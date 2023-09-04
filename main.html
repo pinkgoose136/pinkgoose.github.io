@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Изменение фона страницы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .color-button {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #green-button {
+            background-color: green;
+            color: white;
+        }
+
+        #blue-button {
+            background-color: blue;
+            color: white;
+        }
+
+        #red-button {
+            background-color: red;
+            color: white;
+        }
+
+        #yellow-button {
+            background-color: yellow;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Изменение фона страницы</h1>
+    <div class="button-container">
+        <button id="green-button" class="color-button">Зелёный</button>
+        <button id="blue-button" class="color-button">Синий</button>
+        <button id="red-button" class="color-button">Красный</button>
+        <button id="yellow-button" class="color-button">Жёлтый</button>
+    </div>
+
+    <script>
+        const greenButton = document.getElementById('green-button');
+        const blueButton = document.getElementById('blue-button');
+        const redButton = document.getElementById('red-button');
+        const yellowButton = document.getElementById('yellow-button');
+
+        greenButton.addEventListener('click', () => {
+            document.body.style.backgroundColor = 'green';
+        });
+
+        blueButton.addEventListener('click', () => {
+            document.body.style.backgroundColor = 'blue';
+        });
+
+        redButton.addEventListener('click', () => {
+            document.body.style.backgroundColor = 'red';
+        });
+
+        yellowButton.addEventListener('click', () => {
+            document.body.style.backgroundColor = 'yellow';
+        });
+    </script>
+</body>
+</html>
