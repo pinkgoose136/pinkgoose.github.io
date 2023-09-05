@@ -35,9 +35,9 @@ btn1.addEventListener("click", function(){
 		tg.MainButton.setText("Вы выбрали товар 1!");
 		item = "1";
 		tg.MainButton.show();
-		document.getElementById("userid").textContent = tg.initDataUnsafe.user.id;
-		document.getElementById("username").textContent = tg.initDataUnsafe.user.username;		
-		document.getElementById("name").textContent = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;			
+		document.getElementById("userid").textContent = `${tg.initDataUnsafe.user.id}`;
+		document.getElementById("username").textContent = `${tg.initDataUnsafe.user.username}`;		
+		document.getElementById("name").textContent = `${tg.initDataUnsafe.user.first_name}` + " " + `${tg.initDataUnsafe.user.last_name}`;			
 	}
 });
 
