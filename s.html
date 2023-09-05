@@ -23,9 +23,9 @@
 let tg = window.Telegram.WebApp;
 tg.expand();
 
-document.getElementById("userid").textContent  = tg.initDataUnsafe.id;
-document.getElementById("username").textContent  = tg.initDataUnsafe.username;		
-document.getElementById("name").textContent  = tg.initDataUnsafe.first_name + " " + tg.initDataUnsafe.last_name;			
+document.getElementById("userid").textContent  = tg.initData.id;
+document.getElementById("username").textContent  = tg.initData.username;		
+document.getElementById("name").textContent  = tg.initData.first_name + " " + tg.initDataUnsafe.last_name;			
 		
 let item = "";
 let btn1 = document.getElementById("btn1");
