@@ -22,8 +22,7 @@
 	<script>
 let tg = window.Telegram.WebApp;
 tg.expand();
-tg.MainButton.textColor = var(--tg-theme-text-color);
-tg.MainButton.color = var(--tg-theme-button-color);
+
 document.getElementById("userid").text = tg.initDataUnsafe.id;
 document.getElementById("username").text = tg.initDataUnsafe.username;		
 document.getElementById("name").text = tg.initDataUnsafe.first_name + " " + tg.initDataUnsafe.last_name;			
