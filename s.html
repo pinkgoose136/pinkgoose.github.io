@@ -12,6 +12,7 @@
 			<h2 id="userid">Ao</h2>
 			<h2 id="username"></h2>
 			<h2 id="name"></h2>
+			<h2 id="btn">AAA</h2>
 		</div>
 	</div>
 	<div class="usercard" id="usercard">
@@ -22,13 +23,9 @@
 	<script>
 let tg = window.Telegram.WebApp;
 tg.expand();
-
-document.getElementById("userid").textContent  = tg.initData.id;
-document.getElementById("username").textContent  = tg.initData.username;		
-document.getElementById("name").textContent  = tg.initData.first_name + " " + tg.initDataUnsafe.last_name;			
-		
+	
 let item = "";
-let btn1 = document.getElementById("btn1");
+let btn1 = document.getElementById("btn");
 
 btn1.addEventListener("click", function(){
 	if (tg.MainButton.isVisible) {
@@ -38,6 +35,10 @@ btn1.addEventListener("click", function(){
 		tg.MainButton.setText("Вы выбрали товар 1!");
 		item = "1";
 		tg.MainButton.show();
+		document.getElementById("userid").textContent  = tg.initData.id;
+document.getElementById("username").textContent  = tg.initData.username;		
+document.getElementById("name").textContent  = tg.initData.first_name + " " + tg.initDataUnsafe.last_name;			
+	
 	}
 });
 
