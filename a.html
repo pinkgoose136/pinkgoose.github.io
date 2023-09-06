@@ -98,14 +98,15 @@
    ${tg.initDataUnsafe.user.username} (${tg.initDataUnsafe.user.language_code})`;
    usercard.appendChild(profName); 
 
-
+   let profName = document.createElement('p');
+   profName.innerText = `${tg.initDataUnsafe.start_param}`;
+   usercard.appendChild(profName);
 
    
    let userid = document.createElement('p');
    userid.innerText = `${tg.initDataUnsafe.user.id}`;
    usercard.appendChild(userid);
 
-   работает только в attachment menu
    let pic = document.createElement('img');
    pic.src = tg.initDataUnsafe.user.photo_url;
    usercard.appendChild(pic);
