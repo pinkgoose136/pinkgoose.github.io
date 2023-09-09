@@ -60,36 +60,8 @@
 
         <label for="eventImage">Картинка (опционально):</label>
         <input type="file" id="eventImage" name="eventImage"><br><br>
+        <input type="submit" value="Сохранить">
     </form>
-
-    <script>
-        document.getElementById("eventForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            // Получение значений полей
-            const eventName = document.getElementById("eventName").value;
-            const eventDate = document.getElementById("eventDate").value;
-            const eventTimezone = document.getElementById("eventTimezone").value;
-            const eventTime = document.getElementById("eventTime").value;
-            // Обработка выбора картинки
-            const eventImage = document.getElementById("eventImage").files[0];
-
-            // Очистка полей формы
-            document.getElementById("eventName").value = "";
-            document.getElementById("eventDate").value = "";
-            document.getElementById("eventTimezone").value = "";
-            document.getElementById("eventTime").value = "";
-            document.getElementById("eventImage").value = "";
-
-            // Добавление кода для сохранения данных, например, отправка на сервер
-            // В данном примере, выводим полученные значения в консоль
-            console.log("Название даты: " + eventName);
-            console.log("Дата: " + eventDate);
-            console.log("Часовой пояс: " + eventTimezone);
-            console.log("Время: " + eventTime);
-            console.log("Картинка: " + (eventImage ? eventImage.name : "Не выбрана"));
-        });
-    </script>
     <style>
         body {
             color: var(--tg-theme-text-color);
@@ -133,23 +105,42 @@
             width: 100%;
             margin-bottom: 15px;
         }
-    </style>
+        
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
 
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 
     <script>
    let tg = window.Telegram.WebApp;
    tg.expand();
-   tg.MainButton.show()
-   tg.MainButton.text = "Changed Text"; 
-   tg.MainButton.setText("Сохранить");
-   tg.MainButton.textColor = "#F55353";
-   tg.MainButton.color = "#143F6B";
+ //  tg.MainButton.show()
+  // tg.MainButton.text = "Changed Text"; 
+//   tg.MainButton.setText("Сохранить");
+//   tg.MainButton.textColor = "#F55353";
+   //tg.MainButton.color = "#143F6B";
 
-   Telegram.WebApp.onEvent('mainButtonClicked', function(){
-      tg.sendData("some string that we need to send"); 
-      tg.close()
-   });
-
+    document.getElementById("eventForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const eventName = document.getElementById("eventName").value;
+            const eventDate = document.getElementById("eventDate").value;
+            const eventTimezone = document.getElementById("eventTimezone").value;
+            const eventTime = document.getElementById("eventTime").value;
+            const eventImage = document.getElementById("eventImage").files[0];
+            tg.sendData("some string that we need to send"); 
+            tg.close()
+    });
 </script>
     
 </body>
