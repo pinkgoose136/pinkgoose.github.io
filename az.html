@@ -60,8 +60,6 @@
 
         <label for="eventImage">Картинка (опционально):</label>
         <input type="file" id="eventImage" name="eventImage"><br><br>
-
-        <input type="submit" value="Сохранить">
     </form>
 
     <script>
@@ -141,7 +139,7 @@
     <script>
    let tg = window.Telegram.WebApp;
    tg.expand();
-
+   tg.MainButton.show()
    tg.MainButton.text = "Changed Text"; 
    tg.MainButton.setText("Сохранить");
    tg.MainButton.textColor = "#F55353";
