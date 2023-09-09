@@ -125,12 +125,9 @@
     <script>
    let tg = window.Telegram.WebApp;
    tg.expand();
-   tg.MainButton.show()
-   tg.MainButton.text = "Changed Text"; 
    tg.MainButton.setText("Подтвердить");
    tg.MainButton.textColor = "#F55353";
    tg.MainButton.color = "#E0FFFF";
-   tg.MainButton.disable()
    tg.MainButton.hide()
     document.getElementById("eventForm").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -139,14 +136,11 @@
             const eventTimezone = document.getElementById("eventTimezone").value;
             const eventTime = document.getElementById("eventTime").value;
             const eventImage = document.getElementById("eventImage").files[0];
-            tg.MainButton.enable()
-            tg.MainButton.setParams({"color": "#143F6B"});
             tg.MainButton.show()
     });   
         
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
-      tg.sendData("some string that we need to send"); 
-        
+      tg.sendData("Ae");   
       tg.close()
    });
 </script>
