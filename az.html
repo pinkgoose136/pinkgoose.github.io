@@ -129,7 +129,7 @@
    tg.MainButton.textColor = "#F55353";
    tg.MainButton.color = "#E0FFFF";
    tg.MainButton.hide()
-    document.getElementById("eventForm").addEventListener("submit", function(event) {
+   document.getElementById("eventForm").addEventListener("submit", function(event) {
             event.preventDefault();
             const eventName = document.getElementById("eventName").value;
             const eventDate = document.getElementById("eventDate").value;
@@ -141,8 +141,8 @@
         
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
       tg.sendData("Ae");   
-      tg.close()
-   });
+    //  tg.close()
+     });
 </script>
     
 </body>
