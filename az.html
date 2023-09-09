@@ -138,9 +138,16 @@
             const eventImage = document.getElementById("eventImage").files[0];
             tg.MainButton.show()
     });   
+    let data = {
+        name: eventName,
+        date: eventDate,
+        timezone: eventTimezone,
+        time: eventTime,
+        image: eventImage
+    }
         
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
-      tg.sendData("Ae");   
+      tg.sendData(JSON.stringify(data));   
     //  tg.close()
      });
 </script>
