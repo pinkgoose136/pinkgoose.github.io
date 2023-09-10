@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра Змейка</title>
+</head>
+<body>
+    <header>
+        <h1>Игра Змейка</h1>
+    </header>
+    <main>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <div class="controls">
+            <button id="startButton">Старт</button>
+            <button id="stopButton">Стоп</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Игра Змейка</p>
+    </footer>
+    <script>
+// Получаем элемент canvas и контекст
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// Размеры игрового поля
+const GRID_SIZE = 20;
+const GRID_WIDTH = canvas.width / GRID_SIZE;
+const GRID_HEIGHT = canvas.height / GRID_SIZE;
+
+// Начальные параметры игры
+let snake = [{ x: 5, y: 5 }];
+let direction = 'right';
+let food = { x: Math.floor(Math.random() * GRID_WIDTH), y: Math.floor(Math.random() * GRID_HEIGHT) };
+let score = 0;
+
+// Функция отрисовки змейки
+function drawSnake() {
+  ctx.fillStyle = 'green';
+  for (let segment of snake) {
+    ctx.fillRect(segment.x * GRID_SIZE, segment.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+  }
+}
+
+// Функция отрисовки еды
+function drawFood() {
+  ctx.fillStyle = 'red';
+  ctx.fillRect(food.x * GRID_SIZE, food.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+}
+
+// Функция обновления игры
+function update() {
+  // Движение змейки
+  let newHead = { x: snake[0].x, y: snake[0].y };
+
+  if (direction === 'right') newHead.x++;
+  if (direction === 'left') newHead.x--;
+  if (direction === 'down') newHead.y++;
+  if (direction === 'up') newHead.y--;
+
+  // Проверка столкновения с границами и самим собой
+  if (
+    newHead.x < 0 || newHead.x >= GRID_WIDTH ||
+    newHead.y < 0 || newHead.y >= GRID_HEIGHT ||
+    snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)
+  ) {
+    alert('Игра окончена! Счет: ' + score);
+    document.location.reload();
+  }
+
+  // Проверка на съедание еды
+  if (newHead.x === food.x && newHead.y === food.y) {
+    score++;
+    food = { x: Math.floor(Math.random() * GRID_WIDTH), y: Math.floor(Math.random() * GRID_HEIGHT) };
+  } else {
+    snake.pop();
+  }
+
+  // Добавление новой головы
+  snake.unshift(newHead);
+
+  // Отрисовка игрового поля
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawFood();
+  drawSnake();
+
+  // Запуск следующего обновления
+  setTimeout(update, 100);
+}
+
+// События клавиш для управления
+document.addEventListener('keydown', event => {
+  if (event.key === 'ArrowRight' && direction !== 'left') direction = 'right';
+  if (event.key === 'ArrowLeft' && direction !== 'right') direction = 'left';
+  if (event.key === 'ArrowDown' && direction !== 'up') direction = 'down';
+  if (event.key === 'ArrowUp' && direction !== 'down') direction = 'up';
+});
+
+// Запуск игры
+update();
+
+
+    </script>
+<style>
+    /* Общие стили для страницы */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Заголовок */
+header {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Основное содержание */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+/* Canvas для игры */
+#gameCanvas {
+  border: 2px solid #333;
+}
+
+/* Кнопки управления */
+.controls {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+/* Подвал */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+</style>
+</body>
+</html>
