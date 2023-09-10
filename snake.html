@@ -6,19 +6,13 @@
     <title>Игра Змейка</title>
 </head>
 <body>
-    <header>
-        <h1>Игра Змейка</h1>
-    </header>
     <main>
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <canvas id="gameCanvas"></canvas>
         <div class="controls">
             <button id="startButton">Старт</button>
             <button id="stopButton">Стоп</button>
         </div>
     </main>
-    <footer>
-        <p>&copy; 2023 Игра Змейка</p>
-    </footer>
     <script>
 // Получаем элемент canvas и контекст
 const canvas = document.getElementById('gameCanvas');
@@ -26,14 +20,15 @@ const ctx = canvas.getContext('2d');
 
 // Размеры игрового поля
 const GRID_SIZE = 20;
-const GRID_WIDTH = canvas.width / GRID_SIZE;
-const GRID_HEIGHT = canvas.height / GRID_SIZE;
+const GRID_WIDTH = Math.floor(canvas.width / GRID_SIZE);
+const GRID_HEIGHT = Math.floor(canvas.height / GRID_SIZE);
 
 // Начальные параметры игры
 let snake = [{ x: 5, y: 5 }];
 let direction = 'right';
 let food = { x: Math.floor(Math.random() * GRID_WIDTH), y: Math.floor(Math.random() * GRID_HEIGHT) };
 let score = 0;
+let gameSpeed = 100; // Скорость игры (меньшее значение - более медленная игра)
 
 // Функция отрисовки змейки
 function drawSnake() {
@@ -73,6 +68,8 @@ function update() {
   if (newHead.x === food.x && newHead.y === food.y) {
     score++;
     food = { x: Math.floor(Math.random() * GRID_WIDTH), y: Math.floor(Math.random() * GRID_HEIGHT) };
+    // Увеличиваем скорость игры с каждым съеденным куском еды
+    gameSpeed -= 5;
   } else {
     snake.pop();
   }
@@ -80,13 +77,13 @@ function update() {
   // Добавление новой головы
   snake.unshift(newHead);
 
-  // Отрисовка игрового поля
+  // Очистка игрового поля и отрисовка
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawFood();
   drawSnake();
 
   // Запуск следующего обновления
-  setTimeout(update, 100);
+  setTimeout(update, gameSpeed);
 }
 
 // События клавиш для управления
@@ -97,9 +94,42 @@ document.addEventListener('keydown', event => {
   if (event.key === 'ArrowUp' && direction !== 'down') direction = 'up';
 });
 
+// Обработка свайпов для мобильных устройств
+let touchStartX = null;
+let touchStartY = null;
+
+document.addEventListener('touchstart', event => {
+  touchStartX = event.touches[0].clientX;
+  touchStartY = event.touches[0].clientY;
+});
+
+document.addEventListener('touchend', event => {
+  if (touchStartX === null || touchStartY === null) {
+    return;
+  }
+
+  const touchEndX = event.changedTouches[0].clientX;
+  const touchEndY = event.changedTouches[0].clientY;
+
+  const dx = touchEndX - touchStartX;
+  const dy = touchEndY - touchStartY;
+
+  if (Math.abs(dx) > Math.abs(dy)) {
+    // Горизонтальный свайп
+    if (dx > 0 && direction !== 'left') direction = 'right';
+    if (dx < 0 && direction !== 'right') direction = 'left';
+  } else {
+    // Вертикальный свайп
+    if (dy > 0 && direction !== 'up') direction = 'down';
+    if (dy < 0 && direction !== 'down') direction = 'up';
+  }
+
+  touchStartX = null;
+  touchStartY = null;
+});
+
 // Запуск игры
 update();
-
 
     </script>
 <style>
@@ -110,29 +140,21 @@ body {
   padding: 0;
 }
 
-/* Заголовок */
-header {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 20px 0;
-}
-
-/* Основное содержание */
 main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
 }
 
-/* Canvas для игры */
 #gameCanvas {
   border: 2px solid #333;
+  height: 90%;
+  width: 90%;
 }
 
-/* Кнопки управления */
 .controls {
   margin-top: 20px;
 }
@@ -149,14 +171,6 @@ button {
 
 button:hover {
   background-color: #555;
-}
-
-/* Подвал */
-footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
 }
 
 </style>
