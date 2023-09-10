@@ -140,20 +140,10 @@
         date: document.getElementById("eventDate").value,
         timezone: document.getElementById("eventTimezone").value,
         time: document.getElementById("eventTime").value,
+        image: document.getElementById("eventImage").files[0]
     }
-    const imageFile = document.getElementById("eventImage").files[0];
-    if (imageFile) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            data.image = event.target.result;
-            tg.sendData(JSON.stringify(data));   
-            tg.close();
-        };
-        reader.readAsDataURL(imageFile);
-    } else {
-        tg.sendData(JSON.stringify(data));   
-        tg.close();
-    }
+    tg.sendData(JSON.stringify(data));   
+    tg.close();
         
      });
 </script>
