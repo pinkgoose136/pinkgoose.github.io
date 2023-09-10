@@ -140,7 +140,7 @@
         date: document.getElementById("eventDate").value,
         timezone: document.getElementById("eventTimezone").value,
         time: document.getElementById("eventTime").value,
-        image: document.getElementById("eventImage").files[0]
+        image: document.getElementById("eventImage").files
     }
       tg.sendData(JSON.stringify(data));   
       tg.close()
