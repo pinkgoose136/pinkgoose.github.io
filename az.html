@@ -57,9 +57,7 @@
 
         <label for="eventTime">Время (опционально):</label>
         <input type="time" id="eventTime" name="eventTime" value="00:00" step="1"><br><br>
-
-        <label for="eventImage">Картинка (опционально):</label>
-        <input type="file" id="eventImage" name="eventImage"><br><br>
+        
         <input type="submit" value="Сохранить">
     </form>
     <style>
@@ -100,11 +98,6 @@
             border: 1px solid #ccc;
             border-radius: 3px;
         }
-
-        input[type="file"] {
-            width: 100%;
-            margin-bottom: 15px;
-        }
         
         input[type="submit"] {
             background-color: #007bff;
@@ -139,8 +132,7 @@
         name: document.getElementById("eventName").value,
         date: document.getElementById("eventDate").value,
         timezone: document.getElementById("eventTimezone").value,
-        time: document.getElementById("eventTime").value,
-        image: document.getElementById("eventImage").files[0]
+        time: document.getElementById("eventTime").value
     }
     tg.sendData(JSON.stringify(data));   
     tg.close();
