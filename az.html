@@ -131,22 +131,17 @@
    tg.MainButton.hide()
    document.getElementById("eventForm").addEventListener("submit", function(event) {
             event.preventDefault();
-            let eventName = document.getElementById("eventName").value;
-            let eventDate = document.getElementById("eventDate").value;
-            let eventTimezone = document.getElementById("eventTimezone").value;
-            let eventTime = document.getElementById("eventTime").value;
-            let eventImage = document.getElementById("eventImage").files[0];
             tg.MainButton.show()
     });   
-    let data = {
-        name: eventName,
-        date: eventDate,
-        timezone: eventTimezone,
-        time: eventTime,
-        image: eventImage
-    }
         
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
+    let data = {
+        name: document.getElementById("eventName").value,
+        date: document.getElementById("eventDate").value,
+        timezone: document.getElementById("eventTimezone").value,
+        time: document.getElementById("eventTime").value,
+        image: document.getElementById("eventImage").files[0]
+    }
       tg.sendData(JSON.stringify(data));   
     //  tg.close()
      });
