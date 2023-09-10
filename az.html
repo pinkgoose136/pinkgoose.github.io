@@ -131,11 +131,11 @@
    tg.MainButton.hide()
    document.getElementById("eventForm").addEventListener("submit", function(event) {
             event.preventDefault();
-            const eventName = document.getElementById("eventName").value;
-            const eventDate = document.getElementById("eventDate").value;
-            const eventTimezone = document.getElementById("eventTimezone").value;
-            const eventTime = document.getElementById("eventTime").value;
-            const eventImage = document.getElementById("eventImage").files[0];
+            let eventName = document.getElementById("eventName").value;
+            let eventDate = document.getElementById("eventDate").value;
+            let eventTimezone = document.getElementById("eventTimezone").value;
+            let eventTime = document.getElementById("eventTime").value;
+            let eventImage = document.getElementById("eventImage").files[0];
             tg.MainButton.show()
     });   
     let data = {
