@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание страны</title>
+</head>
+<body>
+    <main>
+        <form id="countryForm">
+            <label for="countryName">Название страны:</label>
+            <input type="text" id="countryName" name="countryName" required><br>
+
+            <fieldset>
+                <legend>Идеология:</legend>
+                <label>
+                    <input type="radio" name="ideology" value="Национализм">
+                    Национализм
+                    <div class="description">Описание национализма.</div>
+                </label>
+                <label>
+                    <input type="radio" name="ideology" value="Либерализм">
+                    Либерализм
+                    <div class="description">Описание либерализма.</div>
+                </label>
+                <label>
+                    <input type="radio" name="ideology" value="Консерватизм">
+                    Консерватизм
+                    <div class="description">Описание консерватизма.</div>
+                </label>
+                <label>
+                    <input type="radio" name="ideology" value="Социализм">
+                    Социализм
+                    <div class="description">Описание социализм.</div>
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Религия:</legend>
+                <label>
+                    <input type="radio" name="religion" value="Христианство">
+                    Христианство
+                    <div class="description">Описание христианства.</div>
+                </label>
+                <label>
+                    <input type="radio" name="religion" value="Ислам">
+                    Ислам
+                    <div class="description">Описание ислама.</div>
+                </label>
+                <label>
+                    <input type="radio" name="religion" value="Буддизм">
+                    Буддизм
+                    <div class="description">Описание буддизма.</div>
+                </label>
+                <label>
+                    <input type="radio" name="religion" value="Атеизм">
+                    Атеизм
+                    <div class="description">Описание атеизма.</div>
+                </label>
+                <label>
+                    <input type="radio" name="religion" value="Иудаизм">
+                    Иудаизм
+                    <div class="description">Описание иудаизм.</div>
+                </label>
+
+                <label>
+                    <input type="radio" name="religion" value="Индуизм">
+                    Индуизм
+                    <div class="description">Описание индуизм.</div>
+                </label>
+            </fieldset>
+            <input type="submit" value="Создать страну">
+        </form>
+    </main>
+    <style>
+/* Стили для страницы */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Стили для основного содержания */
+main {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  overflow: auto; /* Добавлено для прокрутки, если контент выходит за пределы */
+}
+
+/* Стили для формы */
+form {
+  width: 400px;
+  margin: 0 auto;
+}
+
+/* Стили для текстовых полей */
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+input[type="text"],
+label,
+fieldset {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Добавлено для корректного учета границы внутри ширины */
+}
+
+/* Стили для радиокнопок и легенд */
+fieldset {
+  padding: 10px;
+  border-radius: 4px;
+}
+
+legend {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+}
+
+label input[type="radio"] {
+  margin-right: 5px;
+}
+
+/* Стили для кнопки */
+input[type="submit"] {
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Растягиваем кнопку на всю ширину блока */
+}
+
+input[type="submit"]:hover {
+  background-color: #555;
+}
+
+.description {
+  font-size: 14px; /* Меньший размер шрифта */
+  color: #888; /* Серый цвет */
+  font-weight: normal; /* Не жирный шрифт */
+  margin-top: 5px;
+}
+    </style>
+
+<script>
+    // JavaScript для обязательного выбора одного чекбокса в каждой группе
+    document.getElementById('countryForm').addEventListener('submit', function(event) {
+        const ideologyCheckboxes = document.querySelectorAll('input[name="ideology"]:checked');
+        const religionCheckboxes = document.querySelectorAll('input[name="religion"]:checked');
+
+        if (ideologyCheckboxes.length === 0 || religionCheckboxes.length === 0) {
+            event.preventDefault(); // Отменить отправку формы
+            alert('Выберите идеологию и религию');
+        }
+    });
+</script>
+</body>
+</html>
