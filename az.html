@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="eventForm">
-        <label for="eventName">Название датыe:</label>
+        <label for="eventName">Название даты:</label>
         <input type="text" id="eventName" name="eventName" required><br><br>
 
         <label for="eventDate">Дата:</label>
@@ -127,7 +127,7 @@
             event.preventDefault();
             tg.MainButton.show()
     });   
-        
+    Telegram.WebApp..onEvent('viewportChanged', () => WebApp.expand());
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
     let data = {
         name: document.getElementById("eventName").value,
