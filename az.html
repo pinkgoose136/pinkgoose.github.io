@@ -118,7 +118,6 @@
     <script>
    let tg = window.Telegram.WebApp;
    tg.expand();
-   tg.isStateStable = true;
    tg.MainButton.setText("Подтвердить");
    tg.MainButton.textColor = "#F55353";
    tg.MainButton.color = "#E0FFFF";
@@ -127,7 +126,7 @@
             event.preventDefault();
             tg.MainButton.show()
     });   
-    Telegram.WebApp..onEvent('viewportChanged', () => WebApp.expand());
+    Telegram.WebApp..onEvent('viewportChanged', () => tg.expand());
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
     let data = {
         name: document.getElementById("eventName").value,
