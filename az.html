@@ -126,7 +126,9 @@
             event.preventDefault();
             tg.MainButton.show()
     });   
-    Telegram.WebApp..onEvent('viewportChanged', () => tg.expand());
+    Telegram.WebApp.onEvent('viewportChanged', function(){
+        tg.expand();
+    };
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
     let data = {
         name: document.getElementById("eventName").value,
