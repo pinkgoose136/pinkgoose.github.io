@@ -70,7 +70,6 @@
             display: flex;
             justify-content: center;
             align-items: flex-start; /* Выравнивание по верхнему краю */
-            height: var(--tg-viewport-stable-height);
         }
         form {
             width: 90%;
@@ -126,9 +125,6 @@
             event.preventDefault();
             tg.MainButton.show()
     });   
-    Telegram.WebApp.onEvent('viewportChanged', function(){
-        window.Telegram.WebApp.expand();
-    });
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
     let data = {
         name: document.getElementById("eventName").value,
