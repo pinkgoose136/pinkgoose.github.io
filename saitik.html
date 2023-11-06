@@ -149,32 +149,11 @@
                 type: document.getElementById('type').value,
                 cat: document.getElementById('categoryList').innerText,
                 tag: document.getElementById('tagList').innerText
-            }
-                
+            }   
             tg.sendData(JSON.stringify(data));   
             tg.close();
-                
             });
-        function displayData() {
 
-           let tg = window.Telegram.WebApp;
-           tg.expand();
-           tg.MainButton.setText("Зарегистрироваться");
-           tg.MainButton.textColor = "#F55353";
-           tg.MainButton.color = "#E0FFFF";
-           tg.MainButton.hide()
-           document.getElementById("eventForm").addEventListener("submit", function(event) {
-                    event.preventDefault();
-                    tg.MainButton.show()
-            });   
-            Telegram.WebApp.onEvent('mainButtonClicked', function(){
-
-            tg.sendData(JSON.stringify(data));   
-            tg.close();
-                
-             });
-
-        }
     </script>
 </head>
 <body>
@@ -208,8 +187,6 @@
         <label for="tags">Теги:</label>
         <input type="text" id="tagInput" onkeypress="addTagOnComma(event)" placeholder="Добавьте теги через запятую"><br>
         <div id="tagList"></div><br>
-
-        <input type="button" value="Зарегистрироваться" onclick="displayData()">
     </form>
 
 </body>
