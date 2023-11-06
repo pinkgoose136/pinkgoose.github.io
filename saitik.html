@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Регистрация в каталоге</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         /* Добавьте стили по своему усмотрению */
         body {
@@ -138,14 +139,30 @@
             var categoryList = document.getElementById('categoryList').innerText;
             var tagList = document.getElementById('tagList').innerText;
 
-            var data = `
-                Ссылка: ${link}
-                Описание: ${description}
-                Тип: ${type}
-                Категории: ${categoryList}
-                Теги: ${tagList}
-            `;
+            let data = {
+                link: link,
+                desc: description,
+                type: type,
+                cat: categoryList,
+                tag: tagList
+            }
 
+           let tg = window.Telegram.WebApp;
+           tg.expand();
+           tg.MainButton.setText("Зарегистрироваться");
+           tg.MainButton.textColor = "#F55353";
+           tg.MainButton.color = "#E0FFFF";
+           tg.MainButton.hide()
+           document.getElementById("eventForm").addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    tg.MainButton.show()
+            });   
+            Telegram.WebApp.onEvent('mainButtonClicked', function(){
+
+            tg.sendData(JSON.stringify(data));   
+            tg.close();
+                
+             });
 
         }
     </script>
