@@ -147,8 +147,7 @@
                 link: document.getElementById('link').value,
                 desc: document.getElementById('description').value,
                 type: document.getElementById('type').value,
-                cat: document.getElementById('categoryList').innerText,
-                tag: document.getElementById('tagList').innerText
+                cat: document.getElementById('categoryList').innerText
             }   
             tg.sendData(JSON.stringify(data));   
             tg.close();
