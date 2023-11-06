@@ -131,21 +131,31 @@
             }
         }
 
-        function displayData() {
-
-            var link = document.getElementById('link').value;
-            var description = document.getElementById('description').value;
-            var type = document.getElementById('type').value;
-            var categoryList = document.getElementById('categoryList').innerText;
-            var tagList = document.getElementById('tagList').innerText;
-
+           let tg = window.Telegram.WebApp;
+           tg.expand();
+           tg.MainButton.setText("Зарегистрироваться");
+           tg.MainButton.textColor = "#F55353";
+           tg.MainButton.color = "#E0FFFF";
+           tg.MainButton.hide()
+           document.getElementById("eventForm").addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    tg.MainButton.show()
+            });   
+            Telegram.WebApp.onEvent('mainButtonClicked', function(){
+            
             let data = {
-                link: link,
-                desc: description,
-                type: type,
-                cat: categoryList,
-                tag: tagList
+                link: document.getElementById('link').value,
+                desc: document.getElementById('description').value,
+                type: document.getElementById('type').value,
+                cat: document.getElementById('categoryList').innerText,
+                tag: document.getElementById('tagList').innerText
             }
+                
+            tg.sendData(JSON.stringify(data));   
+            tg.close();
+                
+            });
+        function displayData() {
 
            let tg = window.Telegram.WebApp;
            tg.expand();
