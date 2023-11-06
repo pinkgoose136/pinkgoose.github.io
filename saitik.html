@@ -130,29 +130,6 @@
                 tagInput.value = '';
             }
         }
-
-           let tg = window.Telegram.WebApp;
-           tg.expand();
-           tg.MainButton.setText("Зарегистрироваться");
-           tg.MainButton.textColor = "#F55353";
-           tg.MainButton.color = "#E0FFFF";
-           tg.MainButton.hide()
-           document.getElementById("eventForm").addEventListener("submit", function(event) {
-                    event.preventDefault();
-                    tg.MainButton.show()
-            });   
-            Telegram.WebApp.onEvent('mainButtonClicked', function(){
-            
-            let data = {
-                link: document.getElementById('link').value,
-                desc: document.getElementById('description').value,
-                type: document.getElementById('type').value,
-                cat: document.getElementById('categoryList').innerText
-            }   
-            tg.sendData(JSON.stringify(data));   
-            tg.close();
-            });
-
     </script>
 </head>
 <body>
@@ -189,5 +166,29 @@
         <input type="submit" value="Сохранить">
     </form>
 
+    <style>
+           let tg = window.Telegram.WebApp;
+           tg.expand();
+           tg.MainButton.setText("Зарегистрироваться");
+           tg.MainButton.textColor = "#F55353";
+           tg.MainButton.color = "#E0FFFF";
+           tg.MainButton.hide()
+           document.getElementById("eventForm").addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    tg.MainButton.show()
+            });   
+            Telegram.WebApp.onEvent('mainButtonClicked', function(){
+            
+            let data = {
+                link: document.getElementById('link').value,
+                desc: document.getElementById('description').value,
+                type: document.getElementById('type').value,
+                cat: document.getElementById('categoryList').innerText
+            }   
+            tg.sendData(JSON.stringify(data));   
+            tg.close();
+            });
+
+    </style>
 </body>
 </html>
