@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Регистрация в каталоге</title>
+    <link rel="stylesheet" type="text\css" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--tg-theme-secondary-bg-color);
+            margin: 0;
+            padding: 0;
+            color: var(--tg-theme-text-color);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: var(--tg-theme-bg-color);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input[type="text"],
+        input[type="button"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        textarea {
+            resize: none;
+             overflow-y: auto;
+        }
+
+        select {
+            appearance: none;
+        }
+
+        button {
+            background-color: var(--tg-theme-button-color);
+            color: var(--tg-theme-button-text-color);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00578f;
+        }
+
+        .category, .tag {
+            background-color: var(--tg-theme-link-color);
+            color: white;
+            padding: 5px;
+            margin: 5px;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #dataDisplay {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #dataDisplay h2 {
+            color: #333;
+        }
+    </style>
+    <script type="text/javascript">
+        function addCategory() {
+            var categorySelect = document.getElementById('categorySelect');
+            var selectedCategory = categorySelect.options[categorySelect.selectedIndex].value;
+            var categoryList = document.getElementById('categoryList');
+
+            if (selectedCategory && categoryList.childElementCount < 3) {
+                var categoryItem = document.createElement('div');
+                categoryItem.textContent = selectedCategory;
+                categoryItem.classList.add('category');
+                categoryItem.onclick = function() {
+                    categoryList.removeChild(categoryItem);
+                    categorySelect.options.add(new Option(categoryItem.textContent, categoryItem.textContent));
+                };
+
+                categoryList.appendChild(categoryItem);
+                categorySelect.options.remove(categorySelect.selectedIndex);
+            }
+        }
+
+        function addTagOnComma(event) {
+            var tagInput = document.getElementById('tagInput');
+            var tagList = document.getElementById('tagList');
+            var tagText = tagInput.value.trim();
+            console.log(event.key)
+            if (event.key === "," && tagText) {
+
+                var tagItem = document.createElement('div');
+                tagItem.textContent = tagText;
+                tagItem.classList.add('tag');
+                tagItem.onclick = function() {
+                    tagList.removeChild(tagItem);
+                };
+
+                tagList.appendChild(tagItem);
+                tagInput.value = '';
+            }
+        }
+
+        function displayData() {
+
+            var link = document.getElementById('link').value;
+            var description = document.getElementById('description').value;
+            var type = document.getElementById('type').value;
+            var categoryList = document.getElementById('categoryList').innerText;
+            var tagList = document.getElementById('tagList').innerText;
+
+            var data = `
+                Ссылка: ${link}
+                Описание: ${description}
+                Тип: ${type}
+                Категории: ${categoryList}
+                Теги: ${tagList}
+            `;
+
+
+        }
+    </script>
+</head>
+<body>
+   a
+    <h1>Регистрация в каталоге</h1>
+    <form action="#" method="post">
+        <label for="link">Ссылка:</label>
+        <input type="text" name="link" id="link" required><br>
+
+        <label for="description">Описание:</label>
+        <textarea name="description" id="description" required></textarea><br>
+
+        <label for="type">Тип:</label>
+        <select name="type" id="type" required>
+            <option value="канал">Канал</option>
+            <option value="группа">Группа</option>
+            <option value="бот">Бот</option>
+            <option value="стикерпак">Стикерпак</option>
+            <option value="эмодзипак">Эмодзипак</option>
+            <option value="тема">Тема</option>
+        </select><br>
+
+        <label for="category">Категория:</label>
+        <select id="categorySelect" onchange="addCategory(this.value)">
+            <option value="Категория 1">Категория 1</option>
+            <option value="Категория 2">Категория 2</option>
+            <option value="Категория 3">Категория 3</option>
+            <option value="Категория 4">Категория 4</option>
+        </select>
+        <div id="categoryList"></div><br>
+
+        <label for="tags">Теги:</label>
+        <input type="text" id="tagInput" onkeypress="addTagOnComma(event)" placeholder="Добавьте теги через запятую"><br>
+        <div id="tagList"></div><br>
+
+        <input type="button" value="Зарегистрироваться" onclick="displayData()">
+        
+    </form>
+    
+</body>
+</html>
