@@ -128,30 +128,12 @@ button:hover {
             }
         }
 
-        function displayData() {
-
-            var link = document.getElementById('link').value;
-            var description = document.getElementById('description').value;
-            var type = document.getElementById('type').value;
-            var categoryList = document.getElementById('categoryList').innerText;
-            var tagList = document.getElementById('tagList').innerText;
-
-            var data = `
-                Ссылка: ${link}
-                Описание: ${description}
-                Тип: ${type}
-                Категории: ${categoryList}
-                Теги: ${tagList}
-            `;
-
-
-        }
     </script>
 </head>
 <body>
    
     <h1>Регистрация в каталоге</h1>
-    <form action="#" method="post">
+    <form id="eventForm">
         <label for="link">Ссылка:</label>
         <input type="text" name="link" id="link" required><br>
 
@@ -181,9 +163,32 @@ button:hover {
         <input type="text" id="tagInput" onkeypress="addTagOnComma(event)" placeholder="Добавьте теги через запятую"><br>
         <div id="tagList"></div><br>
 
-        <input type="button" value="Зарегистрироваться" onclick="displayData()">
+        <input type="submit" value="Сохранить">
         
     </form>
-    
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.MainButton.setText("Зарегистрироваться");
+        tg.MainButton.textColor = "#F55353";
+        tg.MainButton.color = "#E0FFFF";
+        tg.MainButton.hide()
+        document.getElementById("eventForm").addEventListener("submit", function(event) {
+                 event.preventDefault();
+                 tg.MainButton.show()
+         });   
+         Telegram.WebApp.onEvent('mainButtonClicked', function(){
+         
+         let data = {
+             link: document.getElementById('link').value,
+             desc: document.getElementById('description').value,
+             type: document.getElementById('type').value,
+             cat: document.getElementById('categoryList').innerText
+         }   
+         tg.sendData(JSON.stringify(data));   
+         tg.close();
+         });
+
+ </script>
 </body>
 </html>
