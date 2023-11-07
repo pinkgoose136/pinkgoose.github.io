@@ -2,25 +2,25 @@
 <html>
 <head>
     <title>Регистрация в каталоге</title>
+    <link rel="stylesheet" type="text\css" href="style.css">
     <style>
-        /* Добавьте стили по своему усмотрению */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: var(--tg-theme-secondary-bg-color);
             margin: 0;
             padding: 0;
+            color: var(--tg-theme-text-color);
         }
 
         h1 {
             text-align: center;
-            color: #333;
         }
 
         form {
             max-width: 400px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #fff;
+            background: var(--tg-theme-bg-color);
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -28,7 +28,6 @@
         label {
             display: block;
             margin: 10px 0;
-            color: #333;
         }
 
         input[type="text"],
@@ -53,8 +52,8 @@
         }
 
         button {
-            background-color: #0074b8;
-            color: #fff;
+            background-color: var(--tg-theme-button-color);
+            color: var(--tg-theme-button-text-color);
             border: none;
             border-radius: 5px;
             padding: 10px 20px;
@@ -66,17 +65,13 @@
         }
 
         .category, .tag {
-            background-color: #33cc33;
+            background-color: var(--tg-theme-link-color);
             color: white;
             padding: 5px;
             margin: 5px;
             display: inline-block;
             cursor: pointer;
             border-radius: 5px;
-        }
-
-        .tag {
-            background-color: #3333cc;
         }
 
         #dataDisplay {
