@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-    <title>Регистрация в каталоге</title>
+    <title>Telegram Explorer</title>
     <link rel="stylesheet" type="text\css" href="style.css">
     <style>
 body {
@@ -20,6 +19,7 @@ h1 {
 
 form {
     max-width: 400px;
+    width: 100vh;
     margin: 0 auto;
     padding: 20px;
     background: var(--tg-theme-bg-color, #fff); /* Ваш цвет по умолчанию */
@@ -36,7 +36,7 @@ input[type="text"],
 input[type="button"],
 select,
 textarea {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
@@ -54,6 +54,7 @@ select {
 }
 
 button {
+    width: 100%;
     background-color: var(--tg-theme-button-color, #0078d4); /* Ваш цвет по умолчанию */
     color: var(--tg-theme-button-text-color, #fff); /* Ваш цвет по умолчанию */
     border: none;
@@ -108,31 +109,29 @@ button:hover {
                 categorySelect.options.remove(categorySelect.selectedIndex);
             }
         }
+        
 
-        function addTagOnComma(event) {
-            var tagInput = document.getElementById('tagInput');
+        function addTagOnComma(inputElement) {
             var tagList = document.getElementById('tagList');
-            var tagText = tagInput.value.trim();
-            console.log(event.key)
-            if (event.key === "," && tagText) {
+            var tagText = inputElement.value.trim().slice(0, -1);
 
+            if (inputElement.value.includes(',')) {
                 var tagItem = document.createElement('div');
                 tagItem.textContent = tagText;
                 tagItem.classList.add('tag');
                 tagItem.onclick = function() {
                     tagList.removeChild(tagItem);
                 };
-
                 tagList.appendChild(tagItem);
-                tagInput.value = '';
+                inputElement.value = '';
             }
+
+        
         }
 
     </script>
 </head>
 <body>
-   
-    <h1>Регистрация в каталоге</h1>
     <form id="eventForm">
         <label for="link">Ссылка:</label>
         <input type="text" name="link" id="link" required><br>
@@ -160,10 +159,10 @@ button:hover {
         <div id="categoryList"></div><br>
 
         <label for="tags">Теги:</label>
-        <input type="text" id="tagInput" onkeypress="addTagOnComma(event)" placeholder="Добавьте теги через запятую"><br>
+        <input type="text" id="tagInput" oninput="addTagOnComma(this)" placeholder="Добавьте теги через запятую"><br>
         <div id="tagList"></div><br>
 
-        <input type="submit" value="Сохранить">
+        <button type="submit">Сохранить</button>
         
     </form>
     <script>
