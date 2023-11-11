@@ -115,7 +115,7 @@ select {
         function addTagOnComma(inputElement) {
             var tagList = document.getElementById('tagList');
             var tagText = inputElement.value.trim().slice(0, -1);
-
+            
             if (inputElement.value.includes(',')) {
                 var tagItem = document.createElement('div');
                 tagItem.textContent = tagText;
@@ -140,16 +140,6 @@ select {
         <label for="description">Описание:</label>
         <textarea name="description" id="description" required></textarea><br>
 
-        <label for="type">Тип:</label>
-        <select name="type" id="type" required>
-            <option value="channels">Канал</option>
-            <option value="groups">Группа</option>
-            <option value="bots">Бот</option>
-            <option value="stickers">Стикерпак</option>
-            <option value="emoji">Эмодзипак</option>
-            <option value="thema">Тема</option>
-        </select><br>
-
         <label for="category">Категория:</label>
         <select id="categorySelect" onchange="addCategory(this.value)">
             <option value="Категория 1">Категория 1</option>
@@ -167,6 +157,25 @@ select {
         
     </form>
     <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        var aValue = getParameterByName('type');
+       // document.addEventListener('DOMContentLoaded', function () {
+         //   var outputElement = document.getElementById('output');
+       //     outputElement.textContent = 'Значение переменной a: ' + aValue;
+      //  });
+
+    </script>
+
+    <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
         tg.MainButton.setText("Зарегистрироваться");
@@ -178,12 +187,13 @@ select {
                  tg.MainButton.show()
          });   
          Telegram.WebApp.onEvent('mainButtonClicked', function(){
-         
+        
          let data = {
              link: document.getElementById('link').value,
              desc: document.getElementById('description').value,
-             type: document.getElementById('type').value,
-             cat: document.getElementById('categoryList').innerText
+             type: document.getElementById('type').aValue,
+             cat: document.getElementById('categoryList').innerText,
+             tags: document.getElementById('tagList').innerText
          }   
          tg.sendData(JSON.stringify(data));   
          tg.close();
