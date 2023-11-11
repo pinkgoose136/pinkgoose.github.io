@@ -187,13 +187,13 @@ select {
                  tg.MainButton.show()
          });   
          Telegram.WebApp.onEvent('mainButtonClicked', function(){
-        
+         
          let data = {
              link: document.getElementById('link').value,
              desc: document.getElementById('description').value,
              type: aValue,
              cat: document.getElementById('categoryList').innerText,
-             tag: document.getElementById('tagList').innerText
+             tag: document.getElementById('tagList').innerHTML
          }   
          tg.sendData(JSON.stringify(data));   
          tg.close();
