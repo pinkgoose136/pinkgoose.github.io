@@ -116,7 +116,7 @@ select {
             var tagList = document.getElementById('tagList');
             var tagText = inputElement.value.trim().slice(0, -1);
             
-            if (inputElement.value.includes(',')) {
+            if (inputElement.value.includes(',') && inputElement.value != ',') {
                 var tagItem = document.createElement('div');
                 tagItem.textContent = tagText;
                 tagItem.classList.add('tag');
@@ -126,8 +126,6 @@ select {
                 tagList.appendChild(tagItem);
                 inputElement.value = '';
             }
-
-        
         }
 
     </script>
@@ -192,7 +190,7 @@ select {
              link: document.getElementById('link').value,
              desc: document.getElementById('description').value,
              type: aValue,
-             cat: document.getElementById('categoryList').innerText,
+             cat: document.getElementById('categoryList').innerHTML,
              tag: document.getElementById('tagList').innerHTML
          }   
          tg.sendData(JSON.stringify(data));   
