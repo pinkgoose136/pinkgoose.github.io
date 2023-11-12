@@ -108,6 +108,7 @@ select {
 
                 categoryList.appendChild(categoryItem);
                 categorySelect.options.remove(categorySelect.selectedIndex);
+                categorySelect.value = '';
             }
         }
         
@@ -139,8 +140,7 @@ select {
         <textarea name="description" id="description" required minlength="10" maxlength="1000"></textarea><br>
 
         <label for="category">Категория:</label>
-        <select id="categorySelect" onchange="addCategory(this.value)">
-        </select>
+        <select id="categorySelect" onchange="addCategory(this.value)"></select>
         <div id="categoryList"></div><br>
         
         <label for="tags">Теги:</label>
@@ -211,6 +211,7 @@ select {
             option.text = options[i];
             dropdown.add(option);
         }
+        dropdown.value = '';
     });
 </script>
 
