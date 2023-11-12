@@ -139,7 +139,7 @@ select {
         <label for="description">Описание:</label>
         <textarea name="description" id="description" required minlength="10" maxlength="1000"></textarea><br>
 
-        <label for="category">Категория:</label>
+        <label for="category">Категории:</label>
         <select id="categorySelect" onchange="addCategory(this.value)"></select>
         <div id="categoryList"></div><br>
         
@@ -162,10 +162,6 @@ select {
         }
 
         var aValue = getParameterByName('type');
-       // document.addEventListener('DOMContentLoaded', function () {
-         //   var outputElement = document.getElementById('output');
-       //     outputElement.textContent = 'Значение переменной a: ' + aValue;
-      //  });
 
     </script>
 
@@ -200,11 +196,18 @@ select {
 
         var options;
 
-        if (aValue === 'channels') {
-            options = ['Категория 1', 'Категория 2', 'Категория 3', 'Категория 4'];
-        } else {
-            options = ['Категория 1', 'Категория 2', 'Категория 3', 'Категория 4', 'Категория 5'];
-        }
+        if (aValue === 'channels' ) {
+            options = ['Политика', 'Мемы', 'Новости', 'Технологии'];
+        } 
+        else if (aValue === 'groups') {
+            options = ['Общение', 'Мемы', 'Знакомства', 'Тематичесике'];
+        }  
+        else if (aValue === 'bots') {
+            options = ['Полезные', 'Игры', 'Развлечения'];
+        }  
+        else if (aValue === 'stickers' || aValue === 'emoji') {
+            options = ['Мемы', 'Известности', 'Тематические', 'Анимированные'];
+        }  
 
         for (var i = 0; i < options.length; i++) {
             var option = document.createElement('option');
