@@ -136,14 +136,10 @@ select {
         <input type="text" name="link" id="link" required><br>
 
         <label for="description">Описание:</label>
-        <textarea name="description" id="description" required></textarea><br>
+        <textarea name="description" id="description" required minlength="10" maxlength="1000"></textarea><br>
 
         <label for="category">Категория:</label>
         <select id="categorySelect" onchange="addCategory(this.value)">
-            <option value="Категория 1">Категория 1</option>
-            <option value="Категория 2">Категория 2</option>
-            <option value="Категория 3">Категория 3</option>
-            <option value="Категория 4">Категория 4</option>
         </select>
         <div id="categoryList"></div><br>
         
@@ -196,7 +192,27 @@ select {
          tg.sendData(JSON.stringify(data));   
          tg.close();
          });
+    </script>
 
- </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var dropdown = document.getElementById('categorySelect');
+
+        var options;
+
+        if (aValue === 'channels') {
+            options = ['Категория 1', 'Категория 2', 'Категория 3', 'Категория 4'];
+        } else {
+            options = ['Категория 1', 'Категория 2', 'Категория 3', 'Категория 4', 'Категория 5'];
+        }
+
+        for (var i = 0; i < options.length; i++) {
+            var option = document.createElement('option');
+            option.text = options[i];
+            dropdown.add(option);
+        }
+    });
+</script>
+
 </body>
 </html>
