@@ -169,8 +169,7 @@ select {
         let tg = window.Telegram.WebApp;
         tg.expand();
         tg.MainButton.setText("Подтвердить");
-        tg.MainButton.color = "var(--tg-theme-button-color, #0078d4)";
-        tg.MainButton.textColor = "var(--tg-theme-button-text-color, #fff)";
+
         tg.MainButton.hide()
         document.getElementById("eventForm").addEventListener("submit", function(event) {
                  event.preventDefault();
