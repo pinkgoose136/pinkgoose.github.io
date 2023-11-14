@@ -169,6 +169,13 @@ select {
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
+        tg.CloudStorage.getItem('aboba', function(err, value) {
+        if (err) {
+            document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
+        } else {
+            document.getElementById('opa').innerHTML = 'Значение по ключу aboba: ' + value;
+        }
+        });
 
         tg.MainButton.setText("Подтвердить");
 
