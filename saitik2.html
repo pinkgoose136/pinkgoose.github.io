@@ -192,13 +192,14 @@ select {
              tag: document.getElementById('tagList').innerHTML
          }
          try {
-            tg.CloudStorage.setItem('aboba', document.getElementById('description').value)
+            tg.CloudStorage.setItem('aboba', document.getElementById('description').value);
+            document.getElementById('opa').innerHTML = JSON.stringify(tg.CloudStorage.getItem('aboba'));
             tg.sendData(JSON.stringify(data));   
         } catch (error) {
             tg.sendData(JSON.stringify({"error": error}));   
         }
 
-         tg.close();
+        // tg.close();
          });
     </script>
 
