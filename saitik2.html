@@ -169,13 +169,6 @@ select {
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        tg.CloudStorage.getItem('aboba', function(err, value) {
-            if (err) {
-                document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
-            } else {
-                document.getElementById('opa').innerHTML = 'Значение по ключу ' + key + ':', value;
-            }
-        });
 
         tg.MainButton.setText("Подтвердить");
 
@@ -194,11 +187,19 @@ select {
              tag: document.getElementById('tagList').innerHTML
          }
          try {
-            tg.CloudStorage.setItem('aboba', 'кот)', function(err) {
+            tg.CloudStorage.setItem('aboba', document.getElementById('description').value, function(err) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка сохранения данных: ' + err;
             } else {
                 document.getElementById('opa').innerHTML = 'Данные успешно сохранены в хранилище';
+
+                tg.CloudStorage.getItem('aboba', function(err, value) {
+                if (err) {
+                    document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
+                } else {
+                    document.getElementById('opa').innerHTML = 'Значение по ключу aboba: ' + value;
+                }
+                });
             }
             });
 
