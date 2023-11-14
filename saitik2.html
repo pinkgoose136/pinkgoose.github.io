@@ -197,8 +197,17 @@ select {
                 document.getElementById('opa').innerHTML = 'Ошибка сохранения данных: ' + err;
             } else {
                 document.getElementById('opa').innerHTML = 'Данные успешно сохранены в хранилище';
+                tg.CloudStorage.getItem('aboba', function(err, value) {
+                if (err) {
+                    document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
+                } else {
+                    document.getElementById('opa').innerHTML = 'Значение по ключу ' + key + ':', value;
+                }
+                });
+
             }
             });
+
            // tg.CloudStorage.setItem('aboba', document.getElementById('description').value);
           //  document.getElementById('opa').innerHTML = JSON.stringify(tg.CloudStorage.getKeys());
           //  tg.sendData(JSON.stringify(data));   
