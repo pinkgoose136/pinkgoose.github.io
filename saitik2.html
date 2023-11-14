@@ -169,7 +169,7 @@ select {
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        document.getElementById('opa').innerHTML = tg.getItem('aboba')
+        document.getElementById('opa').innerHTML = tg.cloudStorage.getItem('aboba')
         tg.MainButton.setText("Подтвердить");
 
         tg.MainButton.hide()
@@ -187,7 +187,7 @@ select {
              tag: document.getElementById('tagList').innerHTML
          }   
          tg.sendData(JSON.stringify(data));   
-         tg.setItem('aboba', document.getElementById('description').value)
+         tg.cloudStorage.setItem('aboba', document.getElementById('description').value)
          tg.close();
          });
     </script>
