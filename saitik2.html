@@ -192,8 +192,15 @@ select {
              tag: document.getElementById('tagList').innerHTML
          }
          try {
-            tg.CloudStorage.setItem('aboba', document.getElementById('description').value);
-            document.getElementById('opa').innerHTML = JSON.stringify(tg.CloudStorage.getKeys());
+            tg.CloudStorage.setItem('aboba', document.getElementById('description').value, function(err) {
+            if (err) {
+                document.getElementById('opa').innerHTML = 'Ошибка сохранения данных: ' + err;
+            } else {
+                document.getElementById('opa').innerHTML = 'Данные успешно сохранены в хранилище';
+            }
+            });
+           // tg.CloudStorage.setItem('aboba', document.getElementById('description').value);
+          //  document.getElementById('opa').innerHTML = JSON.stringify(tg.CloudStorage.getKeys());
           //  tg.sendData(JSON.stringify(data));   
         } catch (error) {
             tg.sendData(JSON.stringify({"error": error}));   
