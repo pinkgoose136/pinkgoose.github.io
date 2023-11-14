@@ -170,7 +170,7 @@ select {
         let tg = window.Telegram.WebApp;
         tg.expand();
         try{
-            document.getElementById('opa').innerHTML = tg.CloudStorage.getItem('aboba').value;
+            document.getElementById('opa').innerHTML = tg.CloudStorage.getItem('aboba').key;
         } catch (error) {
             document.getElementById('opa').innerHTML = error  
         }
