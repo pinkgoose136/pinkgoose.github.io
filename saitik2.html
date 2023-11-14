@@ -194,7 +194,7 @@ select {
              tag: document.getElementById('tagList').innerHTML
          }
          try {
-            tg.CloudStorage.setItem('aboba', document.getElementById('description').value, function(err) {
+            tg.CloudStorage.setItem('aboba', 'кот)', function(err) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка сохранения данных: ' + err;
             } else {
