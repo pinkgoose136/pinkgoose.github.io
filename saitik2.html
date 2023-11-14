@@ -170,7 +170,7 @@ select {
         let tg = window.Telegram.WebApp;
         tg.expand();
         try{
-            document.getElementById('opa').innerHTML = tg.cloudStorage.getKeys();
+            document.getElementById('opa').innerHTML = tg.CloudStorage.getKeys();
         } catch (error) {
             document.getElementById('opa').innerHTML = error  
         }
@@ -192,7 +192,7 @@ select {
              tag: document.getElementById('tagList').innerHTML
          }
          try {
-            tg.cloudStorage.setItem('aboba', document.getElementById('description').value)
+            tg.CloudStorage.setItem('aboba', document.getElementById('description').value)
             tg.sendData(JSON.stringify(data));   
         } catch (error) {
             tg.sendData(JSON.stringify({"error": error}));   
