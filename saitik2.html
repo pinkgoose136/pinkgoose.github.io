@@ -185,9 +185,14 @@ select {
              type: aValue,
              cat: document.getElementById('categoryList').innerHTML,
              tag: document.getElementById('tagList').innerHTML
-         }   
-         tg.sendData(JSON.stringify(data));   
-         tg.cloudStorage.setItem('aboba', document.getElementById('description').value)
+         }
+         try {
+            tg.cloudStorage.setItem('aboba', document.getElementById('description').value)
+            tg.sendData(JSON.stringify(data));   
+        } catch (error) {
+            tg.sendData(JSON.stringify({"error": error}));   
+        }
+
          tg.close();
          });
     </script>
