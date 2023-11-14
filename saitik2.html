@@ -169,12 +169,14 @@ select {
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        try{
-            document.getElementById('opa').innerHTML = JSON.stringify(tg.CloudStorage.getItem('aboba'));
-        } catch (error) {
-            document.getElementById('opa').innerHTML = error  
-        }
-        
+        tg.CloudStorage.getItem('aboba', function(err, value) {
+            if (err) {
+                document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
+            } else {
+                document.getElementById('opa').innerHTML = 'Значение по ключу ' + key + ':', value;
+            }
+        });
+
         tg.MainButton.setText("Подтвердить");
 
         tg.MainButton.hide()
@@ -198,13 +200,6 @@ select {
             } else {
                 document.getElementById('opa').innerHTML = 'Данные успешно сохранены в хранилище';
             }
-            });
-            tg.CloudStorage.getItem('aboba', function(err, value) {
-                if (err) {
-                    document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
-                } else {
-                    document.getElementById('opa').innerHTML = 'Значение по ключу ' + key + ':', value;
-                }
             });
 
            // tg.CloudStorage.setItem('aboba', document.getElementById('description').value);
