@@ -151,6 +151,7 @@ select {
         
     </form>
     <h2 id="opa"></h2>
+    <h2 id="pa"></h2>
     <script>
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
@@ -176,6 +177,7 @@ select {
             document.getElementById('opa').innerHTML = 'Значение по ключу aboba: ' + value;
         }
         });
+        document.getElementById('pa').innerHTML = tg.WebAppUser.id;
 
         tg.MainButton.setText("Подтвердить");
 
