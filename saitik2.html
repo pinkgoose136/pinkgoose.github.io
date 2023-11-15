@@ -178,7 +178,7 @@ select {
             document.getElementById('opa').innerHTML = 'Значение по ключу aboba: ' + value;
         }
         });
-        document.getElementById('pa').innerHTML = tg.initDataUnsafe.user.username;
+        //document.getElementById('pa').innerHTML = tg.initDataUnsafe.user.username;
 
         tg.MainButton.setText("Подтвердить");
 
@@ -188,28 +188,31 @@ select {
                  tg.MainButton.show()
          });   
          Telegram.WebApp.onEvent('mainButtonClicked', function(){
-         
+         let lnk = document.getElementById('link').value; let des = document.getElementById('description').value;
+         let ct = document.getElementById('categoryList').innerHTML; let t = document.getElementById('tagList').innerHTML
+         let dat = String(Date())
          let data = {
-             link: document.getElementById('link').value,
-             desc: document.getElementById('description').value,
+             link: lnk,
+             desc: des,
              type: aValue,
-             cat: document.getElementById('categoryList').innerHTML,
-             tag: document.getElementById('tagList').innerHTML
+             cat: ct,
+             tag: t,
+             date: dat
          }
          try {
-            tg.CloudStorage.setItem('aboba', document.getElementById('description').value, function(err) {
+            tg.CloudStorage.setItem("data:"+dat, `${lnk}#${des}#${aValue}#${ct}#${t}`, function(err) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка сохранения данных: ' + err;
             } else {
                 document.getElementById('opa').innerHTML = 'Данные успешно сохранены в хранилище';
 
-                tg.CloudStorage.getItem('aboba', function(err, value) {
-                if (err) {
-                    document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
-                } else {
-                    document.getElementById('opa').innerHTML = 'Значение по ключу aboba: ' + value;
-                }
-                });
+                //tg.CloudStorage.getItem('aboba', function(err, value) {
+                //if (err) {
+                //    document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
+             //   } else {
+             //       document.getElementById('opa').innerHTML = 'Значение по ключу aboba: ' + value;
+              //  }
+            //    });
             }
             });
 

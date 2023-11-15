@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telegram Explorer</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+    <h2 id="opa"></h2>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        
+        tg.CloudStorage.getKeys(function(err, keys) {
+        if (err) {
+            document.getElementById('opa').innerHTML = 'Ошибка получения ключей:', err;
+        } else {
+            document.getElementById('opa').innerHTML = 'Список ключей:', keys;
+        }
+        });
+
+    </script>
+
+</body>
+</html>
