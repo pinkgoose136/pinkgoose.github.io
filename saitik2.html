@@ -170,6 +170,8 @@ select {
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
+        
+        tg.showAlert(`Добро пожаловать, @${tg.WebAppUser.username}.`);
         tg.CloudStorage.getItem('aboba', function(err, value) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
