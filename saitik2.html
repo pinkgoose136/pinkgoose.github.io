@@ -171,7 +171,6 @@ select {
         let tg = window.Telegram.WebApp;
         tg.expand();
         
-        tg.showAlert(`Добро пожаловать, @${tg.WebAppUser.username}.`);
         tg.CloudStorage.getItem('aboba', function(err, value) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
@@ -179,7 +178,7 @@ select {
             document.getElementById('opa').innerHTML = 'Значение по ключу aboba: ' + value;
         }
         });
-        document.getElementById('pa').innerHTML = tg.WebAppUser.username;
+        document.getElementById('pa').innerHTML = tg.initDataUnsafe.user.username;
 
         tg.MainButton.setText("Подтвердить");
 
