@@ -211,18 +211,16 @@ select {
             type: aValue,
             cat: ct,
             tag: t,
-        };
-
+        };  
+        let keys = Object.keys(valuesList);
         function saveValues(index) {
-            let keys = Object.keys(valuesList);
-            
             if (index < keys.length) {
                 let key = keys[index];
                 let value = valuesList[key];
 
-                tg.CloudStorage.setItem("draft-" + String(formattedDateTime) + '-' + key, value, function(err) {
+                tg.CloudStorage.setItem("draft-" + String(formattedDateTime) + "-" + key, value, function(err) {
                     if (err) {
-                        tg.sendData(JSON.stringify({"error": err}));
+                        tg.sendData(JSON.stringify({"error": err + "\ndraft-" + String(formattedDateTime) + "-" + key}));
                         tg.close();
                     } else {
                         saveValues(index + 1);
