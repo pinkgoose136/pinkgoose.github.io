@@ -205,16 +205,37 @@ select {
              date: formattedDateTime
          }
 
-        tg.CloudStorage.setItem("draft-"+String(formattedDateTime), `${lnk}#${des}#${aValue}#${ct}#${t}`, function(err) {
-        if (err) {
-            tg.sendData(JSON.stringify({"error": err})); 
-            tg.close();
-            //document.getElementById('opa').innerHTML = 'Ошибка сохранения данных: ' + err + ` (${"data-"+String(formattedDateTime)})`;
-        } else {
-            tg.sendData(JSON.stringify(data));   
-            tg.close();
+         let valuesList = {
+            link: lnk,
+            desc: des,
+            type: aValue,
+            cat: ct,
+            tag: t,
+        };
+
+        function saveValues(index) {
+            let keys = Object.keys(valuesList);
+            
+            if (index < keys.length) {
+                let key = keys[index];
+                let value = valuesList[key];
+
+                tg.CloudStorage.setItem("draft-" + String(formattedDateTime) + '-' + key, value, function(err) {
+                    if (err) {
+                        tg.sendData(JSON.stringify({"error": err}));
+                        tg.close();
+                    } else {
+                        saveValues(index + 1);
+                    }
+                });
+            } else {
+                tg.sendData(JSON.stringify(data));
+                tg.close();
+            }
         }
-        });
+
+        saveValues(0);
+
          });
     </script>
 
