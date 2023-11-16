@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telegram Explorer</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+    <h2 id="opa"></h2>
+
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        var idi = getParameterByName('idi');
+
+    </script>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        tg.CloudStorage.getKeys(function(err, keys) {
+        if (err) {
+            document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
+        } else {
+            document.getElementById('opa').innerHTML = 'Список ключей:' + String(keys.filter(word => word.includes(idi)));
+        }
+        });
+
+    </script>
+
+</body>
+</html>

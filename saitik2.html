@@ -182,7 +182,7 @@ select {
          });   
          Telegram.WebApp.onEvent('mainButtonClicked', function(){
          let lnk = document.getElementById('link').value; let des = document.getElementById('description').value;
-         let ct = document.getElementById('categoryList').innerText; let t = document.getElementById('tagList').innerText;
+         let ct = document.getElementById('categoryList').innerHTML; let t = document.getElementById('tagList').innerHTML;
 
          function getFormattedDateTime() {
             let currentDate = new Date();
