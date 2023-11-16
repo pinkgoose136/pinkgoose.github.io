@@ -202,15 +202,13 @@ select {
         }
 
         let formattedDateTime = getFormattedDateTime();
-
-         let dat = String(Date())
          let data = {
              link: lnk,
              desc: des,
              type: aValue,
              cat: ct,
              tag: t,
-             date: dat
+             date: formattedDateTime
          }
          try {
             tg.CloudStorage.setItem("data-"+String(formattedDateTime), `${lnk}#${des}#${aValue}#${ct}#${t}`, function(err) {
@@ -229,12 +227,12 @@ select {
             }
             });
 
-         //   tg.sendData(JSON.stringify(data));   
+            tg.sendData(JSON.stringify(data));   
         } catch (error) {
             tg.sendData(JSON.stringify({"error": error}));   
         }
 
-        // tg.close();
+         tg.close();
          });
     </script>
 
