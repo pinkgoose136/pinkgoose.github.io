@@ -20,6 +20,15 @@
         }
         });
 
+        tg.CloudStorage.getItem('aboba', function(err, value) {
+        if (err) {
+            document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
+        } else {
+            document.getElementById('opa').innerHTML = 'Значение по ключу aboba: ' + value;
+        }
+        });
+        
+
     </script>
 
 </body>
