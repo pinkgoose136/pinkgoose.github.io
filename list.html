@@ -16,7 +16,7 @@
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:', err;
         } else {
-            document.getElementById('opa').innerHTML = 'Список ключей:', String(keys);
+            document.getElementById('opa').innerHTML = 'Список ключей:', keys.join(', ');
         }
         });
 
