@@ -221,7 +221,7 @@ select {
                     if (err) {
                         document.getElementById('pa').innerHTML = 'Ошибка получения ключей:', err;
                     } else {
-                        document.getElementById('pa').innerHTML = 'Список ключей:', keys[0];
+                        document.getElementById('pa').innerHTML = 'Список ключей:', JSON.stringify(keys);
                     }
                     });
 
