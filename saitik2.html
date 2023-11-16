@@ -202,7 +202,7 @@ select {
          try {
             tg.CloudStorage.setItem("data-"+dat, `${lnk}#${des}#${aValue}#${ct}#${t}`, function(err) {
             if (err) {
-                document.getElementById('opa').innerHTML = 'Ошибка сохранения данных: ' + err;
+                document.getElementById('opa').innerHTML = 'Ошибка сохранения данных: ' + err + ` (${"data-"+dat})`;
             } else {
                 document.getElementById('opa').innerHTML = 'Данные успешно сохранены в хранилище';
 
