@@ -18,7 +18,7 @@
         let az = String(tg.initDataUnsafe.user.username)+"-"+String(tg.initDataUnsafe.user.id)
         tg.CloudStorage.setItem(az, 'ab', function(err) {
         if (err) {
-            document.getElementById('opa').innerHTML = er;
+            document.getElementById('opa').innerHTML = err;
         } else {
             document.getElementById('opa').innerHTML = az
         }
