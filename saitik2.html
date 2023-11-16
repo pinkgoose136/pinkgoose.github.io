@@ -217,6 +217,13 @@ select {
             } else {
                 document.getElementById('opa').innerHTML = 'Данные успешно сохранены в хранилище';
 
+                tg.CloudStorage.getKeys(function(err, keys) {
+                    if (err) {
+                        document.getElementById('opa').innerHTML = 'Ошибка получения ключей:', err;
+                    } else {
+                        document.getElementById('opa').innerHTML = 'Список ключей:', keys.join(', ');
+                    }
+                    });
                 //tg.CloudStorage.getItem('aboba', function(err, value) {
                 //if (err) {
                 //    document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
@@ -227,12 +234,12 @@ select {
             }
             });
 
-            tg.sendData(JSON.stringify(data));   
+            //tg.sendData(JSON.stringify(data));   
         } catch (error) {
             tg.sendData(JSON.stringify({"error": error}));   
         }
 
-         tg.close();
+         //tg.close();
          });
     </script>
 
