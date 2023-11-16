@@ -219,9 +219,18 @@ select {
 
                 tg.CloudStorage.getKeys(function(err, keys) {
                     if (err) {
-                        document.getElementById('opa').innerHTML = 'Ошибка получения ключей:', err;
+                        document.getElementById('pa').innerHTML = 'Ошибка получения ключей:', err;
                     } else {
-                        document.getElementById('opa').innerHTML = 'Список ключей:', keys.join(', ');
+                        document.getElementById('pa').innerHTML = 'Список ключей:', keys.join(', ');
+                    }
+                    });
+
+                
+                    tg.CloudStorage.getItem("data-"+String(formattedDateTime), function(err, value) {
+                    if (err) {
+                        document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
+                    } else {
+                        document.getElementById('opa').innerHTML = 'Значение по ключу aboba: ' + value;
                     }
                     });
                 //tg.CloudStorage.getItem('aboba', function(err, value) {
