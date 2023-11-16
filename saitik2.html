@@ -219,9 +219,9 @@ select {
 
                 tg.CloudStorage.getKeys(function(err, keys) {
                     if (err) {
-                        document.getElementById('pa').innerHTML = 'Ошибка получения ключей:', err;
+                        document.getElementById('pa').innerHTML = 'Ошибка получения ключей:' + err;
                     } else {
-                        document.getElementById('pa').innerHTML = 'Список ключей:', JSON.stringify(keys);
+                        document.getElementById('pa').innerHTML = 'Список ключей:' + JSON.stringify(keys);
                     }
                     });
 
