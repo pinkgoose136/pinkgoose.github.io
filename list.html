@@ -16,18 +16,10 @@
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:', err;
         } else {
-            document.getElementById('opa').innerHTML = 'Список ключей:', keys;
+            document.getElementById('opa').innerHTML = 'Список ключей:', String(keys);
         }
         });
 
-        tg.CloudStorage.getItem('aboba', function(err, value) {
-        if (err) {
-            document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
-        } else {
-            document.getElementById('opa').innerHTML = 'Значение по ключу aboba: ' + value;
-        }
-        });
-        
 
     </script>
 
