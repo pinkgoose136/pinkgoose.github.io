@@ -36,7 +36,7 @@
                 if (err) {
                     document.getElementById('opa').innerHTML = 'Ошибка получения значений:' + err;
                 } else {
-                    document.getElementById('opa').innerHTML = 'Полученные значения: ' + values;
+                    document.getElementById('opa').innerHTML = 'Полученные значения: ' + JSON.stringify(values);
                 }
             });
 
