@@ -11,7 +11,10 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        document.getElementById('opa').innerHTML = "Aa"
+        tg.MainButton.setText("Омг");
+        tg.MainButton.show()
+
+        Telegram.WebApp.onEvent('mainButtonClicked', function(){
         let az = String(tg.initDataUnsafe.user.username)+"-"+String(tg.initDataUnsafe.user.id)
         tg.CloudStorage.setItem(az, 'ab', function(err) {
         if (err) {
@@ -20,6 +23,7 @@
             document.getElementById('opa').innerHTML = az
         }
         });
+    });
     </script>
 
 </body>
