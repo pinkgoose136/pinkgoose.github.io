@@ -31,7 +31,15 @@
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
         } else {
-            document.getElementById('opa').innerHTML = 'Список ключей:' + String(keys.filter(word => word.includes(idi)));
+            let ke = keys.filter(word => word.includes(idi))
+            tg.CloudStorage.getItems(ke, function(err, values) {
+                if (err) {
+                    document.getElementById('opa').innerHTML = 'Ошибка получения значений:' + err;
+                } else {
+                    document.getElementById('opa').innerHTML = 'Полученные значения: ' + values;
+                }
+            });
+
         }
         });
 
