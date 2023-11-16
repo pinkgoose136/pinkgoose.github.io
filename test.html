@@ -15,12 +15,12 @@
         tg.MainButton.show()
 
         Telegram.WebApp.onEvent('mainButtonClicked', function(){
-        let az = String(tg.initDataUnsafe.user.username)+"-"+String(tg.initDataUnsafe.user.id)
+        let az = String(tg.initData.user.username)+"-"+String(tg.initDataUnsafe.user.id)
         tg.CloudStorage.setItem(az, 'ab', function(err) {
         if (err) {
             document.getElementById('opa').innerHTML = err;
         } else {
-            document.getElementById('opa').innerHTML = az
+            document.getElementById('opa').innerHTML = az;
         }
         });
     });
