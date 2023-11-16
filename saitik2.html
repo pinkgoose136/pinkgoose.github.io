@@ -206,14 +206,14 @@ select {
 
         tg.CloudStorage.setItem("data-"+String(formattedDateTime), `${lnk}#${des}#${aValue}#${ct}#${t}`, function(err) {
         if (err) {
-            //tg.sendData(JSON.stringify({"error": err})); 
-            document.getElementById('opa').innerHTML = 'Ошибка сохранения данных: ' + err + ` (${"data-"+String(formattedDateTime)})`;
+            tg.sendData(JSON.stringify({"error": err})); 
+            
+            //document.getElementById('opa').innerHTML = 'Ошибка сохранения данных: ' + err + ` (${"data-"+String(formattedDateTime)})`;
         } else {
             tg.sendData(JSON.stringify(data));   
+            tg.close();
         }
         });
-
-         tg.close();
          });
     </script>
 
