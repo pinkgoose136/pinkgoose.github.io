@@ -182,7 +182,7 @@ select {
          });   
          Telegram.WebApp.onEvent('mainButtonClicked', function(){
          let lnk = document.getElementById('link').value; let des = document.getElementById('description').value;
-         let ct = document.getElementById('categoryList').innerHTML; let t = document.getElementById('tagList').innerHTML;
+         let ct = document.getElementById('categoryList').innerText; let t = document.getElementById('tagList').innerText;
 
          function getFormattedDateTime() {
             let currentDate = new Date();
@@ -205,7 +205,7 @@ select {
              date: formattedDateTime
          }
 
-        tg.CloudStorage.setItem("data-"+String(formattedDateTime), `${lnk}#${des}#${aValue}#${ct}#${t}`, function(err) {
+        tg.CloudStorage.setItem("draft-"+String(formattedDateTime), `${lnk}#${des}#${aValue}#${ct}#${t}`, function(err) {
         if (err) {
             tg.sendData(JSON.stringify({"error": err})); 
             tg.close();

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telegram Explorer</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+</head>
+<body>
+    <h2 id="opa"></h2>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        
+        document.getElementById('opa').innerHTML = tg.initDataUnsafe.user.username;
+        let az = String(tg.initDataUnsafe.user.username)+"_"+String(tg.initDataUnsafe.user.id)
+        tg.CloudStorage.setItem(az, '', function(err) {
+        if (err) {
+            document.getElementById('opa').innerHTML = er;
+        } else {
+            document.getElementById('opa').innerHTML = az
+        }
+        });
+    </script>
+
+</body>
+</html>
