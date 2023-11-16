@@ -200,7 +200,7 @@ select {
              date: dat
          }
          try {
-            tg.CloudStorage.setItem("data:"+dat, `${lnk}#${des}#${aValue}#${ct}#${t}`, function(err) {
+            tg.CloudStorage.setItem("data-"+dat, `${lnk}#${des}#${aValue}#${ct}#${t}`, function(err) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка сохранения данных: ' + err;
             } else {
