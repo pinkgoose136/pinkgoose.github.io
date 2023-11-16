@@ -11,8 +11,8 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        
-        let az = String(tg.initDataUnsafe.user.username)+"_"+String(tg.initDataUnsafe.user.id)
+        document.getElementById('opa').innerHTML = "Aa"
+        let az = String(tg.initDataUnsafe.user.username)+"-"+String(tg.initDataUnsafe.user.id)
         tg.CloudStorage.setItem(az, 'ab', function(err) {
         if (err) {
             document.getElementById('opa').innerHTML = er;
