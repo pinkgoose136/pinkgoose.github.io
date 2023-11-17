@@ -55,7 +55,7 @@
                     function addItemsToStorage(items) {
                         Object.keys(items).forEach(function(key) {
 
-                            tg.CloudStorage.setItem("item-" + String(formattedDateTime) + "-" + key, value, function(err) {
+                            tg.CloudStorage.setItem("item-" + key, value, function(err) {
                                 if (err) {
                                     document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + key + ':' + err;
                                 } else {
@@ -72,6 +72,7 @@
                     }
                     document.getElementById('accept').onclick = function(){
                         addItemsToStorage(values);
+                        removeItemsFromStorage(values);
                         tg.close();
                     }
                 }
