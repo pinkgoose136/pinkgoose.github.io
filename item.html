@@ -7,6 +7,9 @@
 <body>
 
     <h2 id="opa"></h2>
+    <button id="accept">Добавить</button>
+    <button id="delete">Удалить</button>
+    <h2 id="pa"></h2>
 
     <script>
         function getParameterByName(name, url) {
@@ -34,9 +37,43 @@
             let ke = keys.filter(word => word.includes(idi))
             tg.CloudStorage.getItems(ke, function(err, values) {
                 if (err) {
-                    document.getElementById('opa').innerHTML = 'Ошибка получения значений:' + err;
+                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                 } else {
                     document.getElementById('opa').innerHTML = 'Полученные значения: ' + JSON.stringify(values);
+
+                    function removeItemsFromStorage(items) {
+                        Object.keys(items).forEach(function(key) {
+                            tg.CloudStorage.removeItem(key, function(err) {
+                                if (err) {
+                                    document.getElementById('pa').innerHTML = 'Ошибка удаления элемента с ключом ' + key + ':' + err;
+                                } else {
+                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + key + ' успешно удален из хранилища';
+                                }
+                            });
+                        });
+                    }
+                    function addItemsToStorage(items) {
+                        Object.keys(items).forEach(function(key) {
+
+                            tg.CloudStorage.setItem("item-" + String(formattedDateTime) + "-" + key, value, function(err) {
+                                if (err) {
+                                    document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + key + ':' + err;
+                                } else {
+                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + key + ' успешно добавлен в хранилище';
+                                }
+                            });
+
+                        });
+                    }
+  
+                    document.getElementById('delete').onclick = function(){
+                        removeItemsFromStorage(values);
+                        tg.close();
+                    }
+                    document.getElementById('accept').onclick = function(){
+                        addItemsToStorage(values);
+                        tg.close();
+                    }
                 }
             });
 
