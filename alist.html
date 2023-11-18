@@ -4,7 +4,7 @@
     <title>Telegram Explorer</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-<body>
+<body style="color: aliceblue;">
     <div id="keysList"></div>
     <h2 id="opa"></h2>
 
@@ -12,28 +12,50 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
+
+
+
         tg.CloudStorage.getKeys(function(err, keys) {
-        if (err) {
-            document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
-        } else {
-            tg.CloudStorage.getItems(keys, function(err, items) {
-                if (err) {
-                    document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
-                } else {
-                    let keysAndValuesListDiv = document.getElementById('keysList');
+            if (err) {
+                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
+            } else {
+                tg.CloudStorage.getItems(keys, function(err, items) {
+                    if (err) {
+                        document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+                    } else {
+                        let keysBySecondPart = {};
 
-                    Object.keys(items).forEach(function(key) {
-                        let value = items[key];
-                        let keyAndValueDiv = document.createElement('div');
-                        keyAndValueDiv.textContent = 'Ключ: ' + key + ', Значение: ' + value;
-                        keysAndValuesListDiv.appendChild(keyAndValueDiv);
-                    });
-                }
-            });
+                        Object.keys(items).forEach(function(key) {
+                            let value = items[key];
+                            let keyParts = key.split('-');
 
-        }
+                            if (keyParts[0] === 'draft') {
+                                let secondPart = keyParts[1];
+
+                                if (!keysBySecondPart[secondPart]) {
+                                    keysBySecondPart[secondPart] = [];
+                                }
+
+                                keysBySecondPart[secondPart].push(key);
+                            }
+                        });
+
+                        let keysListDiv = document.getElementById('keysList');
+
+                        Object.keys(keysBySecondPart).forEach(function(secondPart) {
+                            let keysDiv = document.createElement('div');
+                            keysDiv.textContent = 'Вторая часть ключа: ' + secondPart + ', Ключи: ' + keysBySecondPart[secondPart].join(', ');
+                            keysListDiv.appendChild(keysDiv);
+                        });
+                    }
+                });
+            }
         });
-        
+
+
+
+
+
     </script>
 
 </body>
