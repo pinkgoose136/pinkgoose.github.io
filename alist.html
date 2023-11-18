@@ -43,12 +43,30 @@
                         let keysListDiv = document.getElementById('keysList');
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let keysDiv = document.createElement('div');
-                            tg.CloudStorage.getItems(keysBySecondPart[secondPart], function(err, items) {
+                            tg.CloudStorage.getItems(keysBySecondPart[secondPart], function(err, itemss) {
                                 if (err) {
                                     keysDiv.textContent = 'Ошибка получения значений: ' + err;;
                                     keysListDiv.appendChild(keysDiv);
                                 } else {
-                                    keysDiv.textContent = JSON.stringify(items);
+                                    Object.keys(itemss).forEach(function(key2) {
+                                        let itemDiv = document.createElement('div');
+
+                                        let valu2 = itemss[key2];
+                                        let keyParts = key2.split('-');
+                                        let tex = "";
+                                        switch (keyParts[2]) {
+                                        case 'link': tex += "Ссылка: "; break;
+                                        case 'desc': tex += "Описание: "; break;
+                                        case 'type': tex += "Тип: "; break;
+                                        case 'cat': tex += "Категории: "; break;
+                                        case 'tag': tex += "Теги: "; break;
+                                        default: tex += expr; break;
+                                        }
+
+                                        itemDiv.textContent = tex + valu2;
+                                        keysDiv.appendChild(itemDiv);
+
+                                    });
                                     keysListDiv.appendChild(keysDiv);
                                 }
                             });
@@ -58,10 +76,6 @@
                 });
             }
         });
-
-
-
-
 
     </script>
 
