@@ -41,7 +41,7 @@
                         });
 
                         let keysListDiv = document.getElementById('keysList');
-
+                        document.getElementById('opa').innerHTML = JSON.stringify(keysBySecondPart)
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let keysDiv = document.createElement('div');
                             keysDiv.textContent = 'Вторая часть ключа: ' + secondPart + ', Ключи: ' + keysBySecondPart[secondPart].join(', ');
