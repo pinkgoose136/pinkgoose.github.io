@@ -20,7 +20,7 @@
                 if (err) {
                     document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
                 } else {
-                    let keysAndValuesListDiv = document.getElementById('keysAndValuesList');
+                    let keysAndValuesListDiv = document.getElementById('keysList');
 
                     Object.keys(items).forEach(function(key) {
                         let value = items[key];
