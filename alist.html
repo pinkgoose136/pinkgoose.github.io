@@ -11,8 +11,12 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        function displayAllKeysAndValues() {
-            tg.CloudStorage.getItems([], function(err, items) {
+
+        tg.CloudStorage.getKeys(function(err, keys) {
+        if (err) {
+            document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
+        } else {
+            tg.CloudStorage.getItems(keys, function(err, items) {
                 if (err) {
                     document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
                 } else {
@@ -26,9 +30,10 @@
                     });
                 }
             });
-        }
 
-        displayAllKeysAndValues();
+        }
+        });
+        
     </script>
 
 </body>
