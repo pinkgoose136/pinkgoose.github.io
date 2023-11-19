@@ -27,6 +27,27 @@
     <script>
         let ke = idi.split('.')
         document.getElementById('opa').innerHTML = JSON.stringify(ke)
+
+        tg.CloudStorage.getKeys(function(err, keys) {
+        if (err) {
+            document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
+        } else {
+            keys.forEach(function(key) {
+            var splittedKey = key.split('-');
+            if (splittedKey.length >= 2 && splittedKey[1] === idi) {
+                tg.CloudStorage.removeItem(key, function(err) {
+                if (err) {
+                    document.getElementById('opa').innerHTML += 'Ошибка удаления ключа:' + err;
+                } else {
+                    document.getElementById('opa').innerHTML += 'Ключ успешно удален:' + key;
+                }
+                });
+            }
+            });
+        }
+        });
+
+
        // let tg = window.Telegram.WebApp;
        // tg.expand();
 
