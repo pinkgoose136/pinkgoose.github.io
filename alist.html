@@ -12,9 +12,6 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
-
-
-
         tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
@@ -48,25 +45,29 @@
                                     keysDiv.textContent = 'Ошибка получения значений: ' + err;;
                                     keysListDiv.appendChild(keysDiv);
                                 } else {
+                                    itms = {}
                                     Object.keys(itemss).forEach(function(key2) {
-                                        let itemDiv = document.createElement('div');
-
                                         let valu2 = itemss[key2];
                                         let keyParts = key2.split('-');
                                         let tex = "";
+                                        let keyy = ""
                                         switch (keyParts[2]) {
-                                        case 'link': tex += "Ссылка: "; break;
-                                        case 'desc': tex += "Описание: "; break;
-                                        case 'type': tex += "Тип: "; break;
-                                        case 'cat': tex += "Категории: "; break;
-                                        case 'tag': tex += "Теги: "; break;
-                                        default: tex += expr; break;
+                                        case 'link': tex = "Ссылка: "; keyy = '1'; break;
+                                        case 'desc': tex = "Описание: "; keyy = '3'; break;
+                                        case 'type': tex = "Тип: "; keyy = '2'; break;
+                                        case 'cat': tex = "Категории: "; keyy = '4'; break;
+                                        case 'tag': tex = "Теги: "; keyy = '5'; break;
+                                        default: tex = expr; keyy = '0'; break;
                                         }
-
-                                        itemDiv.textContent = tex + valu2;
-                                        keysDiv.appendChild(itemDiv);
+                                        itms[keyy] = tex
 
                                     });
+                                    itms.forEach(function(i){
+                                        let itemDiv = document.createElement('p');
+                                        itemDiv.textContent = itms[i];
+                                        keysDiv.appendChild(itemDiv);
+                                    });
+
                                     keysListDiv.appendChild(keysDiv);
                                 }
                             });
