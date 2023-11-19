@@ -36,7 +36,8 @@
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
             if (splittedKey.length >= 2){
-                if (ke.indexOf(String(splittedKey[1])) !== -1) {
+                try{
+                    if (ke.indexOf(String(splittedKey[1])) !== -1) {
                     tg.CloudStorage.removeItem(key, function(err2) {
                     if (err2) {
                         bb += 'Ошибка удаления ключа:' + err2;
@@ -44,7 +45,14 @@
                         bb += 'Ключ успешно удален:' + key;
                     }
                     });
-            }
+                    }
+                }
+                catch (e){
+                    document.getElementById('pa').textContent =  bb;
+                    document.getElementById('opa').textContent =  e;
+                    return;
+                }
+
             }
             });
             try{
