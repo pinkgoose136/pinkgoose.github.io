@@ -50,7 +50,7 @@
                                         let valu2 = itemss[key2];
                                         let keyParts = key2.split('-');
                                         let tex = "";
-                                        let keyy = ""
+                                        let keyy = "";
                                         switch (keyParts[2]) {
                                         case 'link': tex = "Ссылка: "; keyy = '1'; break;
                                         case 'desc': tex = "Описание: "; keyy = '3'; break;
@@ -63,7 +63,7 @@
 
                                     });
                                     itms.forEach(function(i){
-                                        let itemDiv = document.createElement('p');
+                                        let itemDiv = document.createElement('div');
                                         itemDiv.textContent = i;
                                         keysDiv.appendChild(itemDiv);
                                     });
