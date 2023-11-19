@@ -27,7 +27,8 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        let ke = JSON.stringify(idi).split('.');
+        let ake = JSON.stringify(idi);
+        let ke = ake.split('.')
         tg.CloudStorage.getKeys(function(err, keys) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
@@ -36,6 +37,7 @@
             let y = ""
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
+            y += splittedKey
             if (splittedKey.length >= 2){
                 if (ke.indexOf(String(splittedKey[1])) !== -1) {
                     y += splittedKey[1]
