@@ -32,18 +32,20 @@
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
         } else {
+            let bb = ''
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
             if (splittedKey.length >= 2 && splittedKey[1] === idi) {
                 tg.CloudStorage.removeItem(key, function(err) {
                 if (err) {
-                    document.getElementById('opa').innerHTML += 'Ошибка удаления ключа:' + err;
+                    bb += 'Ошибка удаления ключа:' + err;
                 } else {
-                    document.getElementById('opa').innerHTML += 'Ключ успешно удален:' + key;
+                    bb += 'Ключ успешно удален:' + key;
                 }
                 });
             }
             });
+            document.getElementById('opa').innerHTML = bb;
         }
         });
 
