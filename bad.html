@@ -40,9 +40,9 @@
                 tg.CloudStorage.removeItem(key, function(err2) {
                 let ab = document.createElement('div');
                 if (err2) {
-                    ab.innerHTML += 'Ошибка удаления ключа:' + err2;
+                    ab.innerHTML = 'Ошибка удаления ключа:' + err2;
                 } else {
-                    ab.innerHTML += 'Ключ успешно удален:' + key;
+                    ab.innerHTML = 'Ключ успешно удален:' + key;
                 }
                 bb.appendChild(ab);
                 });
