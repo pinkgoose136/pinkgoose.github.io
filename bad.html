@@ -8,7 +8,7 @@
 
     <h2 id="opa"></h2>
     <h2 id="pa"></h2>
-
+    <div id="log"></div>
     <script>
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
@@ -32,17 +32,19 @@
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
         } else {
-            let bb = ""
+            let bb = document.getElementById('log');
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
             if (splittedKey.length >= 2){
                 if (ke.indexOf(String(splittedKey[1])) !== -1) {
                 tg.CloudStorage.removeItem(key, function(err2) {
+                let ab = document.createElement('div');
                 if (err2) {
-                    document.getElementById('pa').innerHTML += 'Ошибка удаления ключа:' + err2;
+                    ab.innerHTML += 'Ошибка удаления ключа:' + err2;
                 } else {
-                    document.getElementById('pa').innerHTML += 'Ключ успешно удален:' + key;
+                    ab.innerHTML += 'Ключ успешно удален:' + key;
                 }
+                bb.appendChild(ab);
                 });
                 }
             }
