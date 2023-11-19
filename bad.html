@@ -27,7 +27,7 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        let ke = String(idi).split('.');
+        let ke = JSON.stringify(idi).split('.');
         tg.CloudStorage.getKeys(function(err, keys) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
@@ -37,7 +37,7 @@
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
             if (splittedKey.length >= 2){
-                if (ke.includes(String(splittedKey[1]))) {
+                if (ke.indexOf(String(splittedKey[1])) !== -1) {
                     y += splittedKey[1]
                     tg.CloudStorage.removeItem(key, function(err) {
                     if (err) {
