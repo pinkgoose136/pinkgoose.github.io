@@ -12,6 +12,34 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
+        function addEl(items){
+            Object.keys(items).forEach(function(key) {
+                let updatedKey = 'item-' + key;
+                let value = items[key];
+
+                tg.CloudStorage.setItem(updatedKey, value, function(err) {
+                    if (err) {
+                        document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + key + ':' + err;
+                    } else {
+                        document.getElementById('pa').innerHTML = 'Элемент с ключом ' + key + ' успешно добавлен в хранилище';
+                    }
+                });
+
+            });
+        }
+
+        function delEl(items){
+            Object.keys(items).forEach(function(key) {
+                tg.CloudStorage.removeItem(key, function(err) {
+                    if (err) {
+                        document.getElementById('pa').innerHTML = 'Ошибка удаления элемента с ключом ' + key + ':' + err;
+                    } else {
+                        document.getElementById('pa').innerHTML = 'Элемент с ключом ' + key + ' успешно удален из хранилища';
+                    }
+                });
+            });
+        }
+
         tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
@@ -40,6 +68,8 @@
                         let keysListDiv = document.getElementById('keysList');
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let keysDiv = document.createElement('div');
+                            keysDiv.classList.add('item');
+
                             tg.CloudStorage.getItems(keysBySecondPart[secondPart], function(err, itemss) {
                                 if (err) {
                                     keysDiv.textContent = 'Ошибка получения значений: ' + err;;
@@ -67,6 +97,20 @@
                                         itemDiv.textContent = itms[i];
                                         keysDiv.appendChild(itemDiv);
                                     });
+                                    let button1 = document.createElement('button');
+                                    button1.textContent = 'Добавить';
+                                    button1.addEventListener('click', function() {
+                                        addEl(itemss);
+                                        delEl(itemss);
+                                    });
+                                    keysListDiv.appendChild(button1);
+
+                                    let button2 = document.createElement('button');
+                                    button2.textContent = 'Удалить';
+                                    button2.addEventListener('click', function() {
+                                        delEl(itemss);
+                                    });
+                                    keysListDiv.appendChild(button2);
 
                                     keysListDiv.appendChild(keysDiv);
                                 }
@@ -79,6 +123,12 @@
         });
 
     </script>
+    <style>
+        .item{
+         padding-bottom: 20px;
+         background-color: darkkhaki;   
+        }
+    </style>
 
 </body>
 </html>
