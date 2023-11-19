@@ -4,33 +4,88 @@
     <title>Telegram Explorer</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-<body>
-
+<body style="color: aliceblue;">
+    <div id="keysList"></div>
     <h2 id="opa"></h2>
 
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
 
+
         tg.CloudStorage.getKeys(function(err, keys) {
-        if (err) {
-            document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
-        } else {
-            document.getElementById('opa').innerHTML = 'Список ключей:' + JSON.stringify(keys);
-        }
+            if (err) {
+                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
+            } else {
+                tg.CloudStorage.getItems(keys, function(err, items) {
+                    if (err) {
+                        document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+                    } else {
+                        let keysBySecondPart = {};
+
+                        Object.keys(items).forEach(function(key) {
+                            let value = items[key];
+                            let keyParts = key.split('-');
+
+                            if (keyParts[0] === 'item') {
+                                let secondPart = keyParts[1];
+
+                                if (!keysBySecondPart[secondPart]) {
+                                    keysBySecondPart[secondPart] = [];
+                                }
+
+                                keysBySecondPart[secondPart].push(key);
+                            }
+                        });
+
+                        let keysListDiv = document.getElementById('keysList');
+                        Object.keys(keysBySecondPart).forEach(function(secondPart) {
+                            let keysDiv = document.createElement('div');
+                            keysDiv.classList.add('item');
+
+                            tg.CloudStorage.getItems(keysBySecondPart[secondPart], function(err, itemss) {
+                                if (err) {
+                                    keysDiv.textContent = 'Ошибка получения значений: ' + err;;
+                                    keysListDiv.appendChild(keysDiv);
+                                } else {
+                                    let itms = {}
+                                    Object.keys(itemss).forEach(function(key2) {
+                                        let valu2 = itemss[key2];
+                                        let keyParts = key2.split('-');
+                                        let tex = "";
+                                        let keyy = "";
+                                        switch (keyParts[2]) {
+                                        case 'link': tex = "Ссылка: "; keyy = '1'; break;
+                                        case 'desc': tex = "Описание: "; keyy = '3'; break;
+                                        case 'type': tex = "Тип: "; keyy = '2'; break;
+                                        case 'cat': tex = "Категории: "; keyy = '4'; break;
+                                        case 'tag': tex = "Теги: "; keyy = '5'; break;
+                                        default: tex = expr; keyy = '0'; break;
+                                        }
+                                        itms[keyy] = tex + valu2;
+
+                                    });
+                                    Object.keys(itms).forEach(function(i){
+                                        let itemDiv = document.createElement('div');
+                                        itemDiv.textContent = itms[i];
+                                        keysDiv.appendChild(itemDiv);
+                                    });
+                                    keysListDiv.appendChild(keysDiv);
+                                }
+                            });
+                        });
+                    }
+                });
+            }
         });
-        
-
-
-        //tg.CloudStorage.getItem("data-"+String(formattedDateTime), function(err, value) {
-            //if (err) {
-              //          document.getElementById('opa').innerHTML = 'Ошибка получения данных: ' + err;
-                //    } else {
-                  //      document.getElementById('opa').innerHTML = 'Значение по ключу aboba: ' + value;
-                    //}
-                    //});
 
     </script>
+    <style>
+        .item{
+         margin-bottom: 30px;
+         background-color: darkkhaki;   
+        }
+    </style>
 
 </body>
 </html>

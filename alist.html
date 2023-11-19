@@ -14,7 +14,7 @@
 
         function addEl(items){
             Object.keys(items).forEach(function(key) {
-                let updatedKey = 'item-' + key;
+                let updatedKey = key.replace("draft", "item");
                 let value = items[key];
 
                 tg.CloudStorage.setItem(updatedKey, value, function(err) {
