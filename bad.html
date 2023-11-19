@@ -27,7 +27,8 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        let ke = idi.split('.')
+        let kee = JSON.stringify(idi);
+        let ke = kee.split('.')
         tg.CloudStorage.getKeys(function(err, keys) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
