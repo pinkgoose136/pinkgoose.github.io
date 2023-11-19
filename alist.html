@@ -45,7 +45,7 @@
                                     keysDiv.textContent = 'Ошибка получения значений: ' + err;;
                                     keysListDiv.appendChild(keysDiv);
                                 } else {
-                                    itms = {}
+                                    let itms = {}
                                     Object.keys(itemss).forEach(function(key2) {
                                         let valu2 = itemss[key2];
                                         let keyParts = key2.split('-');
