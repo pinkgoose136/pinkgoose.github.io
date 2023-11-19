@@ -37,7 +37,7 @@
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
             if (splittedKey.length >= 2){
-                if (ke.includes(splittedKey[1])) {
+                if (ke.includes(String(splittedKey[1]))) {
                     y += splittedKey[1]
                     tg.CloudStorage.removeItem(key, function(err) {
                     if (err) {
@@ -49,7 +49,7 @@
             }
             }
             });
-            document.getElementById('opa').textContent = bb;
+            document.getElementById('opa').inert = ke;
             document.getElementById('pa').textContent =  y;
         }
         });
