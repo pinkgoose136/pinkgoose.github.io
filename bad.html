@@ -32,10 +32,8 @@
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
         } else {
             let bb = ""
-            let aa = String(ke)
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
-            aa += splittedKey[1]
             if (splittedKey.length >= 2){
                 if (ke.includes(splittedKey[1])) {
                     tg.CloudStorage.removeItem(key, function(err) {
@@ -48,7 +46,7 @@
             }
             }
             });
-            document.getElementById('opa').textContent = aa;
+            document.getElementById('opa').textContent = bb;
         }
         });
 
