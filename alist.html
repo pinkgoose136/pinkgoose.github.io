@@ -99,16 +99,20 @@
                                     });
                                     let button1 = document.createElement('button');
                                     button1.textContent = 'Добавить';
-                                    button1.addEventListener('click', function() {
+                                    button1.addEventListener('click', function(event) {
                                         addEl(itemss);
                                         delEl(itemss);
+                                        let parentElement = event.target.parentNode;
+                                        parentElement.parentNode.removeChild(parentElement);
                                     });
                                     keysDiv.appendChild(button1);
 
                                     let button2 = document.createElement('button');
                                     button2.textContent = 'Удалить';
-                                    button2.addEventListener('click', function() {
+                                    button2.addEventListener('click', function(event) {
                                         delEl(itemss);
+                                        let parentElement = event.target.parentNode;
+                                        parentElement.parentNode.removeChild(parentElement);
                                     });
                                     keysDiv.appendChild(button2);
 
@@ -125,7 +129,7 @@
     </script>
     <style>
         .item{
-         padding-bottom: 30px;
+         margin-bottom: 30px;
          background-color: darkkhaki;   
         }
     </style>
