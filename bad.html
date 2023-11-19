@@ -33,8 +33,8 @@
             let bb = document.getElementById('log');
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
-            if (splittedKey.length >= 2){
-                if (ke.indexOf(String(splittedKey[1])) !== -1) {
+          //  if (splittedKey.length >= 2){
+             //   if (ke.indexOf(String(splittedKey[1])) !== -1) {
                 tg.CloudStorage.removeItem(key, function(err2) {
                 let ab = document.createElement('div');
                 if (err2) {
@@ -44,8 +44,8 @@
                 }
                 bb.appendChild(ab);
                 });
-                }
-            }
+             //   }
+          //  }
             });
             
         }
