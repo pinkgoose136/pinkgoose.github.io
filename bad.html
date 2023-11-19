@@ -8,7 +8,6 @@
 
     <h2 id="opa"></h2>
 
-
     <script>
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
@@ -28,12 +27,13 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
         let ke = idi.split('.');
+        document.getElementById('opa').textContent = JSON.stringify(ke);
         tg.CloudStorage.getKeys(function(err, keys) {
+        document.getElementById('opa').textContent = JSON.stringify(keys);
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
         } else {
             let bb = ""
-            document.getElementById('opa').textContent = JSON.stringify(keys)
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
             if (splittedKey.length >= 2 && idi.includes(splittedKey[1])) {
