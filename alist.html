@@ -59,12 +59,12 @@
                                         case 'tag': tex = "Теги: "; keyy = '5'; break;
                                         default: tex = expr; keyy = '0'; break;
                                         }
-                                        itms[keyy] = tex
+                                        itms[keyy] = tex;
 
                                     });
                                     itms.forEach(function(i){
                                         let itemDiv = document.createElement('p');
-                                        itemDiv.textContent = itms[i];
+                                        itemDiv.textContent = i;
                                         keysDiv.appendChild(itemDiv);
                                     });
 
