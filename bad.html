@@ -39,9 +39,9 @@
                 if (ke.indexOf(String(splittedKey[1])) !== -1) {
                 tg.CloudStorage.removeItem(key, function(err2) {
                 if (err2) {
-                    document.getElementById('pa').innerHTML = 'Ошибка удаления ключа:' + err2;
+                    document.getElementById('pa').innerHTML += 'Ошибка удаления ключа:' + err2;
                 } else {
-                    document.getElementById('pa').innerHTML = 'Ключ успешно удален:' + key;
+                    document.getElementById('pa').innerHTML += 'Ключ успешно удален:' + key;
                 }
                 });
                 }
