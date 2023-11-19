@@ -38,11 +38,11 @@
             var splittedKey = key.split('-');
             if (splittedKey.length >= 2){
                 if (ke.indexOf(String(splittedKey[1])) !== -1) {
-                    tg.CloudStorage.removeItem(key2, function(err) {
+                    tg.CloudStorage.removeItem(key, function(err) {
                     if (err) {
                         bb += 'Ошибка удаления ключа:' + err;
                     } else {
-                        bb += 'Ключ успешно удален:' + key2;
+                        bb += 'Ключ успешно удален:' + key;
                     }
                     });
             }
