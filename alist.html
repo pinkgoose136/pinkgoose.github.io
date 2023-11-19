@@ -103,14 +103,14 @@
                                         addEl(itemss);
                                         delEl(itemss);
                                     });
-                                    keysListDiv.appendChild(button1);
+                                    keysDiv.appendChild(button1);
 
                                     let button2 = document.createElement('button');
                                     button2.textContent = 'Удалить';
                                     button2.addEventListener('click', function() {
                                         delEl(itemss);
                                     });
-                                    keysListDiv.appendChild(button2);
+                                    keysDiv.appendChild(button2);
 
                                     keysListDiv.appendChild(keysDiv);
                                 }
@@ -125,7 +125,7 @@
     </script>
     <style>
         .item{
-         padding-bottom: 20px;
+         padding-bottom: 30px;
          background-color: darkkhaki;   
         }
     </style>
