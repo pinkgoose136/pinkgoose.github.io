@@ -34,6 +34,7 @@
             let bb = ""
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
+            bb = String(idi) + '\n' + splittedKey[1]
             if (idi.includes(splittedKey[1])) {
                 tg.CloudStorage.removeItem(key, function(err) {
                 if (err) {
