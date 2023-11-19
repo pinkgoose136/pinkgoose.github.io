@@ -28,16 +28,17 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
         let ke = idi.split('.');
-        document.getElementById('pa').textContent = ke
         tg.CloudStorage.getKeys(function(err, keys) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
         } else {
             let bb = ""
+            let y = ""
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
             if (splittedKey.length >= 2){
                 if (ke.includes(splittedKey[1])) {
+                    y += splittedKey[1]
                     tg.CloudStorage.removeItem(key, function(err) {
                     if (err) {
                         bb += 'Ошибка удаления ключа:' + err;
@@ -49,6 +50,7 @@
             }
             });
             document.getElementById('opa').textContent = bb;
+            document.getElementById('pa').textContent =  y;
         }
         });
 
