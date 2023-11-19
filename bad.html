@@ -32,7 +32,8 @@
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
         } else {
-            let bb = ''
+            let bb = ""
+            document.getElementById('opa').textContent = JSON.stringify(keys)
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
             if (splittedKey.length >= 2 && idi.includes(splittedKey[1])) {
@@ -45,7 +46,7 @@
                 });
             }
             });
-            document.getElementById('opa').innerHTML = bb;
+            document.getElementById('opa').textContent = bb;
         }
         });
 
