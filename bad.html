@@ -36,14 +36,16 @@
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
             aa += splittedKey[1]
-            if (ke.includes(splittedKey[1])) {
-                tg.CloudStorage.removeItem(key, function(err) {
-                if (err) {
-                    bb += 'Ошибка удаления ключа:' + err;
-                } else {
-                    bb += 'Ключ успешно удален:' + key;
-                }
-                });
+            if (splittedKey.length >= 2){
+                if (ke.includes(splittedKey[1])) {
+                    tg.CloudStorage.removeItem(key, function(err) {
+                    if (err) {
+                        bb += 'Ошибка удаления ключа:' + err;
+                    } else {
+                        bb += 'Ключ успешно удален:' + key;
+                    }
+                    });
+            }
             }
             });
             document.getElementById('opa').textContent = aa;
