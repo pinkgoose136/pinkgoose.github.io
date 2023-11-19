@@ -28,7 +28,7 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
         let ke = idi.split('.');
-        document.getElementById('opa').textContent = ke
+        document.getElementById('pa').textContent = ke
         tg.CloudStorage.getKeys(function(err, keys) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
