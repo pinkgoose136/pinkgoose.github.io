@@ -34,18 +34,18 @@
             let bb = ""
             keys.forEach(function(key) {
             var splittedKey = key.split('-');
-            bb = String(idi) + '\n' + splittedKey[1]
+            abb = String(idi) + splittedKey[1]
             if (idi.includes(splittedKey[1])) {
                 tg.CloudStorage.removeItem(key, function(err) {
                 if (err) {
-                    bb = bb + 'Ошибка удаления ключа:' + err;
+                    bb += 'Ошибка удаления ключа:' + err;
                 } else {
-                    bb = bb + 'Ключ успешно удален:' + key;
+                    bb += 'Ключ успешно удален:' + key;
                 }
                 });
             }
             });
-            document.getElementById('opa').textContent = bb;
+            document.getElementById('opa').textContent = abb;
         }
         });
 
