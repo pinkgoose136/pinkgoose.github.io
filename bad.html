@@ -7,6 +7,7 @@
 <body>
 
     <h2 id="opa"></h2>
+    <h2 id="pa"></h2>
 
     <script>
         function getParameterByName(name, url) {
@@ -27,6 +28,7 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
         let ke = idi.split('.');
+        document.getElementById('opa').textContent = ke
         tg.CloudStorage.getKeys(function(err, keys) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
