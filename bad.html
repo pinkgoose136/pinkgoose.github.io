@@ -27,7 +27,6 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
         let ke = idi.split('.');
-        document.getElementById('opa').textContent = JSON.stringify(ke);
         tg.CloudStorage.getKeys(function(err, keys) {
         document.getElementById('opa').textContent = JSON.stringify(keys);
         if (err) {
@@ -46,7 +45,7 @@
                 });
             }
             });
-            document.getElementById('opa').textContent = bb;
+            //document.getElementById('opa').textContent = bb;
         }
         });
 
