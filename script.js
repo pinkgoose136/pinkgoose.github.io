@@ -20,13 +20,13 @@ function addCategory() {
 
 function addTagOnComma(inputElement) {
     var tagList = document.getElementById('tagList');
-    var tagText = inputElement.value
+    var tagText = inputElement.value.slice(0, -1);
     var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
 
     if (inputElement.value.includes(',') && inputElement.value !== ',') {
         if (tagText && !existingTags.includes(tagText)) {
             var tagItem = document.createElement('div');
-            tagItem.textContent = tagText.slice(0, -1);;
+            tagItem.textContent = tagText;
             tagItem.classList.add('tag');
             tagItem.onclick = function() {
                 tagList.removeChild(tagItem);
