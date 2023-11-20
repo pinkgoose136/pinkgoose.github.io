@@ -43,11 +43,7 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-}
-
-textarea {
     resize: none;
-    overflow-y: auto;
 }
 
 select {
@@ -137,7 +133,7 @@ select {
         <input type="text" name="link" id="link" required><br>
 
         <label for="description">Описание:</label>
-        <textarea name="description" id="description" required minlength="10" maxlength="1000"></textarea><br>
+        <textarea name="description" id="description" required minlength="10" maxlength="1000" oninput="adjustTextAreaHeight()"></textarea><br>
 
         <label for="category">Категории:</label>
         <select id="categorySelect" onchange="addCategory(this.value)"></select>
@@ -238,6 +234,13 @@ select {
     </script>
 
 <script>
+        function adjustTextAreaHeight() {
+        var textarea = document.getElementById("description");
+        textarea.style.height = "auto";
+        var newHeight = textarea.scrollHeight;
+        textarea.style.height = newHeight + "px";
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         var dropdown = document.getElementById('categorySelect');
         var options;
