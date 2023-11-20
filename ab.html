@@ -7,10 +7,14 @@
         #inputField {
             height: 200px; /* Domyślna szerokość */
         }
+        textarea {
+    overflow-y: auto;
+}
+
     </style>
 </head>
 <body>
-    <input type="text" id="inputField" oninput="adjustInputWidth()">
+    <textarea id="inputField" oninput="adjustInputWidth()"></textarea>
   
     <script>
         function adjustInputWidth() {
