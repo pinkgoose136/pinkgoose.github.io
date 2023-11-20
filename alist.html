@@ -11,7 +11,7 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-
+        let lnk = []
         function addEl(items){
             Object.keys(items).forEach(function(key) {
                 let updatedKey = key.replace("draft", "item");
@@ -106,7 +106,7 @@
                                         parentElement.parentNode.removeChild(parentElement);
                                     });
                                     keysDiv.appendChild(button1);
-
+                                    lnk.push(itemss)
                                     let button2 = document.createElement('button');
                                     button2.textContent = 'Удалить';
                                     button2.addEventListener('click', function(event) {
@@ -127,12 +127,24 @@
         });
 
     </script>
-    <style>
-        .item{
-         margin-bottom: 30px;
-         background-color: darkkhaki;   
+    
+    <script>
+        tg.MainButton.setText("Завершить");
+
+        tg.MainButton.show()
+        Telegram.WebApp.onEvent('mainButtonClicked', function(){
+
+        let formattedDateTime = getFormattedDateTime();
+        let data = {
+            links: lnk,
+            name: "check"
         }
-    </style>
+
+        tg.sendData(JSON.stringify(data));
+        tg.close();
+
+        });
+    </script>
 
 </body>
 </html>
