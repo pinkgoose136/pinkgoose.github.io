@@ -45,7 +45,10 @@ async def aie(update: Update, context: CallbackContext):
                 await update.message.reply_text(str(e), reply_markup=ReplyKeyboardRemove())
                 add_data(res['date'])
     elif res['name'] == 'check':
-        await update.message.reply_text(str(res['links']), reply_markup=ReplyKeyboardRemove())
+        rer = str(res['links'])
+        if rer == '':
+            rer = 'Пусто'
+        await update.message.reply_text(rer, reply_markup=ReplyKeyboardRemove())
 
 async def question(update, context):
     query = update.callback_query.data
