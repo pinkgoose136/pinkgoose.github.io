@@ -26,7 +26,7 @@ function addTagOnComma(inputElement) {
     if (inputElement.value.includes(',') && inputElement.value !== ',') {
         if (tagText && !existingTags.includes(tagText)) {
             var tagItem = document.createElement('div');
-            tagItem.textContent = tagText;
+            tagItem.textContent = tagText.slice(0, -1);;
             tagItem.classList.add('tag');
             tagItem.onclick = function() {
                 tagList.removeChild(tagItem);
