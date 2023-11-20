@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dostosowywanie pola input</title>
+    <style>
+        /* Dodatkowy styl dla lepszego wyświetlania */
+        #inputField {
+            width: 200px; /* Domyślna szerokość */
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="inputField" oninput="adjustInputWidth()">
+  
+    <script>
+        function adjustInputWidth() {
+            var input = document.getElementById("inputField");
+            var inputLength = input.value.length;
+
+            // Ustaw nową szerokość pola input w zależności od długości wprowadzanego tekstu
+            if (inputLength > input.getAttribute("size")) {
+                input.style.width = inputLength * 8 + "px"; // Możesz dostosować wartość współczynnika
+            } else {
+                input.style.width = "200px"; // Szerokość domyślna
+            }
+        }
+    </script>
+</body>
+</html>
