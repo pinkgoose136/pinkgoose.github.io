@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zwiększanie wysokości textarea</title>
+    <style>
+        /* Domyślne style dla textarea */
+        #inputArea {
+            width: 300px;
+            height: auto;
+            resize: none; /* Wyłączenie możliwości zmiany rozmiaru przez użytkownika */
+        }
+    </style>
+</head>
+<body>
+    <textarea id="inputArea" oninput="adjustTextAreaHeight()"></textarea>
+  
+    <script>
+        function adjustTextAreaHeight() {
+            var textarea = document.getElementById("inputArea");
+            textarea.style.height = "auto"; // Ustawienie wysokości na automatyczną
+
+            var newHeight = textarea.scrollHeight; // Pobranie rzeczywistej wysokości tekstu
+
+            // Ustawienie wysokości pola textarea na nową obliczoną wysokość
+            textarea.style.height = newHeight + "px";
+        }
+    </script>
+</body>
+</html>
