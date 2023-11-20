@@ -20,7 +20,7 @@ function addCategory() {
 
 function addTagOnComma(inputElement) {
     var tagList = document.getElementById('tagList');
-    var tagText = inputElement.value.trim()
+    var tagText = inputElement.value
     var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
 
     if (inputElement.value.includes(',') && inputElement.value !== ',') {
