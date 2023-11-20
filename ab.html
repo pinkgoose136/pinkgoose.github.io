@@ -5,7 +5,7 @@
     <style>
         /* Dodatkowy styl dla lepszego wyświetlania */
         #inputField {
-            width: 200px; /* Domyślna szerokość */
+            height: 200px; /* Domyślna szerokość */
         }
     </style>
 </head>
@@ -19,9 +19,9 @@
 
             // Ustaw nową szerokość pola input w zależności od długości wprowadzanego tekstu
             if (inputLength > input.getAttribute("size")) {
-                input.style.width = inputLength * 8 + "px"; // Możesz dostosować wartość współczynnika
+                input.style.height = inputLength * 8 + "px"; // Możesz dostosować wartość współczynnika
             } else {
-                input.style.width = "200px"; // Szerokość domyślna
+                input.style.height = "200px"; // Szerokość domyślna
             }
         }
     </script>
