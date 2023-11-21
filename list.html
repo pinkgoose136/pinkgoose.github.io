@@ -11,6 +11,7 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
+        document.getElementById('pa').innerHTML = tg.initDataUnsafe.user.id;
 
 
         tg.CloudStorage.getKeys(function(err, keys) {

@@ -7,7 +7,7 @@
     <script src="script.js"></script>
 </head>
 <body>
-
+    <div id="form">
         <label for="link">Ссылка:</label>
         <input type="text" name="link" id="link" required><br>
 
@@ -21,6 +21,7 @@
         <label for="tags">Теги:</label>
         <input type="text" id="tagInput" oninput="addTagOnComma(this)" placeholder="Добавьте теги через запятую"><br>
         <div id="tagList"></div><br>
+    </div>
 
     <h2 id="opa"></h2>
     <h2 id="pa"></h2>
@@ -42,11 +43,7 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        
-        //document.getElementById('pa').innerHTML = tg.initDataUnsafe.user.username;
-
         tg.MainButton.setText("Подтвердить");
-
         tg.MainButton.show()
 
          Telegram.WebApp.onEvent('mainButtonClicked', function(){
