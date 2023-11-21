@@ -7,7 +7,7 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <form id="eventForm">
+
         <label for="link">Ссылка:</label>
         <input type="text" name="link" id="link" required><br>
 
@@ -22,9 +22,6 @@
         <input type="text" id="tagInput" oninput="addTagOnComma(this)" placeholder="Добавьте теги через запятую"><br>
         <div id="tagList"></div><br>
 
-        <input type="submit" title="Сохранить" class="button">
-        
-    </form>
     <h2 id="opa"></h2>
     <h2 id="pa"></h2>
     <script>
@@ -50,12 +47,9 @@
 
         tg.MainButton.setText("Подтвердить");
 
-        tg.MainButton.hide()
-        document.getElementById("eventForm").addEventListener("submit", function(event) {
-        //         event.preventDefault();
-        //         tg.MainButton.show()
-        // });   
-        // Telegram.WebApp.onEvent('mainButtonClicked', function(){
+        tg.MainButton.show()
+
+         Telegram.WebApp.onEvent('mainButtonClicked', function(){
          let lnk = document.getElementById('link').value; let des = document.getElementById('description').value;
          let ct = document.getElementById('categoryList').textContent; let t = document.getElementById('tagList').textContent;
 
