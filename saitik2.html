@@ -85,9 +85,9 @@
                 let key = keys[index];
                 let value = valuesList[key];
 
-                tg.CloudStorage.setItem("d-" + String(formattedDateTime) + "-" + key, value, function(err) {
+                tg.CloudStorage.setItem(String(formattedDateTime) + "-" + key, value, function(err) {
                     if (err) {
-                        tg.sendData(JSON.stringify({"error": err + "\ndraft-" + String(formattedDateTime) + "-" + key}));
+                        tg.sendData(JSON.stringify({"error": err + String(formattedDateTime) + "-" + key}));
                         tg.close();
                     } else {
                         saveValues(index + 1);
