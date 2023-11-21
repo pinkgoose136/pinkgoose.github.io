@@ -7,13 +7,10 @@
 <body style="color: aliceblue;">
     <div id="keysList"></div>
     <h2 id="opa"></h2>
-    <h2 id="pa"></h2>
 
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        document.getElementById('pa').innerHTML = tg.initDataUnsafe.user.id;
-
 
         tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
@@ -30,7 +27,7 @@
                             let keyParts = key.split('-');
 
                             if (keyParts[0] === 'item') {
-                                let secondPart = keyParts[1];
+                                let secondPart = keyParts[2];
 
                                 if (!keysBySecondPart[secondPart]) {
                                     keysBySecondPart[secondPart] = [];
@@ -56,7 +53,7 @@
                                         let keyParts = key2.split('-');
                                         let tex = "";
                                         let keyy = "";
-                                        switch (keyParts[2]) {
+                                        switch (keyParts[3]) {
                                         case 'link': tex = "Ссылка: "; keyy = '1'; break;
                                         case 'desc': tex = "Описание: "; keyy = '3'; break;
                                         case 'type': tex = "Тип: "; keyy = '2'; break;
@@ -65,8 +62,10 @@
                                         default: tex = expr; keyy = '0'; break;
                                         }
                                         itms[keyy] = tex + valu2;
+                                        itms['authorid'] = "Айди автора: " + keyParts[1];
 
                                     });
+                                    
                                     Object.keys(itms).forEach(function(i){
                                         let itemDiv = document.createElement('div');
                                         itemDiv.textContent = itms[i];
