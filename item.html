@@ -57,7 +57,7 @@
 
                     function addItemsToStorage(items) {
                         Object.keys(items).forEach(function(key) {
-                            let updatedKey = 'item-' + String(idd) + "-" + key;
+                            let updatedKey = 'draft-' + String(idd) + "-" + key;
                             let value = items[key];
 
                             tg.CloudStorage.setItem(updatedKey, value, function(err) {
