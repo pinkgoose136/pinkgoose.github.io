@@ -52,10 +52,10 @@
 
         tg.MainButton.hide()
         document.getElementById("eventForm").addEventListener("submit", function(event) {
-                 event.preventDefault();
-                 tg.MainButton.show()
-         });   
-         Telegram.WebApp.onEvent('mainButtonClicked', function(){
+        //         event.preventDefault();
+        //         tg.MainButton.show()
+        // });   
+        // Telegram.WebApp.onEvent('mainButtonClicked', function(){
          let lnk = document.getElementById('link').value; let des = document.getElementById('description').value;
          let ct = document.getElementById('categoryList').textContent; let t = document.getElementById('tagList').textContent;
 
