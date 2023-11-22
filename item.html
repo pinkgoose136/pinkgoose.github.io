@@ -65,7 +65,7 @@
                     let itemDiv = document.createElement('div');
                     let ssil = document.createElement('a');
                     ssil.href = itms['1'];
-                    ssil.textContent = name; 
+                    ssil.textContent = itms['1']; 
                     itemDiv.appendChild(ssil);
                     keysDiv.appendChild(itemDiv);
 
@@ -104,7 +104,7 @@
                             });
 
                         });
-                        let ge = 'draft-' + String(idd) + "-" + items[keys(items)[0]].split('-')[0] + '-name'
+                        let ge = 'draft-' + String(idd) + "-" + Object.values(items)[0].split('-')[0] + '-name'
                         tg.CloudStorage.setItem(ge, value, function(err) {
                                 if (err) {
                                     document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + ':' + err;
