@@ -64,8 +64,8 @@
 
                     let itemDiv = document.createElement('div');
                     let ssil = document.createElement('a');
-                    ssil.href = itms['1'];
-                    ssil.textContent = itms['1']; 
+                    ssil.url = itms['1'];
+                    ssil.textContent = name; 
                     itemDiv.appendChild(ssil);
                     keysDiv.appendChild(itemDiv);
 
@@ -104,6 +104,7 @@
                             });
 
                         });
+                        document.getElementById('pa').innerHTML = Object.values(items)[0]
                         let ge = 'draft-' + String(idd) + "-" + Object.values(items)[0].split('-')[0] + '-name'
                         tg.CloudStorage.setItem(ge, value, function(err) {
                                 if (err) {
