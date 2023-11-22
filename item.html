@@ -24,7 +24,7 @@
         }
 
         var idi = getParameterByName('idi');
-
+        var name = getParameterByName('name');
     </script>
 
     <script>
@@ -60,19 +60,23 @@
                         default: tex = expr; keyy = '0'; break;
                         }
                         itms[keyy] = tex + valu2;
-                        itms['authorid'] = "Айди автора: " + keyParts[1];
-
                     });
-                    
+
+                    let itemDiv = document.createElement('div');
+                    let ssil = document.createElement('a');
+                    ssil.href = itms['1'];
+                    ssil.textContent = name; 
+                    itemDiv.appendChild(ssil);
+                    keysDiv.appendChild(itemDiv);
+
                     Object.keys(itms).forEach(function(i){
-                        let itemDiv = document.createElement('div');
-                        itemDiv.textContent = itms[i];
-                        keysDiv.appendChild(itemDiv);
+                        if (i != '1'){
+                            let itemDiv = document.createElement('div');
+                            itemDiv.textContent = itms[i];
+                            keysDiv.appendChild(itemDiv);
+                        }
                     });
                     keysListDiv.appendChild(keysDiv);
-
-
-                    document.getElementById('opa').innerHTML = 'Полученные значения: ' + JSON.stringify(values);
 
                     function removeItemsFromStorage(items) {
                         Object.keys(items).forEach(function(key) {
@@ -100,6 +104,15 @@
                             });
 
                         });
+                        let ge = 'draft-' + String(idd) + "-" + items[0].split('-')[0] + '-name'
+                        tg.CloudStorage.setItem(ge, value, function(err) {
+                                if (err) {
+                                    document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + ':' + err;
+                                } else {
+                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + ge + ' успешно добавлен в хранилище';
+                                }
+                            });
+
                     }
   
                     document.getElementById('delete').onclick = function(){
