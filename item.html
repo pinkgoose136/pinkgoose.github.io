@@ -104,8 +104,7 @@
                             });
 
                         });
-                        document.getElementById('pa').innerHTML = Object.values(items)[0]
-                        let ge = 'draft-' + String(idd) + "-" + Object.values(items)[0].split('-')[0] + '-name'
+                        let ge = 'draft-' + String(idd) + "-" + Object.keys(items)[0].split('-')[0] + '-name'
                         tg.CloudStorage.setItem(ge, name, function(err) {
                                 if (err) {
                                     document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + ':' + err;
@@ -122,8 +121,8 @@
                     }
                     document.getElementById('accept').onclick = function(){
                         addItemsToStorage(values);
-                       // removeItemsFromStorage(values);
-                      //  tg.close();
+                        removeItemsFromStorage(values);
+                        tg.close();
                     }
                 }
             });
