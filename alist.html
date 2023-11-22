@@ -82,7 +82,8 @@
                                         let tex = "";
                                         let keyy = "";
                                         switch (keyParts[3]) {
-                                        case 'link': tex = "Ссылка: "; keyy = '1'; break;
+                                        case 'link': tex = valu2; keyy = '1'; break;
+                                        case 'name': tex = valu2; keyy = '-1'; break;
                                         case 'desc': tex = "Описание: "; keyy = '3'; break;
                                         case 'type': tex = "Тип: "; keyy = '2'; break;
                                         case 'cat': tex = "Категории: "; keyy = '4'; break;
@@ -92,10 +93,22 @@
                                         itms[keyy] = tex + valu2;
 
                                     });
+
+
+                                    let itemDiv = document.createElement('div');
+                                    let ssil = document.createElement('a');
+                                    ssil.href = itms['1'];
+                                    ssil.textContent = itms['-1']; 
+                                    itemDiv.appendChild(ssil);
+                                    keysDiv.appendChild(itemDiv);
+
+
                                     Object.keys(itms).forEach(function(i){
-                                        let itemDiv = document.createElement('div');
-                                        itemDiv.textContent = itms[i];
-                                        keysDiv.appendChild(itemDiv);
+                                        if (i != '1' && i != '-1'){
+                                            let itemDiv = document.createElement('div');
+                                            itemDiv.textContent = itms[i];
+                                            keysDiv.appendChild(itemDiv);
+                                        }
                                     });
                                     let button1 = document.createElement('button');
                                     button1.textContent = 'Добавить';
