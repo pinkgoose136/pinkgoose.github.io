@@ -45,39 +45,31 @@
                     let keysDiv = document.createElement('div');
                     keysDiv.classList.add('item');
 
-                    tg.CloudStorage.getItems(values, function(err, itemss) {
-                        if (err) {
-                            keysDiv.textContent = 'Ошибка получения значений: ' + err;;
-                            keysListDiv.appendChild(keysDiv);
-                        } else {
-                            let itms = {}
-                            Object.keys(itemss).forEach(function(key2) {
-                                let valu2 = itemss[key2];
-                                let keyParts = key2.split('-');
-                                let tex = "";
-                                let keyy = "";
-                                switch (keyParts[1]) {
-                                case 'link': tex = "Ссылка: "; keyy = '1'; break;
-                                case 'desc': tex = "Описание: "; keyy = '3'; break;
-                                case 'type': tex = "Тип: "; keyy = '2'; break;
-                                case 'cat': tex = "Категории: "; keyy = '4'; break;
-                                case 'tag': tex = "Теги: "; keyy = '5'; break;
-                                default: tex = expr; keyy = '0'; break;
-                                }
-                                itms[keyy] = tex + valu2;
-                                itms['authorid'] = "Айди автора: " + keyParts[1];
-
-                            });
-                            
-                            Object.keys(itms).forEach(function(i){
-                                let itemDiv = document.createElement('div');
-                                itemDiv.textContent = itms[i];
-                                keysDiv.appendChild(itemDiv);
-                            });
-                            keysListDiv.appendChild(keysDiv);
+                    let itms = {}
+                    Object.keys(values).forEach(function(key2) {
+                        let valu2 = values[key2];
+                        let keyParts = key2.split('-');
+                        let tex = "";
+                        let keyy = "";
+                        switch (keyParts[1]) {
+                        case 'link': tex = "Ссылка: "; keyy = '1'; break;
+                        case 'desc': tex = "Описание: "; keyy = '3'; break;
+                        case 'type': tex = "Тип: "; keyy = '2'; break;
+                        case 'cat': tex = "Категории: "; keyy = '4'; break;
+                        case 'tag': tex = "Теги: "; keyy = '5'; break;
+                        default: tex = expr; keyy = '0'; break;
                         }
-                    });
+                        itms[keyy] = tex + valu2;
+                        itms['authorid'] = "Айди автора: " + keyParts[1];
 
+                    });
+                    
+                    Object.keys(itms).forEach(function(i){
+                        let itemDiv = document.createElement('div');
+                        itemDiv.textContent = itms[i];
+                        keysDiv.appendChild(itemDiv);
+                    });
+                    keysListDiv.appendChild(keysDiv);
 
 
                     document.getElementById('opa').innerHTML = 'Полученные значения: ' + JSON.stringify(values);
