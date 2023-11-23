@@ -90,6 +90,7 @@
                                         case 'cat': tex = "Категории: "; keyy = '4'; break;
                                         case 'tag': tex = "Теги: "; keyy = '5'; break;
                                         case 'owner': tex = "Айди автора: "; keyy = '6'; lnk[ket]['owner'] = valu2; break;
+                                        case 'img': tex = ""; keyy = '11'; ae = valu2; break;
                                         default: tex = expr; keyy = '0'; break;
                                         }
                                         itms[keyy] = tex + valu2;
@@ -106,7 +107,7 @@
 
 
                                     Object.keys(itms).forEach(function(i){
-                                        if (i != '1' && i != '-1'){
+                                        if (i != '1' && i != '-1' && i != '11'){
                                             let itemDiv = document.createElement('div');
                                             itemDiv.textContent = itms[i];
                                             keysDiv.appendChild(itemDiv);
