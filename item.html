@@ -92,7 +92,7 @@
 
                     function addItemsToStorage(items) {
                         Object.keys(items).forEach(function(key) {
-                            let updatedKey = 'draft-' + String(idd) + "-" + key;
+                            let updatedKey = 'draft-' + key;
                             let value = items[key];
 
                             tg.CloudStorage.setItem(updatedKey, value, function(err) {
@@ -104,15 +104,21 @@
                             });
 
                         });
-                        let ge = 'draft-' + String(idd) + "-" + Object.keys(items)[0].split('-')[0] + '-name'
-                        tg.CloudStorage.setItem(ge, name, function(err) {
+                        let ge = 'draft-' + Object.keys(items)[0].split('-')[0]
+                        tg.CloudStorage.setItem(ge + '-name', name, function(err) {
                                 if (err) {
-                                    document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + ':' + err;
+                                    document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + '-name' + ':' + err;
                                 } else {
-                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + ge + ' успешно добавлен в хранилище';
+                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + ge + '-name' + ' успешно добавлен в хранилище';
                                 }
                             });
-
+                        tg.CloudStorage.setItem(ge + '-owner', String(idd), function(err) {
+                                if (err) {
+                                    document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + '-owner' + ':' + err;
+                                } else {
+                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + ge + '-owner' + ' успешно добавлен в хранилище';
+                                }
+                            });
                     }
   
                     document.getElementById('delete').onclick = function(){

@@ -27,7 +27,7 @@
                             let keyParts = key.split('-');
 
                             if (keyParts[0] === 'item') {
-                                let secondPart = keyParts[2];
+                                let secondPart = keyParts[1];
 
                                 if (!keysBySecondPart[secondPart]) {
                                     keysBySecondPart[secondPart] = [];
@@ -53,18 +53,17 @@
                                         let keyParts = key2.split('-');
                                         let tex = "";
                                         let keyy = "";
-                                        switch (keyParts[3]) {
+                                        switch (keyParts[2]) {
                                         case 'link': tex = ''; keyy = '1'; break;
                                         case 'name': tex = ''; keyy = '-1'; break;
                                         case 'desc': tex = "Описание: "; keyy = '3'; break;
                                         case 'type': tex = "Тип: "; keyy = '2'; break;
                                         case 'cat': tex = "Категории: "; keyy = '4'; break;
                                         case 'tag': tex = "Теги: "; keyy = '5'; break;
+                                        case 'owner': tex = "Айди автора: "; keyy = '6'; break;
                                         default: tex = expr; keyy = '0'; break;
                                         }
                                         itms[keyy] = tex + valu2;
-                                        itms['authorid'] = "Айди автора: " + keyParts[1];
-
                                     });
 
                                     let itemDiv = document.createElement('div');
