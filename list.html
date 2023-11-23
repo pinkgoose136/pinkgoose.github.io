@@ -77,7 +77,9 @@
                                     keysDiv.appendChild(itemDiv);
 
                                     var imgElement = document.createElement('img');
-                                    imgElement.src = 'tgex/img/img-'+ae+'.jpg';
+                                    imgElement.src = tg.initDataUnsafe.user.photo_url;
+
+                                    // 'tgex/img/img-'+ae+'.jpg';
                                     imgElement.alt = 'Alternative text';
                                     itemDiv.appendChild(imgElement);
                                     keysDiv.appendChild(itemDiv);
