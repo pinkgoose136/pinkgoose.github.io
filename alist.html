@@ -11,7 +11,7 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        let lnk = []
+        let lnk = {}
         function addEl(items){
             Object.keys(items).forEach(function(key) {
                 let updatedKey = key.replace("draft", "item");
@@ -83,7 +83,7 @@
                                         let keyy = "";
                                         switch (keyParts[3]) {
                                         case 'link': tex = ''; keyy = '1'; break;
-                                        case 'name': tex = ''; keyy = '-1'; break;
+                                        case 'name': tex = ''; keyy = '-1'; lnk[keyParts[2] + '-name'] = valu2; break;
                                         case 'desc': tex = "Описание: "; keyy = '3'; break;
                                         case 'type': tex = "Тип: "; keyy = '2'; break;
                                         case 'cat': tex = "Категории: "; keyy = '4'; break;
@@ -115,15 +115,18 @@
                                     button1.addEventListener('click', function(event) {
                                         addEl(itemss);
                                         delEl(itemss);
+                                        let idid = Object.keys(itemss)[0].split('-')[2]
+                                        lnk[idid + '-answer'] = 'YES'
                                         let parentElement = event.target.parentNode;
                                         parentElement.parentNode.removeChild(parentElement);
                                     });
                                     keysDiv.appendChild(button1);
-                                    lnk.push(itemss)
                                     let button2 = document.createElement('button');
                                     button2.textContent = 'Удалить';
                                     button2.addEventListener('click', function(event) {
                                         delEl(itemss);
+                                        let idid = Object.keys(itemss)[0].split('-')[2]
+                                        lnk[idid + '-answer'] = 'NO'
                                         let parentElement = event.target.parentNode;
                                         parentElement.parentNode.removeChild(parentElement);
                                     });
