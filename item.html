@@ -25,6 +25,7 @@
 
         var idi = getParameterByName('idi');
         var name = getParameterByName('name');
+        var img = getParameterByName('img');
     </script>
 
     <script>
@@ -117,6 +118,13 @@
                                     document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + '-owner' + ':' + err;
                                 } else {
                                     document.getElementById('pa').innerHTML = 'Элемент с ключом ' + ge + '-owner' + ' успешно добавлен в хранилище';
+                                }
+                            });
+                        tg.CloudStorage.setItem(ge + '-img', img, function(err) {
+                                if (err) {
+                                    document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + '-img' + ':' + err;
+                                } else {
+                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + ge + '-img' + ' успешно добавлен в хранилище';
                                 }
                             });
                     }

@@ -52,7 +52,6 @@
                                     Object.keys(itemss).forEach(function(key2) {
                                         let valu2 = itemss[key2];
                                         let keyParts = key2.split('-');
-                                        ae = keyParts[1]
                                         let tex = "";
                                         let keyy = "";
                                         switch (keyParts[2]) {
@@ -63,6 +62,7 @@
                                         case 'cat': tex = "Категории: "; keyy = '4'; break;
                                         case 'tag': tex = "Теги: "; keyy = '5'; break;
                                         case 'owner': tex = "Айди автора: "; keyy = '6'; break;
+                                        case 'img': tex = ""; keyy = '11'; ae = valu2; break;
                                         default: tex = expr; keyy = '0'; break;
                                         }
                                         
@@ -77,15 +77,13 @@
                                     keysDiv.appendChild(itemDiv);
 
                                     var imgElement = document.createElement('img');
-                                    imgElement.src = "https://twitter.com/telegram";
-
-                                    // 'tgex/img/img-'+ae+'.jpg';
+                                    imgElement.src = itms['11']
                                     imgElement.alt = 'Alternative text';
                                     itemDiv.appendChild(imgElement);
                                     keysDiv.appendChild(itemDiv);
                                     
                                     Object.keys(itms).forEach(function(i){
-                                        if (i != '1' && i != '-1'){
+                                        if (i != '1' && i != '-1' && i != '11'){
                                             let itemDiv = document.createElement('div');
                                             itemDiv.textContent = itms[i];
                                             keysDiv.appendChild(itemDiv);
