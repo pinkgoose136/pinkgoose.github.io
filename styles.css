@@ -11,7 +11,7 @@ h1 {
     color: var(--tg-theme-link-color, #0078d4); /* Ваш цвет по умолчанию */
 }
 
-#form, .item, #keysList {
+#form, #keysList {
     max-width: 350px;
     width: 100%;
     margin: 0 auto;
