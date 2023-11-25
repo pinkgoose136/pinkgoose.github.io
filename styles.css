@@ -44,7 +44,7 @@ textarea{
     width: 85%;
     background-color: var(--tg-theme-secondary-bg-color, #f5f5f5);
     padding: 10px;
-    margin: 20px 0;
+    margin: 40px 40px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -85,7 +85,9 @@ select {
 }
 
 .img{
+    display: inline-block;
     width: 30%;
+    height: 30%;
 }
 
 #dataDisplay {
