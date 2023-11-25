@@ -3,8 +3,9 @@
 <head>
     <title>Telegram Explorer</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body style="color: aliceblue;">
+<body>
     <div id="keysList"></div>
     <h2 id="opa"></h2>
 
@@ -77,6 +78,7 @@
                                     keysDiv.appendChild(itemDiv);
 
                                     var imgElement = document.createElement('img');
+                                    imgElement.classList.add('img');
                                     imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
                                     imgElement.alt = 'Alternative text';
                                     itemDiv.appendChild(imgElement);
@@ -99,12 +101,6 @@
         });
 
     </script>
-    <style>
-        .item{
-         margin-bottom: 30px;
-         background-color: darkkhaki;   
-        }
-    </style>
 
 </body>
 </html>
