@@ -70,8 +70,10 @@ select {
 }
 .lnk{
     background-color: var(--tg-theme-link-color, #0078d4);
-    width: 80%;
+}
 
+.img{
+    width: 80%;
 }
 
 #dataDisplay {
