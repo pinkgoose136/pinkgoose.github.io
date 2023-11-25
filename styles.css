@@ -69,11 +69,13 @@ select {
     border-radius: 5px;
 }
 .lnk{
-    background-color: var(--tg-theme-link-color, #0078d4);
+    color: var(--tg-theme-link-color, #0078d4);
 }
 
 .img{
+    display: inline-block;
     width: 80%;
+
 }
 
 #dataDisplay {
