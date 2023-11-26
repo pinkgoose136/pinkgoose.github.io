@@ -90,9 +90,11 @@ select {
     height: 100%;
 }
 .left{
+    display: inline-block;
     width: 33%;
 }
 .right{
+    display: inline-block;
     width: 66%;
 }
 head{
