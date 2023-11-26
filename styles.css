@@ -96,13 +96,19 @@ select {
     display: inline-block;
     width: 33%;
 }
-.right{
+
+.right {
+    padding: 3% 0 0 0;
+    position: absolute;
+    text-align: center;
     display: inline-block;
     width: 66%;
 }
+
 head{
     width: 100%;
     display: flex;
+    position: relative;
 }
 
 #dataDisplay {
