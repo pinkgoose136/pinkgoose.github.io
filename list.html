@@ -75,7 +75,7 @@
                                         switch (keyParts[2]) {
                                         case 'link': tex = ''; keyy = '1'; break;
                                         case 'name': tex = ''; keyy = '-1'; break;
-                                        case 'desc': tex = "Описание: "; keyy = '3'; break;
+                                        case 'desc': tex = ''; keyy = '3'; break;
                                         case 'type': tex = "Тип: "; keyy = '2'; break;
                                         case 'cat': tex = "Категории: "; keyy = '4'; break;
                                         case 'tag': tex = "Теги: "; keyy = '5'; break;
@@ -119,7 +119,7 @@
                                     keysDiv.appendChild(head);
                                     
                                     Object.keys(itms).forEach(function(i){
-                                        if (i == '2' || i == '4' || i == '5'){
+                                        if (i == '4' || i == '5'){
                                             let itemDiv = document.createElement('div');
                                             itemDiv.textContent = itms[i];
                                             keysDiv.appendChild(itemDiv);

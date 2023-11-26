@@ -23,7 +23,7 @@ h1 {
 }
 
 #keysList {
-    padding: 20px;
+    padding: 5%;
     background: var(--tg-theme-bg-color, #fff); /* Ваш цвет по умолчанию */
 }
 
@@ -94,15 +94,14 @@ select {
 }
 .left{
     display: inline-block;
-    width: 33%;
+    width: 20%;
 }
 
 .right {
-    padding: 3% 0 0 0;
+    padding: 5px;
     position: absolute;
-    text-align: center;
     display: inline-block;
-    width: 66%;
+    width: 77%;
 }
 
 head{
