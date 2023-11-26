@@ -139,3 +139,24 @@ select {
 #accept{
     color: rgb(9, 214, 43);
 }
+
+.divb{
+    display: flex;
+}
+.button1, .button2{
+    width: 45%;
+    font-size: 20px;
+    border-radius: 15px;
+    border: 2px solid;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 8px;
+    margin: 0 5% 20px 5%;
+}
+
+.button2{
+    color: rgb(231, 9, 9);
+}
+.button1{
+    color: rgb(9, 214, 43);
+}

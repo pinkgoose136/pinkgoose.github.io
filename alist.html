@@ -99,22 +99,50 @@
                                     });
 
 
-                                    let itemDiv = document.createElement('div');
+
+                                    var head = document.createElement('div');
+                                    head.classList.add('head');
+                                    var left = document.createElement('div');
+                                    left.classList.add('left');
+                                    var right = document.createElement('div');
+                                    right.classList.add('right');
+
+                                    var imgElement = document.createElement('img');
+                                    imgElement.classList.add('img');
+                                    imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
+                                    imgElement.alt = 'Alternative text';
+
+
+                                    let title = document.createElement('div');
                                     let ssil = document.createElement('a');
                                     ssil.href = itms['1'];
+                                    ssil.classList.add('lnk');
                                     ssil.textContent = itms['-1']; 
-                                    itemDiv.appendChild(ssil);
-                                    keysDiv.appendChild(itemDiv);
+                                    title.appendChild(ssil);
+                                    var desc = document.createElement('div');
+                                    desc.textContent = itms['3']; 
 
 
+                                    left.appendChild(imgElement);
+                                    right.appendChild(title);
+                                    right.appendChild(desc);
+                                    head.appendChild(left);
+                                    head.appendChild(right);
+
+                                    keysDiv.appendChild(head);
+                                    
                                     Object.keys(itms).forEach(function(i){
-                                        if (i != '1' && i != '-1' && i != '11'){
+                                        if (i == '4' || i == '5'){
                                             let itemDiv = document.createElement('div');
                                             itemDiv.textContent = itms[i];
                                             keysDiv.appendChild(itemDiv);
                                         }
                                     });
+
+                                    let divb = document.createElement('div');
+                                    divb.classList.add('divb');
                                     let button1 = document.createElement('button');
+                                    button1.classList.add('button1');
                                     button1.textContent = 'Добавить';
                                     button1.addEventListener('click', function(event) {
                                         addEl(itemss);
@@ -124,8 +152,9 @@
                                         let parentElement = event.target.parentNode;
                                         parentElement.parentNode.removeChild(parentElement);
                                     });
-                                    keysDiv.appendChild(button1);
+                                    divb.appendChild(button1);
                                     let button2 = document.createElement('button');
+                                    button2.classList.add('button2');
                                     button2.textContent = 'Удалить';
                                     button2.addEventListener('click', function(event) {
                                         delEl(itemss);
@@ -134,12 +163,11 @@
                                         let parentElement = event.target.parentNode;
                                         parentElement.parentNode.removeChild(parentElement);
                                     });
-                                    keysDiv.appendChild(button2);
-
+                                    divb.appendChild(button2);
+                                    keysDiv.appendChild(divb);
                                     keysListDiv.appendChild(keysDiv);
                                 }
-                            });
-                            
+                            }); 
                         });
                     }
                 });
