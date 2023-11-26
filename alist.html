@@ -160,7 +160,7 @@
                                         delEl(itemss);
                                         let idid = Object.keys(itemss)[0].split('-')
                                         lnk[idid[1]]['answer'] = 'NO'
-                                        let parentElement = event.target.parentNode;
+                                        let parentElement = event.target.parentNode.parentNode;
                                         parentElement.parentNode.removeChild(parentElement);
                                     });
                                     divb.appendChild(button2);
