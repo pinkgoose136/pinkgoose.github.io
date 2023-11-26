@@ -84,8 +84,8 @@
                                         let keyy = "";
                                         let ket = keyParts[1];
                                         switch (keyParts[2]) {
-                                        case 'link': tex = ''; keyy = '1'; break;
-                                        case 'name': tex = ''; keyy = '-1'; lnk[ket] = {}; lnk[ket]['name'] = valu2; break;
+                                        case 'link': tex = ''; keyy = '1'; lnk[ket]['link'] = valu2; break;
+                                        case 'name': tex = ''; keyy = '-1'; lnk[ket] = {}; break;
                                         case 'desc': tex = "Описание: "; keyy = '3'; break;
                                         case 'type': tex = "Тип: "; keyy = '2'; break;
                                         case 'cat': tex = "Категории: "; keyy = '4'; break;
