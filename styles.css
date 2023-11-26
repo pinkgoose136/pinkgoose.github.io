@@ -123,6 +123,9 @@ select {
     color: #333;
 }
 
+.btns{
+    display: flex;
+}
 .btn{
     width: 45%;
 }
@@ -133,7 +136,7 @@ select {
     border: 2px solid;
     cursor: pointer;
     background-color: transparent;
-    margin: 5px;
+    padding: 8px;
 }
 #delete{
     color: rgb(231, 9, 9);
