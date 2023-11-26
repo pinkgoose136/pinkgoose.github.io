@@ -127,7 +127,7 @@ select {
     width: 50%;
 }
 #accept{
-    color: rgb(231, 9, 9);
+    background-color: rgb(231, 9, 9);
 }
 #delete{
     background-color: rgb(9, 214, 43);
