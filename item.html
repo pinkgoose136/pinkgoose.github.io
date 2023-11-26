@@ -8,11 +8,9 @@
 <body>
     <div id="keysList"></div>
     <h2 id="opa"></h2>
-        <button id="accept">Добавить</button>
-        <button id="delete">Удалить</button>
-
+    <button id="accept">Добавить</button>
+    <button id="delete">Удалить</button>
     <h2 id="pa"></h2>
-
     <script>
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
@@ -43,6 +41,7 @@
                 if (err) {
                     document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                 } else {
+                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + values;
                     let keysListDiv = document.getElementById('keysList');
                     let keysDiv = document.createElement('div');
                     keysDiv.classList.add('item');
