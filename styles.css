@@ -124,7 +124,8 @@ select {
 }
 
 #accept, #delete{
-    width: 50%;
+    width: 49%;
+    border-radius: 15px;
 }
 #accept{
     background-color: rgb(231, 9, 9);
