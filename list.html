@@ -86,24 +86,40 @@
                                         
                                         itms[keyy] = tex + valu2;
                                     });
-
-                                    let itemDiv = document.createElement('div');
-                                    let ssil = document.createElement('a');
-                                    ssil.href = itms['1'];
-                                    ssil.classList.add('lnk');
-                                    ssil.textContent = itms['-1']; 
-                                    itemDiv.appendChild(ssil);
-                                    keysDiv.appendChild(itemDiv);
+                                    
+                                    var head = document.createElement('div');
+                                    head.classList.add('head');
+                                    var left = document.createElement('div');
+                                    head.classList.add('left');
+                                    var right = document.createElement('div');
+                                    head.classList.add('right');
 
                                     var imgElement = document.createElement('img');
                                     imgElement.classList.add('img');
                                     imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
                                     imgElement.alt = 'Alternative text';
-                                    itemDiv.appendChild(imgElement);
-                                    keysDiv.appendChild(itemDiv);
+
+
+                                    let title = document.createElement('div');
+                                    let ssil = document.createElement('a');
+                                    ssil.href = itms['1'];
+                                    ssil.classList.add('lnk');
+                                    ssil.textContent = itms['-1']; 
+                                    title.appendChild(ssil);
+                                    var desc = document.createElement('div');
+                                    desc.textContent = itms['3']; 
+
+
+                                    left.appendChild(imgElement);
+                                    right.appendChild(title);
+                                    right.appendChild(desc);
+                                    head.appendChild(left);
+                                    head.appendChild(right);
+
+                                    keysDiv.appendChild(head);
                                     
                                     Object.keys(itms).forEach(function(i){
-                                        if (i != '1' && i != '-1' && i != '11'){
+                                        if (i == '2' || i == '4' || i == '5'){
                                             let itemDiv = document.createElement('div');
                                             itemDiv.textContent = itms[i];
                                             keysDiv.appendChild(itemDiv);
