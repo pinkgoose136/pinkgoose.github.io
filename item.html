@@ -68,6 +68,10 @@
                     });
                     if (String(Object.keys(itms)) == 'o'){
                         document.getElementById('opa').innerHTML = 'Заявка отправлена на рассмотрение. Ожидайте ответа';
+                        let acceptb = document.getElementById('accept');
+                        acceptb.remove();
+                        let deleteb = document.getElementById('delete');
+                        deleteb.remove();
                     }
                     else{
                     var head = document.createElement('div'); head.classList.add('head');
