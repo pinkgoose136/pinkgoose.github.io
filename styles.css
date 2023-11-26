@@ -123,20 +123,16 @@ select {
     color: #333;
 }
 
-.btns{
-    display: flex;
-}
-.btn{
-    width: 45%;
-}
+
 #accept, #delete {
-    width:fit-content;
+    width: 90%;
     font-size: 20px;
     border-radius: 15px;
     border: 2px solid;
     cursor: pointer;
     background-color: transparent;
     padding: 8px;
+    margin: 0 5% 20px 5%;
 }
 #delete{
     color: rgb(231, 9, 9);
