@@ -123,13 +123,17 @@ select {
     color: #333;
 }
 
-#accept, #delete{
+#accept, #delete {
     width: 49%;
+    font-size: 20px;
     border-radius: 15px;
+    border: 2px solid;
+    cursor: pointer;
+    background-color: transparent;
 }
 #accept{
-    background-color: rgb(231, 9, 9);
+    color: rgb(231, 9, 9);
 }
 #delete{
-    background-color: rgb(9, 214, 43);
+    color: rgb(9, 214, 43);
 }
