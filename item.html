@@ -63,15 +63,35 @@
                         itms[keyy] = tex + valu2;
                     });
 
-                    let itemDiv = document.createElement('div');
+                    var head = document.createElement('div'); head.classList.add('head');
+                    var left = document.createElement('div'); left.classList.add('left');
+                    var right = document.createElement('div'); right.classList.add('right');
+
+                    var imgElement = document.createElement('img');
+                    imgElement.classList.add('img');
+                    imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
+                    imgElement.alt = 'Alternative text';
+
+                    let title = document.createElement('div');
                     let ssil = document.createElement('a');
                     ssil.href = itms['1'];
+                    ssil.classList.add('lnk');
                     ssil.textContent = name; 
-                    itemDiv.appendChild(ssil);
-                    keysDiv.appendChild(itemDiv);
+                    title.appendChild(ssil);
+                    var desc = document.createElement('div');
+                    desc.textContent = itms['3']; 
 
+
+                    left.appendChild(imgElement);
+                    right.appendChild(title);
+                    right.appendChild(desc);
+                    head.appendChild(left);
+                    head.appendChild(right);
+
+                    keysDiv.appendChild(head);
+                    
                     Object.keys(itms).forEach(function(i){
-                        if (i != '1'){
+                        if (i == '4' || i == '5'){
                             let itemDiv = document.createElement('div');
                             itemDiv.textContent = itms[i];
                             keysDiv.appendChild(itemDiv);

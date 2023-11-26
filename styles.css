@@ -122,3 +122,13 @@ select {
 #dataDisplay h2 {
     color: #333;
 }
+
+#accept, #delete{
+    width: 50%;
+}
+#accept{
+    color: rgb(231, 9, 9);
+}
+#delete{
+    background-color: rgb(9, 214, 43);
+}
