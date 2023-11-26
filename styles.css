@@ -99,10 +99,10 @@ select {
 }
 
 .right {
-    padding: 5px;
-    position: absolute;
+    padding: 3% 0;
     display: inline-block;
-    width: 77%;
+    width: 74%;
+    overflow-wrap: break-word;
 }
 
 head{
