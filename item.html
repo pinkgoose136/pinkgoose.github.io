@@ -62,10 +62,14 @@
                         if (keyy != '0'){
                             itms[keyy] = tex + valu2;    
                         }
+                        else{
+                            itms['o'] = 'ooo';
+                        }
                     });
-                    itms['o'] = 'ooo';
-                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + String(Object.keys(itms));
-
+                    if (String(Object.keys(itms)) == 'o'){
+                        document.getElementById('opa').innerHTML = 'Заявка отправлена на рассмотрение. Ожидайте ответа';
+                    }
+                    else{
                     var head = document.createElement('div'); head.classList.add('head');
                     var left = document.createElement('div'); left.classList.add('left');
                     var right = document.createElement('div'); right.classList.add('right');
@@ -162,6 +166,7 @@
                         tg.close();
                     }
                 }
+            }
             });
 
         }
