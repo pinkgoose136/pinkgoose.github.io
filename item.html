@@ -41,7 +41,6 @@
                 if (err) {
                     document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                 } else {
-                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + values;
                     let keysListDiv = document.getElementById('keysList');
                     let keysDiv = document.createElement('div');
                     keysDiv.classList.add('item');
@@ -62,6 +61,7 @@
                         }
                         itms[keyy] = tex + valu2;
                     });
+                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + itms;
 
                     var head = document.createElement('div'); head.classList.add('head');
                     var left = document.createElement('div'); left.classList.add('left');
