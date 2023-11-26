@@ -37,7 +37,6 @@
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
         } else {
             let ke = keys.filter(word => word.includes(idi))
-            document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + String(ke);
             tg.CloudStorage.getItems(ke, function(err, values) {
                 if (err) {
                     document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
@@ -58,10 +57,11 @@
                         case 'type': tex = "Тип: "; keyy = '2'; break;
                         case 'cat': tex = "Категории: "; keyy = '4'; break;
                         case 'tag': tex = "Теги: "; keyy = '5'; break;
-                        default: tex = expr; keyy = '0'; break;
+                        default: tex = ''; keyy = '0'; break;
                         }
                         itms[keyy] = tex + valu2;
                     });
+                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + String(itms);
 
                     var head = document.createElement('div'); head.classList.add('head');
                     var left = document.createElement('div'); left.classList.add('left');
