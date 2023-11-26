@@ -97,6 +97,7 @@ select {
 }
 head{
     width: 100%;
+    display: flex;
 }
 
 #dataDisplay {
