@@ -59,9 +59,12 @@
                         case 'tag': tex = "Теги: "; keyy = '5'; break;
                         default: tex = ''; keyy = '0'; break;
                         }
-                        itms[keyy] = tex + valu2;
+                        if (keyy != '0'){
+                            itms[keyy] = tex + valu2;    
+                        }
                     });
-                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + String(itms);
+                    itms['o'] = 'ooo';
+                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + String(Object.keys(itms));
 
                     var head = document.createElement('div'); head.classList.add('head');
                     var left = document.createElement('div'); left.classList.add('left');
