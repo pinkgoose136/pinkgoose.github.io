@@ -108,7 +108,7 @@ select {
 head{
     width: 100%;
     display: flex;
-    position: relative;
+    align-items: flex-start;
 }
 
 #dataDisplay {
