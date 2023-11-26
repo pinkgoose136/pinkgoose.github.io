@@ -133,6 +133,7 @@ select {
     border: 2px solid;
     cursor: pointer;
     background-color: transparent;
+    margin: 5px;
 }
 #delete{
     color: rgb(231, 9, 9);
