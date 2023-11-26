@@ -37,7 +37,7 @@
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
         } else {
             let ke = keys.filter(word => word.includes(idi))
-            document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + String(itms);
+            document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + String(ke);
             tg.CloudStorage.getItems(ke, function(err, values) {
                 if (err) {
                     document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
