@@ -99,7 +99,7 @@ select {
 }
 
 .right {
-    padding: 3% 0;
+    padding: 1% 3%;
     display: inline-block;
     width: 74%;
     overflow-wrap: break-word;
@@ -141,6 +141,7 @@ select {
 }
 
 .divb{
+    padding-top: 20px;
     display: flex;
 }
 .button1, .button2{
