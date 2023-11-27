@@ -82,18 +82,18 @@
                                         
                                         itms[keyy] = tex + valu2;
                                     });
-                                    
-                                    let pressTimer;
-
-                                    function startPress() {
-                                    pressTimer = window.setTimeout(function() {
+                                    var menu = document.createElement('img');
+                                    menu.id = 'menu';
+                                    menu.href = 'https://pinkgoose.pythonanywhere.com/static/pngwing.com.png'
+                                    menu.addEventListener('click', function() {
                                         document.getElementById('popup').style.display = 'flex';
+                                        document.getElementById('zag').innerHTML = itms['6'];
 
                                         document.getElementById('closeButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
                                         });
-                                    }, 3000);
-                                    }
+                                    });
+
                                     function endPress() {clearTimeout(pressTimer)}
 
                                     keysDiv.addEventListener('mousedown', startPress);
@@ -112,14 +112,6 @@
                                     var right = document.createElement('div');
                                     right.classList.add('right');
 
-                                    var menu = document.createElement('div');
-                                    menu.classList.add('menu');
-                                    var edit = document.createElement('div');
-                                    edit.classList.add('edit');
-                                    var delet = document.createElement('div');
-                                    delet.classList.add('delet');
-                                    menu.appendChild(edit);
-                                    menu.appendChild(delet);
                                     right.appendChild(menu);
                                     
                                     var imgElement = document.createElement('img');
@@ -166,7 +158,7 @@
 
 <div class="popup" id="popup">
     <div class="popup-content">
-      <h2>Заголовок</h2>
+      <h2 id="zag">Заголовок</h2>
       <input type="text" class="inp" placeholder="Введите что-то">
       <input type="text" class="inp" placeholder="Введите еще что-то">
       <button id="closeButton">Закрыть</button>
