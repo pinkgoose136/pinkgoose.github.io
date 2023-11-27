@@ -67,8 +67,8 @@
          if (!lnk.startsWith('https://t.me/')){lnke.innerHTML = 'Неверная ссылка'}
          else if (des.length < 11 ){dese.innerHTML = 'Описание слишком короткое. Минимум 10 символов'} 
          else if (des.length > 601 ){dese.innerHTML = 'Описание слишком длинное'}
-         else if (String(t) == '' ){ctse.innerHTML = 'Напишите хотя бы один тег'}
-         else if (String(ct) == '' ){tgse.innerHTML = 'Выберите хотя бы одну категорию'}
+         else if (String(ct) == '' ){ctse.innerHTML = 'Напишите хотя бы один тег'}
+         else if (String(t) == '' ){tgse.innerHTML = 'Выберите хотя бы одну категорию'}
          else{
          function getFormattedDateTime() {
             let currentDate = new Date();
