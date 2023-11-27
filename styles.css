@@ -161,3 +161,6 @@ select {
 .button1{
     color: rgb(9, 214, 43);
 }
+.error{
+    color: rgb(199, 13, 13);
+}

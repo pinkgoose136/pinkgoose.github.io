@@ -10,6 +10,8 @@
     <div id="form">
         <label for="link">Ссылка:</label>
         <input type="text" name="link" id="link" required><br>
+        <label id="lnk_error" class="error"></label>
+        <br>
 
         <label for="description">Описание:</label>
         <textarea name="description" id="description" required minlength="10" maxlength="1000" oninput="adjustTextAreaHeight()"></textarea><br>
@@ -56,11 +58,17 @@
          let lnk = document.getElementById('link').value; let des = document.getElementById('description').value;
          let ct = document.getElementById('categoryList').textContent; let t = document.getElementById('tagList').textContent;
 
+         lnke = document.getElementById('lnk_error');  dese = document.getElementById('desc_error');
+         ctse = document.getElementById('cts_error');  tgse = document.getElementById('tgs_error');  
 
-         if (des.length < 11 ){document.getElementById('desc_error').innerHTML = 'Описание слишком короткое. Минимум 10 символов'} 
-         else if (des.length > 601 ){document.getElementById('desc_error').innerHTML = 'Описание слишком длинное'}
-         else if (String(t) == '' ){document.getElementById('cts_error').innerHTML = 'Напишите хотя бы один тег'}
-         else if (String(ct) == '' ){document.getElementById('tgs_error').innerHTML = 'Выберите хотя бы одну категорию'}
+
+         lnke.innerHTML = ''; dese.innerHTML = ''; ctse.innerHTML = ''; tgse.innerHTML = ''
+
+         if (lnk.startsWith('https://t.me/')){lnke.innerHTML = 'Неверная ссылка'}
+         else if (des.length < 11 ){dese.innerHTML = 'Описание слишком короткое. Минимум 10 символов'} 
+         else if (des.length > 601 ){dese.innerHTML = 'Описание слишком длинное'}
+         else if (String(t) == '' ){ctse.innerHTML = 'Напишите хотя бы один тег'}
+         else if (String(ct) == '' ){tgse.innerHTML = 'Выберите хотя бы одну категорию'}
          else{
          function getFormattedDateTime() {
             let currentDate = new Date();
