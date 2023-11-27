@@ -81,17 +81,7 @@
                                         
                                         itms[keyy] = tex + valu2;
                                     });
-                                    var menu = document.createElement('img');
-                                    menu.classList.add('menu');
-                                    menu.src = 'https://pinkgoose.pythonanywhere.com/static/pngwing.com.png'
-                                    menu.addEventListener('click', function() {
-                                        document.getElementById('popup').style.display = 'flex';
-                                        document.getElementById('zag').innerHTML = itms['-1'];
 
-                                        document.getElementById('closeButton').addEventListener('click', function() {
-                                            document.getElementById('popup').style.display = 'none';
-                                        });
-                                    });
 
                                     keysDiv.addEventListener('mousedown', startPress);
                                     keysDiv.addEventListener('mouseup', endPress); 
@@ -109,7 +99,7 @@
                                     var right = document.createElement('div');
                                     right.classList.add('right');
 
-                                    right.appendChild(menu);
+                                   // right.appendChild(menu);
                                     
                                     var imgElement = document.createElement('img');
                                     imgElement.classList.add('img');
