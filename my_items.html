@@ -19,20 +19,17 @@
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
-
-        var aValue = getParameterByName('owner');
-
     </script>
 
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        
+        let idd = tg.initDataUnsafe.user.id;
         tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
             } else {
-                let ke = keys.filter(word => word.includes(aValue))
+                let ke = keys.filter(word => word.includes(idd))
                 tg.CloudStorage.getItems(keys, function(err, items) {
                     if (err) {
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
