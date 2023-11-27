@@ -93,6 +93,16 @@
                                     var right = document.createElement('div');
                                     right.classList.add('right');
 
+                                    var menu = document.createElement('div');
+                                    menu.classList.add('menu');
+                                    var edit = document.createElement('div');
+                                    edit.classList.add('edit');
+                                    var delet = document.createElement('div');
+                                    delet.classList.add('delet');
+                                    menu.appendChild(edit);
+                                    menu.appendChild(delet);
+                                    right.appendChild(menu);
+                                    
                                     var imgElement = document.createElement('img');
                                     imgElement.classList.add('img');
                                     imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
