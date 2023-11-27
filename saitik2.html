@@ -67,9 +67,10 @@
          if (!lnk.startsWith('https://t.me/')){lnke.innerHTML = 'Неверная ссылка'}
          else if (des.length < 11 ){dese.innerHTML = 'Описание слишком короткое. Минимум 10 символов'} 
          else if (des.length > 601 ){dese.innerHTML = 'Описание слишком длинное'}
-         else if (String(ct) == '' ){ctse.innerHTML = 'Напишите хотя бы один тег'}
-         else if (String(t) == '' ){tgse.innerHTML = 'Выберите хотя бы одну категорию'}
+         else if (String(ct) == '' ){ctse.innerHTML =  'Напишите хотя бы одну категорию'}
+         else if (String(t) == '' ){tgse.innerHTML = 'Выберите хотя бы один тег'}
          else{
+        lnke.innerHTML = ''; dese.innerHTML = ''; ctse.innerHTML = ''; tgse.innerHTML = ''
          function getFormattedDateTime() {
             let currentDate = new Date();
             let day = String(currentDate.getDate()).padStart(2, '0');
