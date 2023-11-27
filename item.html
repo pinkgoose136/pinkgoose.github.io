@@ -136,14 +136,14 @@
 
                         });
                         let ge = 'draft-' + Object.keys(items)[0].split('-')[0]
-                        tg.CloudStorage.setItem(ge + '-name', name, function(err) {
+                        tg.CloudStorage.setItem(ge + '-name'  + '-' + String(idd), name, function(err) {
                                 if (err) {
                                     document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + '-name' + ':' + err;
                                 } else {
                                     document.getElementById('pa').innerHTML = 'Элемент с ключом ' + ge + '-name' + ' успешно добавлен в хранилище';
                                 }
                             });
-                        tg.CloudStorage.setItem(ge + '-img', img, function(err) {
+                        tg.CloudStorage.setItem(ge + '-img' + '-' + String(idd), img, function(err) {
                                 if (err) {
                                     document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + '-img' + ':' + err;
                                 } else {
