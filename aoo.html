@@ -1,0 +1,18 @@
+let pressTimer;
+
+function startPress() {
+  pressTimer = window.setTimeout(function() {
+    // Здесь выполняется код при удержании элемента
+    console.log('Элемент был удержан!');
+  }, 1000); // Например, удержание должно длиться 1 секунду
+}
+
+function endPress() {
+  clearTimeout(pressTimer);
+}
+
+const element = document.getElementById('yourElementId');
+
+element.addEventListener('mousedown', startPress);
+element.addEventListener('mouseup', endPress);
+element.addEventListener('mouseleave', endPrслучая, когда курсор покидает элемент
