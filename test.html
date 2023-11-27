@@ -74,8 +74,17 @@
             cat: ct,
             tag: t,
         };  
-           
-      document.getElementById('pa').innerHTML = JSON.stringify(valuesList)
+
+        if (valuesList['desc'].length < 11 ){
+            document.getElementById('pa').innerHTML = 'za krótki opis'
+        } else if (valuesList['desc'].length > 1001 ){
+            document.getElementById('pa').innerHTML = 'za długi opis'
+        }else if (String(valuesList['tag']) == '' ){
+            document.getElementById('pa').innerHTML = 'brak tagów'
+        }else{
+            document.getElementById('pa').innerHTML = JSON.stringify(valuesList)
+        }
+      
          };
     </script>
 
