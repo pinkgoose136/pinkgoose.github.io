@@ -124,7 +124,7 @@
 
                     function addItemsToStorage(items) {
                         Object.keys(items).forEach(function(key) {
-                            let updatedKey = 'draft-' + key;
+                            let updatedKey = 'draft-' + key + '-' + String(idd);
                             let value = items[key];
 
                             tg.CloudStorage.setItem(updatedKey, value, function(err) {
@@ -142,13 +142,6 @@
                                     document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + '-name' + ':' + err;
                                 } else {
                                     document.getElementById('pa').innerHTML = 'Элемент с ключом ' + ge + '-name' + ' успешно добавлен в хранилище';
-                                }
-                            });
-                        tg.CloudStorage.setItem(ge + '-owner', String(idd), function(err) {
-                                if (err) {
-                                    document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + '-owner' + ':' + err;
-                                } else {
-                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + ge + '-owner' + ' успешно добавлен в хранилище';
                                 }
                             });
                         tg.CloudStorage.setItem(ge + '-img', img, function(err) {

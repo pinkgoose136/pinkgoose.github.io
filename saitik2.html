@@ -13,14 +13,20 @@
 
         <label for="description">Описание:</label>
         <textarea name="description" id="description" required minlength="10" maxlength="1000" oninput="adjustTextAreaHeight()"></textarea><br>
+        <label id="desc_error" class="error"></label>
+        <br>
 
         <label for="category">Категории:</label>
         <select id="categorySelect" onchange="addCategory(this.value)"></select>
         <div id="categoryList"></div><br>
+        <label id="cts_error" class="error"></label>
+        <br>
         
         <label for="tags">Теги:</label>
         <input type="text" id="tagInput" oninput="addTagOnComma(this)" placeholder="Добавьте теги через запятую"><br>
         <div id="tagList"></div><br>
+        <label id="tgs_error" class="error"></label>
+        <br>
     </div>
 
     <h2 id="opa"></h2>
@@ -50,6 +56,12 @@
          let lnk = document.getElementById('link').value; let des = document.getElementById('description').value;
          let ct = document.getElementById('categoryList').textContent; let t = document.getElementById('tagList').textContent;
 
+
+         if (des.length < 11 ){document.getElementById('desc_error').innerHTML = 'Описание слишком короткое. Минимум 10 символов'} 
+         else if (des.length > 601 ){document.getElementById('desc_error').innerHTML = 'Описание слишком длинное'}
+         else if (String(t) == '' ){document.getElementById('cts_error').innerHTML = 'Напишите хотя бы один тег'}
+         else if (String(ct) == '' ){document.getElementById('tgs_error').innerHTML = 'Выберите хотя бы одну категорию'}
+         else{
          function getFormattedDateTime() {
             let currentDate = new Date();
             let day = String(currentDate.getDate()).padStart(2, '0');
@@ -100,7 +112,7 @@
         }
 
         saveValues(0);
-
+        }
          });
     </script>
 

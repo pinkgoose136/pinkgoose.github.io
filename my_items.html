@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <label>Search <input id="search"></label>
     <div id="keysList"></div>
     <h2 id="opa"></h2>
     <h3 id="sus"></h3>
@@ -21,18 +20,19 @@
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
 
-        var aValue = getParameterByName('type');
+        var aValue = getParameterByName('owner');
 
     </script>
 
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-
+        
         tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
             } else {
+                let ke = keys.filter(word => word.includes(aValue))
                 tg.CloudStorage.getItems(keys, function(err, items) {
                     if (err) {
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
@@ -93,6 +93,16 @@
                                     var right = document.createElement('div');
                                     right.classList.add('right');
 
+                                    var menu = document.createElement('div');
+                                    menu.classList.add('menu');
+                                    var edit = document.createElement('div');
+                                    edit.classList.add('edit');
+                                    var delet = document.createElement('div');
+                                    delet.classList.add('delet');
+                                    menu.appendChild(edit);
+                                    menu.appendChild(delet);
+                                    right.appendChild(menu);
+                                    
                                     var imgElement = document.createElement('img');
                                     imgElement.classList.add('img');
                                     imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
