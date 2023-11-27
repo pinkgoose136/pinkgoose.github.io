@@ -29,7 +29,7 @@
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
             } else {
-                let ke = keys.filter(word => word.includes(idd))
+                let ke = keys.filter(word => word.includes(String(idd)))
                 tg.CloudStorage.getItems(keys, function(err, items) {
                     if (err) {
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
@@ -83,6 +83,28 @@
                                         itms[keyy] = tex + valu2;
                                     });
                                     
+                                    let pressTimer;
+
+                                    function startPress() {
+                                    pressTimer = window.setTimeout(function() {
+                                        document.getElementById('popup').style.display = 'flex';
+
+                                        document.getElementById('closeButton').addEventListener('click', function() {
+                                            document.getElementById('popup').style.display = 'none';
+                                        });
+                                    }, 3000);
+                                    }
+                                    function endPress() {clearTimeout(pressTimer)}
+
+                                    keysDiv.addEventListener('mousedown', startPress);
+                                    keysDiv.addEventListener('mouseup', endPress); 
+                                    keysDiv.addEventListener('mouseleave', endPress);
+
+                                    keysDiv.addEventListener('touchstart', startPress);
+                                    keysDiv.addEventListener('touchend', endPress);
+                                    keysDiv.addEventListener('touchcancel', endPress);
+
+
                                     var head = document.createElement('div');
                                     head.classList.add('head');
                                     var left = document.createElement('div');
@@ -141,6 +163,15 @@
         });
 
     </script>
+
+<div class="popup" id="popup">
+    <div class="popup-content">
+      <h2>Заголовок</h2>
+      <input type="text" placeholder="Введите что-то">
+      <input type="text" placeholder="Введите еще что-то">
+      <button id="closeButton">Закрыть</button>
+    </div>
+</div>
 
 </body>
 </html>
