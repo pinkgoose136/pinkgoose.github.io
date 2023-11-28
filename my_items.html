@@ -125,7 +125,6 @@
                                     var right = document.createElement('div');
                                     right.classList.add('right');
 
-                                    head.appendChild(svgContainer);
                                     
                                     var imgElement = document.createElement('img');
                                     imgElement.classList.add('img');
@@ -148,7 +147,7 @@
                                     right.appendChild(desc);
                                     head.appendChild(left);
                                     head.appendChild(right);
-
+                                    head.appendChild(svgContainer);
                                     keysDiv.appendChild(head);
                                     
                                     Object.keys(itms).forEach(function(i){
