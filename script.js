@@ -68,8 +68,3 @@ function create_drop(aaValue){
     }
     dropdown.value = '';
 }
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    create_drop(aValue);
-});
