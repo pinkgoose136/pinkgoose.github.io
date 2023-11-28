@@ -18,6 +18,18 @@ function addCategory() {
     }
 }
 
+function createTag(existingTags) {
+    existingTags.array.forEach(element => {
+        var tagItem = document.createElement('div');
+        tagItem.textContent = element;
+        tagItem.classList.add('tag');
+        tagItem.onclick = function() {
+            tagList.removeChild(tagItem);
+        };
+        tagList.appendChild(tagItem);
+    });
+    }
+
 function addTagOnComma(inputElement) {
     var tagList = document.getElementById('tagList');
     var tagText = inputElement.value.slice(0, -1);
