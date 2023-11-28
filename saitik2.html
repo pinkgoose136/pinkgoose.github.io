@@ -58,8 +58,8 @@
          Telegram.WebApp.onEvent('mainButtonClicked', function(){
          let lnk = document.getElementById('link').value; let des = document.getElementById('description').value;
          let ct = document.getElementById('categoryList').textContent; let t = document.getElementById('tagList').innerHTML;
-         console.log(t)
-
+         console.log(t.split('<div class="tag">'))
+         
 
          });
     </script>
