@@ -183,6 +183,7 @@ select {
         width: 80%;
         justify-content: center;
         align-items: center;
+        display: none;
     }
   
   .popup-content {
