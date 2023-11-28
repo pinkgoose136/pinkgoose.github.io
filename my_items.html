@@ -4,6 +4,7 @@
     <title>Telegram Explorer</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
     <div id="keysList"></div>
@@ -72,7 +73,7 @@
                                         case 'link': tex = ''; keyy = '1'; break;
                                         case 'name': tex = ''; keyy = '-1'; break;
                                         case 'desc': tex = ''; keyy = '3'; break;
-                                        case 'type': tex = "Тип: "; keyy = '2'; break;
+                                        case 'type': tex = ''; keyy = '2'; break;
                                         case 'cat': tex = "Категории: "; keyy = '4'; break;
                                         case 'tag': tex = "Теги: "; keyy = '5'; break;
                                         case 'img': tex = ""; keyy = '11'; ae = valu2; break;
@@ -112,7 +113,7 @@
                                     svgContainer.addEventListener('click', function() {
                                         document.getElementById('popup').style.display = 'flex';
                                         document.getElementById('zag').innerHTML = itms['-1'];
-
+                                        create_drop(itms['type'])
                                         document.getElementById('closeButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
                                         });

@@ -44,21 +44,20 @@ function adjustTextAreaHeight() {
     textarea.style.height = newHeight + "px";
 }
 
-
-document.addEventListener('DOMContentLoaded', function () {
+function create_drop(aaValue){
     var dropdown = document.getElementById('categorySelect');
     var options;
 
-    if (aValue === 'channels' ) {
+    if (aaValue === 'channels' ) {
         options = ['Политика', 'Мемы', 'Новости', 'Технологии'];
     } 
-    else if (aValue === 'groups') {
+    else if (aaValue === 'groups') {
         options = ['Общение', 'Мемы', 'Знакомства', 'Тематичесике'];
     }  
-    else if (aValue === 'bots') {
+    else if (aaValue === 'bots') {
         options = ['Полезные', 'Игры', 'Развлечения'];
     }  
-    else if (aValue === 'stickers' || aValue === 'emoji') {
+    else if (aaValue === 'stickers' || aaValue === 'emoji') {
         options = ['Мемы', 'Известности', 'Тематические', 'Анимированные'];
     }  
 
@@ -68,4 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
         dropdown.add(option);
     }
     dropdown.value = '';
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    create_drop(aValue);
 });
