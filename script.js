@@ -19,7 +19,7 @@ function addCategory() {
 }
 
 function createTag(existingTags) {
-    existingTags.array.forEach(element => {
+    existingTags.forEach(element => {
         var tagItem = document.createElement('div');
         tagItem.textContent = element;
         tagItem.classList.add('tag');
@@ -28,7 +28,7 @@ function createTag(existingTags) {
         };
         tagList.appendChild(tagItem);
     });
-    }
+}
 
 function addTagOnComma(inputElement) {
     var tagList = document.getElementById('tagList');

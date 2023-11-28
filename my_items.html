@@ -115,8 +115,9 @@
                                         document.getElementById('zag').innerHTML = itms['-1'];
                                         document.getElementById('description').value = itms['3'];
                                         create_drop(itms['2']);
-                                        createTag(itms['5'].split(','));
                                         console.log(itms['5'])
+                                        createTag(itms['5'].split(','));
+                                        
                                         document.getElementById('closeButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
                                         });
