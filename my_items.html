@@ -72,10 +72,10 @@
                                         switch (keyParts[2]) {
                                         case 'link': tex = ''; keyy = '1'; break;
                                         case 'name': tex = ''; keyy = '-1'; break;
-                                        case 'desc': tex = ''; keyy = '3'; break;
+                                        case 'desc': tex = ''; itms['333'] = key2; keyy = '3'; break;
                                         case 'type': tex = ''; keyy = '2'; break;
-                                        case 'cat': tex = "Категории: "; itms['66'] = valu2; keyy = '4'; break;
-                                        case 'tag': tex = "Теги: "; itms['55'] = valu2;  keyy = '5'; break;
+                                        case 'cat': tex = "Категории: "; itms['666'] = key2; itms['66'] = valu2; keyy = '4'; break;
+                                        case 'tag': tex = "Теги: "; itms['555'] = key2; itms['55'] = valu2;  keyy = '5'; break;
                                         case 'img': tex = ""; keyy = '11'; ae = valu2; break;
                                         default: tex = expr; keyy = '0'; break;
                                         }
@@ -120,6 +120,65 @@
 
                                         document.getElementById('closeButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
+                                        });
+                                        document.getELementById('saveButton').addEventListener('click', function() {
+                                            let des = document.getElementById('description').value;
+                                            let ct = document.getElementById('categoryList').innerHTML;
+                                            let t = document.getElementById('tagList').innerHTML;
+
+                                            let te = t.split('<div class="tag">')
+                                            let tetl = []
+                                            te.forEach(element => {
+                                                tetl.push(element.split('</div>')[0])
+                                            });
+                                            let removedElement = tetl.shift();
+                                            let tttt = tetl.join(', ');
+
+
+                                            let ce = ct.split('<div class="category">')
+                                            let cetl = []
+                                            ce.forEach(element => {
+                                                cetl.push(element.split('</div>')[0])
+                                            });
+                                            let cemovedElement = cetl.shift();
+                                            let cccc = cetl.join(', ');
+
+                                            let valuesList = {
+                                                desc: des,
+                                                cat: cccc,
+                                                tag: tttt,
+                                            }; 
+
+                                            let keysLst = {
+                                                desc: itms['333'],
+                                                cat: itms['666'],
+                                                tag: itms['555'],
+                                            } 
+                                            
+                                        let keys = Object.keys(valuesList);
+                                        function saveValues(index) {
+                                            if (index < keys.length) {
+                                                let key = keys[index];
+                                                let value = valuesList[key];
+
+                                                tg.CloudStorage.setItem(keysLst[key], value, function(err) {
+                                                    if (err) {
+                                                        console.log('aaa')
+                                                       // tg.sendData(JSON.stringify({"error": err + keysLst[key]}));
+                                                       // tg.close();
+                                                    } else {
+                                                        saveValues(index + 1);
+                                                    }
+                                                });
+                                            } else {
+                                                //tg.sendData(JSON.stringify(data));
+                                                //tg.close();
+                                                console.log('ar')
+                                            }
+                                        }
+                                        saveValues(0);
+
+                                        document.getElementById('popup').style.display = 'none';
                                         });
                                     });
 
@@ -195,10 +254,12 @@
     <div id="tagList"></div><br>
     <label id="tgs_error" class="error"></label>
     <br>
-
-
-
-      <button id="closeButton">Закрыть</button>
+        <div id="buttons_menu">
+            <button id="saveButton">Сохранить изменения</button>
+            <button id="closeButton">Закрыть</button>
+            <button id="deleteButton">Удалить</button>
+        </div>
+      
     </div>
 </div>
 
