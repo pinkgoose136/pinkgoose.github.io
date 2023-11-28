@@ -81,11 +81,34 @@
                                         
                                         itms[keyy] = tex + valu2;
                                     });
+                                    const svgContainer = document.createElement('svgContainer');
+                                    const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                                    svgElement.setAttribute('width', '100');
+                                    svgElement.setAttribute('height', '100');
+                                    svgElement.setAttribute('viewBox', '0 0 100 100');
 
-                                    var menu = document.createElement('img');
-                                    menu.classList.add('menu');
-                                    menu.src = 'https://pinkgoose.pythonanywhere.com/static/pngwing.com.png'
-                                    menu.addEventListener('click', function() {
+                                    const circle1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                                    circle1.setAttribute('cx', '30');
+                                    circle1.setAttribute('cy', '30');
+                                    circle1.setAttribute('r', '10');
+
+                                    const circle2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                                    circle2.setAttribute('cx', '30');
+                                    circle2.setAttribute('cy', '55');
+                                    circle2.setAttribute('r', '10');
+
+                                    const circle3 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                                    circle3.setAttribute('cx', '30');
+                                    circle3.setAttribute('cy', '80');
+                                    circle3.setAttribute('r', '10');
+
+                                    svgElement.appendChild(circle1);
+                                    svgElement.appendChild(circle2);
+                                    svgElement.appendChild(circle3);
+
+                                    svgContainer.appendChild(svgElement);
+
+                                    svgContainer.addEventListener('click', function() {
                                         document.getElementById('popup').style.display = 'flex';
                                         document.getElementById('zag').innerHTML = itms['-1'];
 
@@ -101,7 +124,7 @@
                                     var right = document.createElement('div');
                                     right.classList.add('right');
 
-                                    right.appendChild(menu);
+                                    right.appendChild(svgContainer);
                                     
                                     var imgElement = document.createElement('img');
                                     imgElement.classList.add('img');
@@ -145,11 +168,36 @@
 
     </script>
 
+
 <div class="popup" id="popup">
     <div class="popup-content">
       <h2 id="zag">Заголовок</h2>
-      <input type="text" class="inp" placeholder="Введите что-то">
-      <input type="text" class="inp" placeholder="Введите еще что-то">
+      
+      <div id="form">
+        <label for="link">Ссылка:</label>
+        <input type="text" name="link" id="link" required><br>
+        <label id="lnk_error" class="error"></label>
+        <br>
+    
+        <label for="description">Описание:</label>
+        <textarea name="description" id="description" required minlength="10" maxlength="1000" oninput="adjustTextAreaHeight()"></textarea><br>
+        <label id="desc_error" class="error"></label>
+        <br>
+    
+        <label for="category">Категории:</label>
+        <select id="categorySelect" onchange="addCategory(this.value)"></select>
+        <div id="categoryList"></div><br>
+        <label id="cts_error" class="error"></label>
+        <br>
+        
+        <label for="tags">Теги:</label>
+        <input type="text" id="tagInput" oninput="addTagOnComma(this)" placeholder="Добавьте теги через запятую"><br>
+        <div id="tagList"></div><br>
+        <label id="tgs_error" class="error"></label>
+        <br>
+    </div>
+    
+
       <button id="closeButton">Закрыть</button>
     </div>
 </div>

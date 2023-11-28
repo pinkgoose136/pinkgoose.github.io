@@ -203,3 +203,9 @@ select {
     margin-top: 10px;
   }
 
+  svg {
+    height: 30px;
+    width: 30px;
+    margin: 20px;
+    fill: var(--tg-theme-button-color, #0078d4);
+  }
