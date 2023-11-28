@@ -57,14 +57,23 @@
 
          Telegram.WebApp.onEvent('mainButtonClicked', function(){
          let lnk = document.getElementById('link').value; let des = document.getElementById('description').value;
-         let ct = document.getElementById('categoryList').textContent; let t = document.getElementById('tagList').innerHTML;
+         let ct = document.getElementById('categoryList').innerHTML; let t = document.getElementById('tagList').innerHTML;
          let te = t.split('<div class="tag">')
          let tetl = []
          te.forEach(element => {
             tetl.push(element.split('</div>')[0])
          });
          let removedElement = tetl.shift();
-         let tttt = tetl.join(',');
+         let tttt = tetl.join(', ');
+
+
+         let ce = ct.split('<div class="category">')
+         let cetl = []
+         ce.forEach(element => {
+            cetl.push(element.split('</div>')[0])
+         });
+         let cemovedElement = cetl.shift();
+         let cccc = cetl.join(', ');
 
 
          lnke = document.getElementById('lnk_error');  dese = document.getElementById('desc_error');
@@ -96,7 +105,7 @@
              link: lnk,
              desc: des,
              type: aValue,
-             cat: ct,
+             cat: cccc,
              tag: tttt,
              date: formattedDateTime,
              name: "draft"
@@ -106,7 +115,7 @@
             link: lnk,
             desc: des,
             type: aValue,
-            cat: ct,
+            cat: cccc,
             tag: tttt,
         };  
         let keys = Object.keys(valuesList);

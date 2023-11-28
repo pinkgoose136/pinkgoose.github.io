@@ -19,6 +19,7 @@ function addCategory() {
 }
 
 function createTag(existingTags) {
+    var tagList = document.getElementById('tagList');
     existingTags.forEach(element => {
         var tagItem = document.createElement('div');
         tagItem.textContent = element;
@@ -29,6 +30,21 @@ function createTag(existingTags) {
         tagList.appendChild(tagItem);
     });
 }
+
+function createCat(existingTags) {
+    var categoryList = document.getElementById('categoryList');
+
+    existingTags.forEach(element => {
+        var catItem = document.createElement('div');
+        catItem.textContent = element;
+        catItem.classList.add('category');
+        catItem.onclick = function() {
+            categoryList.removeChild(catItem);
+        };
+        categoryList.appendChild(catItem);
+    });
+}
+
 
 function addTagOnComma(inputElement) {
     var tagList = document.getElementById('tagList');

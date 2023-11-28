@@ -74,7 +74,7 @@
                                         case 'name': tex = ''; keyy = '-1'; break;
                                         case 'desc': tex = ''; keyy = '3'; break;
                                         case 'type': tex = ''; keyy = '2'; break;
-                                        case 'cat': tex = "Категории: "; keyy = '4'; break;
+                                        case 'cat': tex = "Категории: "; itms['66'] = valu2; keyy = '4'; break;
                                         case 'tag': tex = "Теги: "; itms['55'] = valu2;  keyy = '5'; break;
                                         case 'img': tex = ""; keyy = '11'; ae = valu2; break;
                                         default: tex = expr; keyy = '0'; break;
@@ -115,8 +115,9 @@
                                         document.getElementById('zag').innerHTML = itms['-1'];
                                         document.getElementById('description').value = itms['3'];
                                         create_drop(itms['2']);
-                                        createTag(itms['55'].split(','));
-                                        
+                                        createTag(itms['55'].split(', '));
+                                        createCat(itms['66'].split(', '));
+
                                         document.getElementById('closeButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
                                         });
