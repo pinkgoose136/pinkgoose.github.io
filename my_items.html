@@ -113,7 +113,9 @@
                                     svgContainer.addEventListener('click', function() {
                                         document.getElementById('popup').style.display = 'flex';
                                         document.getElementById('zag').innerHTML = itms['-1'];
+                                        document.getElementById('description').value = itms['3'];
                                         create_drop(itms['type'])
+                                        
                                         document.getElementById('closeButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
                                         });
@@ -172,14 +174,9 @@
 
 <div class="popup" id="popup">
     <div class="popup-content">
-      <h2 id="zag">Заголовок</h2>
-      
       <div id="form">
-        <label for="link">Ссылка:</label>
-        <input type="text" name="link" id="link" required><br>
-        <label id="lnk_error" class="error"></label>
-        <br>
-    
+        <label id="zag" class="error"></label>
+
         <label for="description">Описание:</label>
         <textarea name="description" id="description" required minlength="10" maxlength="1000" oninput="adjustTextAreaHeight()"></textarea><br>
         <label id="desc_error" class="error"></label>
