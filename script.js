@@ -61,7 +61,7 @@ function create_drop(aaValue){
         options = ['Мемы', 'Известности', 'Тематические', 'Анимированные'];
     }  
 
-    for (var i = 0; i < options.length; i++) {
+    for (let i = 0; i < options.length; i++) {
         var option = document.createElement('option');
         option.text = options[i];
         dropdown.add(option);

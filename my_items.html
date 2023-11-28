@@ -174,26 +174,26 @@
 
 <div class="popup" id="popup">
     <div class="popup-content">
-      <div id="form">
-        <label id="zag" class="error"></label>
 
-        <label for="description">Описание:</label>
-        <textarea name="description" id="description" required minlength="10" maxlength="1000" oninput="adjustTextAreaHeight()"></textarea><br>
-        <label id="desc_error" class="error"></label>
-        <br>
+    <label id="zag" class="error"></label>
+
+    <label for="description">Описание:</label>
+    <textarea name="description" id="description" required minlength="10" maxlength="1000" oninput="adjustTextAreaHeight()"></textarea><br>
+    <label id="desc_error" class="error"></label>
+    <br>
+
+    <label for="category">Категории:</label>
+    <select id="categorySelect" onchange="addCategory(this.value)"></select>
+    <div id="categoryList"></div><br>
+    <label id="cts_error" class="error"></label>
+    <br>
     
-        <label for="category">Категории:</label>
-        <select id="categorySelect" onchange="addCategory(this.value)"></select>
-        <div id="categoryList"></div><br>
-        <label id="cts_error" class="error"></label>
-        <br>
-        
-        <label for="tags">Теги:</label>
-        <input type="text" id="tagInput" oninput="addTagOnComma(this)" placeholder="Добавьте теги через запятую"><br>
-        <div id="tagList"></div><br>
-        <label id="tgs_error" class="error"></label>
-        <br>
-    </div>
+    <label for="tags">Теги:</label>
+    <input type="text" id="tagInput" oninput="addTagOnComma(this)" placeholder="Добавьте теги через запятую"><br>
+    <div id="tagList"></div><br>
+    <label id="tgs_error" class="error"></label>
+    <br>
+
 
 
       <button id="closeButton">Закрыть</button>
