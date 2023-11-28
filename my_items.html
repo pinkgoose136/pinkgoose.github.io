@@ -81,7 +81,8 @@
                                         
                                         itms[keyy] = tex + valu2;
                                     });
-                                    const svgContainer = document.createElement('svgContainer');
+                                    const svgContainer = document.createElement('div');
+                                    svgContainer.classList.add('rght');
                                     const svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
                                     svgElement.setAttribute('width', '100');
                                     svgElement.setAttribute('height', '100');
@@ -124,7 +125,7 @@
                                     var right = document.createElement('div');
                                     right.classList.add('right');
 
-                                    right.appendChild(svgContainer);
+                                    head.appendChild(svgContainer);
                                     
                                     var imgElement = document.createElement('img');
                                     imgElement.classList.add('img');
@@ -196,7 +197,7 @@
         <label id="tgs_error" class="error"></label>
         <br>
     </div>
-    
+
 
       <button id="closeButton">Закрыть</button>
     </div>
