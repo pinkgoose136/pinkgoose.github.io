@@ -63,8 +63,74 @@
          te.forEach(element => {
             tetl.push(element.split('</div>')[0])
          });
-         console.log(tetl)
-         
+         let removedElement = tetl.shift();
+         let tttt = tetl.join(',');
+
+
+         lnke = document.getElementById('lnk_error');  dese = document.getElementById('desc_error');
+         ctse = document.getElementById('cts_error');  tgse = document.getElementById('tgs_error');  
+
+
+         lnke.innerHTML = ''; dese.innerHTML = ''; ctse.innerHTML = ''; tgse.innerHTML = ''
+
+         if (!lnk.startsWith('https://t.me/')){lnke.innerHTML = 'Неверная ссылка'}
+         else if (des.length < 11 ){dese.innerHTML = 'Описание слишком короткое. Минимум 10 символов'} 
+         else if (des.length > 601 ){dese.innerHTML = 'Описание слишком длинное'}
+         else if (String(ct) == '' ){ctse.innerHTML =  'Напишите хотя бы одну категорию'}
+         else if (String(t) == '' ){tgse.innerHTML = 'Выберите хотя бы один тег'}
+         else{
+        lnke.innerHTML = ''; dese.innerHTML = ''; ctse.innerHTML = ''; tgse.innerHTML = ''
+         function getFormattedDateTime() {
+            let currentDate = new Date();
+            let day = String(currentDate.getDate()).padStart(2, '0');
+            let month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Месяц начинается с 0
+            let year = String(currentDate.getFullYear()).slice(2); // Берем последние две цифры года
+            let hours = String(currentDate.getHours()).padStart(2, '0');
+            let minutes = String(currentDate.getMinutes()).padStart(2, '0');
+            let seconds = String(currentDate.getSeconds()).padStart(2, '0');
+            return `${day}${month}${year}${hours}${minutes}${seconds}`;
+        }
+
+        let formattedDateTime = getFormattedDateTime();
+         let data = {
+             link: lnk,
+             desc: des,
+             type: aValue,
+             cat: ct,
+             tag: tttt,
+             date: formattedDateTime,
+             name: "draft"
+         }
+
+         let valuesList = {
+            link: lnk,
+            desc: des,
+            type: aValue,
+            cat: ct,
+            tag: tttt,
+        };  
+        let keys = Object.keys(valuesList);
+        function saveValues(index) {
+            if (index < keys.length) {
+                let key = keys[index];
+                let value = valuesList[key];
+
+                tg.CloudStorage.setItem(String(formattedDateTime) + "-" + key, value, function(err) {
+                    if (err) {
+                        tg.sendData(JSON.stringify({"error": err + String(formattedDateTime) + "-" + key}));
+                        tg.close();
+                    } else {
+                        saveValues(index + 1);
+                    }
+                });
+            } else {
+                tg.sendData(JSON.stringify(data));
+                tg.close();
+            }
+        }
+
+        saveValues(0);
+        }
          });
     </script>
 
