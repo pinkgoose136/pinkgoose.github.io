@@ -69,6 +69,7 @@
                                         let keyParts = key2.split('-');
                                         let tex = "";
                                         let keyy = "";
+                                        keysDiv.id = keyParts[1];
                                         switch (keyParts[2]) {
                                         case 'link': tex = ''; keyy = '1'; break;
                                         case 'name': tex = ''; keyy = '-1'; break;
@@ -127,9 +128,18 @@
                                                 document.getElementById('popup').style.display = 'flex';
                                             });
                                             document.getElementById('delete_yes').addEventListener('click', function() {
-                                                console.log(Object.keys(itemss))
                                                 document.getElementById('delete_popup').style.display = 'none';
-                                                document.getElementById('popup').style.display = 'flex';
+                                                document.getElementById('popup').style.display = 'none';
+                                               // Object.keys(Object.keys(itemss)).forEach(function(key) {
+                                                //    tg.CloudStorage.removeItem(key, function(err) {
+                                                //        if (err) {
+                                                //            console.log('Ошибка удаления элемента с ключом ' + key + ':' + err);
+                                                //        } else {
+                                            //                console.log('Элемент с ключом ' + key + ' успешно удален из хранилища');
+                                             //           }
+                                             //       });
+                                              //  });
+
                                             });
                                         });
 
