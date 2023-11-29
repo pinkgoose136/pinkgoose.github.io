@@ -9,6 +9,7 @@ function addCategory() {
         categoryItem.classList.add('category');
         categoryItem.onclick = function() {
             categoryList.removeChild(categoryItem);
+            categorySelect.value = '';
             categorySelect.options.add(new Option(categoryItem.textContent, categoryItem.textContent));
         };
 
@@ -34,7 +35,9 @@ function createTag(existingTags) {
 
 function createCat(existingTags) {
     var categoryList = document.getElementById('categoryList');
-
+    var categorySelect = document.getElementById('categorySelect');
+    console.log(categorySelect.options);
+    
     existingTags.forEach(element => {
         var catItem = document.createElement('div');
         catItem.textContent = element;
