@@ -184,6 +184,7 @@ select {
         justify-content: center;
         align-items: center;
         display: none;
+        overflow-x: scroll;
     }
   
   .popup-content {
@@ -211,4 +212,9 @@ select {
     width: 30px;
     margin: 20px;
     fill: var(--tg-theme-button-color, #0078d4);
+  }
+
+  #buttons_menu {
+    text-align: center;
+    margin-top: 20px;
   }

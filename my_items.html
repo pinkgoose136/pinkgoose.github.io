@@ -164,15 +164,11 @@
                                                 tg.CloudStorage.setItem(keysLst[key], value, function(err) {
                                                     if (err) {
                                                         console.log('aaa')
-                                                       // tg.sendData(JSON.stringify({"error": err + keysLst[key]}));
-                                                       // tg.close();
                                                     } else {
                                                         saveValues(index + 1);
                                                     }
                                                 });
                                             } else {
-                                                //tg.sendData(JSON.stringify(data));
-                                                //tg.close();
                                                 console.log('ar')
                                             }
                                         }
@@ -193,7 +189,7 @@
                                     var imgElement = document.createElement('img');
                                     imgElement.classList.add('img');
                                     imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
-                                    imgElement.alt = 'Alternative text';
+                                    imgElement.alt = 'Image';
 
 
                                     let title = document.createElement('div');
@@ -255,9 +251,9 @@
     <label id="tgs_error" class="error"></label>
     <br>
         <div id="buttons_menu">
-            <button id="saveButton">Сохранить изменения</button>
-            <button id="closeButton">Закрыть</button>
-            <button id="deleteButton">Удалить</button>
+            <button class="button" id="saveButton">Сохранить изменения</button>
+            <button class="button" id="closeButton">Закрыть</button>
+            <button class="button" id="deleteButton">Удалить</button>
         </div>
       
     </div>

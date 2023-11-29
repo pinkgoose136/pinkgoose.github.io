@@ -2,7 +2,7 @@ function addCategory() {
     var categorySelect = document.getElementById('categorySelect');
     var selectedCategory = categorySelect.options[categorySelect.selectedIndex].value;
     var categoryList = document.getElementById('categoryList');
-
+    categoryList.innerHTML = '';
     if (selectedCategory && categoryList.childElementCount < 3) {
         var categoryItem = document.createElement('div');
         categoryItem.textContent = selectedCategory;
@@ -20,6 +20,7 @@ function addCategory() {
 
 function createTag(existingTags) {
     var tagList = document.getElementById('tagList');
+    tagList.innerHTML = '';
     existingTags.forEach(element => {
         var tagItem = document.createElement('div');
         tagItem.textContent = element;
