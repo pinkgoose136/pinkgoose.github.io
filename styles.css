@@ -211,8 +211,8 @@ svg {
     text-align: center;
 }
 
-.menu_button{
-    width: 70%;
+.menu_button {
+    width: 45%;
     background-color: var(--tg-theme-button-color, #0078d4);
     color: var(--tg-theme-button-text-color, #fff);
     border: none;
@@ -227,4 +227,22 @@ svg {
     background-color: red;
     margin-top: 10px;
     font-size: 9px;
+}
+
+.delete_popup {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    justify-content: center;
+    display: none;
+}
+
+.delete_popup-content {
+    width: 100%;
+    padding: 20px;
+    background: var(--tg-theme-bg-color, #fff);
+    border-radius: 20px;
+    overflow-y: scroll;
 }
