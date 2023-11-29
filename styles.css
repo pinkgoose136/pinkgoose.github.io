@@ -182,6 +182,7 @@ select {
     width: 80%;
     height: 80%;
     justify-content: center;
+    display: none;
 }
   
   .popup-content {
@@ -211,7 +212,7 @@ select {
     margin-top: 20px;
   }
   
-  .button2{
+  .menu_button{
     width: 70%;
     background-color: var(--tg-theme-button-color, #0078d4);
     color: var(--tg-theme-button-text-color, #fff);
