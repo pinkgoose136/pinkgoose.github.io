@@ -198,12 +198,6 @@ select {
     padding: 8px;
     width: 200px;
   }
-  
-  #closeButton {
-    padding: 8px 20px;
-    font-size: 16px;
-    margin-top: 10px;
-  }
 
   svg {
     height: 30px;
@@ -217,7 +211,7 @@ select {
     margin-top: 20px;
   }
   
-  .buttons2{
+  .button2{
     width: 70%;
     background-color: var(--tg-theme-button-color, #0078d4);
     color: var(--tg-theme-button-text-color, #fff);
@@ -228,6 +222,7 @@ select {
     margin: 0 0 10px 0;
     font-size: 12px;
   }
+
   #top_btns_menu{
     width: 80%;
   }
