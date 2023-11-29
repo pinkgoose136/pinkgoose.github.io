@@ -92,7 +92,7 @@ function create_drop(aaValue, exclude){
     else if (aaValue === 'stickers' || aaValue === 'emoji') {
         options = ['Мемы', 'Известности', 'Тематические', 'Анимированные'];
     }  
-    option = option.filter(item => !exclude.includes(item));
+    options = options.filter(item => !exclude.includes(item));
 
     for (let i = 0; i < options.length; i++) {
         var option = document.createElement('option');
