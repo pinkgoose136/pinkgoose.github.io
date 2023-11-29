@@ -118,7 +118,7 @@
                                         createTag(itms['55'].split(', '));
                                         createCat(itms['66'].split(', '));
 
-                                        document.getElementById('closeButton').addEventListener('click', function() {
+                                        document.getElementById('closeeButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
                                         });
                                         document.getElementById('saveButton').addEventListener('click', function() {
@@ -251,8 +251,11 @@
     <label id="tgs_error" class="error"></label>
     <br>
         <div id="buttons_menu">
-            <button class="button" id="saveButton">Сохранить изменения</button>
-            <button class="button" id="closeButton">Закрыть</button>
+            <div id="top_btns_menu">
+                <button class="button" id="saveButton">Сохранить изменения</button>
+                <button class="button" id="closeeButton">Отменить изменения</button>
+            </div>
+            
             <button class="button" id="deleteButton">Удалить</button>
         </div>
       

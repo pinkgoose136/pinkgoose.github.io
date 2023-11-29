@@ -175,23 +175,21 @@ select {
     height: 30px;
 }
 
-    .popup {
-        position: fixed;
-        top: 10%;
-        left: 10%;
-        width: 80%;
-        height: 80%;
-        justify-content: center;
-        align-items: center;
-        display: none;
-        overflow-x: scroll;
-    }
+.popup {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    justify-content: center;
+}
   
   .popup-content {
     width: 100%;
     padding: 20px;
     background: var(--tg-theme-bg-color, #fff);
     border-radius: 20px;
+    overflow-y: scroll;
     }
   
   .inp {
@@ -217,4 +215,19 @@ select {
   #buttons_menu {
     text-align: center;
     margin-top: 20px;
+  }
+  
+  .buttons2{
+    width: 70%;
+    background-color: var(--tg-theme-button-color, #0078d4);
+    color: var(--tg-theme-button-text-color, #fff);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0 0 10px 0;
+    font-size: 12px;
+  }
+  #top_btns_menu{
+    width: 80%;
   }
