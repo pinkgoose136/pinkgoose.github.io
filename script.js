@@ -37,7 +37,7 @@ function createCat(existingTags) {
     var categoryList = document.getElementById('categoryList');
     var categorySelect = document.getElementById('categorySelect');
     console.log(categorySelect.options);
-    
+
     existingTags.forEach(element => {
         var catItem = document.createElement('div');
         catItem.textContent = element;
@@ -76,7 +76,7 @@ function adjustTextAreaHeight() {
     textarea.style.height = newHeight + "px";
 }
 
-function create_drop(aaValue){
+function create_drop(aaValue, exclude){
     var dropdown = document.getElementById('categorySelect');
     var options;
 
@@ -92,6 +92,7 @@ function create_drop(aaValue){
     else if (aaValue === 'stickers' || aaValue === 'emoji') {
         options = ['Мемы', 'Известности', 'Тематические', 'Анимированные'];
     }  
+    option = option.filter(item => !exclude.includes(item));
 
     for (let i = 0; i < options.length; i++) {
         var option = document.createElement('option');

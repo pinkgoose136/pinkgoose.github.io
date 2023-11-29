@@ -114,7 +114,7 @@
                                         document.getElementById('popup').style.display = 'flex';
                                         document.getElementById('zag').innerHTML = itms['-1'];
                                         document.getElementById('description').value = itms['3'];
-                                        create_drop(itms['2']);
+                                        create_drop(itms['2'], itms['66'].split(', '));
                                         createTag(itms['55'].split(', '));
                                         createCat(itms['66'].split(', '));
                                         
@@ -280,8 +280,8 @@
     <div class="delete_popup-content">
     <label id="zag" class="error">Вы уверены, что хотите удалить данный элемент из каталога? Восстановить его будет невозможно</label>
         <div id="delete_buttons_menu">
-            <button class="menu_button" id="delete_yes" style="color: red;">Да</button>
-            <button class="menu_button" id="delete_no" style="color: greenyellow;">Нет</button>
+            <button class="menu_button" id="delete_yes" style="background-color: red;">Да</button>
+            <button class="menu_button" id="delete_no" style="background-color: greenyellow;">Нет</button>
         </div>
     </div>
 </div>

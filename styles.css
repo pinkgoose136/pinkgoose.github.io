@@ -231,7 +231,7 @@ svg {
 
 .delete_popup {
     position: fixed;
-    top: 10%;
+    top: 30%;
     left: 10%;
     width: 80%;
     justify-content: center;
