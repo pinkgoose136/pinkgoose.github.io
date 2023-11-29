@@ -184,35 +184,35 @@ select {
     justify-content: center;
     display: none;
 }
-  
-  .popup-content {
+
+.popup-content {
     width: 100%;
     padding: 20px;
     background: var(--tg-theme-bg-color, #fff);
     border-radius: 20px;
     overflow-y: scroll;
-    }
-  
-  .inp {
+}
+
+.inp {
     display: block;
     margin: 10px 0;
     padding: 8px;
     width: 200px;
-  }
+}
 
-  svg {
+svg {
     height: 30px;
     width: 30px;
     margin: 20px;
     fill: var(--tg-theme-button-color, #0078d4);
-  }
+}
 
-  #buttons_menu {
+#buttons_menu {
     text-align: center;
     margin-top: 20px;
-  }
-  
-  .menu_button{
+}
+
+.menu_button{
     width: 70%;
     background-color: var(--tg-theme-button-color, #0078d4);
     color: var(--tg-theme-button-text-color, #fff);
@@ -222,8 +222,8 @@ select {
     cursor: pointer;
     margin: 0 0 10px 0;
     font-size: 12px;
-  }
+}
 
-  #top_btns_menu{
+#top_btns_menu{
     width: 80%;
-  }
+}
