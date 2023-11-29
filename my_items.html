@@ -119,11 +119,17 @@
                                         createCat(itms['66'].split(', '));
                                         
                                         document.getElementById('deleteButton').addEventListener('click', function() {
-                                            console.log(Object.keys(itemss))
+                                            document.getElementById('popup').style.display = 'none';
                                             document.getElementById('delete_popup').style.display = 'flex';
                                             
-                                            document.getElementById('delete_yes').addEventListener('click', function() {
+                                            document.getElementById('delete_no').addEventListener('click', function() {
                                                 document.getElementById('delete_popup').style.display = 'none';
+                                                document.getElementById('popup').style.display = 'flex';
+                                            });
+                                            document.getElementById('delete_yes').addEventListener('click', function() {
+                                                console.log(Object.keys(itemss))
+                                                document.getElementById('delete_popup').style.display = 'none';
+                                                document.getElementById('popup').style.display = 'flex';
                                             });
                                         });
 
@@ -268,14 +274,14 @@
         </div>
       
     </div>
+</div>
 
-    <div class="delete_popup" id="delete_popup">
-        <div class="delete_popup-content">
-        <label id="zag" class="error">Вы уверены, что хотите удалить элемент?</label>
-            <div id="delete_buttons_menu">
-                <button class="menu_button" id="delete_yes">Да</button>
-                <button class="menu_button" id="delete_no">Нет</button>
-            </div>
+<div class="delete_popup" id="delete_popup">
+    <div class="delete_popup-content">
+    <label id="zag" class="error">Вы уверены, что хотите удалить данный элемент из каталога? Восстановить его будет невозможно</label>
+        <div id="delete_buttons_menu">
+            <button class="menu_button" id="delete_yes" style="color: red;">Да</button>
+            <button class="menu_button" id="delete_no" style="color: greenyellow;">Нет</button>
         </div>
     </div>
 </div>

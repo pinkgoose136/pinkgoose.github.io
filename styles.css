@@ -234,7 +234,6 @@ svg {
     top: 10%;
     left: 10%;
     width: 80%;
-    height: 80%;
     justify-content: center;
     display: none;
 }
@@ -244,5 +243,4 @@ svg {
     padding: 20px;
     background: var(--tg-theme-bg-color, #fff);
     border-radius: 20px;
-    overflow-y: scroll;
 }
