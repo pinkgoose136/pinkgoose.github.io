@@ -131,7 +131,7 @@
                                                 document.getElementById('delete_popup').style.display = 'none';
                                                 document.getElementById('popup').style.display = 'none';
                                                 let itmsdel = Object.keys(itemss)
-                                                Object.keys(itmsdel).forEach(function(key) {
+                                                itmsdel.forEach(function(key) {
                                                     tg.CloudStorage.removeItem(key, function(err) {
                                                         if (err) {
                                                             console.log('Ошибка удаления элемента с ключом ' + key + ':' + err);
@@ -140,7 +140,7 @@
                                                         }
                                                     });
                                                 });
-                                                let Itmsdel2 = document.getElementById(Itmsdel2[0].split('-')[1]);
+                                                let Itmsdel2 = document.getElementById(itmsdel[0].split('-')[1]);
                                                 Itmsdel2.remove();
                                             });
                                         });
