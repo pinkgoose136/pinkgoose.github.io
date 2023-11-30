@@ -60,14 +60,14 @@
         tg.expand();
 
         function generate(sear){
-            console.log(sear)
-
+            let keysListDiv = document.getElementById('keysList');
+            keysListDiv.innerHTML = "";
             tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
             } else {
                 tg.CloudStorage.getItems(keys, function(err, items) {
-                    console.log(items)
+                    console.log(Object.values(items))
                     if (err) {
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                     } else {
@@ -88,7 +88,6 @@
                             }
                         });
 
-                        let keysListDiv = document.getElementById('keysList');
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let keysDiv = document.createElement('div');
                             keysDiv.classList.add('item');

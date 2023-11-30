@@ -293,10 +293,11 @@ svg {
     cursor: pointer;
   }
 
-  #keysList {
+#keysList {
     position: fixed;
     top: 10%;
     padding: 5%;
     background: var(--tg-theme-bg-color, #fff);
     height: 80%;
+    overflow-x: scroll;
 }
