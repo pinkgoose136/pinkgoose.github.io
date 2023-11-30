@@ -262,7 +262,8 @@ svg {
     border-radius: 10px;
     background-color: var(--tg-theme-bg-color, #fff);
     border: 1px solid #ccc;
-}
+    color: var(--tg-theme-text-color, #333);
+}   
 
   #additional_sets {
     display: flex;
@@ -292,10 +293,10 @@ svg {
     cursor: pointer;
   }
 
-#keysList {
+  #keysList {
     position: fixed;
-    bottom: 10%;
+    top: 10%;
     padding: 5%;
     background: var(--tg-theme-bg-color, #fff);
-    height: 85%;
+    height: 80%;
 }
