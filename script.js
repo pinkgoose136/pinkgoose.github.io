@@ -35,7 +35,7 @@ function createTag(existingTags) {
 function createCat(existingTags) {
     var categoryList = document.getElementById('categoryList');
     var categorySelect = document.getElementById('categorySelect');
-
+    categoryList.innerHTML = '';
     existingTags.forEach(element => {
         var catItem = document.createElement('div');
         catItem.textContent = element;

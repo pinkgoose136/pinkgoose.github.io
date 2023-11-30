@@ -244,3 +244,51 @@ svg {
     background: var(--tg-theme-bg-color, #fff);
     border-radius: 20px;
 }
+
+
+
+#head_search {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #f2f2f2;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #search {
+    padding: 8px;
+    font-size: 16px;
+    width: 70%;
+  }
+  
+  #additional_sets {
+    display: flex;
+    align-items: center;
+  }
+  
+  #categoryList {
+    margin-left: 20px;
+  }
+  
+  #bottom_types {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f2f2f2;
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .item_type {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  

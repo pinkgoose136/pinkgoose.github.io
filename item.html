@@ -90,7 +90,7 @@
                     ssil.textContent = name; 
                     title.appendChild(ssil);
                     var desc = document.createElement('div');
-                    desc.textContent = itms['3']; 
+                    desc.textContent = itms['3'].split(', ').join(' #'); 
 
                     left.appendChild(imgElement);
                     right.appendChild(title);
