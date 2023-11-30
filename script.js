@@ -8,8 +8,8 @@ function addCategory() {
         categoryItem.classList.add('category');
         categoryItem.onclick = function() {
             categoryList.removeChild(categoryItem);
-            categorySelect.value = '';
             categorySelect.options.add(new Option(categoryItem.textContent, categoryItem.textContent));
+            categorySelect.value = '';
         };
 
         categoryList.appendChild(categoryItem);
