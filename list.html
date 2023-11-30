@@ -8,15 +8,14 @@
 <body>
     <div id="head_search">
         <input id="search">
-
-        <div id="additional_sets">
+        <button id="toggleButton">Раскрыть/Скрыть</button>
+        <div id="additional_sets" style="display: none;">
             <label for="category">Категории:</label>
             <select id="categorySelect" onchange="addCategory(this.value)"></select>
             <div id="categoryList"></div><br>
         </div>
-
     </div>
-
+    <div id="keysList"></div>
     <div id="bottom_types">
         <div class="item_type">Каналы</div>
         <div class="item_type">Группы</div>
@@ -25,7 +24,6 @@
         <div class="item_type">Эмодзи</div>
     </div>
 
-    <div id="keysList"></div>
     <h2 id="opa"></h2>
     <h3 id="sus"></h3>
     <script>
@@ -40,6 +38,16 @@
         }
 
         var aValue = getParameterByName('type');
+
+        document.getElementById('toggleButton').addEventListener('click', function() {
+            var additionalSets = document.getElementById('additional_sets');
+            if (additionalSets.style.display === 'none') {
+                additionalSets.style.display = 'block';
+            } else {
+                additionalSets.style.display = 'none';
+            }
+        });
+
 
     </script>
 

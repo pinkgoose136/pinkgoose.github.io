@@ -23,11 +23,6 @@ h1 {
     display: inline-block;
 }
 
-#keysList {
-    padding: 5%;
-    background: var(--tg-theme-bg-color, #fff);
-}
-
 label {
     display: block;
     margin: 10px 0;
@@ -256,13 +251,14 @@ svg {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+    height: 10%;
+}
   
-  #search {
+#search {
     padding: 8px;
     font-size: 16px;
     width: 70%;
-  }
+}
   
   #additional_sets {
     display: flex;
@@ -281,6 +277,7 @@ svg {
     display: flex;
     overflow-x: auto;
     white-space: nowrap;
+    height: 5%;
   }
   
   .item_type {
@@ -291,4 +288,8 @@ svg {
     cursor: pointer;
   }
 
-  
+#keysList {
+    padding: 5%;
+    background: var(--tg-theme-bg-color, #fff);
+    height: 85%;
+}
