@@ -9,6 +9,7 @@ function addCategory() {
         categoryItem.onclick = function() {
             categoryList.removeChild(categoryItem);
             categorySelect.options.add(new Option(categoryItem.textContent, categoryItem.textContent));
+            categorySelect.options.add(new Option(categoryItem.textContent, categoryItem.textContent));
             categorySelect.value = '';
         };
 
