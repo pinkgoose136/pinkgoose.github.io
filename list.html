@@ -67,7 +67,6 @@
                 document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
             } else {
                 tg.CloudStorage.getItems(keys, function(err, items) {
-                    console.log(Object.values(items))
                     if (err) {
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                     } else {
@@ -118,7 +117,8 @@
                                         
                                         itms[keyy] = tex + valu2;
                                     });
-                                    
+
+                                    function ge(){
                                     var head = document.createElement('div');
                                     head.classList.add('head');
                                     var left = document.createElement('div');
@@ -158,6 +158,17 @@
                                         }
                                     });
                                     keysListDiv.appendChild(keysDiv);
+                                    }
+
+                                    if (sear != 0){
+                                        if (itms['-1'].includes(sear)){
+                                            ge()
+                                        }
+                                    }
+                                    else{
+                                        ge()
+                                    }
+                                    
                                 }
                             });
                         });
