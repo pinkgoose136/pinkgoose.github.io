@@ -2,7 +2,6 @@ function addCategory() {
     var categorySelect = document.getElementById('categorySelect');
     var selectedCategory = categorySelect.options[categorySelect.selectedIndex].value;
     var categoryList = document.getElementById('categoryList');
-    categorySelect.value = '';
     if (selectedCategory && categoryList.childElementCount < 3) {
         var categoryItem = document.createElement('div');
         categoryItem.textContent = selectedCategory;
