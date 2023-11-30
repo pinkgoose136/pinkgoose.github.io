@@ -9,7 +9,6 @@ function addCategory() {
         categoryItem.onclick = function() {
             categoryList.removeChild(categoryItem);
             categorySelect.options.add(new Option(categoryItem.textContent, categoryItem.textContent));
-            categorySelect.options.add(new Option(categoryItem.textContent, categoryItem.textContent));
             categorySelect.value = '';
         };
 
@@ -43,6 +42,7 @@ function createCat(existingTags) {
         catItem.classList.add('category');
         catItem.onclick = function() {
             categoryList.removeChild(catItem);
+            categorySelect.options.add(new Option(catItem.textContent, catItem.textContent));
             categorySelect.value = '';
         };
         categoryList.appendChild(catItem);
