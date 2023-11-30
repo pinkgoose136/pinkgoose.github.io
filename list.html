@@ -7,7 +7,7 @@
 </head>
 <body>
     <div id="head_search">
-        <input id="search">
+        <input id="search" oninput="searchInput(this)" placeholder="Введите запрос">
         <button id="toggleButton">Раскрыть/Скрыть</button>
         <div id="additional_sets" style="display: none;">
             <label for="category">Категории:</label>
@@ -48,6 +48,10 @@
             }
         });
 
+        function searchInput(){
+            var tagText = inputElement.value.slice(0, -1);
+            generate(tagText)
+        }
 
     </script>
 
@@ -55,11 +59,15 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
-        tg.CloudStorage.getKeys(function(err, keys) {
+        function generate(sear){
+            console.log(sear)
+
+            tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
             } else {
                 tg.CloudStorage.getItems(keys, function(err, items) {
+                    console.log(items)
                     if (err) {
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                     } else {
@@ -158,6 +166,8 @@
                 });
             }
         });
+        }
+        generate(0)
 
     </script>
 
