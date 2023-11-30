@@ -130,17 +130,18 @@
                                             document.getElementById('delete_yes').addEventListener('click', function() {
                                                 document.getElementById('delete_popup').style.display = 'none';
                                                 document.getElementById('popup').style.display = 'none';
-                                                console.log(Object.keys(itemss))
-                                               // Object.keys(Object.keys(itemss)).forEach(function(key) {
-                                                //    tg.CloudStorage.removeItem(key, function(err) {
-                                                //        if (err) {
-                                                //            console.log('Ошибка удаления элемента с ключом ' + key + ':' + err);
-                                                //        } else {
-                                            //                console.log('Элемент с ключом ' + key + ' успешно удален из хранилища');
-                                             //           }
-                                             //       });
-                                              //  });
-
+                                                let itmsdel = Object.keys(itemss)
+                                                Object.keys(itmsdel).forEach(function(key) {
+                                                    tg.CloudStorage.removeItem(key, function(err) {
+                                                        if (err) {
+                                                            console.log('Ошибка удаления элемента с ключом ' + key + ':' + err);
+                                                        } else {
+                                                            console.log('Элемент с ключом ' + key + ' успешно удален из хранилища');
+                                                        }
+                                                    });
+                                                });
+                                                let Itmsdel2 = document.getElementById(Itmsdel2[0].split('-')[1]);
+                                                Itmsdel2.remove();
                                             });
                                         });
 
