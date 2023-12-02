@@ -78,6 +78,7 @@ function adjustTextAreaHeight() {
 
 function create_drop(aaValue, exclude){
     var dropdown = document.getElementById('categorySelect');
+    dropdown.innerHTML = '';
     var options;
 
     if (aaValue === 'channels' ) {

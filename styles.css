@@ -170,7 +170,12 @@ select {
     height: 30px;
 }
 
-.popup {
+.popup{
+    border: 2px solid var(--tg-theme-link-color, #0078d4);;
+    border-radius: 15px;
+}
+
+#popup {
     position: fixed;
     top: 10%;
     left: 10%;
@@ -222,9 +227,6 @@ svg {
     background-color: red;
     margin-top: 10px;
     font-size: 9px;
-}
-
-.delete_popup {
     position: fixed;
     top: 30%;
     left: 10%;
@@ -233,13 +235,12 @@ svg {
     display: none;
 }
 
-.delete_popup-content {
+#delete_popup-content {
     width: 100%;
     padding: 20px;
     background: var(--tg-theme-bg-color, #fff);
     border-radius: 20px;
 }
-
 
 
 #head_search {
