@@ -7,7 +7,6 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <div id="close"></div>
     <div id="keysList"></div>
     <h2 id="opa"></h2>
     <h3 id="sus"></h3>
@@ -124,6 +123,7 @@
                                         document.getElementById('deleteButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
                                             document.getElementById('delete_popup').style.display = 'flex';
+                                            document.getElementById('delete_popup').style.position = 'fixed';
                                             
                                             document.getElementById('delete_no').addEventListener('click', function() {
                                                 document.getElementById('delete_popup').style.display = 'none';
@@ -131,6 +131,8 @@
                                             });
                                             document.getElementById('delete_yes').addEventListener('click', function() {
                                                 document.getElementById('delete_popup').style.display = 'none';
+                                                document.getElementById('delete_popup').style.position = 'relative';
+                                            
                                                 document.getElementById('popup').style.display = 'none';
                                                 let itmsdel = Object.keys(itemss)
                                                 itmsdel.forEach(function(key) {
@@ -299,6 +301,8 @@
         </div>
     </div>
 </div>
+
+<div id="close"></div>
 
 </body>
 </html>

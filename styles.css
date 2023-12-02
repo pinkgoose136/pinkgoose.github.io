@@ -173,6 +173,7 @@ select {
 .popup{
     border: 2px solid var(--tg-theme-link-color, #0078d4);;
     border-radius: 15px;
+    z-index: 1011;
 }
 
 #popup {
@@ -313,10 +314,10 @@ svg {
 
 
 #close {
-    width: 100vh;
-    height: 100vh;
-    background-color: #393939a6;
+    width: 100%;
+    height: 100%;
+    background-color: #73737363;
     position: relative;
-    z-index: 9999;
+    z-index: 999;
     display: none;
 }
