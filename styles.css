@@ -251,9 +251,6 @@ svg {
     top: 0;
     width: 100%;
     background-color: var(--tg-theme-secondary-bg-color, #f5f5f5);
-    justify-content: space-between;
-    align-items: center;
-    height: fit-content;
     z-index: 999;
 }
 
@@ -296,16 +293,13 @@ svg {
     cursor: pointer;
   }
 
-#keysList {
-    position: fixed;
-    top: 20%;
+  #keysList {
+    margin-top: 20%;
     padding: 5%;
     background: var(--tg-theme-bg-color, #fff);
     height: 70%;
     overflow-x: scroll;
-    bottom: 10%;
 }
-
 #keysList2 {
     padding: 5%;
     background: var(--tg-theme-bg-color, #fff);
