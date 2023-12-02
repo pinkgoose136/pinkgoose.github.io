@@ -251,11 +251,10 @@ svg {
     top: 0;
     width: 100%;
     background-color: var(--tg-theme-secondary-bg-color, #f5f5f5);
-    padding: 10px;
-    display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 10%;
+    height: fit-content;
+    z-index: 999;
 }
 
 #search {
@@ -299,17 +298,20 @@ svg {
 
 #keysList {
     position: fixed;
-    top: 10%;
+    top: 20%;
     padding: 5%;
     background: var(--tg-theme-bg-color, #fff);
-    height: 80%;
+    height: 70%;
     overflow-x: scroll;
+    bottom: 10%;
 }
 
 #keysList2 {
     padding: 5%;
     background: var(--tg-theme-bg-color, #fff);
     overflow-x: scroll;
+    position: fixed;
+    height: 100%;
 }
 
 #close {
