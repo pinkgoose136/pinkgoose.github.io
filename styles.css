@@ -312,6 +312,11 @@ svg {
     overflow-x: scroll;
 }
 
+#keysList2 {
+    padding: 5%;
+    background: var(--tg-theme-bg-color, #fff);
+    overflow-x: scroll;
+}
 
 #close {
     width: 100%;
