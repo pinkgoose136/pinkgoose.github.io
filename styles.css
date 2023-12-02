@@ -235,13 +235,21 @@ svg {
     display: none;
 }
 
+#delete_popup {
+    position: fixed;
+    top: 30%;
+    left: 10%;
+    width: 80%;
+    justify-content: center;
+    display: none;
+}
+
 #delete_popup-content {
     width: 100%;
     padding: 20px;
     background: var(--tg-theme-bg-color, #fff);
     border-radius: 20px;
 }
-
 
 #head_search {
     position: fixed;
