@@ -228,12 +228,6 @@ svg {
     background-color: red;
     margin-top: 10px;
     font-size: 9px;
-    position: fixed;
-    top: 30%;
-    left: 10%;
-    width: 80%;
-    justify-content: center;
-    display: none;
 }
 
 #delete_popup {
