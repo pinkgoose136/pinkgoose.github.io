@@ -310,3 +310,13 @@ svg {
     height: 80%;
     overflow-x: scroll;
 }
+
+
+#close {
+    width: 100vh;
+    height: 100vh;
+    background-color: #393939a6;
+    position: relative;
+    z-index: 9999;
+    display: none;
+}
