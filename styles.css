@@ -172,7 +172,7 @@ select {
 
 .popup{
     border: 2px solid var(--tg-theme-link-color, #0078d4);;
-    border-radius: 15px;
+    border-radius: 20px;
     z-index: 1011;
 }
 
