@@ -114,7 +114,7 @@
 
                                     svgContainer.addEventListener('click', function() {
                                         document.getElementById('popup').style.display = 'flex';
-                                        document.getElementById('close').style.display = 'flex';
+                                        document.getElementById('close').style.position = 'relative';
                                         document.getElementById('zag').innerHTML = itms['-1'];
                                         document.getElementById('description').value = itms['3'];
                                         create_drop(itms['2'], itms['66'].split(', '));
@@ -124,7 +124,8 @@
                                         document.getElementById('deleteButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
                                             document.getElementById('close').style.position = 'fixed';
-                                            
+                                            document.getElementById('delete_popup').style.display = 'flex';
+
                                             document.getElementById('delete_no').addEventListener('click', function() {
                                                 document.getElementById('delete_popup').style.display = 'none';
                                                 document.getElementById('popup').style.display = 'flex';
