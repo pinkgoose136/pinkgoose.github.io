@@ -123,18 +123,17 @@
                                         
                                         document.getElementById('deleteButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
-                                            document.getElementById('delete_popup').style.display = 'flex';
-                                            document.getElementById('delete_popup').style.position = 'fixed';
+                                            document.getElementById('close').style.position = 'fixed';
                                             
                                             document.getElementById('delete_no').addEventListener('click', function() {
                                                 document.getElementById('delete_popup').style.display = 'none';
                                                 document.getElementById('popup').style.display = 'flex';
+                                                document.getElementById('close').style.position = 'relative';
                                             });
                                             document.getElementById('delete_yes').addEventListener('click', function() {
-                                                document.getElementById('delete_popup').style.display = 'none';
-                                                document.getElementById('delete_popup').style.position = 'relative';
-                                            
+                                                document.getElementById('close').style.position = 'relative';
                                                 document.getElementById('popup').style.display = 'none';
+                                                document.getElementById('delete_popup').style.display = 'none';
                                                 let itmsdel = Object.keys(itemss)
                                                 itmsdel.forEach(function(key) {
                                                     tg.CloudStorage.removeItem(key, function(err) {
@@ -152,7 +151,7 @@
 
                                         document.getElementById('closeButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
-                                            document.getElementById('close').style.display = 'none';
+                                            document.getElementById('close').style.position = 'relative';
                                         });
                                         document.getElementById('saveButton').addEventListener('click', function() {
                                             let des = document.getElementById('description').value;
