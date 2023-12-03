@@ -267,11 +267,10 @@
                     categoryList.removeChild(categoryItem);
                     categorySelect.options.add(new Option(categoryItem.textContent, categoryItem.textContent));
                     categorySelect.value = '';
-
                     let ce = ct.split('<div class="category">')
                     let cetl = []
                     ce.forEach(element => {
-                        cetl.push(element)
+                        cetl.push(element.split('</div>')[0])
                     });
                     generate(0, selectedValue, cetl)
                 };
@@ -282,8 +281,11 @@
 
                 let ce = ct.split('<div class="category">')
                 let cetl = []
+                console.log(ct)
+                console.log(ce)
+                
                 ce.forEach(element => {
-                    cetl.push(element)
+                    cetl.push(element.split('</div>')[0])
                 });
                 generate(0, selectedValue, cetl)
 
