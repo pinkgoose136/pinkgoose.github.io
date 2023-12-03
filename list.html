@@ -4,6 +4,7 @@
     <title>Telegram Explorer</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div id="head_search">
@@ -99,13 +100,13 @@
                 selectedValue = radio.value;
                 }
             });
-
             generate(tagText, selectedValue)
         }
 
         const radioButtons = document.querySelectorAll('input[type="radio"]');
         radioButtons.forEach((radio) => {
             radio.addEventListener('change', (event) => {
+                create_drop(event.target.value, [])
                 generate(0, event.target.value)
             });
         });
@@ -238,6 +239,7 @@
             }
         });
         }
+        create_drop('channels', [])
         generate(0, 'channels')
 
     </script>
