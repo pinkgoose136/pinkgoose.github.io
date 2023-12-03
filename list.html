@@ -271,7 +271,7 @@
                     let ce = ct.split('<div class="category">')
                     let cetl = []
                     ce.forEach(element => {
-                        cetl.push(element.replace('</div>', ''))
+                        cetl.push(element)
                     });
                     generate(0, selectedValue, cetl)
                 };
@@ -282,9 +282,8 @@
 
                 let ce = ct.split('<div class="category">')
                 let cetl = []
-                console.log(ce)
                 ce.forEach(element => {
-                    cetl.push(element.replace('</div>', ''))
+                    cetl.push(element)
                 });
                 generate(0, selectedValue, cetl)
 
