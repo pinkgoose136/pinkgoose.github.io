@@ -331,7 +331,7 @@ label {
 }
 
 input[type="radio"]:checked + label {
-  background-color: var(--tg-theme-link-color, #0078d4);;
+  background-color: var(--tg-theme-link-color, #0078d4);
   color: var(--tg-theme-button-text-color, #fff);
 }
 

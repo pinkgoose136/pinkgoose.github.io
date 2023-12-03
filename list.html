@@ -8,9 +8,16 @@
 <body>
     <div id="head_search">
         <div class="container">
-            <img class="left-button" src="https://pinkgoose.pythonanywhere.com/static/search.png">
+            <svg  class="left-button"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle id="ccircle" cx="11" cy="11" r="8" />
+                <line id="cline" x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+
             <input id="search" class="input-field" oninput="searchInput(this)" placeholder="Введите запрос">
-            <img class="right-button" id="toggleButton" src="https://pinkgoose.pythonanywhere.com/static/strelka.png">
+
+            <svg class="right-button" id="toggleButton"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline id="cpolyline" points="9 18 15 12 9 6" />
+            </svg>
         </div>
 
         <div id="additional_sets" style="display: none;">
@@ -50,6 +57,15 @@
     <h2 id="opa"></h2>
     <h3 id="sus"></h3>
     <script>
+        let circle = document.getElementById('ccircle');
+        circle.setAttribute('fill', 'var(--tg-theme-link-color, #0078d4)');
+
+        let line = document.getElementById('cline');
+        line.setAttribute('fill', 'var(--tg-theme-link-color, #0078d4)');
+
+        let polyline = document.getElementById('cpolyline');
+        polyline.setAttribute('fill', 'var(--tg-theme-link-color, #0078d4)');
+
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
             name = name.replace(/[\[\]]/g, '\\$&');
@@ -64,9 +80,9 @@
 
         document.getElementById('toggleButton').addEventListener('click', function() {
             var additionalSets = document.getElementById('additional_sets');
+            this.classList.toggle('rotated');
             if (additionalSets.style.display === 'none') {
                 additionalSets.style.display = 'block';
-                this.classList.toggle('rotated');
             } else {
                 additionalSets.style.display = 'none';
             }
