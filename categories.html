@@ -41,10 +41,11 @@
 
                         Object.keys(items).forEach(function(key) {
                             let kese = document.getElementById('keyse')
+                            kese.innerHTML = '';
                             var head = document.createElement('div');
                             var inp = document.createElement('input');
                             var btn = document.createElement('button');
-                            inp.innerHTML = String(items[key]);
+                            inp.value = String(items[key]);
                             inp.id = String(key) + '-inp';
                             btn.id = String(key);
                             btn.innerHTML = "Refresh";
