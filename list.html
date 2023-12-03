@@ -17,11 +17,11 @@
     </div>
     <div id="keysList"></div>
     <div id="bottom_types">
-        <div class="item_type">Каналы</div>
-        <div class="item_type">Группы</div>
-        <div class="item_type">Боты</div>
-        <div class="item_type">Стикерпаки</div>
-        <div class="item_type">Эмодзи</div>
+        <div class="item_type" onclick="showCategory('channels')">Каналы</div>
+        <div class="item_type" onclick="showCategory('groups')">Группы</div>
+        <div class="item_type" onclick="showCategory('bots')">Боты</div>
+        <div class="item_type" onclick="showCategory('stickers')">Стикерпаки</div>
+        <div class="item_type" onclick="showCategory('emoji')">Эмодзи</div>
     </div>
 
     <h2 id="opa"></h2>
@@ -53,13 +53,17 @@
             generate(tagText)
         }
 
+        function showCategory(type){
+            generate(0, type)
+        }
+
     </script>
 
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
 
-        function generate(sear){
+        function generate(sear, type){
             let keysListDiv = document.getElementById('keysList');
             keysListDiv.innerHTML = "";
             tg.CloudStorage.getKeys(function(err, keys) {
@@ -107,7 +111,7 @@
                                         case 'link': tex = ''; keyy = '1'; break;
                                         case 'name': tex = ''; keyy = '-1'; break;
                                         case 'desc': tex = ''; keyy = '3'; break;
-                                        case 'type': tex = "Тип: "; keyy = '2'; break;
+                                        case 'type': tex = ""; keyy = '2'; break;
                                         case 'cat': tex = "Категории: "; keyy = '4'; break;
                                         case 'tag': tex = "Теги: "; keyy = '5'; break;
                                         case 'owner': tex = "Айди автора: "; keyy = '6'; break;
@@ -117,60 +121,60 @@
                                         
                                         itms[keyy] = tex + valu2;
                                     });
+                                    if (itms['2'] == type){
+                                        function ge(){
+                                            var head = document.createElement('div');
+                                            head.classList.add('head');
+                                            var left = document.createElement('div');
+                                            left.classList.add('left');
+                                            var right = document.createElement('div');
+                                            right.classList.add('right');
 
-                                    function ge(){
-                                    var head = document.createElement('div');
-                                    head.classList.add('head');
-                                    var left = document.createElement('div');
-                                    left.classList.add('left');
-                                    var right = document.createElement('div');
-                                    right.classList.add('right');
-
-                                    var imgElement = document.createElement('img');
-                                    imgElement.classList.add('img');
-                                    imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
-                                    imgElement.alt = 'Alternative text';
-
-
-                                    let title = document.createElement('div');
-                                    let ssil = document.createElement('a');
-                                    ssil.href = itms['1'];
-                                    ssil.classList.add('lnk');
-                                    ssil.textContent = itms['-1']; 
-                                    title.appendChild(ssil);
-                                    var desc = document.createElement('div');
-                                    desc.textContent = itms['3']; 
+                                            var imgElement = document.createElement('img');
+                                            imgElement.classList.add('img');
+                                            imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
+                                            imgElement.alt = 'Alternative text';
 
 
-                                    left.appendChild(imgElement);
-                                    right.appendChild(title);
-                                    right.appendChild(desc);
-                                    head.appendChild(left);
-                                    head.appendChild(right);
+                                            let title = document.createElement('div');
+                                            let ssil = document.createElement('a');
+                                            ssil.href = itms['1'];
+                                            ssil.classList.add('lnk');
+                                            ssil.textContent = itms['-1']; 
+                                            title.appendChild(ssil);
+                                            var desc = document.createElement('div');
+                                            desc.textContent = itms['3']; 
 
-                                    keysDiv.appendChild(head);
-                                    
-                                    Object.keys(itms).forEach(function(i){
-                                        if (i == '4' || i == '5'){
-                                            let itemDiv = document.createElement('div');
-                                            itemDiv.textContent = itms[i];
-                                            keysDiv.appendChild(itemDiv);
-                                        }
-                                    });
-                                    keysListDiv.appendChild(keysDiv);
+
+                                            left.appendChild(imgElement);
+                                            right.appendChild(title);
+                                            right.appendChild(desc);
+                                            head.appendChild(left);
+                                            head.appendChild(right);
+
+                                            keysDiv.appendChild(head);
+                                            
+                                            Object.keys(itms).forEach(function(i){
+                                                if (i == '4' || i == '5'){
+                                                    let itemDiv = document.createElement('div');
+                                                    itemDiv.textContent = itms[i];
+                                                    keysDiv.appendChild(itemDiv);
+                                                }
+                                            });
+                                            keysListDiv.appendChild(keysDiv);
+                                            }
+
+                                            if (sear != 0){
+                                                if (itms['-1'].includes(sear)){
+                                                    ge()
+                                                }
+                                            }
+                                            else{
+                                                ge()
+                                            }
+                                            console.log(itms[-1])
+                                            console.log(sear)
                                     }
-
-                                    if (sear != 0){
-                                        if (itms['-1'].includes(sear)){
-                                            ge()
-                                        }
-                                    }
-                                    else{
-                                        ge()
-                                    }
-                                    console.log(itms[-1])
-                                    console.log(sear)
-
                                 }
                             });
                         });
@@ -179,7 +183,7 @@
             }
         });
         }
-        generate(0)
+        generate(0, 'channels')
 
     </script>
 
