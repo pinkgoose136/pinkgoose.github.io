@@ -7,8 +7,12 @@
 </head>
 <body>
     <div id="head_search">
-        <input id="search" oninput="searchInput(this)" placeholder="Введите запрос">
-        <button id="toggleButton">Раскрыть/Скрыть</button>
+        <div class="container">
+            <img class="left-button" src="https://pinkgoose.pythonanywhere.com/static/search.png">
+            <input id="search" class="input-field" oninput="searchInput(this)" placeholder="Введите запрос">
+            <img class="right-button" id="toggleButton" src="https://pinkgoose.pythonanywhere.com/static/strelka.png">
+        </div>
+
         <div id="additional_sets" style="display: none;">
             <label for="category">Категории:</label>
             <select id="categorySelect" onchange="addCategory(this.value)"></select>
@@ -62,6 +66,7 @@
             var additionalSets = document.getElementById('additional_sets');
             if (additionalSets.style.display === 'none') {
                 additionalSets.style.display = 'block';
+                this.classList.toggle('rotated');
             } else {
                 additionalSets.style.display = 'none';
             }
