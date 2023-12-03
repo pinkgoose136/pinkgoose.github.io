@@ -23,7 +23,7 @@
 
         <div id="additional_sets" style="display: none;">
             <label for="category">Категории:</label>
-            <select id="categorySelect" onchange="addCategory(this.value)"></select>
+            <select id="categorySelect" onchange="addCategory2(this.value)"></select>
             <div id="categoryList"></div><br>
         </div>
     </div>
@@ -100,14 +100,14 @@
                 selectedValue = radio.value;
                 }
             });
-            generate(tagText, selectedValue)
+            generate(tagText, selectedValue, [])
         }
 
         const radioButtons = document.querySelectorAll('input[type="radio"]');
         radioButtons.forEach((radio) => {
             radio.addEventListener('change', (event) => {
                 create_drop(event.target.value, [])
-                generate(0, event.target.value)
+                generate(0, event.target.value, [])
             });
         });
 
@@ -117,7 +117,7 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
-        function generate(sear, type){
+        function generate(sear, type, ctgss){
             let keysListDiv = document.getElementById('keysList');
             keysListDiv.innerHTML = "";
             tg.CloudStorage.getKeys(function(err, keys) {
@@ -166,7 +166,7 @@
                                         case 'name': tex = ''; keyy = '-1'; break;
                                         case 'desc': tex = ''; keyy = '3'; break;
                                         case 'type': tex = ""; keyy = '2'; break;
-                                        case 'cat': tex = "Категории: "; keyy = '4'; break;
+                                        case 'cat': tex = ""; keyy = '4'; break;
                                         case 'tag': tex = "Теги: "; keyy = '5'; break;
                                         case 'owner': tex = "Айди автора: "; keyy = '6'; break;
                                         case 'img': tex = ""; keyy = '11'; ae = valu2; break;
@@ -175,9 +175,9 @@
                                         
                                         itms[keyy] = tex + valu2;
                                     });
-                                    console.log(type)
-                                    console.log(itms['2'])
-                                    if (itms['2'] == type){
+
+                                    console.log( itms['4'].split(', '))
+                                    if (itms['2'] == type && ctgss.every(item => itms['4'].split(', ').includes(item))){
                                         function ge(){
                                             var head = document.createElement('div');
                                             head.classList.add('head');
@@ -240,7 +240,45 @@
         });
         }
         create_drop('channels', [])
-        generate(0, 'channels')
+        generate(0, 'channels', [])
+        
+        function addCategory2() {
+            var categorySelect = document.getElementById('categorySelect');
+            var selectedCategory = categorySelect.options[categorySelect.selectedIndex].value;
+            var categoryList = document.getElementById('categoryList');
+            let ct = categoryList.innerHTML;
+            if (selectedCategory && categoryList.childElementCount < 3) {
+                var categoryItem = document.createElement('div');
+                categoryItem.textContent = selectedCategory;
+                categoryItem.classList.add('category');
+                categoryItem.onclick = function() {
+                    categoryList.removeChild(categoryItem);
+                    categorySelect.options.add(new Option(categoryItem.textContent, categoryItem.textContent));
+                    categorySelect.value = '';
+
+                    let ce = ct.split('<div class="category">')
+                    let cetl = []
+                    ce.forEach(element => {
+                        cetl.push(element.split('</div>')[0])
+                    });
+                    let cemovedElement = cetl.shift();
+                    generate(0, 'channels', cetl)
+                };
+
+                categoryList.appendChild(categoryItem);
+                categorySelect.options.remove(categorySelect.selectedIndex);
+                categorySelect.value = '';
+
+                let ce = ct.split('<div class="category">')
+                let cetl = []
+                ce.forEach(element => {
+                    cetl.push(element.split('</div>')[0])
+                });
+                let cemovedElement = cetl.shift();
+                generate(0, 'channels', cetl)
+
+            }
+        }
 
     </script>
 
