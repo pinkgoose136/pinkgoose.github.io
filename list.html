@@ -16,13 +16,30 @@
         </div>
     </div>
     <div id="keysList"></div>
-    <div id="bottom_types">
-        <div class="item_type" onclick="showCategory('channels')">Каналы</div>
-        <div class="item_type" onclick="showCategory('groups')">Группы</div>
-        <div class="item_type" onclick="showCategory('bots')">Боты</div>
-        <div class="item_type" onclick="showCategory('stickers')">Стикерпаки</div>
-        <div class="item_type" onclick="showCategory('emoji')">Эмодзи</div>
+
+    <div class="radio-group">
+        <div class="radio-block">
+          <input type="radio" id="option1" name="radios" value="channels">
+          <label for="option1">Каналы</label>
+        </div>
+        <div class="radio-block">
+          <input type="radio" id="option2" name="radios" value="groups">
+          <label for="option2">Группы</label>
+        </div>
+        <div class="radio-block">
+            <input type="radio" id="option3" name="radios" value="bots">
+            <label for="option3"> Боты</label>
+        </div>
+        <div class="radio-block">
+            <input type="radio" id="option4" name="radios" value="stickers">
+            <label for="option4"> Стикерпаки</label>
+          </div>
+        <div class="radio-block">
+            <input type="radio" id="option5" name="radios" value="emoji">
+            <label for="option5"> Эмодзи</label>
+          </div>
     </div>
+    
 
     <h2 id="opa"></h2>
     <h3 id="sus"></h3>
@@ -50,12 +67,25 @@
 
         function searchInput(inputElement){
             var tagText = inputElement.value;
-            generate(tagText)
+
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            let selectedValue = '';
+
+            radioButtons.forEach((radio) => {
+                if (radio.checked) {
+                selectedValue = radio.value;
+                }
+            });
+
+            generate(tagText, selectedValue)
         }
 
-        function showCategory(type){
-            generate(0, type)
-        }
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach((radio) => {
+            radio.addEventListener('change', (event) => {
+                generate(0, event.target.value)
+            });
+        });
 
     </script>
 

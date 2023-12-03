@@ -274,24 +274,6 @@ svg {
     margin-left: 20px;
   }
   
-  #bottom_types {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: var(--tg-theme-secondary-bg-color, #f5f5f5);
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    height: 10%;
-}
-
-  .item_type {
-    padding: 10px;
-    margin: 5px;
-    background-color: var(--tg-theme-secondary-bg-color, #f5f5f5);
-    border-radius: 5px;
-    cursor: pointer;
-  }
 
   #keysList {
     margin-top: 20%;
@@ -314,4 +296,40 @@ svg {
     background-color: #73737363;
     position: relative;
     z-index: 999;
+}
+
+.radio-group {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--tg-theme-secondary-bg-color, #f5f5f5);
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    height: 10%;
+}
+
+.radio-block {
+    padding: 10px;
+    margin: 5px;
+    background-color: var(--tg-theme-secondary-bg-color, #f5f5f5);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  display: block;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked + label {
+  background-color: var(--tg-theme-bg-color, #fff);
+  color: var(--tg-theme-button-text-color, #fff);
 }
