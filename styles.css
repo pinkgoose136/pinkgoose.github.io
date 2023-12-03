@@ -298,6 +298,12 @@ svg {
     z-index: 999;
 }
 
+
+  
+.element {
+margin: 0 10px;
+}
+
 .radio-group {
     position: fixed;
     bottom: 0;
@@ -307,6 +313,7 @@ svg {
     overflow-x: auto;
     white-space: nowrap;
     height: 10%;
+    justify-content: center;
 }
 
 .radio-block {
@@ -315,6 +322,9 @@ svg {
     background-color: var(--tg-theme-secondary-bg-color, #f5f5f5);
     border-radius: 10px;
     cursor: pointer;
+
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 input[type="radio"] {
