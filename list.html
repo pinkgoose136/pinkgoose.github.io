@@ -248,7 +248,6 @@
             var categorySelect = document.getElementById('categorySelect');
             var selectedCategory = categorySelect.options[categorySelect.selectedIndex].value;
             var categoryList = document.getElementById('categoryList');
-            let ct = categoryList.innerHTML;
 
             const radioButtons = document.querySelectorAll('input[type="radio"]');
             let selectedValue = '';
@@ -267,26 +266,29 @@
                     categoryList.removeChild(categoryItem);
                     categorySelect.options.add(new Option(categoryItem.textContent, categoryItem.textContent));
                     categorySelect.value = '';
+                    let ct = categoryList.innerHTML;
+
                     let ce = ct.split('<div class="category">')
                     let cetl = []
                     ce.forEach(element => {
                         cetl.push(element.split('</div>')[0])
                     });
+                    cetl.shift(); 
                     generate(0, selectedValue, cetl)
                 };
 
                 categoryList.appendChild(categoryItem);
                 categorySelect.options.remove(categorySelect.selectedIndex);
                 categorySelect.value = '';
+                let ct = categoryList.innerHTML;
 
                 let ce = ct.split('<div class="category">')
                 let cetl = []
-                console.log(ct)
-                console.log(ce)
-                
+
                 ce.forEach(element => {
                     cetl.push(element.split('</div>')[0])
                 });
+                celt.shift(); 
                 generate(0, selectedValue, cetl)
 
             }
