@@ -80,6 +80,8 @@ function create_drop(aaValue, exclude){
     var dropdown = document.getElementById('categorySelect');
     dropdown.innerHTML = '';
     var options;
+    var categoryList = document.getElementById('categoryList');
+    categoryList.innerHTML = '';
 
     if (aaValue === 'channels' ) {
         options = ['Политика', 'Мемы', 'Новости', 'Технологии'];

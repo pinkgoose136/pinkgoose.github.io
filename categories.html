@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Telegram Explorer</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body style="color: aliceblue;">
+    <div id="keysList"></div>
+    <h2 id="opa"></h2>
+    <div id="add_cts">
+        <input id="cts_input">
+        <button id="cts_commit">Add</button>
+    </div>
+
+    <div id="keyse"></div>
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        let ese = document.getElementById('cts_commit').addEventListener('click', function(){
+            tg.CloudStorage.setItem("cts-" + document.getElementById('cts_input').value, '', function(err) {
+                if (err) {
+                    console.log('error')
+                } else {
+                    essa()
+                }
+            });
+        });
+
+        function essa(){
+        tg.CloudStorage.getKeys(function(err, keys) {
+            if (err) {
+                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
+            } else {
+                document.getElementById('opa').innerHTML = JSON.stringify(keys);
+                let ke = keys.filter(word => word.includes(String('cts')))
+                tg.CloudStorage.getItems(keys, function(err, items) {
+                    if (err) {
+                        document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+                    } else {
+                        let keysBySecondPart = {};
+
+                        Object.keys(items).forEach(function(key) {
+                            let kese = document.getElementById('keyse')
+                            var head = document.createElement('div');
+                            var inp = document.createElement('input');
+                            var btn = document.createElement('button');
+                            inp.innerHTML = String(items[key]);
+                            inp.id = String(key) + '-inp';
+                            btn.id = String(key);
+                            
+                            inp.classList.add('addb');
+
+                            btn.addEventListener('click', function(event) {
+                                let buttonId = event.target.id;
+                                let inpP = document.getElementById(buttonId+'-inp')
+
+                                console.log('ID кнопки: ' + buttonId);
+                                console.log(inpP.value)
+                            });
+
+                            head.appendChild(inp);
+                            head.appendChild(btn);
+                            kese.appendChild(head);
+                        });
+                    }
+                })
+            }
+        });
+        }
+        essa()
+
+
+    </script>
+
+</body>
+</html>
