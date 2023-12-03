@@ -178,7 +178,7 @@
 
                                     console.log(itms['4'].split(', '))
                                     console.log(ctgss)
-                                    
+
                                     if (itms['2'] == type && ctgss.every(item => itms['4'].split(', ').includes(item))){
                                         function ge(){
                                             var head = document.createElement('div');
@@ -249,6 +249,16 @@
             var selectedCategory = categorySelect.options[categorySelect.selectedIndex].value;
             var categoryList = document.getElementById('categoryList');
             let ct = categoryList.innerHTML;
+
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            let selectedValue = '';
+
+            radioButtons.forEach((radio) => {
+                if (radio.checked) {
+                selectedValue = radio.value;
+                }
+            });
+
             if (selectedCategory && categoryList.childElementCount < 3) {
                 var categoryItem = document.createElement('div');
                 categoryItem.textContent = selectedCategory;
@@ -263,8 +273,7 @@
                     ce.forEach(element => {
                         cetl.push(element.split('</div>')[0])
                     });
-                    let cemovedElement = cetl.shift();
-                    generate(0, 'channels', cetl)
+                    generate(0, selectedValue, cetl)
                 };
 
                 categoryList.appendChild(categoryItem);
@@ -276,8 +285,7 @@
                 ce.forEach(element => {
                     cetl.push(element.split('</div>')[0])
                 });
-                let cemovedElement = cetl.shift();
-                generate(0, 'channels', cetl)
+                generate(0, selectedValue, cetl)
 
             }
         }
