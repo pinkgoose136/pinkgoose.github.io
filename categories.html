@@ -47,7 +47,8 @@
                             inp.innerHTML = String(items[key]);
                             inp.id = String(key) + '-inp';
                             btn.id = String(key);
-                            
+                            btn.innerHTML = "Refresh";
+
                             inp.classList.add('addb');
 
                             btn.addEventListener('click', function(event) {
