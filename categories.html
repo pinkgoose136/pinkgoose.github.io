@@ -93,10 +93,7 @@
                                 let inputElement = event.target;
                                 let inpId = inputElement.id;
                                 var tagList = document.getElementById(inpId.replace('-inp', '-tgs'));
-                                var tagText = inputElement.value.trim();
-                                console.log(tagList)
-                                console.log(inputElement.value)
-
+                                var tagText = inputElement.value.slice(0, -1);
                                 var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
 
                                 if (inputElement.value.includes(',') && inputElement.value !== ',') {
