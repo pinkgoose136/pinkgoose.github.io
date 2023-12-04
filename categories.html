@@ -44,10 +44,10 @@
                             kese.innerHTML = '';
 
                             var head = document.createElement('div');
+                            var name = document.createElement('p');
                             var tagList = document.createElement('div');
                             var inp = document.createElement('input');
                             var btn = document.createElement('button');
-                            var btna = document.createElement('button');
 
                             tagList.classList.add('tagList');
                             
@@ -63,14 +63,13 @@
                                 tagList.appendChild(tagItem);
                             });
 
-                            head.id = String(key) + '-head'     
+                            name.innerHTML = String(key);
+                            head.id = String(key) + '-head';     
                             tagList.id = String(key) + '-tgs';
                             inp.id = String(key) + '-inp';
                             inp.classList.add('addb');
                             btn.id = String(key);
                             btn.innerHTML = "Refresh";
-                            btna.id = String(key) + '-add';
-                            btna.innerHTML = "Add";
 
                             btn.addEventListener('click', function(event) {
                                 let buttonId = event.target.id;
@@ -113,7 +112,7 @@
                             })
 
 
-
+                            head.appendChild(name);
                             head.appendChild(inp);
                             head.appendChild(btn);
                             head.appendChild(tagList);
