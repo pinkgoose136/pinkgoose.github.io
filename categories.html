@@ -76,7 +76,7 @@
                                 let buttonId = event.target.id;
                                 let inpP = document.getElementById(buttonId+'-tgs')
                                 let divsInsideInpP = inpP.querySelectorAll('div');
-                                console.log(divsInsideInpP.join(', '))
+                                console.log(divsInsideInpP)
                                 divsInsideInpP.forEach(function(div) {
                                     console.log(div.textContent);
                                 });
