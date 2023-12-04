@@ -63,21 +63,39 @@
                             });
 
                             
-                            inp.addEventListener('oninput', function(this){
-                            })
-                            
-
                             tagList.id = String(key) + '-tgs';
                             btn.id = String(key);
+                            inp.id = String(key) + '-inp';
                             btn.innerHTML = "Refresh";
 
                             inp.classList.add('addb');
+
+                            inp.addEventListener('oninput', function(event){
+                                let inpId = event.target.id;
+                                var tagList = document.getElementById('tagList'+inpId.replace('-inp', '-tgs'));
+                                var tagText = inputElement.value.slice(0, -1);
+                                var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
+
+                                if (inputElement.value.includes(',') && inputElement.value !== ',') {
+                                    if (tagText && !existingTags.includes(tagText)) {
+                                        var tagItem = document.createElement('div');
+                                        tagItem.textContent = tagText;
+                                        tagItem.classList.add('tag');
+                                        tagItem.onclick = function() {
+                                            tagList.removeChild(tagItem);
+                                        };
+                                        tagList.appendChild(tagItem);
+                                    }
+                                    inputElement.value = '';
+                                }
+                            })
+                            
 
                             btn.addEventListener('click', function(event) {
                                 let buttonId = event.target.id;
                                 let inpP = document.getElementById(buttonId+'-tgs')
                                 console.log(inpP.value)
-                                
+
                               //  tg.CloudStorage.setItem(buttonId, inpP.value, function(err) {
                                //     if (err) {
                               //          console.log('error')
