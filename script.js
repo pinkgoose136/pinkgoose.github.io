@@ -81,7 +81,7 @@ function getITM(tg, ke){
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
         } else {
-            return items
+            return items;
         }
     })
 
@@ -95,7 +95,7 @@ function cts_addc(tg){
         aValue = 'stickers'
     }
     options = getITM(tg, aValue);
-
+    console.log(options)
     for (let i = 0; i < options.length; i++) {
         var option = document.createElement('option');
         option.text = options[i];
