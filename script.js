@@ -76,34 +76,27 @@ function adjustTextAreaHeight() {
     textarea.style.height = newHeight + "px";
 }
 
-function getITM(tg, ke){
-    tg.CloudStorage.getItem('cts-'+ke, function(err, item) {
+function cts_addc(tg){
+    var dropdown = document.getElementById('categorySelect');
+
+    if (aValue === 'emoji'){
+        aValue = 'stickers'
+    }
+
+    tg.CloudStorage.getItem('cts-'+aValue, function(err, item) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
         } else {
             let tu = item.split(', ')
             tu.shift()
-            return item;
+            for (let i = 0; i < tu.length; i++) {
+                var option = document.createElement('option');
+                option.text = tu[i];
+                dropdown.add(option);
+            }
+            dropdown.value = '';
         }
     })
-
-}
-
-function cts_addc(tg){
-    var dropdown = document.getElementById('categorySelect');
-    var options;
-
-    if (aValue === 'emoji'){
-        aValue = 'stickers'
-    }
-    options = getITM(tg, aValue);
-    console.log(options)
-    for (let i = 0; i < options.length; i++) {
-        var option = document.createElement('option');
-        option.text = options[i];
-        dropdown.add(option);
-    }
-    dropdown.value = '';
 }
 
 function create_drop(aaValue, exclude){
