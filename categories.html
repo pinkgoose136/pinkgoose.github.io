@@ -84,11 +84,11 @@
                              //   });
                                 
                             });
-                            inp.addEventListener('input', inpge(event))
+                            //inp.addEventListener('input', inpge(event))
 
                             head.appendChild(btn);
-                            head.appendChild(tagList);
                             head.appendChild(inp);
+                            head.appendChild(tagList);
                             kese.appendChild(head);
                         });
                     }
@@ -105,7 +105,7 @@
             var tagText = inputElement.value.trim();
             console.log(tagList)
             console.log(inputElement.value)
-            
+
             var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
 
             if (inputElement.value.includes(',') && inputElement.value !== ',') {
