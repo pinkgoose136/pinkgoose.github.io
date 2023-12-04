@@ -77,11 +77,11 @@ function adjustTextAreaHeight() {
 }
 
 function getITM(tg, ke){
-    tg.CloudStorage.getItem('cts-'+ke, function(err, items) {
+    tg.CloudStorage.getItem('cts-'+ke, function(err, item) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
         } else {
-            return items;
+            return item;
         }
     })
 
@@ -96,11 +96,7 @@ function cts_addc(tg){
     }
     options = getITM(tg, aValue);
     console.log(options)
-    for (let i = 0; i < options.length; i++) {
-        var option = document.createElement('option');
-        option.text = options[i];
-        dropdown.add(option);
-    }
+
     dropdown.value = '';
 }
 
