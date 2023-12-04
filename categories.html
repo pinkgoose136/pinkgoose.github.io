@@ -75,7 +75,10 @@
                             btn.addEventListener('click', function(event) {
                                 let buttonId = event.target.id;
                                 let inpP = document.getElementById(buttonId+'-tgs')
-                                console.log(inpP.innerHTML)
+                                let divsInsideInpP = inpP.querySelectorAll('div');
+                                divsInsideInpP.forEach(function(div) {
+                                    console.log(div.textContent);
+                                });
 
                               //  tg.CloudStorage.setItem(buttonId, inpP.value, function(err) {
                                //     if (err) {
