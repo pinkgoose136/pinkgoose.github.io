@@ -81,6 +81,7 @@ function getITM(tg, ke){
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
         } else {
+            console.log(item)
             return item;
         }
     })
