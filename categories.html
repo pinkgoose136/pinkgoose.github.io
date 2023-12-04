@@ -103,7 +103,7 @@
         let elementsArray = Array.from(elements);
 
         elementsArray.forEach(function(element) {
-            element.addEventListener('click', function(event) {
+            element.addEventListener('input', function(event) {
                 console.log(event.target.id);
                 console.log(document.getElementById(event.target.id.replace('-inp', '-tgs')).innerHTML)
             });
