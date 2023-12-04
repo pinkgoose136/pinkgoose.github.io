@@ -70,6 +70,12 @@
 
                             inp.classList.add('addb');
 
+                            
+                            head.appendChild(inp);
+                            head.appendChild(btn);
+                            head.appendChild(tagList);
+                            kese.appendChild(head);
+                            
                             inp.addEventListener('input', function(event) {
                                 let inputElement = event.target;
                                 let inpId = inputElement.id;
@@ -108,10 +114,6 @@
                                 
                             });
 
-                            head.appendChild(inp);
-                            head.appendChild(btn);
-                            head.appendChild(tagList);
-                            kese.appendChild(head);
                         });
                     }
                 })
