@@ -62,7 +62,7 @@
                                 tagList.appendChild(tagItem);
                             });
 
-                            
+                            head.id = String(key) + '-head'     
                             tagList.id = String(key) + '-tgs';
                             btn.id = String(key);
                             inp.id = String(key) + '-inp';
@@ -70,16 +70,31 @@
 
                             inp.classList.add('addb');
 
-                            
-                            head.appendChild(inp);
+                            btn.addEventListener('click', function(event) {
+                                let buttonId = event.target.id;
+                                let inpP = document.getElementById(buttonId+'-tgs')
+                                console.log(inpP.value)
+
+                              //  tg.CloudStorage.setItem(buttonId, inpP.value, function(err) {
+                               //     if (err) {
+                              //          console.log('error')
+                              //      } else {
+                              //          essa()
+                             //       }
+                             //   });
+                                
+                            });
+
+
                             head.appendChild(btn);
                             head.appendChild(tagList);
                             kese.appendChild(head);
-                            
+
                             inp.addEventListener('input', function(event) {
                                 let inputElement = event.target;
                                 let inpId = inputElement.id;
                                 var tagList = document.getElementById('tagList' + inpId.replace('-inp', '-tgs'));
+                                console.log(inpId.replace('-inp', '-tgs'))
                                 var tagText = inputElement.value.trim();
 
                                 var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
@@ -97,23 +112,10 @@
                                     inputElement.value = '';
                                 }
                             });
-                            
 
-                            btn.addEventListener('click', function(event) {
-                                let buttonId = event.target.id;
-                                let inpP = document.getElementById(buttonId+'-tgs')
-                                console.log(inpP.value)
-
-                              //  tg.CloudStorage.setItem(buttonId, inpP.value, function(err) {
-                               //     if (err) {
-                              //          console.log('error')
-                              //      } else {
-                              //          essa()
-                             //       }
-                             //   });
-                                
-                            });
-
+                            let hea = document.getElementById(String(key) + '-head')
+                            hea.appendChild(inp);
+                            kese.appendChild(hea);
                         });
                     }
                 })
