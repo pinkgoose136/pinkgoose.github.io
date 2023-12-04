@@ -84,7 +84,7 @@
                              //   });
                                 
                             });
-                            inp.addEventListener('input', inpge(event))
+                            //inp.addEventListener('input', inpge(event))
 
                             head.appendChild(inp);
                             head.appendChild(btn);
@@ -98,6 +98,16 @@
         }
         essa()
 
+
+        let elements = document.getElementsByClassName('addb');
+        let elementsArray = Array.from(elements);
+
+        elementsArray.forEach(function(element) {
+            element.addEventListener('click', function(event) {
+                console.log(event.target.id);
+                console.log(document.getElementById(event.target.id.replace('-inp', '-tgs')).innerHTML)
+            });
+        });
 
         function inpge(event){
             let inputElement = event.target;
