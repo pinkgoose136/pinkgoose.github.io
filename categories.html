@@ -70,7 +70,7 @@
 
                             inp.classList.add('addb');
 
-                            inp.addEventListener('input', function(event){
+                            inp.addEventListener('oninput', function(event){
                                 let inpId = event.target.id;
                                 var tagList = document.getElementById('tagList'+inpId.replace('-inp', '-tgs'));
                                 var tagText = inputElement.value.slice(0, -1);
