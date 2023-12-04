@@ -92,20 +92,23 @@
                             inp.addEventListener('input', function(event) {
                                 let inputElement = event.target;
                                 let inpId = inputElement.id;
-                                var tagList = document.getElementById('tagList' + inpId.replace('-inp', '-tgs'));
+                                var tagList = document.getElementById(inpId.replace('-inp', '-tgs'));
                                 var tagText = inputElement.value.trim();
                                 console.log(tagList)
                                 console.log(inputElement.value)
 
+                                var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
+
                                 if (inputElement.value.includes(',') && inputElement.value !== ',') {
-                                    var tagItem = document.createElement('div');
-                                    tagItem.textContent = tagText;
-                                    tagItem.classList.add('tag');
-                                    tagItem.onclick = function() {
-                                        tagList.removeChild(tagItem);
-                                    };
-                                    tagList.appendChild(tagItem);
-                        
+                                    if (tagText && !existingTags.includes(tagText)) {
+                                        var tagItem = document.createElement('div');
+                                        tagItem.textContent = tagText;
+                                        tagItem.classList.add('tag');
+                                        tagItem.onclick = function() {
+                                            tagList.removeChild(tagItem);
+                                        };
+                                        tagList.appendChild(tagItem);
+                                    }
                                     inputElement.value = '';
                                 }
                             })
