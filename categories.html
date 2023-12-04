@@ -42,11 +42,32 @@
                         Object.keys(items).forEach(function(key) {
                             let kese = document.getElementById('keyse')
                             kese.innerHTML = '';
+
                             var head = document.createElement('div');
+                            var tagList = document.createElement('div');
                             var inp = document.createElement('input');
                             var btn = document.createElement('button');
-                            inp.value = String(items[key]);
-                            inp.id = String(key) + '-inp';
+
+                            tagList.classList.add('tagList');
+                            
+                            let cts = String(items[key]).split(', ') 
+                            
+                            cts.forEach(element => {
+                                var tagItem = document.createElement('div');
+                                tagItem.textContent = element;
+                                tagItem.classList.add('tag');
+                                tagItem.onclick = function() {
+                                    tagList.removeChild(tagItem);
+                                };
+                                tagList.appendChild(tagItem);
+                            });
+
+                            
+                            inp.addEventListener('oninput', function(this){
+                            })
+                            
+
+                            tagList.id = String(key) + '-tgs';
                             btn.id = String(key);
                             btn.innerHTML = "Refresh";
 
@@ -54,15 +75,16 @@
 
                             btn.addEventListener('click', function(event) {
                                 let buttonId = event.target.id;
-                                let inpP = document.getElementById(buttonId+'-inp')
-
-                                tg.CloudStorage.setItem(buttonId, inpP.value, function(err) {
-                                    if (err) {
-                                        console.log('error')
-                                    } else {
-                                        essa()
-                                    }
-                                });
+                                let inpP = document.getElementById(buttonId+'-tgs')
+                                console.log(inpP.value)
+                                
+                              //  tg.CloudStorage.setItem(buttonId, inpP.value, function(err) {
+                               //     if (err) {
+                              //          console.log('error')
+                              //      } else {
+                              //          essa()
+                             //       }
+                             //   });
                                 
                             });
 
@@ -76,8 +98,6 @@
         });
         }
         essa()
-
-
     </script>
 
 </body>
