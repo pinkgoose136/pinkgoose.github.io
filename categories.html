@@ -70,10 +70,12 @@
 
                             inp.classList.add('addb');
 
-                            inp.addEventListener('oninput', function(event){
-                                let inpId = event.target.id;
-                                var tagList = document.getElementById('tagList'+inpId.replace('-inp', '-tgs'));
-                                var tagText = inputElement.value.slice(0, -1);
+                            inp.addEventListener('input', function(event) {
+                                let inputElement = event.target;
+                                let inpId = inputElement.id;
+                                var tagList = document.getElementById('tagList' + inpId.replace('-inp', '-tgs'));
+                                var tagText = inputElement.value.trim();
+
                                 var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
 
                                 if (inputElement.value.includes(',') && inputElement.value !== ',') {
@@ -88,7 +90,7 @@
                                     }
                                     inputElement.value = '';
                                 }
-                            })
+                            });
                             
 
                             btn.addEventListener('click', function(event) {
