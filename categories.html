@@ -76,22 +76,20 @@
                                 let buttonId = event.target.id;
                                 let inpP = document.getElementById(buttonId+'-tgs')
                                 let divsInsideInpP = inpP.querySelectorAll('div');
-                                console.log(divsInsideInpP)
+                                let tute = []
                                 divsInsideInpP.forEach(function(div) {
-                                    console.log(div.textContent);
+                                    tute.push(div.textContent);
                                 });
 
-                              //  tg.CloudStorage.setItem(buttonId, inpP.value, function(err) {
-                               //     if (err) {
-                              //          console.log('error')
-                              //      } else {
-                              //          essa()
-                             //       }
-                             //   });
+                                tg.CloudStorage.setItem(buttonId, tute.join(', '), function(err) {
+                                    if (err) {
+                                        console.log('error')
+                                    } else {
+                                        essa()
+                                    }
+                                });
                                 
                             });
-                            //inp.addEventListener('input', inpge(event))
-
                             
                             inp.addEventListener('input', function(event) {
                                 let inputElement = event.target;
