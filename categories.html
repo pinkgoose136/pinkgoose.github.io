@@ -34,16 +34,12 @@
             } else {
                 let ke = keys.filter(word => word.includes(String('cts')))
                 tg.CloudStorage.getItems(ke, function(err, items) {
-                    console.log(items)
                     if (err) {
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                     } else {
-                        let keysBySecondPart = {};
-
+                        let kese = document.getElementById('keyse')
+                        kese.innerHTML = '';
                         Object.keys(items).forEach(function(key) {
-                            let kese = document.getElementById('keyse')
-                            kese.innerHTML = '';
-
                             var head = document.createElement('div');
                             var name = document.createElement('p');
                             var tagList = document.createElement('div');
