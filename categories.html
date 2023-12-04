@@ -84,38 +84,12 @@
                              //   });
                                 
                             });
-
+                            inp.addEventListener('input', inpge(event))
 
                             head.appendChild(btn);
                             head.appendChild(tagList);
+                            head.appendChild(inp);
                             kese.appendChild(head);
-
-                            inp.addEventListener('input', function(event) {
-                                let inputElement = event.target;
-                                let inpId = inputElement.id;
-                                var tagList = document.getElementById('tagList' + inpId.replace('-inp', '-tgs'));
-                                console.log(tagList)
-                                var tagText = inputElement.value.trim();
-
-                                var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
-
-                                if (inputElement.value.includes(',') && inputElement.value !== ',') {
-                                    if (tagText && !existingTags.includes(tagText)) {
-                                        var tagItem = document.createElement('div');
-                                        tagItem.textContent = tagText;
-                                        tagItem.classList.add('tag');
-                                        tagItem.onclick = function() {
-                                            tagList.removeChild(tagItem);
-                                        };
-                                        tagList.appendChild(tagItem);
-                                    }
-                                    inputElement.value = '';
-                                }
-                            });
-
-                            let hea = document.getElementById(String(key) + '-head')
-                            hea.appendChild(inp);
-                            kese.appendChild(hea);
                         });
                     }
                 })
@@ -123,6 +97,30 @@
         });
         }
         essa()
+
+        function inpge(){
+            let inputElement = event.target;
+            let inpId = inputElement.id;
+            var tagList = document.getElementById('tagList' + inpId.replace('-inp', '-tgs'));
+            var tagText = inputElement.value.trim();
+            console.log(tagList)
+            console.log(inputElement.value)
+            
+            var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
+
+            if (inputElement.value.includes(',') && inputElement.value !== ',') {
+                if (tagText && !existingTags.includes(tagText)) {
+                    var tagItem = document.createElement('div');
+                    tagItem.textContent = tagText;
+                    tagItem.classList.add('tag');
+                    tagItem.onclick = function() {
+                        tagList.removeChild(tagItem);
+                    };
+                    tagList.appendChild(tagItem);
+                }
+                inputElement.value = '';
+            }
+        }
     </script>
 
 </body>
