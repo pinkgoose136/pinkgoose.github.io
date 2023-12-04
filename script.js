@@ -76,6 +76,34 @@ function adjustTextAreaHeight() {
     textarea.style.height = newHeight + "px";
 }
 
+function getITM(tg, ke){
+    tg.CloudStorage.getItem('cts-'+ke, function(err, items) {
+        if (err) {
+            document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+        } else {
+            return items
+        }
+    })
+
+}
+
+function cts_addc(tg){
+    var dropdown = document.getElementById('categorySelect');
+    var options;
+
+    if (aValue === 'emoji'){
+        aValue = 'stickers'
+    }
+    options = getITM(tg, aValue);
+
+    for (let i = 0; i < options.length; i++) {
+        var option = document.createElement('option');
+        option.text = options[i];
+        dropdown.add(option);
+    }
+    dropdown.value = '';
+}
+
 function create_drop(aaValue, exclude){
     var dropdown = document.getElementById('categorySelect');
     dropdown.innerHTML = '';
