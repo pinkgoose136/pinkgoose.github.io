@@ -73,7 +73,7 @@
                             btn.addEventListener('click', function(event) {
                                 let buttonId = event.target.id;
                                 let inpP = document.getElementById(buttonId+'-tgs')
-                                console.log(inpP.value)
+                                console.log(inpP.innerHTML)
 
                               //  tg.CloudStorage.setItem(buttonId, inpP.value, function(err) {
                                //     if (err) {
@@ -84,10 +84,10 @@
                              //   });
                                 
                             });
-                            //inp.addEventListener('input', inpge(event))
+                            inp.addEventListener('input', inpge(event))
 
-                            head.appendChild(btn);
                             head.appendChild(inp);
+                            head.appendChild(btn);
                             head.appendChild(tagList);
                             kese.appendChild(head);
                         });
@@ -98,7 +98,8 @@
         }
         essa()
 
-        function inpge(){
+
+        function inpge(event){
             let inputElement = event.target;
             let inpId = inputElement.id;
             var tagList = document.getElementById('tagList' + inpId.replace('-inp', '-tgs'));
