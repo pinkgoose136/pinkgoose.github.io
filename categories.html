@@ -47,6 +47,7 @@
                             var tagList = document.createElement('div');
                             var inp = document.createElement('input');
                             var btn = document.createElement('button');
+                            var btna = document.createElement('button');
 
                             tagList.classList.add('tagList');
                             
@@ -64,11 +65,12 @@
 
                             head.id = String(key) + '-head'     
                             tagList.id = String(key) + '-tgs';
-                            btn.id = String(key);
                             inp.id = String(key) + '-inp';
-                            btn.innerHTML = "Refresh";
-
                             inp.classList.add('addb');
+                            btn.id = String(key);
+                            btn.innerHTML = "Refresh";
+                            btna.id = String(key) + '-add';
+                            btna.innerHTML = "Add";
 
                             btn.addEventListener('click', function(event) {
                                 let buttonId = event.target.id;
@@ -86,6 +88,31 @@
                             });
                             //inp.addEventListener('input', inpge(event))
 
+                            
+                            inp.addEventListener('input', function(event) {
+                                let inputElement = event.target;
+                                let inpId = inputElement.id;
+                                var tagList = document.getElementById('tagList' + inpId.replace('-inp', '-tgs'));
+                                var tagText = inputElement.value.trim();
+                                console.log(tagList)
+                                console.log(inputElement.value)
+
+                                if (inputElement.value.includes(',') && inputElement.value !== ',') {
+                                    if (tagText && !existingTags.includes(tagText)) {
+                                        var tagItem = document.createElement('div');
+                                        tagItem.textContent = tagText;
+                                        tagItem.classList.add('tag');
+                                        tagItem.onclick = function() {
+                                            tagList.removeChild(tagItem);
+                                        };
+                                        tagList.appendChild(tagItem);
+                                    }
+                                    inputElement.value = '';
+                                }
+                            })
+
+
+
                             head.appendChild(inp);
                             head.appendChild(btn);
                             head.appendChild(tagList);
@@ -93,44 +120,10 @@
                         });
                     }
                 })
-                let elements = document.getElementsByClassName('addb');
-                let elementsArray = Array.from(elements);
-
-                elementsArray.forEach(function(element) {
-                    element.addEventListener('input', function(event) {
-                        console.log(event.target.id);
-                        console.log(document.getElementById(event.target.id.replace('-inp', '-tgs')).innerHTML)
-                    });
-                });
-                
             }
         });
         }
         essa()
-
-        function inpge(event){
-            let inputElement = event.target;
-            let inpId = inputElement.id;
-            var tagList = document.getElementById('tagList' + inpId.replace('-inp', '-tgs'));
-            var tagText = inputElement.value.trim();
-            console.log(tagList)
-            console.log(inputElement.value)
-
-            var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
-
-            if (inputElement.value.includes(',') && inputElement.value !== ',') {
-                if (tagText && !existingTags.includes(tagText)) {
-                    var tagItem = document.createElement('div');
-                    tagItem.textContent = tagText;
-                    tagItem.classList.add('tag');
-                    tagItem.onclick = function() {
-                        tagList.removeChild(tagItem);
-                    };
-                    tagList.appendChild(tagItem);
-                }
-                inputElement.value = '';
-            }
-        }
     </script>
 
 </body>
