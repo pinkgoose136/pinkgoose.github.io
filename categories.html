@@ -94,7 +94,7 @@
                                 let inputElement = event.target;
                                 let inpId = inputElement.id;
                                 var tagList = document.getElementById('tagList' + inpId.replace('-inp', '-tgs'));
-                                console.log(inpId.replace('-inp', '-tgs'))
+                                console.log(tagList)
                                 var tagText = inputElement.value.trim();
 
                                 var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
