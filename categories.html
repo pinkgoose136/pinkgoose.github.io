@@ -98,15 +98,14 @@
                                 console.log(inputElement.value)
 
                                 if (inputElement.value.includes(',') && inputElement.value !== ',') {
-                                    if (tagText && !existingTags.includes(tagText)) {
-                                        var tagItem = document.createElement('div');
-                                        tagItem.textContent = tagText;
-                                        tagItem.classList.add('tag');
-                                        tagItem.onclick = function() {
-                                            tagList.removeChild(tagItem);
-                                        };
-                                        tagList.appendChild(tagItem);
-                                    }
+                                    var tagItem = document.createElement('div');
+                                    tagItem.textContent = tagText;
+                                    tagItem.classList.add('tag');
+                                    tagItem.onclick = function() {
+                                        tagList.removeChild(tagItem);
+                                    };
+                                    tagList.appendChild(tagItem);
+                        
                                     inputElement.value = '';
                                 }
                             })
