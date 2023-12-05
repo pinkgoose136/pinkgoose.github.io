@@ -14,7 +14,7 @@
                 <line id="cline" x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
 
-            <input id="search" class="input-field" oninput="inputChanged(this)" placeholder="Введите запрос">
+            <input id="search" class="input-field" oninput="searchInput(this)" placeholder="Введите запрос">
 
             <svg class="right-button" id="toggleButton"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline id="cpolyline" points="9 18 15 12 9 6" />
@@ -89,24 +89,21 @@
             }
         });
 
-        let timer;
-        function inputChanged(inputElement) {
-            clearTimeout(timer);
-            timer = setTimeout(searchInput(inputElement), 10000);
-        }
-
         function searchInput(inputElement){
-            var tagText = inputElement.value;
+            function agh() {
+                var tagText = inputElement.value;
+                const radioButtons = document.querySelectorAll('input[type="radio"]');
+                let selectedValue = '';
 
-            const radioButtons = document.querySelectorAll('input[type="radio"]');
-            let selectedValue = '';
-
-            radioButtons.forEach((radio) => {
-                if (radio.checked) {
-                selectedValue = radio.value;
+                radioButtons.forEach((radio) => {
+                    if (radio.checked) {
+                    selectedValue = radio.value;
+                    }
+                });
+                generate(tagText, selectedValue, [])
                 }
-            });
-            generate(tagText, selectedValue, [])
+
+            let timer = setTimeout(agh, 2000);
         }
 
         const radioButtons = document.querySelectorAll('input[type="radio"]');
