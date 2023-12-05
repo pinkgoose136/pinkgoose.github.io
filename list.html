@@ -173,7 +173,7 @@
                                         case 'desc': tex = ''; keyy = '3'; break;
                                         case 'type': tex = ""; keyy = '2'; break;
                                         case 'cat': tex = ""; keyy = '4'; break;
-                                        case 'tag': tex = "Теги: "; keyy = '5'; break;
+                                        case 'tag': tex = ""; keyy = '5'; break;
                                         case 'owner': tex = "Айди автора: "; keyy = '6'; break;
                                         case 'img': tex = ""; keyy = '11'; ae = valu2; break;
                                         default: tex = expr; keyy = '0'; break;
@@ -215,10 +215,11 @@
 
                                             keysDiv.appendChild(head);
                                             
+                                            var dudu = {'4': 'Категории: ', '5': 'Теги: '}
                                             Object.keys(itms).forEach(function(i){
                                                 if (i == '4' || i == '5'){
                                                     let itemDiv = document.createElement('div');
-                                                    itemDiv.textContent = itms[i];
+                                                    itemDiv.textContent = dudu[i] + itms[i];
                                                     keysDiv.appendChild(itemDiv);
                                                 }
                                             });
