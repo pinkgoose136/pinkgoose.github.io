@@ -89,21 +89,24 @@
             }
         });
 
-        function searchInput(inputElement){
-            function agh() {
+        
+        let timer;
+
+        function searchInput(inputElement) {
+            clearTimeout(timer);
+
+            timer = setTimeout(function() {
                 var tagText = inputElement.value;
                 const radioButtons = document.querySelectorAll('input[type="radio"]');
                 let selectedValue = '';
 
                 radioButtons.forEach((radio) => {
                     if (radio.checked) {
-                    selectedValue = radio.value;
+                        selectedValue = radio.value;
                     }
                 });
-                generate(tagText, selectedValue, [])
-                }
-
-            let timer = setTimeout(agh, 2000);
+                generate(tagText, selectedValue, []);
+            }, 2000);
         }
 
         const radioButtons = document.querySelectorAll('input[type="radio"]');
