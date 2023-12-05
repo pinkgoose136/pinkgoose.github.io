@@ -106,7 +106,7 @@
                     }
                 });
                 generate(tagText, selectedValue, []);
-            }, 2000);
+            }, 1000);
         }
 
         const radioButtons = document.querySelectorAll('input[type="radio"]');
@@ -182,9 +182,6 @@
                                         itms[keyy] = tex + valu2;
                                     });
 
-                                    console.log(itms['4'].split(', '))
-                                    console.log(ctgss)
-
                                     if (itms['2'] == type && ctgss.every(item => itms['4'].split(', ').includes(item))){
                                         function ge(){
                                             var head = document.createElement('div');
@@ -229,6 +226,7 @@
                                             }
 
                                         if (sear != 0){
+                                            console.log(itms['5'].toLowerCase().split(', '))
                                             if (itms['-1'].toLowerCase().includes(sear.toLowerCase())){
                                                 ge()
                                             }
@@ -239,8 +237,6 @@
                                         else{
                                             ge()
                                         }
-                                        console.log(itms[-1])
-                                        console.log(sear)
                                     }
                                 }
                             });
