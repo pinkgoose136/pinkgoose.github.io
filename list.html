@@ -228,16 +228,19 @@
                                             keysListDiv.appendChild(keysDiv);
                                             }
 
-                                            if (sear != 0){
-                                                if (itms['-1'].includes(sear)){
-                                                    ge()
-                                                }
-                                            }
-                                            else{
+                                        if (sear != 0){
+                                            if (itms['-1'].toLowerCase().includes(sear.toLowerCase())){
                                                 ge()
                                             }
-                                            console.log(itms[-1])
-                                            console.log(sear)
+                                            else if(itms['5'].toLowerCase().split(', ').includes(sear.toLowerCase())){
+                                                ge()
+                                            }
+                                        }
+                                        else{
+                                            ge()
+                                        }
+                                        console.log(itms[-1])
+                                        console.log(sear)
                                     }
                                 }
                             });
