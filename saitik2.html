@@ -55,7 +55,9 @@
         }
         var typeSelect = document.getElementById('typeSelect');
         var selected = typeSelect.options[typeSelect.selectedIndex].value;
-        aValue = selected.textContent  
+        console.log(typeSelect.options[typeSelect.selectedIndex])
+        console.log(typeSelect.options[typeSelect.selectedIndex].value)
+        aValue = selected.value  
 
         let tg = window.Telegram.WebApp;
         document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue))
