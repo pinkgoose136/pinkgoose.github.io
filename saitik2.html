@@ -49,13 +49,13 @@
         function typeChange(){
             var typeSelect = document.getElementById('typeSelect');
             var selected = typeSelect.options[typeSelect.selectedIndex].value;
-            aValue = selectedCategory.textContent;
+            aValue = selected.textContent;
             cts_addc(tg, aValue)
 
         }
         var typeSelect = document.getElementById('typeSelect');
         var selected = typeSelect.options[typeSelect.selectedIndex].value;
-        aValue = selectedCategory.textContent  
+        aValue = selected.textContent  
 
         let tg = window.Telegram.WebApp;
         document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue))
