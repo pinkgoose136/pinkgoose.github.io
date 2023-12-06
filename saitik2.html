@@ -8,6 +8,12 @@
 </head>
 <body>
     <div id="form">
+        <label for="type">Выберите тип:</label>
+        <select id="typeSelect" onchange="typeChange()">
+            
+        </select>
+        <br><br>
+
         <label for="link">Ссылка:</label>
         <input type="text" name="link" id="link" required><br>
         <label id="lnk_error" class="error"></label>
@@ -33,23 +39,22 @@
 
     <h2 id="opa"></h2>
     <h2 id="pa"></h2>
+
     <script>
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        let aValue;
+        function typeChange(){
+            var typeSelect = document.getElementById('typeSelect');
+            var selected = typeSelect.options[typeSelect.selectedIndex].value;
+            aValue = selectedCategory.textContent;
+            cts_addc(tg, aValue)
+
         }
-        var aValue = getParameterByName('type');
-    </script>
+        var typeSelect = document.getElementById('typeSelect');
+        var selected = typeSelect.options[typeSelect.selectedIndex].value;
+        aValue = selectedCategory.textContent  
 
-    <script>
         let tg = window.Telegram.WebApp;
-
-        document.addEventListener('DOMContentLoaded',  cts_addc(tg))
+        document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue))
 
         tg.expand();
         tg.MainButton.setText("Подтвердить");
