@@ -78,6 +78,7 @@ function adjustTextAreaHeight() {
 
 function cts_addc(tg, aValue){
     var dropdown = document.getElementById('categorySelect');
+    dropdown.innerHTML = '';
 
     if (aValue === 'emoji'){
         aValue = 'stickers'
@@ -90,6 +91,32 @@ function cts_addc(tg, aValue){
             let tu = item.split(', ')
             tu.shift()
             for (let i = 0; i < tu.length; i++) {
+                var option = document.createElement('option');
+                option.text = tu[i];
+                dropdown.add(option);
+            }
+            dropdown.value = '';
+        }
+    })
+}
+
+function create_drop(tg, aaValue, exclude){
+    var dropdown = document.getElementById('categorySelect');
+    dropdown.innerHTML = '';
+
+    if (aaValue === 'emoji'){
+        aaValue = 'stickers'
+    }
+
+    tg.CloudStorage.getItem('cts-'+aaValue, function(err, item) {
+        if (err) {
+            document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+        } else {
+            let tu = item.split(', ')
+            tu.shift()
+            let tut = tu.filter(item => !exclude.includes(item));
+
+            for (let i = 0; i < tut.length; i++) {
                 var option = document.createElement('option');
                 option.text = tu[i];
                 dropdown.add(option);
