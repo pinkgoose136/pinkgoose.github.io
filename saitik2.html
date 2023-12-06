@@ -122,7 +122,34 @@
             type: aValue,
             cat: cccc,
             tag: tttt,
-        };  
+        }; 
+
+        tg.CloudStorage.getKeys(function(err, keys) {
+            if (err) {
+                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
+            } else {
+                let ke = keys.filter(word => word.split('-')[2] == 'link')
+                tg.CloudStorage.getItems(ke, function(err, items) {
+                if (err) {
+                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+                } else {
+                    console.log(items)
+
+               //     let tu = items.split(', ')
+              //      tu.shift()
+              //      for (let i = 0; i < tu.length; i++) {
+              //          var option = document.createElement('option');
+                //        option.text = tu[i];
+                //        dropdown.add(option);
+                  //  }
+                    //dropdown.value = '';
+                }
+            })
+
+            }
+        })
+
+
         let keys = Object.keys(valuesList);
         function saveValues(index) {
             if (index < keys.length) {
