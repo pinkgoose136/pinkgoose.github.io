@@ -159,7 +159,11 @@
                 document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
             } else {
                 let linkis = Object.values(items)
+                console.log(linkis)
+                console.log(lnk)
+
                 if (linkis.includes(lnk)){
+                    console.log('aaaa')
                     tgse.innerHTML = 'Элемент с такой ссылкой уже сдержится в базе данных'
                 }
                 else{
