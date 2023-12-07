@@ -112,7 +112,7 @@
         const radioButtons = document.querySelectorAll('input[type="radio"]');
         radioButtons.forEach((radio) => {
             radio.addEventListener('change', (event) => {
-                create_drop(event.target.value, [])
+                create_drop(tg, event.target.value, [])
                 generate(0, event.target.value, [])
             });
         });
