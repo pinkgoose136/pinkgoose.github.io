@@ -149,11 +149,11 @@
             }
         }
 
-        tg.CloudStorage.getKeys(function(err, keys) {
+        tg.CloudStorage.getKeys(function(err, keyse) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
         } else {
-            let ke = keys.filter(word => word.split('-')[2] == 'link')
+            let ke = keyse.filter(word => word.split('-')[2] == 'link')
             tg.CloudStorage.getItems(ke, function(err, items) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
