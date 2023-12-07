@@ -91,7 +91,7 @@
 
          lnke.innerHTML = ''; dese.innerHTML = ''; ctse.innerHTML = ''; tgse.innerHTML = ''
          
-         
+
          getLikis()
             .then(linkis => {
                 if (linkis.includes(lnk)) {
@@ -102,7 +102,6 @@
                 console.error(error);
             });
 
-         let fef = getLikis(tg)
          if (!lnk.startsWith('https://t.me/')){lnke.innerHTML = 'Неверная ссылка'}
          else if (des.length < 11 ){dese.innerHTML = 'Описание слишком короткое. Минимум 10 символов'} 
          else if (des.length > 601 ){dese.innerHTML = 'Описание слишком длинное'}
