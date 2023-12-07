@@ -91,6 +91,7 @@
 
          lnke.innerHTML = ''; dese.innerHTML = ''; ctse.innerHTML = ''; tgse.innerHTML = ''
 
+         let linkis;
          tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
                 document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
@@ -100,16 +101,7 @@
                 if (err) {
                     document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                 } else {
-                    console.log(items)
-
-               //     let tu = items.split(', ')
-              //      tu.shift()
-              //      for (let i = 0; i < tu.length; i++) {
-              //          var option = document.createElement('option');
-                //        option.text = tu[i];
-                //        dropdown.add(option);
-                  //  }
-                    //dropdown.value = '';
+                    linkis = Object.values(items)
                 }
             })
 
@@ -117,6 +109,7 @@
         })
 
          if (!lnk.startsWith('https://t.me/')){lnke.innerHTML = 'Неверная ссылка'}
+         else if(linkis.includes(linkis)){lnke.innerHTML = 'Такой элемент уже содержится в базе данных'}
          else if (des.length < 11 ){dese.innerHTML = 'Описание слишком короткое. Минимум 10 символов'} 
          else if (des.length > 601 ){dese.innerHTML = 'Описание слишком длинное'}
          else if (String(ct) == '' ){ctse.innerHTML =  'Напишите хотя бы одну категорию'}
