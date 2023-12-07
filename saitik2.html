@@ -90,9 +90,20 @@
 
 
          lnke.innerHTML = ''; dese.innerHTML = ''; ctse.innerHTML = ''; tgse.innerHTML = ''
-         console.log(getLikis(tg))
+         
+         
+         getLikis()
+            .then(linkis => {
+                if (linkis.includes(lnk)) {
+                    lnke.innerHTML = 'Такой элемент уже содержится в базе данных';
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+         let fef = getLikis(tg)
          if (!lnk.startsWith('https://t.me/')){lnke.innerHTML = 'Неверная ссылка'}
-         else if (getLikis(tg).includes(lnk)){lnke.innerHTML = 'Такой элемент уже содержится в базе данных'}
          else if (des.length < 11 ){dese.innerHTML = 'Описание слишком короткое. Минимум 10 символов'} 
          else if (des.length > 601 ){dese.innerHTML = 'Описание слишком длинное'}
          else if (String(ct) == '' ){ctse.innerHTML =  'Напишите хотя бы одну категорию'}
@@ -149,24 +160,25 @@
             }
         }
 
-        function getLikis(tg){
-            tg.CloudStorage.getKeys(function(err, keys) {
-            if (err) {
-                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
-            } else {
-                let ke = keys.filter(word => word.split('-')[2] == 'link')
-                tg.CloudStorage.getItems(ke, function(err, items) {
-                if (err) {
-                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
-                } else {
-                    let linkis = Object.values(items)
-                    return linkis;
-                }
-                })
-                }
-            })
-
-        }
+        function getLikis() {
+            return new Promise((resolve, reject) => {
+                tg.CloudStorage.getKeys(function(err, keys) {
+                    if (err) {
+                        reject('Ошибка получения ключей: ' + err);
+                    } else {
+                        let ke = keys.filter(word => word.split('-')[2] == 'link');
+                        tg.CloudStorage.getItems(ke, function(err, items) {
+                            if (err) {
+                                reject('Ошибка получения значений: ' + err);
+                            } else {
+                                let linkis = Object.values(items);
+                                resolve(linkis);
+                            }
+                        });
+                    }
+                });
+            });
+        }      
 
         saveValues(0);
         }
