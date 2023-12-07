@@ -72,14 +72,16 @@
             })
         }
 
-        let fef = getLikis(tg)
-        console.log(fef)
         var typeSelect = document.getElementById('typeSelect');
         var selected = typeSelect.options[typeSelect.selectedIndex].value;
         aValue = selected;
 
         let tg = window.Telegram.WebApp;
         document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue))
+
+        let fef = getLikis(tg)
+        console.log(fef)
+        
 
         tg.expand();
         tg.MainButton.setText("Подтвердить");
