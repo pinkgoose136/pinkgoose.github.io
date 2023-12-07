@@ -91,26 +91,8 @@
 
          lnke.innerHTML = ''; dese.innerHTML = ''; ctse.innerHTML = ''; tgse.innerHTML = ''
 
-         var linkis;
-         tg.CloudStorage.getKeys(function(err, keys) {
-            if (err) {
-                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
-            } else {
-                let ke = keys.filter(word => word.split('-')[2] == 'link')
-                tg.CloudStorage.getItems(ke, function(err, items) {
-                if (err) {
-                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
-                } else {
-                    linkis = Object.values(items)
-                    console.log(linkis)
-                }
-            })
-
-            }
-        })
-         console.log(linkis)
          if (!lnk.startsWith('https://t.me/')){lnke.innerHTML = 'Неверная ссылка'}
-         else if (linkis.includes(lnk)){lnke.innerHTML = 'Такой элемент уже содержится в базе данных'}
+         else if (getLikis().includes(lnk)){lnke.innerHTML = 'Такой элемент уже содержится в базе данных'}
          else if (des.length < 11 ){dese.innerHTML = 'Описание слишком короткое. Минимум 10 символов'} 
          else if (des.length > 601 ){dese.innerHTML = 'Описание слишком длинное'}
          else if (String(ct) == '' ){ctse.innerHTML =  'Напишите хотя бы одну категорию'}
@@ -165,6 +147,25 @@
                 tg.sendData(JSON.stringify(data));
                 tg.close();
             }
+        }
+
+        function getLikis(){
+            tg.CloudStorage.getKeys(function(err, keys) {
+            if (err) {
+                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
+            } else {
+                let ke = keys.filter(word => word.split('-')[2] == 'link')
+                tg.CloudStorage.getItems(ke, function(err, items) {
+                if (err) {
+                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+                } else {
+                    let linkis = Object.values(items)
+                    return linkis;
+                }
+            })
+            }
+        })
+
         }
 
         saveValues(0);
