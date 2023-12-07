@@ -60,6 +60,7 @@
 
         let tg = window.Telegram.WebApp;
         document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue))
+        let suie;
 
         tg.CloudStorage.getKeys(function(err, keys) {
         if (err) {
@@ -71,7 +72,7 @@
                 document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
             } else {
                 let linkis = Object.values(items)
-                console.log(linkis)
+                suie = linkis;
             }
             })
             }
@@ -82,6 +83,7 @@
         tg.MainButton.setText("Подтвердить");
         tg.MainButton.show()
 
+        console.log(suie)
          Telegram.WebApp.onEvent('mainButtonClicked', function(){
          let lnk = document.getElementById('link').value; let des = document.getElementById('description').value;
          let ct = document.getElementById('categoryList').innerHTML; let t = document.getElementById('tagList').innerHTML;
