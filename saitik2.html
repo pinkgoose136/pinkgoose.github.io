@@ -54,24 +54,6 @@
 
         }
 
-        function getLikis(tg){
-            tg.CloudStorage.getKeys(function(err, keys) {
-            if (err) {
-                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
-            } else {
-                let ke = keys.filter(word => word.split('-')[2] == 'link')
-                tg.CloudStorage.getItems(ke, function(err, items) {
-                if (err) {
-                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
-                } else {
-                    let linkis = Object.values(items)
-                    return linkis;
-                }
-                })
-                }
-            })
-        }
-
         var typeSelect = document.getElementById('typeSelect');
         var selected = typeSelect.options[typeSelect.selectedIndex].value;
         aValue = selected;
@@ -79,9 +61,22 @@
         let tg = window.Telegram.WebApp;
         document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue))
 
-        let fef = getLikis(tg)
-        console.log(fef)
-        
+        tg.CloudStorage.getKeys(function(err, keys) {
+        if (err) {
+            document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
+        } else {
+            let ke = keys.filter(word => word.split('-')[2] == 'link')
+            tg.CloudStorage.getItems(ke, function(err, items) {
+            if (err) {
+                document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+            } else {
+                let linkis = Object.values(items)
+                console.log(linkis)
+            }
+            })
+            }
+        })
+
 
         tg.expand();
         tg.MainButton.setText("Подтвердить");
