@@ -202,8 +202,8 @@
                         console.log(itims)
                         
                         Object.keys(itims).forEach(function(its){
-                            console.log(itims[its])
-                            Object.values(itims[String(its)]).forEach(function(itms){
+                            Object.keys(itims[its]).forEach(function(its2){
+                                let itms = itims[its][its2]
                                 console.log(itms)
                                 var head = document.createElement('div');
                                 head.classList.add('head');
