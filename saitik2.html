@@ -50,6 +50,9 @@
             var typeSelect = document.getElementById('typeSelect');
             var selected = typeSelect.options[typeSelect.selectedIndex].value;
             aValue = selected;
+            if (aValue == 'bots'){
+                document.getElementById('link').value = "https://t.me/"
+            }
             cts_addc(tg, aValue)
 
         }

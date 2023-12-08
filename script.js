@@ -52,7 +52,7 @@ function createCat(existingTags) {
 
 function addTagOnComma(inputElement) {
     var tagList = document.getElementById('tagList');
-    var tagText = inputElement.value.slice(0, -1);
+    var tagText = inputElement.value.slice(0, -1).toLowerCase();
     var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
 
     if (inputElement.value.includes(',') && inputElement.value !== ',') {
