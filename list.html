@@ -202,7 +202,8 @@
                         console.log(itims)
                         
                         Object.keys(itims).forEach(function(its){
-                            if (itims[its] == []){
+                            if (itims[its].lenght != 0){
+                                console.log(itims[its])
                                 Object.keys(itims[its]).forEach(function(its2){
                                     console.log(its2)
                                 
