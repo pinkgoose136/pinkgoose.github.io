@@ -204,12 +204,10 @@
                         });
                         console.log(itims)
                         let kes = itims.sort((a, b) => b['001'] - a['001'])
-                        console.log(kes)
-                        Object.keys(kes).forEach(function(its){
-                                console.log(itims[its])
-                                console.log(its)
-                                let itms = itims[its]
-                                
+
+                        Object.forEach(function(itms){
+                                console.log(itms)
+
                                 var head = document.createElement('div');
                                 head.classList.add('head');
                                 var left = document.createElement('div');
