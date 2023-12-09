@@ -135,7 +135,6 @@
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                     } else {
                         let keysBySecondPart = {};
-                        let jui = []
                         let itims = [];
                         Object.keys(items).forEach(function(key) {
                             let value = items[key];
@@ -147,38 +146,12 @@
                                 if (!keysBySecondPart[secondPart]) {
                                     keysBySecondPart[secondPart] = [];
                                 }
-                                keysBySecondPart[secondPart].push(key);
-                                jui.push(key)
+                                let kuseo = {}
+                                kuseo[key] = value
+                                keysBySecondPart2[secondPart].push(kuseo);
                             }
                         });
                         console.log(keysBySecondPart)
-
-                        tg.CloudStorage.getItems(jui, function(err, itemss) {
-                            if (err) {
-                                keysDiv.textContent = 'Ошибка получения значений: ' + err;;
-                                keysListDiv.appendChild(keysDiv);
-                            } else {
-                                let keysBySecondPart2 = {};
-                                Object.keys(items).forEach(function(key) {
-                                    let value = items[key];
-                                    let keyParts = key.split('-');
-
-                                    if (keyParts[0] === 'item') {
-                                        let secondPart = keyParts[1];
-
-                                        if (!keysBySecondPart2[secondPart]) {
-                                            keysBySecondPart2[secondPart] = [];
-                                        }
-                                        let kuseo = {}
-                                        kuseo[key] = value
-                                        keysBySecondPart2[secondPart].push(kuseo);
-                                    } 
-                                });
-                                console.log(keysBySecondPart2)
-
-                                
-                            }
-                        })
 
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let keysDiv = document.createElement('div');
