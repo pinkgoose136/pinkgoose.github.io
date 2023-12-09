@@ -230,9 +230,11 @@
 
                             
                             let itemDiv2 = document.createElement('div');
+                            itemDiv.classList.add('catstyle');
                             let tagis2 = itms['4'].split(', ');
                             tagis2.forEach((tt) => {
                                 let kr = document.createElement('div');
+                                kr.classList.add('itim');
                                 kr.textContent = tt + ' ';
                                 kr.addEventListener('click', function(event) {
                                     console.log(event.target.textContent);
@@ -246,10 +248,11 @@
                             let tagis = itms['5'].split(', ');
                             tagis.forEach((t) => {
                                 let kr = document.createElement('div');
+                                kr.classList.add('itim');
                                 kr.textContent = '#'+t + ' ';
                                 itemDiv.appendChild(kr);
                             })
-                            
+
                             keysDiv.appendChild(itemDiv);
                             keysListDiv.appendChild(keysDiv)
                         });

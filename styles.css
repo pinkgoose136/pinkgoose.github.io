@@ -392,3 +392,9 @@ input[type="radio"]:checked + label {
     font-size: 12px;
     display: flex;
 }
+  .catstyle{
+    display: flex;
+  }
+  .itim{
+    margin-right: 5px
+  }
