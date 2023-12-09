@@ -203,15 +203,11 @@
                             });
                         });
                         console.log(itims)
-
-                        let entries = Object.entries(itims);
-                        entries.sort((a, b) => a[1]["001"].localeCompare(b[1]["001"]));
-                        let sortedDictionary = Object.fromEntries(entries);
-                        console.log(sortedDictionary);
+                        console.log(itims.sort((a, b) => b['001'] - a['001']))
 
                         Object.keys(sortedDictionary).forEach(function(its){
                                 console.log(itims[its])
-                                console.log(its2)
+                                console.log(its)
                             
                                 let itms = itims[its][its2]
                                 console.log(itms)
