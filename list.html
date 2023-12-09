@@ -203,14 +203,13 @@
                             });
                         });
                         console.log(itims)
-                        console.log(itims.sort((a, b) => b['001'] - a['001']))
-
-                        Object.keys(sortedDictionary).forEach(function(its){
+                        let kes = itims.sort((a, b) => b['001'] - a['001'])
+                        console.log(kes)
+                        Object.keys(kes).forEach(function(its){
                                 console.log(itims[its])
                                 console.log(its)
-                            
-                                let itms = itims[its][its2]
-                                console.log(itms)
+                                let itms = itims[its]
+                                
                                 var head = document.createElement('div');
                                 head.classList.add('head');
                                 var left = document.createElement('div');
