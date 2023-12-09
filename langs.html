@@ -32,7 +32,6 @@
                 console.log('Ошибка получения ключей: ' + err);
             } else {
                 let ke = keys.filter(word => word.includes(String('lng')))
-                console.log(ke)
                 tg.CloudStorage.getItems(ke, function(err, items) {
                     if (err) {
                         console.log('Ошибка получения значений: ' + err);
@@ -42,23 +41,14 @@
                         Object.keys(items).forEach(function(key) {
                             var head = document.createElement('div');
                             var name = document.createElement('p');
-                            var tagList = document.createElement('div');
+                            var tagList = document.createElement('input');
                             var inp = document.createElement('input');
                             var btn = document.createElement('button');
 
                             tagList.classList.add('tagList');
-                            
+                            tagList = items[key]
+
                             let cts = String(items[key]).split(', ') 
-                            
-                            cts.forEach(element => {
-                                var tagItem = document.createElement('div');
-                                tagItem.textContent = element;
-                                tagItem.classList.add('tag');
-                                tagItem.onclick = function() {
-                                    tagList.removeChild(tagItem);
-                                };
-                                tagList.appendChild(tagItem);
-                            });
 
                             name.innerHTML = String(key);
                             head.id = String(key) + '-head';     
