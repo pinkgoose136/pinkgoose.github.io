@@ -57,8 +57,8 @@
             mode: 'no-cors'
             })
             .then(response => response.json())
-            .then(data => {
-                console.log(data.kukus);
+            .then(ru => {
+                console.log(ru.kukus);
             })
             .catch(error => console.error('Ошибка загрузки файла JSON:', error));
 
