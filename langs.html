@@ -41,19 +41,21 @@
                         Object.keys(items).forEach(function(key) {
                             var head = document.createElement('div');
                             var name = document.createElement('p');
-                            var tagList = document.createElement('input');
                             var inp = document.createElement('input');
                             var btn = document.createElement('button');
 
-                            tagList.classList.add('tagList');
-                            tagList.value = items[key]
-
-                            let cts = String(items[key]).split(', ') 
+                            inp.value = items[key]
+                            inp.type = 'text';
+                            inp.addEventListener('input', function(event){
+                                var textarea = event.target;
+                                textarea.style.height = "auto";
+                                var newHeight = textarea.scrollHeight;
+                                textarea.style.height = newHeight + "px";
+                            })
 
                             name.innerHTML = String(key);
                             head.id = String(key) + '-head';     
-                            tagList.id = String(key) + '-tgs';
-                            inp.id = String(key) + '-inp';
+                            inp.id = String(key) + '-tgs';
                             inp.classList.add('addb');
                             btn.id = String(key);
                             btn.innerHTML = "Refresh";
@@ -76,33 +78,10 @@
                                 });
                                 
                             });
-                            
-                            inp.addEventListener('input', function(event) {
-                                let inputElement = event.target;
-                                let inpId = inputElement.id;
-                                var tagList = document.getElementById(inpId.replace('-inp', '-tgs'));
-                                var tagText = inputElement.value.slice(0, -1);
-                                var existingTags = Array.from(tagList.getElementsByClassName('tag')).map(tag => tag.textContent);
-
-                                if (inputElement.value.includes(',') && inputElement.value !== ',') {
-                                    if (tagText && !existingTags.includes(tagText)) {
-                                        var tagItem = document.createElement('div');
-                                        tagItem.textContent = tagText;
-                                        tagItem.classList.add('tag');
-                                        tagItem.onclick = function() {
-                                            tagList.removeChild(tagItem);
-                                        };
-                                        tagList.appendChild(tagItem);
-                                    }
-                                    inputElement.value = '';
-                                }
-                            })
-
 
                             head.appendChild(name);
                             head.appendChild(inp);
                             head.appendChild(btn);
-                            head.appendChild(tagList);
                             kese.appendChild(head);
                         });
                     }
