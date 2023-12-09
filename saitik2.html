@@ -56,10 +56,8 @@
         fetch('https://pinkgoose.pythonanywhere.com/static/alangs.json', {
             mode: 'no-cors'
             })
-            .then(response => console.log(response))
-            .then(ru => {
-                console.log(ru.kukus);
-            })
+          //  .then(response => {console.log(response)})
+            .then(ru => {console.log(ru.kukus)})
             .catch(error => console.error('Ошибка загрузки файла JSON:', error));
 
         var typeSelect = document.getElementById('typeSelect');
