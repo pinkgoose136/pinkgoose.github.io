@@ -149,7 +149,6 @@
                                 keysBySecondPart[secondPart][key] = value;
                             }
                         });
-                        console.log(keysBySecondPart)
 
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let itms = {}
@@ -188,12 +187,10 @@
                                     itims.push(itms)
                                 }
                             }
-                            console.log(itms)
                         });
 
                         let kes = itims.sort((a, b) => b['001'] - a['001'])
-                        console.log(kes)
-                        
+
                         kes.forEach((itms) => {
                             let keysDiv = document.createElement('div');
                             keysDiv.classList.add('item');
@@ -235,7 +232,7 @@
                             tagis2.forEach((tt) => {
                                 let kr = document.createElement('div');
                                 kr.classList.add('itim');
-                                kr.textContent = tt + ' ';
+                                kr.textContent = tt + ',';
                                 kr.addEventListener('click', function(event) {
                                     console.log(event.target.textContent);
                                 });
@@ -267,7 +264,9 @@
         function addCategory2(valw) {
             console.log(valw)
             var categorySelect = document.getElementById('categorySelect');
-            var selectedCategory = categorySelect.options[categorySelect.selectedIndex].value;
+            var selectedCategory = valw;
+            console.log(categorySelect.options)
+
             var categoryList = document.getElementById('categoryList');
 
             const radioButtons = document.querySelectorAll('input[type="radio"]');
