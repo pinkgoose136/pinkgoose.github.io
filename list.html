@@ -157,7 +157,22 @@
                                 keysDiv.textContent = 'Ошибка получения значений: ' + err;;
                                 keysListDiv.appendChild(keysDiv);
                             } else {
-                                console.log(itemss)
+                                let keysBySecondPart2 = {};
+                                Object.keys(items).forEach(function(key) {
+                                    let value = items[key];
+                                    let keyParts = key.split('-');
+
+                                    if (keyParts[0] === 'item') {
+                                        let secondPart = keyParts[1];
+
+                                        if (!keysBySecondPart2[secondPart]) {
+                                            keysBySecondPart2[secondPart] = [];
+                                        }
+                                        keysBySecondPart2[secondPart].push({key: value});
+                                    } 
+                                });
+                                console.log(keysBySecondPart2)
+
                             }
                         })
 
