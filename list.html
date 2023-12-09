@@ -135,7 +135,7 @@
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                     } else {
                         let keysBySecondPart = {};
-                        let itims = {'1': [], '2': [], '3': []}
+                        let itims = {}
                         Object.keys(items).forEach(function(key) {
                             let value = items[key];
                             let keyParts = key.split('-');
@@ -186,13 +186,22 @@
                                     if (itms['2'] == type && ctgss.every(item => itms['4'].split(', ').includes(item))){
                                         if (sear != 0){
                                             if (itms['-1'].toLowerCase().includes(sear.toLowerCase())){
+                                                if (typeof itims['1'] == "undefined") {
+                                                    itims['1'] = []
+                                                }
                                                 itims['1'].push(itms)
                                             }
                                             else if(itms['5'].toLowerCase().split(', ').includes(sear.toLowerCase())){
+                                                if (typeof itims['2'] == "undefined") {
+                                                    itims['2'] = []
+                                                }
                                                 itims['2'].push(itms)
                                             }
                                         }
                                         else{
+                                            if (typeof itims['3'] == "undefined") {
+                                                itims['3'] = []
+                                            }
                                             itims['3'].push(itms)
                                         }
                                     }
@@ -202,10 +211,6 @@
                         console.log(itims)
                         
                         Object.keys(itims).forEach(function(its){
-                            console.log(itims['3'].length)
-                            console.log(itims['3'].keys)
-                            console.log(itims['3'].values)
-                            if (itims[its].length != 0){
                                 console.log(itims[its])
                                 Object.keys(itims[its]).forEach(function(its2){
                                     console.log(its2)
@@ -252,7 +257,7 @@
                                     });
                                     keysListDiv.appendChild(keysDiv);
                             })  
-                            }                         
+                                                    
                         })
                     }
                 });
