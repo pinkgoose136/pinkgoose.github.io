@@ -151,7 +151,7 @@
                             }
                         });
                         console.log(keysBySecondPart)
-                        
+
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let keysDiv = document.createElement('div');
                             keysDiv.classList.add('item');
@@ -210,7 +210,8 @@
                         
                         
                         kes.forEach((itms) => {
-                            console.log(itms)
+                            let keysDiv = document.createElement('div');
+                            keysDiv.classList.add('item');
 
                             var head = document.createElement('div');
                             head.classList.add('head');
