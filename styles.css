@@ -390,4 +390,5 @@ input[type="radio"]:checked + label {
     color: var(--tg-theme-link-color, #0078d4);
     margin-top: 8px;
     font-size: 12px;
+    display: flex;
 }

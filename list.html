@@ -227,25 +227,32 @@
                             head.appendChild(right);
 
                             keysDiv.appendChild(head);
+
                             
+                            let itemDiv2 = document.createElement('div');
+                            itemDiv2.classList.add('tagstyle');
+                            let tagis2 = itms['4'].split(', ');
+                            tagis2.forEach((t) => {
+                                let kr = document.createElement('div');
+                                kr.addEventListener('click', function(this) {
+                                    console.log(this.textContent)
+                                });
+
+                                kr.textContent = t + ' ';
+                                itemDiv2.appendChild(kr);
+                            })
+                            keysDiv.appendChild(itemDiv2);
+
                             let itemDiv = document.createElement('div');
                             itemDiv.classList.add('tagstyle');
                             let tagis = itms['5'].split(', ');
                             tagis.forEach((t) => {
                                 let kr = document.createElement('div');
-                                kr.classList.add('tagik');
-                                kr.textContent = t;
+                                kr.textContent = '#'+t + ' ';
                                 itemDiv.appendChild(kr);
                             })
                             keysDiv.appendChild(itemDiv);
-
-
-                            let itemDiv2 = document.createElement('div');
-                            itemDiv2.textContent = itms['4'];
-                            keysDiv.appendChild(itemDiv2);
-
-                            keysListDiv.appendChild(keysDiv);  
-                            });
+                        });
                     }
                 });
             }
@@ -254,7 +261,8 @@
         create_drop(tg, 'channels', [])
         generate(0, 'channels', [])
         
-        function addCategory2() {
+        function addCategory2(valw) {
+            console.log(valw)
             var categorySelect = document.getElementById('categorySelect');
             var selectedCategory = categorySelect.options[categorySelect.selectedIndex].value;
             var categoryList = document.getElementById('categoryList');
