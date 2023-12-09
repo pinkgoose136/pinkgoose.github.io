@@ -152,60 +152,43 @@
                         console.log(keysBySecondPart)
 
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
-                            console.log(secondPart)
-                            Object.keys(keysBySecondPart[secondPart]).forEach(function(kee){
-                                console.log(kee)
-                            })
+                            let itms = {}
+                            let ae = ''
+                            Object.keys(keysBySecondPart[secondPart]).forEach(function(key2){
+                                let valu2 = itemss[key2];
+                                let keyParts = key2.split('-');
+                                let tex = "";
+                                let keyy = "";
+                                switch (keyParts[2]) {
+                                    case 'link': tex = ''; keyy = '1'; break;
+                                    case 'name': tex = ''; keyy = '-1'; break;
+                                    case 'desc': tex = ''; keyy = '3'; break;
+                                    case 'type': tex = ""; keyy = '2'; break;
+                                    case 'cat': tex = ""; keyy = '4'; break;
+                                    case 'tag': tex = ""; keyy = '5'; break;
+                                    case 'owner': tex = "Айди автора: "; keyy = '6'; break;
+                                    case 'img': tex = ""; keyy = '11'; ae = valu2; break;
+                                    default: tex = expr; keyy = '0'; break;
+                                }
+                                itms[keyy] = tex + valu2;
                             
-                            let keysDiv = document.createElement('div');
-                            keysDiv.classList.add('item');
-
-                            tg.CloudStorage.getItems(keysBySecondPart[secondPart], function(err, itemss) {
-                                if (err) {
-                                    keysDiv.textContent = 'Ошибка получения значений: ' + err;;
-                                    keysListDiv.appendChild(keysDiv);
-                                } else {
-                                    let itms = {}
-                                    let ae = ''
-                                    Object.keys(itemss).forEach(function(key2) {
-                                        let valu2 = itemss[key2];
-                                        let keyParts = key2.split('-');
-                                        let tex = "";
-                                        let keyy = "";
-                                        switch (keyParts[2]) {
-                                        case 'link': tex = ''; keyy = '1'; break;
-                                        case 'name': tex = ''; keyy = '-1'; break;
-                                        case 'desc': tex = ''; keyy = '3'; break;
-                                        case 'type': tex = ""; keyy = '2'; break;
-                                        case 'cat': tex = ""; keyy = '4'; break;
-                                        case 'tag': tex = ""; keyy = '5'; break;
-                                        case 'owner': tex = "Айди автора: "; keyy = '6'; break;
-                                        case 'img': tex = ""; keyy = '11'; ae = valu2; break;
-                                        default: tex = expr; keyy = '0'; break;
-                                        }
-                                        
-                                        itms[keyy] = tex + valu2;
-                                    });
-                                    
-
-                                    if (itms['2'] == type && ctgss.every(item => itms['4'].split(', ').includes(item))){
-                                        if (sear != 0){
-                                            if (itms['-1'].toLowerCase().includes(sear.toLowerCase())){
-                                                itms['001'] = '1'
-                                                itims.push(itms)
-                                            }
-                                            else if(itms['5'].toLowerCase().split(', ').includes(sear.toLowerCase())){
-                                                itms['001'] = '2'
-                                                itims.push(itms)
-                                            }
-                                        }
-                                        else{
-                                            itms['001'] = '1'
-                                            itims.push(itms)
-                                        }
+                            if (itms['2'] == type && ctgss.every(item => itms['4'].split(', ').includes(item))){
+                                if (sear != 0){
+                                    if (itms['-1'].toLowerCase().includes(sear.toLowerCase())){
+                                        itms['001'] = '1'
+                                        itims.push(itms)
+                                    }
+                                    else if(itms['5'].toLowerCase().split(', ').includes(sear.toLowerCase())){
+                                        itms['001'] = '2'
+                                        itims.push(itms)
                                     }
                                 }
-                            });
+                                else{
+                                    itms['001'] = '1'
+                                    itims.push(itms)
+                                }
+                            }
+                            })
                         });
                         let kes = itims.sort((a, b) => b['001'] - a['001'])
                         console.log(kes)
