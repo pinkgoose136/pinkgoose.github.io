@@ -168,7 +168,9 @@
                                         if (!keysBySecondPart2[secondPart]) {
                                             keysBySecondPart2[secondPart] = [];
                                         }
-                                        keysBySecondPart2[secondPart].push({key: value});
+                                        let kuseo = {}
+                                        kuseo[key] = value
+                                        keysBySecondPart2[secondPart].push(kuseo);
                                     } 
                                 });
                                 console.log(keysBySecondPart2)
