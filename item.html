@@ -7,7 +7,6 @@
 </head>
 <body>
     <div id="keysList"></div>
-    <h2 id="opa"></h2>
     <button id="accept">Добавить</button>
     <button id="delete">Удалить</button>
     <h2 id="pa"></h2>
@@ -34,12 +33,12 @@
 
         tg.CloudStorage.getKeys(function(err, keys) {
         if (err) {
-            document.getElementById('opa').innerHTML = 'Ошибка получения ключей:' + err;
+            console.log('Ошибка получения ключей:' + err);
         } else {
             let ke = keys.filter(word => word.includes(idi))
             tg.CloudStorage.getItems(ke, function(err, values) {
                 if (err) {
-                    document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+                    console.log('Ошибка получения значений: ' + err);
                 } else {
                     let keysListDiv = document.getElementById('keysList');
                     let keysDiv = document.createElement('div');
@@ -67,7 +66,7 @@
                         }
                     });
                     if (String(Object.keys(itms)) == 'o'){
-                        document.getElementById('opa').innerHTML = 'Заявка отправлена на рассмотрение. Ожидайте ответа';
+                        console.log('Заявка отправлена на рассмотрение. Ожидайте ответа');
                         let acceptb = document.getElementById('accept');
                         acceptb.remove();
                         let deleteb = document.getElementById('delete');
@@ -113,9 +112,9 @@
                         Object.keys(items).forEach(function(key) {
                             tg.CloudStorage.removeItem(key, function(err) {
                                 if (err) {
-                                    document.getElementById('pa').innerHTML = 'Ошибка удаления элемента с ключом ' + key + ':' + err;
+                                    console.log('Ошибка удаления элемента с ключом ' + key + ':' + err);
                                 } else {
-                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + key + ' успешно удален из хранилища';
+                                    console.log('Элемент с ключом ' + key + ' успешно удален из хранилища');
                                 }
                             });
                         });
@@ -128,9 +127,9 @@
 
                             tg.CloudStorage.setItem(updatedKey, value, function(err) {
                                 if (err) {
-                                    document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + key + ':' + err;
+                                    console.log('Ошибка добвления элемента с ключом ' + key + ':' + err);
                                 } else {
-                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + key + ' успешно добавлен в хранилище';
+                                    console.log('Элемент с ключом ' + key + ' успешно добавлен в хранилище');
                                 }
                             });
 
@@ -138,16 +137,16 @@
                         let ge = 'draft-' + Object.keys(items)[0].split('-')[0]
                         tg.CloudStorage.setItem(ge + '-name'  + '-' + String(idd), name, function(err) {
                                 if (err) {
-                                    document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + '-name' + ':' + err;
+                                    console.log('Ошибка добвления элемента с ключом ' + ge + '-name' + ':' + err);
                                 } else {
-                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + ge + '-name' + ' успешно добавлен в хранилище';
+                                    console.log('Элемент с ключом ' + ge + '-name' + ' успешно добавлен в хранилище');
                                 }
                             });
                         tg.CloudStorage.setItem(ge + '-img' + '-' + String(idd), img, function(err) {
                                 if (err) {
-                                    document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + ge + '-img' + ':' + err;
+                                    console.log('Ошибка добвления элемента с ключом ' + ge + '-img' + ':' + err);
                                 } else {
-                                    document.getElementById('pa').innerHTML = 'Элемент с ключом ' + ge + '-img' + ' успешно добавлен в хранилище';
+                                    console.log('Элемент с ключом ' + ge + '-img' + ' успешно добавлен в хранилище');
                                 }
                             });
                     }

@@ -6,17 +6,15 @@
 </head>
 <body style="color: aliceblue;">
     <div id="keysList"></div>
-    <h2 id="opa"></h2>
-
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
 
         tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
-                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
+                console.log('Ошибка получения ключей: ' + err);
             } else {
-                document.getElementById('opa').innerHTML = JSON.stringify(keys);
+                console.log(JSON.stringify(keys));
             }
         });
     </script>

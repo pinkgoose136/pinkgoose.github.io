@@ -53,10 +53,6 @@
               </div>
         </div>
     </div>
-    
-
-    <h2 id="opa"></h2>
-    <h3 id="sus"></h3>
     <script>
         let circle = document.getElementById('ccircle');
         circle.setAttribute('color', 'var(--tg-theme-link-color, #0078d4)');
@@ -128,11 +124,11 @@
             keysListDiv.innerHTML = "";
             tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
-                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
+                console.log('Ошибка получения ключей: ' + err);
             } else {
                 tg.CloudStorage.getItems(keys, function(err, items) {
                     if (err) {
-                        document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+                        console.log('Ошибка получения значений: ' + err);
                     } else {
                         let keysBySecondPart = {};
                         let itims = [];

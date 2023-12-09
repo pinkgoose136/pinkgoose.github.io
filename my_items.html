@@ -9,8 +9,6 @@
 <body>
     <div id="close"></div>
     <div id="keysList2"></div>
-    <h2 id="opa"></h2>
-    <h3 id="sus"></h3>
     <script>
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
@@ -29,12 +27,12 @@
         let idd = tg.initDataUnsafe.user.id;
         tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
-                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
+                console.log('Ошибка получения ключей: ' + err);
             } else {
                 let ke = keys.filter(word => word.includes(String(idd)))
                 tg.CloudStorage.getItems(keys, function(err, items) {
                     if (err) {
-                        document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+                        console.log('Ошибка получения значений: ' + err);
                     } else {
                         let keysBySecondPart = {};
 

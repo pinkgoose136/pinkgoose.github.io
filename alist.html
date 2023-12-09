@@ -7,8 +7,6 @@
 </head>
 <body style="color: aliceblue;">
     <div id="keysList"></div>
-    <h2 id="opa"></h2>
-
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
@@ -20,9 +18,9 @@
 
                 tg.CloudStorage.setItem(updatedKey, value, function(err) {
                     if (err) {
-                        document.getElementById('pa').innerHTML = 'Ошибка добвления элемента с ключом ' + key + ':' + err;
+                        console.log('Ошибка добвления элемента с ключом ' + key + ':' + err);
                     } else {
-                        document.getElementById('pa').innerHTML = 'Элемент с ключом ' + key + ' успешно добавлен в хранилище';
+                        console.log('Элемент с ключом ' + key + ' успешно добавлен в хранилище');
                     }
                 });
 
@@ -33,9 +31,9 @@
             Object.keys(items).forEach(function(key) {
                 tg.CloudStorage.removeItem(key, function(err) {
                     if (err) {
-                        document.getElementById('pa').innerHTML = 'Ошибка удаления элемента с ключом ' + key + ':' + err;
+                        console.log('Ошибка удаления элемента с ключом ' + key + ':' + err);
                     } else {
-                        document.getElementById('pa').innerHTML = 'Элемент с ключом ' + key + ' успешно удален из хранилища';
+                        console.log('Элемент с ключом ' + key + ' успешно удален из хранилища');
                     }
                 });
             });
@@ -43,11 +41,11 @@
 
         tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
-                document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
+                console.log('Ошибка получения ключей: ' + err);
             } else {
                 tg.CloudStorage.getItems(keys, function(err, items) {
                     if (err) {
-                        document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+                        console.log('Ошибка получения значений: ' + err);
                     } else {
                         let keysBySecondPart = {};
 

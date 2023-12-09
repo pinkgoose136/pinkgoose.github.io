@@ -40,10 +40,6 @@
         <label id="tgs_error" class="error"></label>
         <br>
     </div>
-
-    <h2 id="opa"></h2>
-    <h2 id="pa"></h2>
-
     <script>
         let aValue;
         function typeChange(){
@@ -95,12 +91,12 @@
          
         tg.CloudStorage.getKeys(function(err, keyse) {
         if (err) {
-            document.getElementById('opa').innerHTML = 'Ошибка получения ключей: ' + err;
+            console.log('Ошибка получения ключей: ' + err);
         } else {
             let ke = keyse.filter(word => word.split('-')[2] == 'link')
             tg.CloudStorage.getItems(ke, function(err, items) {
             if (err) {
-                document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
+                console.log('Ошибка получения значений: ' + err);
             } else {
                 let linkis = Object.values(items)
                 if (linkis.includes(lnk)){
