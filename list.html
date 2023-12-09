@@ -261,8 +261,8 @@
         create_drop(tg, 'channels', [])
         generate(0, 'channels', [])
         
-        function addCategory2(valw) {
-            console.log(valw)
+        function addCategory2(vali) {
+            let valw = vali.replace(',', '')
             var categorySelect = document.getElementById('categorySelect');
             var selectedCategory = valw;
 
