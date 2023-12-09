@@ -135,7 +135,7 @@
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                     } else {
                         let keysBySecondPart = {};
-                        let susu = [];
+                        let jui = []
                         let itims = [];
                         Object.keys(items).forEach(function(key) {
                             let value = items[key];
@@ -147,11 +147,19 @@
                                 if (!keysBySecondPart[secondPart]) {
                                     keysBySecondPart[secondPart] = [];
                                 }
-
                                 keysBySecondPart[secondPart].push(key);
-                                susu.push(key)
+                                jui.push(key)
                             }
                         });
+
+                        tg.CloudStorage.getItems(jui, function(err, itemss) {
+                            if (err) {
+                                keysDiv.textContent = 'Ошибка получения значений: ' + err;;
+                                keysListDiv.appendChild(keysDiv);
+                            } else {
+                                console.log(itemss)
+                            }
+                        })
 
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let keysDiv = document.createElement('div');
@@ -206,7 +214,6 @@
                         });
                         let kes = itims.sort((a, b) => b['001'] - a['001'])
                         console.log(kes)
-                        console.log(susu)
                         
                         kes.forEach((itms) => {
                             let keysDiv = document.createElement('div');
