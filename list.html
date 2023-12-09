@@ -205,49 +205,48 @@
                         console.log(itims)
                         let kes = itims.sort((a, b) => b['001'] - a['001'])
 
-                        itims.forEach(function(itms){
-                                console.log(itms)
+                        kes.forEach((itms) => {
+                            console.log(itms)
 
-                                var head = document.createElement('div');
-                                head.classList.add('head');
-                                var left = document.createElement('div');
-                                left.classList.add('left');
-                                var right = document.createElement('div');
-                                right.classList.add('right');
+                            var head = document.createElement('div');
+                            head.classList.add('head');
+                            var left = document.createElement('div');
+                            left.classList.add('left');
+                            var right = document.createElement('div');
+                            right.classList.add('right');
 
-                                var imgElement = document.createElement('img');
-                                imgElement.classList.add('img');
-                                imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
-                                imgElement.alt = 'Alternative text';
+                            var imgElement = document.createElement('img');
+                            imgElement.classList.add('img');
+                            imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
+                            imgElement.alt = 'Alternative text';
 
-                                let title = document.createElement('div');
-                                let ssil = document.createElement('a');
-                                ssil.href = itms['1'];
-                                ssil.classList.add('lnk');
-                                ssil.textContent = itms['-1']; 
-                                title.appendChild(ssil);
-                                var desc = document.createElement('div');
-                                desc.textContent = itms['3']; 
+                            let title = document.createElement('div');
+                            let ssil = document.createElement('a');
+                            ssil.href = itms['1'];
+                            ssil.classList.add('lnk');
+                            ssil.textContent = itms['-1']; 
+                            title.appendChild(ssil);
+                            var desc = document.createElement('div');
+                            desc.textContent = itms['3']; 
 
 
-                                left.appendChild(imgElement);
-                                right.appendChild(title);
-                                right.appendChild(desc);
-                                head.appendChild(left);
-                                head.appendChild(right);
+                            left.appendChild(imgElement);
+                            right.appendChild(title);
+                            right.appendChild(desc);
+                            head.appendChild(left);
+                            head.appendChild(right);
 
-                                keysDiv.appendChild(head);
-                                
-                                var dudu = {'4': 'Категории: ', '5': 'Теги: '}
-                                Object.keys(itms).forEach(function(i){
-                                    if (i == '4' || i == '5'){
-                                        let itemDiv = document.createElement('div');
-                                        itemDiv.textContent = dudu[i] + itms[i];
-                                        keysDiv.appendChild(itemDiv);
-                                    }
-                                });
-                                keysListDiv.appendChild(keysDiv);
-                                                   
+                            keysDiv.appendChild(head);
+                            
+                            var dudu = {'4': 'Категории: ', '5': 'Теги: '}
+                            Object.keys(itms).forEach(function(i){
+                                if (i == '4' || i == '5'){
+                                    let itemDiv = document.createElement('div');
+                                    itemDiv.textContent = dudu[i] + itms[i];
+                                    keysDiv.appendChild(itemDiv);
+                                }
+                            });
+                            keysListDiv.appendChild(keysDiv);                 
                         })
                     }
                 });
