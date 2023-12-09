@@ -155,7 +155,7 @@
                             let itms = {}
                             let ae = ''
                             Object.keys(keysBySecondPart[secondPart]).forEach(function(key2){
-                                let valu2 = itemss[key2];
+                                let valu2 = keysBySecondPart[secondPart][key2];
                                 let keyParts = key2.split('-');
                                 let tex = "";
                                 let keyy = "";
@@ -190,7 +190,7 @@
                             }
                             console.log(itms)
                         });
-                        
+
                         let kes = itims.sort((a, b) => b['001'] - a['001'])
                         console.log(kes)
                         
