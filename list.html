@@ -135,7 +135,7 @@
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                     } else {
                         let keysBySecondPart = {};
-                        let itims = {}
+                        let itims = []
                         Object.keys(items).forEach(function(key) {
                             let value = items[key];
                             let keyParts = key.split('-');
@@ -186,78 +186,75 @@
                                     if (itms['2'] == type && ctgss.every(item => itms['4'].split(', ').includes(item))){
                                         if (sear != 0){
                                             if (itms['-1'].toLowerCase().includes(sear.toLowerCase())){
-                                                if (typeof itims['1'] == "undefined") {
-                                                    itims['1'] = []
-                                                }
-                                                itims['1'].push(itms)
+                                                itms['001'] = '1'
+                                                itims.push(itms)
                                             }
                                             else if(itms['5'].toLowerCase().split(', ').includes(sear.toLowerCase())){
-                                                if (typeof itims['2'] == "undefined") {
-                                                    itims['2'] = []
-                                                }
-                                                itims['2'].push(itms)
+                                                itms['001'] = '2'
+                                                itims.push(itms)
                                             }
                                         }
                                         else{
-                                            if (typeof itims['3'] == "undefined") {
-                                                itims['3'] = []
-                                            }
-                                            itims['3'].push(itms)
+                                            itms['001'] = '1'
+                                            itims.push(itms)
                                         }
                                     }
                                 }
                             });
                         });
                         console.log(itims)
-                        
-                        Object.keys(itims).forEach(function(its){
+
+                        let entries = Object.entries(itims);
+                        entries.sort((a, b) => a[1]["001"].localeCompare(b[1]["001"]));
+                        let sortedDictionary = Object.fromEntries(entries);
+                        console.log(sortedDictionary);
+
+                        Object.keys(sortedDictionary).forEach(function(its){
                                 console.log(itims[its])
-                                Object.keys(itims[its]).forEach(function(its2){
-                                    console.log(its2)
+                                console.log(its2)
+                            
+                                let itms = itims[its][its2]
+                                console.log(itms)
+                                var head = document.createElement('div');
+                                head.classList.add('head');
+                                var left = document.createElement('div');
+                                left.classList.add('left');
+                                var right = document.createElement('div');
+                                right.classList.add('right');
+
+                                var imgElement = document.createElement('img');
+                                imgElement.classList.add('img');
+                                imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
+                                imgElement.alt = 'Alternative text';
+
+                                let title = document.createElement('div');
+                                let ssil = document.createElement('a');
+                                ssil.href = itms['1'];
+                                ssil.classList.add('lnk');
+                                ssil.textContent = itms['-1']; 
+                                title.appendChild(ssil);
+                                var desc = document.createElement('div');
+                                desc.textContent = itms['3']; 
+
+
+                                left.appendChild(imgElement);
+                                right.appendChild(title);
+                                right.appendChild(desc);
+                                head.appendChild(left);
+                                head.appendChild(right);
+
+                                keysDiv.appendChild(head);
                                 
-                                    let itms = itims[its][its2]
-                                    console.log(itms)
-                                    var head = document.createElement('div');
-                                    head.classList.add('head');
-                                    var left = document.createElement('div');
-                                    left.classList.add('left');
-                                    var right = document.createElement('div');
-                                    right.classList.add('right');
-
-                                    var imgElement = document.createElement('img');
-                                    imgElement.classList.add('img');
-                                    imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
-                                    imgElement.alt = 'Alternative text';
-
-                                    let title = document.createElement('div');
-                                    let ssil = document.createElement('a');
-                                    ssil.href = itms['1'];
-                                    ssil.classList.add('lnk');
-                                    ssil.textContent = itms['-1']; 
-                                    title.appendChild(ssil);
-                                    var desc = document.createElement('div');
-                                    desc.textContent = itms['3']; 
-
-
-                                    left.appendChild(imgElement);
-                                    right.appendChild(title);
-                                    right.appendChild(desc);
-                                    head.appendChild(left);
-                                    head.appendChild(right);
-
-                                    keysDiv.appendChild(head);
-                                    
-                                    var dudu = {'4': 'Категории: ', '5': 'Теги: '}
-                                    Object.keys(itms).forEach(function(i){
-                                        if (i == '4' || i == '5'){
-                                            let itemDiv = document.createElement('div');
-                                            itemDiv.textContent = dudu[i] + itms[i];
-                                            keysDiv.appendChild(itemDiv);
-                                        }
-                                    });
-                                    keysListDiv.appendChild(keysDiv);
-                            })  
-                                                    
+                                var dudu = {'4': 'Категории: ', '5': 'Теги: '}
+                                Object.keys(itms).forEach(function(i){
+                                    if (i == '4' || i == '5'){
+                                        let itemDiv = document.createElement('div');
+                                        itemDiv.textContent = dudu[i] + itms[i];
+                                        keysDiv.appendChild(itemDiv);
+                                    }
+                                });
+                                keysListDiv.appendChild(keysDiv);
+                                                   
                         })
                     }
                 });
