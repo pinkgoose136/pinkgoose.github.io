@@ -144,17 +144,19 @@
                                 let secondPart = keyParts[1];
 
                                 if (!keysBySecondPart[secondPart]) {
-                                    keysBySecondPart[secondPart] = [];
+                                    keysBySecondPart[secondPart] = {};
                                 }
-                                let kuseo = {}
-                                kuseo[key] = value
-                                keysBySecondPart[secondPart].push(kuseo);
+                                keysBySecondPart[secondPart][key] = value;
                             }
                         });
                         console.log(keysBySecondPart)
 
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             console.log(secondPart)
+                            Object.keys(keysBySecondPart[secondPart]).forEach(function(kee){
+                                console.log(kee)
+                            })
+                            
                             let keysDiv = document.createElement('div');
                             keysDiv.classList.add('item');
 
