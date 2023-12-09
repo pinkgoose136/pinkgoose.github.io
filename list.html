@@ -150,7 +150,8 @@
                                 keysBySecondPart[secondPart].push(key);
                             }
                         });
-
+                        console.log(keysBySecondPart)
+                        
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let keysDiv = document.createElement('div');
                             keysDiv.classList.add('item');
