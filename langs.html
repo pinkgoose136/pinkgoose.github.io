@@ -41,11 +41,11 @@
                         Object.keys(items).forEach(function(key) {
                             var head = document.createElement('div');
                             var name = document.createElement('p');
-                            var inp = document.createElement('input');
+                            var inp = document.createElement('textarea');
                             var btn = document.createElement('button');
 
                             inp.value = items[key]
-                            inp.type = 'text';
+
                             inp.addEventListener('input', function(event){
                                 var textarea = event.target;
                                 textarea.style.height = "auto";
@@ -63,13 +63,8 @@
                             btn.addEventListener('click', function(event) {
                                 let buttonId = event.target.id;
                                 let inpP = document.getElementById(buttonId+'-tgs')
-                                let divsInsideInpP = inpP.querySelectorAll('div');
-                                let tute = []
-                                divsInsideInpP.forEach(function(div) {
-                                    tute.push(div.textContent);
-                                });
 
-                                tg.CloudStorage.setItem(buttonId, tute.join(', '), function(err) {
+                                tg.CloudStorage.setItem(buttonId, inpP.value, function(err) {
                                     if (err) {
                                         console.log('error')
                                     } else {
