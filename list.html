@@ -144,15 +144,16 @@
                             if (keyParts[0] === 'item') {
                                 let secondPart = keyParts[1];
 
-                               // if (!keysBySecondPart[secondPart]) {
-                               //     keysBySecondPart[secondPart] = [];
-                               // }
-                               // keysBySecondPart[secondPart].push(key);
+                                if (!keysBySecondPart[secondPart]) {
+                                    keysBySecondPart[secondPart] = [];
+                                }
+                                keysBySecondPart[secondPart].push(key);
                                 jui.push(key)
                             }
                         });
+                        console.log(keysBySecondPart)
 
-                        tg.CloudStorage.getItems(items, function(err, itemss) {
+                        tg.CloudStorage.getItems(jui, function(err, itemss) {
                             if (err) {
                                 keysDiv.textContent = 'Ошибка получения значений: ' + err;;
                                 keysListDiv.appendChild(keysDiv);
