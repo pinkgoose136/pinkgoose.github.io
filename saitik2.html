@@ -56,9 +56,18 @@
         fetch('https://pinkgoose.pythonanywhere.com/static/alangs.json', {
             mode: 'no-cors'
             })
-          //  .then(response => {console.log(response)})
-            .then(ru => {console.log(ru)})
-            .catch(error => console.error('Ошибка загрузки файла JSON:', error));
+            .then(response => {
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
 
         var typeSelect = document.getElementById('typeSelect');
         var selected = typeSelect.options[typeSelect.selectedIndex].value;
