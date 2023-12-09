@@ -265,7 +265,16 @@
             console.log(valw)
             var categorySelect = document.getElementById('categorySelect');
             var selectedCategory = valw;
-            console.log(categorySelect.options)
+
+            let options = categorySelect.options;
+            let found = -1;
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].textContent === valw) {
+                    found = i;
+                    break;
+                }
+            }
+            console.log(options[found])
 
             var categoryList = document.getElementById('categoryList');
 
