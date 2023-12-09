@@ -135,7 +135,8 @@
                         document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
                     } else {
                         let keysBySecondPart = {};
-                        let itims = []
+                        let susu;
+                        let itims = [];
                         Object.keys(items).forEach(function(key) {
                             let value = items[key];
                             let keyParts = key.split('-');
@@ -148,6 +149,7 @@
                                 }
 
                                 keysBySecondPart[secondPart].push(key);
+                                susu.push(key)
                             }
                         });
 
@@ -204,6 +206,7 @@
                         });
                         let kes = itims.sort((a, b) => b['001'] - a['001'])
                         console.log(kes)
+                        console.log(susu)
                         
                         kes.forEach((itms) => {
                             let keysDiv = document.createElement('div');
