@@ -32,6 +32,7 @@
                 console.log('Ошибка получения ключей: ' + err);
             } else {
                 let ke = keys.filter(word => word.includes(String('lng')))
+                console.log(ke)
                 tg.CloudStorage.getItems(ke, function(err, items) {
                     if (err) {
                         console.log('Ошибка получения значений: ' + err);
