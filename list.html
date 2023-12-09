@@ -186,14 +186,14 @@
                                     if (itms['2'] == type && ctgss.every(item => itms['4'].split(', ').includes(item))){
                                         if (sear != 0){
                                             if (itms['-1'].toLowerCase().includes(sear.toLowerCase())){
-                                                itims['1'].push(itms)
+                                                itims['1'].addItem(itms)
                                             }
                                             else if(itms['5'].toLowerCase().split(', ').includes(sear.toLowerCase())){
-                                                itims['2'].push(itms)
+                                                itims['2'].addItem(itms)
                                             }
                                         }
                                         else{
-                                            itims['3'].push(itms)
+                                            itims['3'].addItem(itms)
                                         }
                                     }
                                 }
