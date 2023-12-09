@@ -228,16 +228,23 @@
 
                             keysDiv.appendChild(head);
                             
-                            var dudu = {'4': 'Категории: ', '5': 'Теги: '}
-                            Object.keys(itms).forEach(function(i){
-                                if (i == '4' || i == '5'){
-                                    let itemDiv = document.createElement('div');
-                                    itemDiv.textContent = dudu[i] + itms[i];
-                                    keysDiv.appendChild(itemDiv);
-                                }
+                            let itemDiv = document.createElement('div');
+                            itemDiv.classList.add('tagstyle');
+                            let tagis = itms['5'].split(', ');
+                            tagis.forEach((t) => {
+                                let kr = document.createElement('div');
+                                kr.classList.add('tagik');
+                                kr.textContent = t;
+                            })
+                            keysDiv.appendChild(itemDiv);
+
+
+                            let itemDiv2 = document.createElement('div');
+                            itemDiv2.textContent = itms['4'];
+                            keysDiv.appendChild(itemDiv2);
+
+                            keysListDiv.appendChild(keysDiv);  
                             });
-                            keysListDiv.appendChild(keysDiv);                 
-                        })
                     }
                 });
             }
