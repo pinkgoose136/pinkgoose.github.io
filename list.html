@@ -234,7 +234,7 @@
                                 kr.classList.add('itim');
                                 kr.textContent = tt + ',';
                                 kr.addEventListener('click', function(event) {
-                                    console.log(event.target.textContent);
+                                    addCategory2(event.target.textContent)
                                 });
                                 itemDiv2.appendChild(kr);
                             })
@@ -274,8 +274,6 @@
                     break;
                 }
             }
-            console.log(found)
-            console.log(options[found].value)
 
             var categoryList = document.getElementById('categoryList');
 
@@ -308,8 +306,7 @@
                 };
 
                 categoryList.appendChild(categoryItem);
-                console.log(categorySelect.selectedIndex)
-                categorySelect.options.remove(categorySelect.selectedIndex);
+                categorySelect.options.remove(found);
                 categorySelect.value = '';
                 let ct = categoryList.innerHTML;
 
