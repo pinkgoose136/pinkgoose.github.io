@@ -229,7 +229,17 @@
                             keysDiv.appendChild(head);
 
                             
-
+                            let itemDiv2 = document.createElement('div');
+                            let tagis2 = itms['4'].split(', ');
+                            tagis2.forEach((tt) => {
+                                let kr = document.createElement('div');
+                                kr.textContent = tt + ' ';
+                                kr.addEventListener('click', function(event) {
+                                    console.log(event.target.textContent);
+                                });
+                                itemDiv2.appendChild(kr);
+                            })
+                            keysDiv.appendChild(itemDiv2);
 
                             let itemDiv = document.createElement('div');
                             itemDiv.classList.add('tagstyle');
@@ -239,7 +249,9 @@
                                 kr.textContent = '#'+t + ' ';
                                 itemDiv.appendChild(kr);
                             })
+                            
                             keysDiv.appendChild(itemDiv);
+                            keysListDiv.appendChild(keysDiv)
                         });
                     }
                 });
