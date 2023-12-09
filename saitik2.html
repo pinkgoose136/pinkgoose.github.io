@@ -53,6 +53,14 @@
 
         }
 
+        fetch('https://pinkgoose.pythonanywhere.com/static/alangs.json')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.kukus);
+            })
+            .catch(error => console.error('Ошибка загрузки файла JSON:', error));
+
+
         var typeSelect = document.getElementById('typeSelect');
         var selected = typeSelect.options[typeSelect.selectedIndex].value;
         aValue = selected;
