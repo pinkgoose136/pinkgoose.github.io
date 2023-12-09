@@ -234,8 +234,8 @@
                             let tagis2 = itms['4'].split(', ');
                             tagis2.forEach((t) => {
                                 let kr = document.createElement('div');
-                                kr.addEventListener('click', function(this) {
-                                    console.log(this.textContent)
+                                kr.addEventListener('click', function() {
+                                    console.log(kr.textContent)
                                 });
 
                                 kr.textContent = t + ' ';
