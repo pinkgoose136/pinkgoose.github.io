@@ -186,14 +186,14 @@
                                     if (itms['2'] == type && ctgss.every(item => itms['4'].split(', ').includes(item))){
                                         if (sear != 0){
                                             if (itms['-1'].toLowerCase().includes(sear.toLowerCase())){
-                                                itims['1'].addItem(itms)
+                                                itims['1'].push(itms)
                                             }
                                             else if(itms['5'].toLowerCase().split(', ').includes(sear.toLowerCase())){
-                                                itims['2'].addItem(itms)
+                                                itims['2'].push(itms)
                                             }
                                         }
                                         else{
-                                            itims['3'].addItem(itms)
+                                            itims['3'].push(itms)
                                         }
                                     }
                                 }
@@ -203,7 +203,7 @@
                         
                         Object.keys(itims).forEach(function(its){
                             console.log(itims['3'].length)
-                            console.log(itims['3'])
+                            console.log(itims['3'].keys)
                             console.log(itims['3'].values)
                             if (itims[its].length != 0){
                                 console.log(itims[its])
