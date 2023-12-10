@@ -81,11 +81,13 @@
 
         asyncFunction()
             .then(returnedValue => {
+                console.log(returnedValue)
                 Object.keys(rura =>{
                     const selectElement = document.getElementById('typeSelect');
                     const newOption = document.createElement('option');
                     newOption.value = rura;
                     newOption.text = returnedValue[rura];
+                    console.log(newOption)
                     selectElement.appendChild(newOption);
                 })
             })
