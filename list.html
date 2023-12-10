@@ -121,24 +121,33 @@
         let idd = tg.initDataUnsafe.user.language_code;
         console.log(idd)
 
-        tg.CloudStorage.getItem('lng-'+idd, function(err, item) {
+        tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
-                console.log('Ошибка получения значений: ' + err);
+                console.log('Ошибка получения ключей: ' + err);
             } else {
-                let tutu = {};
-                let yy = item.split('\n');
-                yy.forEach(ee => {
-                    let yd = ee.split(':');
-                    tutu[yd[0]] = yd[1];
+                let ke = keys.filter(word => word.includes('lng'))
+                let kek = keys.filter(word => word.includes('lng-'+idd))
+                console.log(ke)
+                console.log(kek)
+
+                tg.CloudStorage.getItem('lng-'+idd, function(err, item) {
+                    if (err) {
+                        console.log('Ошибка получения значений: ' + err);
+                    } else {
+                        let tutu = {};
+                        let yy = item.split('\n');
+                        yy.forEach(ee => {
+                            let yd = ee.split(':');
+                            tutu[yd[0]] = yd[1];
+                        });
+                        console.log(tutu)
+                        //document.getElementById('search').placeholder = tutu['search_placeholder']
+                        
+                    }
                 });
-                Object.keys(tutu).forEach(function(rura){
-                    const selectElement = document.getElementById('keysList');
-                    const newOption = document.createElement('div');
-                    newOption.textContent = rura + ": " + tutu[rura];
-                    selectElement.appendChild(newOption);
-                })
+
             }
-        });
+        })
 
 
         function generate(sear, type, ctgss){
