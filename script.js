@@ -100,7 +100,7 @@ function cts_addc(tg, aValue){
     })
 }
 
-function create_drop(tg, aaValue, exclude){
+function create_drop(tg, aaValue, exclude, idd){
     var dropdown = document.getElementById('categorySelect');
     dropdown.innerHTML = '';
 
@@ -115,16 +115,36 @@ function create_drop(tg, aaValue, exclude){
             let tu = item.split(', ')
             tu.shift()
             let tut = tu.filter(item => !exclude.includes(item));
-            console.log(tut)
 
-            for (let i = 0; i < tut.length; i++) {
-                var option = document.createElement('option');
-                option.text = tu[i];
-                console.log(tu[i])
-
-                dropdown.add(option);
-            }
-            dropdown.value = '';
+            tg.CloudStorage.getKeys(function(err, keys) {
+                if (err) {
+                    console.log('Ошибка получения ключей: ' + err);
+                } else {
+                    let ker = keys.filter(word => word.includes('lng-'+idd))
+                    if (ker.length == 0){
+                        idd = 'en'
+                    }
+                    tg.CloudStorage.getItem('lng-'+idd, function(err, item) {
+                        if (err) {
+                            console.log('Ошибка получения значений: ' + err);
+                        } else {
+                            let tutu = {};
+                            let yy = item.split('\n');
+                            yy.forEach(ee => {
+                                let yd = ee.split(': ');
+                                tutu[yd[0]] = yd[1];
+                            });
+                            
+                            for (let i = 0; i < tut.length; i++) {
+                                var option = document.createElement('option');
+                                option.text = tutu[sus][i];
+                                dropdown.add(option);
+                            }
+                            dropdown.value = '';
+                        }
+                    });
+                }
+            })
         }
     })
 }
