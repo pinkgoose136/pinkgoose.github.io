@@ -83,12 +83,8 @@
         asyncFunction()
             .then(returnedValue => {
                 lans = returnedValue;
+                console.log(lans)
             })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        console.log(lans)
-
 
         tg.expand();
         tg.MainButton.setText("Подтвердить");
