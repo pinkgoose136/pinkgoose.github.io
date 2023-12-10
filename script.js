@@ -142,7 +142,7 @@ function translate(tg, wordlist, idd){
                     let tutu = {};
                     let yy = item.split('\n');
                     yy.forEach(ee => {
-                        let yd = ee.split(':');
+                        let yd = ee.split(': ');
                         tutu[yd[0]] = yd[1];
                     });
                     console.log(tutu)
