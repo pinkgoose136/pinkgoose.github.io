@@ -100,7 +100,7 @@ function cts_addc(tg, aValue){
     })
 }
 
-function create_drop(tg, aaValue, exclude, idd){
+function create_drop(tg, aaValue, exclude, idde){
     var dropdown = document.getElementById('categorySelect');
     dropdown.innerHTML = '';
 
@@ -120,12 +120,11 @@ function create_drop(tg, aaValue, exclude, idd){
                 if (err) {
                     console.log('Ошибка получения ключей: ' + err);
                 } else {
+                    let idd = idde
                     let ker = keys.filter(word => word.includes('lng-'+idd))
-                    console.log(idd)
                     if (ker.length == 0){
                         idd = 'en'
                     }
-                    console.log(idd)
                     tg.CloudStorage.getItem('lng-'+idd, function(err, item) {
                         if (err) {
                             console.log('Ошибка получения значений: ' + err);
