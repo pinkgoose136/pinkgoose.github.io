@@ -125,11 +125,10 @@
             if (err) {
                 console.log('Ошибка получения ключей: ' + err);
             } else {
-                let ke = keys.filter(word => word.includes('lng'))
-                let kek = keys.filter(word => word.includes('lng-'+idd))
-                console.log(ke)
-                console.log(kek)
-
+                let ker = keys.filter(word => word.includes('lng-'+idd))
+                if (ker.length == 0){
+                    id = 'en'
+                }
                 tg.CloudStorage.getItem('lng-'+idd, function(err, item) {
                     if (err) {
                         console.log('Ошибка получения значений: ' + err);
