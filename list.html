@@ -121,7 +121,7 @@
         let idd = tg.initDataUnsafe.user.language_code;
         console.log(idd)
 
-        let ui = ['op1', 'op2', 'op3', 'op4', 'op5', 'ctgs_list']
+        let ui = ['op1', 'op2', 'op3', 'op4', 'op5', 'ctgs_list', 'placeholder']
         translate(tg, ui, idd)
 
         function generate(sear, type, ctgss){
@@ -157,20 +157,19 @@
                             Object.keys(keysBySecondPart[secondPart]).forEach(function(key2){
                                 let valu2 = keysBySecondPart[secondPart][key2];
                                 let keyParts = key2.split('-');
-                                let tex = "";
                                 let keyy = "";
                                 switch (keyParts[2]) {
-                                    case 'link': tex = ''; keyy = '1'; break;
-                                    case 'name': tex = ''; keyy = '-1'; break;
-                                    case 'desc': tex = ''; keyy = '3'; break;
-                                    case 'type': tex = ""; keyy = '2'; break;
-                                    case 'cat': tex = ""; keyy = '4'; break;
-                                    case 'tag': tex = ""; keyy = '5'; break;
-                                    case 'owner': tex = "Айди автора: "; keyy = '6'; break;
-                                    case 'img': tex = ""; keyy = '11'; ae = valu2; break;
-                                    default: tex = expr; keyy = '0'; break;
+                                    case 'link': keyy = '1'; break;
+                                    case 'name': keyy = '-1'; break;
+                                    case 'desc': keyy = '3'; break;
+                                    case 'type': keyy = '2'; break;
+                                    case 'cat': keyy = '4'; break;
+                                    case 'tag': keyy = '5'; break;
+                                    case 'owner': keyy = '6'; break;
+                                    case 'img': keyy = '11'; ae = valu2; break;
+                                    default: keyy = '0'; break;
                                 }
-                                itms[keyy] = tex + valu2;
+                                itms[keyy] = valu2;
                             })
                             if (itms['2'] == type && ctgss.every(item => itms['4'].split(', ').includes(item))){
                                 if (sear != 0){

@@ -115,6 +115,7 @@ function create_drop(tg, aaValue, exclude){
             let tu = item.split(', ')
             tu.shift()
             let tut = tu.filter(item => !exclude.includes(item));
+            console.log(tut)
 
             for (let i = 0; i < tut.length; i++) {
                 var option = document.createElement('option');
@@ -147,7 +148,11 @@ function translate(tg, wordlist, idd){
                     });
                     console.log(tutu)
                     wordlist.forEach(sus =>{
-                        document.getElementById(sus).textContent = tutu[sus]  
+                        if (sus == 'placeholder'){
+                            document.getElementById(sus).placeholder = tutu[sus];
+                        }else{
+                            document.getElementById(sus).textContent = tutu[sus];
+                        }
                     })
                 }
             });
