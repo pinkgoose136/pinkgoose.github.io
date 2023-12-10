@@ -120,6 +120,8 @@ function create_drop(tg, aaValue, exclude){
             for (let i = 0; i < tut.length; i++) {
                 var option = document.createElement('option');
                 option.text = tu[i];
+                console.log(tu[i])
+
                 dropdown.add(option);
             }
             dropdown.value = '';
@@ -148,7 +150,7 @@ function translate(tg, wordlist, idd){
                     });
                     console.log(tutu)
                     wordlist.forEach(sus =>{
-                        if (sus == 'placeholder'){
+                        if (sus == 'search'){
                             document.getElementById(sus).placeholder = tutu[sus];
                         }else{
                             document.getElementById(sus).textContent = tutu[sus];
