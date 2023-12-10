@@ -45,7 +45,11 @@
                             var btn = document.createElement('button');
 
                             inp.value = items[key]
-                            console.log(items[key])
+                            let yy = items[key].split('\n')
+                            yy.forEach(ee => {
+                                let yd = ee.split(':')
+                                console.log(yd)
+                            })
 
                             inp.addEventListener('input', function(event){
                                 var textarea = event.target;
