@@ -121,9 +121,11 @@ function create_drop(tg, aaValue, exclude, idd){
                     console.log('Ошибка получения ключей: ' + err);
                 } else {
                     let ker = keys.filter(word => word.includes('lng-'+idd))
+                    console.log(idd)
                     if (ker.length == 0){
                         idd = 'en'
                     }
+                    console.log(idd)
                     tg.CloudStorage.getItem('lng-'+idd, function(err, item) {
                         if (err) {
                             console.log('Ошибка получения значений: ' + err);
