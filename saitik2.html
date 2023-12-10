@@ -79,11 +79,15 @@
             });
         }
 
-        let lans = {}
         asyncFunction()
             .then(returnedValue => {
-                lans = returnedValue;
-                console.log(lans)
+                Object.keys(rura =>{
+                    const selectElement = document.getElementById('typeSelect');
+                    const newOption = document.createElement('option');
+                    newOption.value = rura;
+                    newOption.text = returnedValue[rura];
+                    selectElement.appendChild(newOption);
+                })
             })
 
         tg.expand();
