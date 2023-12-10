@@ -8,34 +8,34 @@
 </head>
 <body>
     <div id="form">
-        <label for="type">Выберите тип:</label>
+        <label for="type">Choose the type:</label>
         <select id="typeSelect" onchange="typeChange()">
-            <option value="channels">Канал</option>
-            <option value="groups">Группа</option>
-            <option value="bots">Бот</option>
-            <option value="stickers">Стикерпак</option>
-            <option value="emoji">Эмодзи</option>
+            <option value="channels">Channel</option>
+            <option value="groups">Group</option>
+            <option value="bots">Bot</option>
+            <option value="stickers">Stickers</option>
+            <option value="emoji">Emoji</option>
         </select>
         <br><br>
 
-        <label for="link">Ссылка:</label>
+        <label for="link">Link:</label>
         <input type="text" name="link" id="link" required><br>
         <label id="lnk_error" class="error"></label>
         <br>
 
-        <label for="description">Описание:</label>
+        <label for="description">Description:</label>
         <textarea name="description" id="description" required minlength="10" maxlength="1000" oninput="adjustTextAreaHeight()"></textarea><br>
         <label id="desc_error" class="error"></label>
         <br>
 
-        <label for="category">Категории:</label>
+        <label for="category">Categories:</label>
         <select id="categorySelect" onchange="addCategory(this.value)"></select>
         <div id="categoryList"></div><br>
         <label id="cts_error" class="error"></label>
         <br>
         
-        <label for="tags">Теги:</label>
-        <input type="text" id="tagInput" oninput="addTagOnComma(this)" placeholder="Добавьте теги через запятую"><br>
+        <label for="tags">Tags:</label>
+        <input type="text" id="tagInput" oninput="addTagOnComma(this)" placeholder="Add tags separated by commas"><br>
         <div id="tagList"></div><br>
         <label id="tgs_error" class="error"></label>
         <br>
@@ -71,6 +71,7 @@
                     let yd = ee.split(':');
                     tutu[yd[0]] = yd[1];
                 });
+
                 Object.keys(tutu).forEach(function(rura){
                     const selectElement = document.getElementById('typeSelect');
                     const newOption = document.createElement('option');
@@ -84,7 +85,7 @@
         });
 
         tg.expand();
-        tg.MainButton.setText("Подтвердить");
+        tg.MainButton.setText("Confirm");
         tg.MainButton.show()
 
          Telegram.WebApp.onEvent('mainButtonClicked', function(){
@@ -123,7 +124,7 @@
             } else {
                 let linkis = Object.values(items)
                 if (linkis.includes(lnk)){
-                    lnke.innerHTML = 'Элемент с такой ссылкой уже сдержится в базе данных'
+                    lnke.innerHTML = 'An element with this link is already stored in the database'
                 }
                 else{
                     hehe()
@@ -135,18 +136,18 @@
 
         function hehe(){
             lnke.innerHTML = ''; dese.innerHTML = ''; ctse.innerHTML = ''; tgse.innerHTML = ''
-            if (!lnk.startsWith('https://t.me/')){lnke.innerHTML = 'Неверная ссылка'}
-            else if (des.length < 11 ){dese.innerHTML = 'Описание слишком короткое. Минимум 10 символов'} 
-            else if (des.length > 601 ){dese.innerHTML = 'Описание слишком длинное'}
-            else if (String(ct) == '' ){ctse.innerHTML =  'Напишите хотя бы одну категорию'}
-            else if (String(t) == '' ){tgse.innerHTML = 'Выберите хотя бы один тег'}
+            if (!lnk.startsWith('https://t.me/')){lnke.innerHTML = 'Wrong link'}
+            else if (des.length < 11 ){dese.innerHTML = 'Description is too short. Minimum 10 symbols'} 
+            else if (des.length > 601 ){dese.innerHTML = 'Desciption is too long'}
+            else if (String(ct) == '' ){ctse.innerHTML =  'Add atleast 1 category'}
+            else if (String(t) == '' ){tgse.innerHTML = 'Add atleast 1 tag'}
             else{
             lnke.innerHTML = ''; dese.innerHTML = ''; ctse.innerHTML = ''; tgse.innerHTML = ''
             function getFormattedDateTime() {
                 let currentDate = new Date();
                 let day = String(currentDate.getDate()).padStart(2, '0');
-                let month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Месяц начинается с 0
-                let year = String(currentDate.getFullYear()).slice(2); // Берем последние две цифры года
+                let month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                let year = String(currentDate.getFullYear()).slice(2);
                 let hours = String(currentDate.getHours()).padStart(2, '0');
                 let minutes = String(currentDate.getMinutes()).padStart(2, '0');
                 let seconds = String(currentDate.getSeconds()).padStart(2, '0');

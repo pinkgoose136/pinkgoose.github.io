@@ -31,6 +31,10 @@
         tg.expand();
         let idd = tg.initDataUnsafe.user.id;
 
+        let ui = ['accept', 'delete']
+        translate(tg, ui, idd)
+
+
         tg.CloudStorage.getKeys(function(err, keys) {
         if (err) {
             console.log('Ошибка получения ключей:' + err);

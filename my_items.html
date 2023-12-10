@@ -58,7 +58,7 @@
 
                             tg.CloudStorage.getItems(keysBySecondPart[secondPart], function(err, itemss) {
                                 if (err) {
-                                    keysDiv.textContent = 'Ошибка получения значений: ' + err;;
+                                    keysDiv.textContent = 'Error: ' + err;;
                                     keysListDiv.appendChild(keysDiv);
                                 } else {
                                     let itms = {}
@@ -74,8 +74,8 @@
                                         case 'name': tex = ''; keyy = '-1'; break;
                                         case 'desc': tex = ''; itms['333'] = key2; keyy = '3'; break;
                                         case 'type': tex = ''; keyy = '2'; break;
-                                        case 'cat': tex = "Категории: "; itms['666'] = key2; itms['66'] = valu2; keyy = '4'; break;
-                                        case 'tag': tex = "Теги: "; itms['555'] = key2; itms['55'] = valu2;  keyy = '5'; break;
+                                        case 'cat': tex = "Categories: "; itms['666'] = key2; itms['66'] = valu2; keyy = '4'; break;
+                                        case 'tag': tex = "Tags: "; itms['555'] = key2; itms['55'] = valu2;  keyy = '5'; break;
                                         case 'img': tex = ""; keyy = '11'; ae = valu2; break;
                                         default: tex = expr; keyy = '0'; break;
                                         }
