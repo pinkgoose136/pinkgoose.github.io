@@ -125,3 +125,32 @@ function create_drop(tg, aaValue, exclude){
         }
     })
 }
+
+function translate(tg, wordlist, idd){
+    tg.CloudStorage.getKeys(function(err, keys) {
+        if (err) {
+            console.log('Ошибка получения ключей: ' + err);
+        } else {
+            let ker = keys.filter(word => word.includes('lng-'+idd))
+            if (ker.length == 0){
+                idd = 'en'
+            }
+            tg.CloudStorage.getItem('lng-'+idd, function(err, item) {
+                if (err) {
+                    console.log('Ошибка получения значений: ' + err);
+                } else {
+                    let tutu = {};
+                    let yy = item.split('\n');
+                    yy.forEach(ee => {
+                        let yd = ee.split(':');
+                        tutu[yd[0]] = yd[1];
+                    });
+                    console.log(tutu)
+                    wordlist.forEach(sus =>{
+                        document.getElementById(sus).textContent = tutu[sus]  
+                    })
+                }
+            });
+        }
+    })
+}

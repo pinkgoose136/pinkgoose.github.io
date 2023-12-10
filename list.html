@@ -22,7 +22,7 @@
         </div>
 
         <div id="additional_sets" style="display: none;">
-            <label for="category">Категории:</label>
+            <label for="category" id="ctgs_list">Категории:</label>
             <select id="categorySelect" onchange="addCategory2(this.value)"></select>
             <div id="categoryList"></div><br>
         </div>
@@ -33,23 +33,23 @@
         <div id="center_radio">
             <div class="radio-block">
                 <input type="radio" id="option1" name="radios" value="channels" checked>
-                <label class="labell" for="option1">Каналы</label>
+                <label class="labell" for="option1" id="op1">Каналы</label>
               </div>
               <div class="radio-block">
                 <input type="radio" id="option2" name="radios" value="groups">
-                <label class="labell" for="option2">Группы</label>
+                <label class="labell" for="option2" id="op2">Группы</label>
               </div>
               <div class="radio-block">
                   <input type="radio" id="option3" name="radios" value="bots">
-                  <label class="labell" for="option3"> Боты</label>
+                  <label class="labell" for="option3" id="op3"> Боты</label>
               </div>
               <div class="radio-block">
                   <input type="radio" id="option4" name="radios" value="stickers">
-                  <label class="labell" for="option4"> Стикерпаки</label>
+                  <label class="labell" for="option4" id="op4"> Стикерпаки</label>
                 </div>
               <div class="radio-block">
                   <input type="radio" id="option5" name="radios" value="emoji">
-                  <label class="labell" for="option5"> Эмодзи</label>
+                  <label class="labell" for="option5" id="op5"> Эмодзи</label>
               </div>
         </div>
     </div>
@@ -121,33 +121,8 @@
         let idd = tg.initDataUnsafe.user.language_code;
         console.log(idd)
 
-        tg.CloudStorage.getKeys(function(err, keys) {
-            if (err) {
-                console.log('Ошибка получения ключей: ' + err);
-            } else {
-                let ker = keys.filter(word => word.includes('lng-'+idd))
-                if (ker.length == 0){
-                    id = 'en'
-                }
-                tg.CloudStorage.getItem('lng-'+idd, function(err, item) {
-                    if (err) {
-                        console.log('Ошибка получения значений: ' + err);
-                    } else {
-                        let tutu = {};
-                        let yy = item.split('\n');
-                        yy.forEach(ee => {
-                            let yd = ee.split(':');
-                            tutu[yd[0]] = yd[1];
-                        });
-                        console.log(tutu)
-                        //document.getElementById('search').placeholder = tutu['search_placeholder']
-                        
-                    }
-                });
-
-            }
-        })
-
+        let ui = ['op1', 'op2', 'op3', 'op4', 'op5', 'ctgs_list']
+        translate(td, ui, idd)
 
         function generate(sear, type, ctgss){
             let keysListDiv = document.getElementById('keysList');
