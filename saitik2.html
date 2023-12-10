@@ -76,22 +76,12 @@
         }) 
         }
 
-        async function doSomething() {
-        try {
-            const result = await asyncFunction();
-            console.log(result);
-            return result;
-        } catch (error) {
-            console.error('Error:', error);
-        }
-        }
-
-        doSomething().then(returnedValue => {
+        asyncFunction().then(returnedValue => {
             console.log('Returned value:', returnedValue);
         }).catch(error => {
             console.error('Error:', error);
         });
-        
+
 
         tg.expand();
         tg.MainButton.setText("Подтвердить");
