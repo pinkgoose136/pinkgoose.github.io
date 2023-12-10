@@ -118,9 +118,28 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        console.log(tg.initDataUnsafe)
-        let idd = tg.initDataUnsafe.language_code;
+        let idd = tg.initDataUnsafe.user.language_code;
         console.log(idd)
+
+        tg.CloudStorage.getItem('lng-'+idd, function(err, item) {
+            if (err) {
+                console.log('Ошибка получения значений: ' + err);
+            } else {
+                let tutu = {};
+                let yy = item.split('\n');
+                yy.forEach(ee => {
+                    let yd = ee.split(':');
+                    tutu[yd[0]] = yd[1];
+                });
+                Object.keys(tutu).forEach(function(rura){
+                    const selectElement = document.getElementById('keysList');
+                    const newOption = document.createElement('div');
+                    newOption.textContent = rura + ": " + tutu[rura];
+                    selectElement.appendChild(newOption);
+                })
+            }
+        });
+
 
         function generate(sear, type, ctgss){
             let keysListDiv = document.getElementById('keysList');

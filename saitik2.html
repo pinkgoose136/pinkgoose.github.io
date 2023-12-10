@@ -60,37 +60,28 @@
         let tg = window.Telegram.WebApp;
         document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue))
 
-        function asyncFunction() {
-            return new Promise((resolve, reject) => {
-                tg.CloudStorage.getItem('lng-ru', function(err, item) {
-                    if (err) {
-                        console.log('Ошибка получения значений: ' + err);
-                        reject(err);
-                    } else {
-                        let tutu = {};
-                        let yy = item.split('\n');
-                        yy.forEach(ee => {
-                            let yd = ee.split(':');
-                            tutu[yd[0]] = yd[1];
-                        });
-                        resolve(tutu);
-                    }
+        
+        tg.CloudStorage.getItem('lng-ru', function(err, item) {
+            if (err) {
+                console.log('Ошибка получения значений: ' + err);
+            } else {
+                let tutu = {};
+                let yy = item.split('\n');
+                yy.forEach(ee => {
+                    let yd = ee.split(':');
+                    tutu[yd[0]] = yd[1];
                 });
-            });
-        }
-
-        asyncFunction()
-            .then(returnedValue => {
-                console.log(returnedValue)
-                Object.keys(returnedValue).forEach(function(rura){
+                Object.keys(tutu).forEach(function(rura){
                     const selectElement = document.getElementById('typeSelect');
                     const newOption = document.createElement('option');
                     newOption.value = rura;
-                    newOption.text = returnedValue[rura];
+                    newOption.text = tutu[rura];
                     console.log(newOption)
                     selectElement.appendChild(newOption);
                 })
-            })
+
+            }
+        });
 
         tg.expand();
         tg.MainButton.setText("Подтвердить");
