@@ -79,14 +79,15 @@
             });
         }
 
+        let lans = {}
         asyncFunction()
             .then(returnedValue => {
-                console.log('Returned value:', returnedValue);
+                lans = returnedValue;
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-
+        console.log(lans)
 
 
         tg.expand();
