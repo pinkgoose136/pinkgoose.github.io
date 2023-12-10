@@ -82,7 +82,7 @@
         asyncFunction()
             .then(returnedValue => {
                 console.log(returnedValue)
-                Object.keys(rura =>{
+                Object.keys(kreturnedValue).forEach(function(rura){
                     const selectElement = document.getElementById('typeSelect');
                     const newOption = document.createElement('option');
                     newOption.value = rura;
