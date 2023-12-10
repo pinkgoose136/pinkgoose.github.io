@@ -52,13 +52,46 @@
             cts_addc(tg, aValue)
 
         }
-        
+
         var typeSelect = document.getElementById('typeSelect');
         var selected = typeSelect.options[typeSelect.selectedIndex].value;
         aValue = selected;
 
         let tg = window.Telegram.WebApp;
         document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue))
+
+        async function asyncFunction() {
+        tg.CloudStorage.getItem('lng-ru', function(err, item) {
+            if (err) {
+                console.log('Ошибка получения значений: ' + err);
+            } else {
+                let tutu = {}
+                let yy = item.split('\n')
+                yy.forEach(ee => {
+                    let yd = ee.split(':')
+                    tutu[yd[0]] = yd[1]
+                })
+                return tutu
+            }
+        }) 
+        }
+
+        async function doSomething() {
+        try {
+            const result = await asyncFunction();
+            console.log(result);
+            return result;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        }
+
+        doSomething().then(returnedValue => {
+            console.log('Returned value:', returnedValue);
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+        
 
         tg.expand();
         tg.MainButton.setText("Подтвердить");
