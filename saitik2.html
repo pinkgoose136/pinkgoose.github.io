@@ -10,11 +10,6 @@
     <div id="form">
         <label for="type">Choose the type:</label>
         <select id="typeSelect" onchange="typeChange()">
-            <option value="channels">Channel</option>
-            <option value="groups">Group</option>
-            <option value="bots">Bot</option>
-            <option value="stickers">Stickers</option>
-            <option value="emoji">Emoji</option>
         </select>
         <br><br>
 
@@ -72,17 +67,15 @@
                     let yd = ee.split(':');
                     tutu[yd[0]] = yd[1];
                 });
-
-
-
-                Object.keys(tutu).forEach(function(rura){
-                    const selectElement = document.getElementById('typeSelect');
-                    const newOption = document.createElement('option');
-                    newOption.value = rura;
-                    newOption.text = tutu[rura];
-                    console.log(newOption)
-                    selectElement.appendChild(newOption);
-                })
+                let wordlist = ['op1', 'op2', 'op3', 'op4', 'op5']
+                wordlist.forEach(rura =>{
+                        const selectElement = document.getElementById('typeSelect');
+                        const newOption = document.createElement('option');
+                        newOption.value = rura;
+                        newOption.text = tutu[rura];
+                        console.log(newOption)
+                        selectElement.appendChild(newOption);
+                    })
 
             }
         });
