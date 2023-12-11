@@ -51,7 +51,6 @@
         let tg = window.Telegram.WebApp;
         document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue, 'en'))
 
-        
         tg.CloudStorage.getItem('lng-en', function(err, item) {
             if (err) {
                 console.log('Ошибка получения значений: ' + err);
