@@ -98,6 +98,7 @@ function cts_addc(tg, aValue, idd){
                         let yd = ee.split(': ');
                         tutu[yd[0]] = yd[1];
                     });
+                    console.log(tutu)
                     
                     let tu = item.split(', ')
                     tu.shift()
