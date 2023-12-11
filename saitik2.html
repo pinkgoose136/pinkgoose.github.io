@@ -44,12 +44,12 @@
             if (aValue == 'bots'){
                 document.getElementById('link').value = "https://t.me/"
             }
-            cts_addc(tg, aValue)
+            cts_addc(tg, aValue, 'en')
 
         }
 
         let tg = window.Telegram.WebApp;
-        document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue))
+        document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue, 'en'))
 
         
         tg.CloudStorage.getItem('lng-en', function(err, item) {

@@ -76,7 +76,7 @@ function adjustTextAreaHeight() {
     textarea.style.height = newHeight + "px";
 }
 
-function cts_addc(tg, aValue){
+function cts_addc(tg, aValue, idd){
     var dropdown = document.getElementById('categorySelect');
     dropdown.innerHTML = '';
 
@@ -88,14 +88,27 @@ function cts_addc(tg, aValue){
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
         } else {
-            let tu = item.split(', ')
-            tu.shift()
-            for (let i = 0; i < tu.length; i++) {
-                var option = document.createElement('option');
-                option.text = tu[i];
-                dropdown.add(option);
-            }
-            dropdown.value = '';
+            tg.CloudStorage.getItem('lng-'+idd, function(err, item) {
+                if (err) {
+                    console.log('Ошибка получения значений: ' + err);
+                } else {
+                    let tutu = {};
+                    let yy = item.split('\n');
+                    yy.forEach(ee => {
+                        let yd = ee.split(': ');
+                        tutu[yd[0]] = yd[1];
+                    });
+                    
+                    let tu = item.split(', ')
+                    tu.shift()
+                    for (let i = 0; i < tu.length; i++) {
+                        var option = document.createElement('option');
+                        option.text = tutu[tu[i]];
+                        dropdown.add(option);
+                    }
+                    dropdown.value = '';
+                }
+            });
         }
     })
 }
@@ -139,8 +152,6 @@ function create_drop(tg, aaValue, exclude, idde){
                             for (let i = 0; i < tut.length; i++) {
                                 var option = document.createElement('option');
                                 option.text = tutu[tu[i]];
-                                console.log(tu[i])
-                                console.log(tutu)
                                 dropdown.add(option);
                             }
                             dropdown.value = '';
