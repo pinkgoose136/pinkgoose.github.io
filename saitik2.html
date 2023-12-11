@@ -48,10 +48,6 @@
 
         }
 
-        var typeSelect = document.getElementById('typeSelect');
-        var selected = typeSelect.options[typeSelect.selectedIndex].value;
-        aValue = selected;
-
         let tg = window.Telegram.WebApp;
         document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue))
 
@@ -76,6 +72,9 @@
                         console.log(newOption)
                         selectElement.appendChild(newOption);
                     })
+                    var typeSelect = document.getElementById('typeSelect');
+                    var selected = typeSelect.options[typeSelect.selectedIndex].value;
+                    aValue = selected;
 
             }
         });
