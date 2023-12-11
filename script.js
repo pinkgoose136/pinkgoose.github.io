@@ -139,6 +139,8 @@ function create_drop(tg, aaValue, exclude, idde){
                             for (let i = 0; i < tut.length; i++) {
                                 var option = document.createElement('option');
                                 option.text = tutu[tu[i]];
+                                console.log(tu[i])
+                                console.log(tutu)
                                 dropdown.add(option);
                             }
                             dropdown.value = '';
