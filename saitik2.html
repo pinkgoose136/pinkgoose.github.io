@@ -49,7 +49,7 @@
         }
 
         let tg = window.Telegram.WebApp;
-        document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue, 'en'))
+        document.addEventListener('DOMContentLoaded',  cts_addc(tg, 'channels', 'en'))
 
         tg.CloudStorage.getItem('lng-en', function(err, item) {
             if (err) {
