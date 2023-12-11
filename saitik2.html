@@ -61,16 +61,19 @@
         document.addEventListener('DOMContentLoaded',  cts_addc(tg, aValue))
 
         
-        tg.CloudStorage.getItem('lng-ru', function(err, item) {
+        tg.CloudStorage.getItem('lng-en', function(err, item) {
             if (err) {
                 console.log('Ошибка получения значений: ' + err);
             } else {
+                console.log(item)
                 let tutu = {};
                 let yy = item.split('\n');
                 yy.forEach(ee => {
                     let yd = ee.split(':');
                     tutu[yd[0]] = yd[1];
                 });
+
+
 
                 Object.keys(tutu).forEach(function(rura){
                     const selectElement = document.getElementById('typeSelect');
