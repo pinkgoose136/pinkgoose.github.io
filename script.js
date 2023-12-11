@@ -84,7 +84,7 @@ function cts_addc(tg, aValue, idd){
         aValue = 'stickers'
     }
 
-    tg.CloudStorage.getItem('cts-'+aValue, function(err, item) {
+    tg.CloudStorage.getItem('cts-'+aValue, function(err, itemm) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
         } else {
@@ -100,7 +100,7 @@ function cts_addc(tg, aValue, idd){
                     });
                     console.log(tutu)
                     
-                    let tu = item.split(', ')
+                    let tu = itemm.split(', ')
                     tu.shift()
                     for (let i = 0; i < tu.length; i++) {
                         var option = document.createElement('option');
