@@ -25,6 +25,7 @@
         var idi = getParameterByName('idi');
         var name = getParameterByName('name');
         var img = getParameterByName('img');
+        var imgdel = getParameterByName('imgdel')
     </script>
 
     <script>
@@ -152,6 +153,13 @@
                                     console.log('Ошибка добвления элемента с ключом ' + ge + '-img' + ':' + err);
                                 } else {
                                     console.log('Элемент с ключом ' + ge + '-img' + ' успешно добавлен в хранилище');
+                                }
+                            });
+                        tg.CloudStorage.setItem(ge + '-imgdel' + '-' + String(idd), imgdel, function(err) {
+                                if (err) {
+                                    console.log('Ошибка добвления элемента с ключом ' + ge + '-imgdel' + ':' + err);
+                                } else {
+                                    console.log('Элемент с ключом ' + ge + '-imgdel' + ' успешно добавлен в хранилище');
                                 }
                             });
                     }
