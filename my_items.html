@@ -50,18 +50,20 @@
                                 keysBySecondPart[secondPart].push(key);
                             }
                         });
-
+                        console.log(keysBySecondPart)
                         let keysListDiv = document.getElementById('keysList2');
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let keysDiv = document.createElement('div');
                             keysDiv.classList.add('item');
-
+                            console.lg(secondPart)
+                            
                             tg.CloudStorage.getItems(keysBySecondPart[secondPart], function(err, itemss) {
                                 if (err) {
                                     keysDiv.textContent = 'Error: ' + err;;
                                     keysListDiv.appendChild(keysDiv);
                                 } else {
                                     let itms = {}
+                                    console.log(itemss)
                                     Object.keys(itemss).forEach(function(key2) {
                                         let valu2 = itemss[key2];
                                         let keyParts = key2.split('-');
@@ -231,7 +233,6 @@
                                     title.appendChild(ssil);
                                     var desc = document.createElement('div');
                                     desc.textContent = itms['3']; 
-
 
                                     left.appendChild(imgElement);
                                     right.appendChild(title);
