@@ -55,8 +55,8 @@
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let keysDiv = document.createElement('div');
                             keysDiv.classList.add('item');
-                            console.lg(secondPart)
-                            
+                            console.log(secondPart)
+
                             tg.CloudStorage.getItems(keysBySecondPart[secondPart], function(err, itemss) {
                                 if (err) {
                                     keysDiv.textContent = 'Error: ' + err;;
