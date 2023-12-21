@@ -27,7 +27,9 @@
             <div id="categoryList"></div><br>
         </div>
     </div>
-    <div id="keysList"></div>
+    <div id="keysList">
+        <h2 id="keys_no" style="display: none;"></h2>
+    </div>
 
     <div class="radio-group">
         <div id="center_radio">
@@ -121,12 +123,14 @@
         let idd = tg.initDataUnsafe.user.language_code;
         console.log(idd)
 
-        let ui = ['op1', 'op2', 'op3', 'op4', 'op5', 'ctgs_list', 'search']
+        let ui = ['op1', 'op2', 'op3', 'op4', 'op5', 'ctgs_list', 'search', 'keys_no']
         translate(tg, ui, idd)
 
         function generate(sear, type, ctgss){
             let keysListDiv = document.getElementById('keysList');
             keysListDiv.innerHTML = "";
+            let ha = document.getElementById('keys_no');
+            ha.display = 'none';
             tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
                 console.log('Ошибка получения ключей: ' + err);
@@ -187,9 +191,8 @@
                             }
                         });
 
-                        let kes = itims.sort((a, b) => b['001'] - a['001'])
-                        console.log(kes.length)
-
+                        let kes = itims.sort((a, b) => b['001'] - a['001'])                     
+                        if(kes.length != 0){
                         kes.forEach((itms) => {
                             let keysDiv = document.createElement('div');
                             keysDiv.classList.add('item');
@@ -252,6 +255,11 @@
                             keysDiv.appendChild(itemDiv);
                             keysListDiv.appendChild(keysDiv)
                         });
+                        }else{
+                            let ha = document.getElementById('keys_no');
+                            ha.display = 'block';
+                        }
+
                     }
                 });
             }
