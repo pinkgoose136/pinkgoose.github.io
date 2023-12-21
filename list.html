@@ -231,6 +231,10 @@
                             tagis2.forEach((tt) => {
                                 let kr = document.createElement('div');
                                 kr.classList.add('itim');
+                                let tty = tt
+                                if (tt != tagis2[tagis2.length-1]){
+                                    tty += ','
+                                }
                                 kr.textContent = tt + ',';
                                 kr.addEventListener('click', function(event) {
                                     addCategory2(event.target.textContent)
