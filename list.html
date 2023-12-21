@@ -150,7 +150,6 @@
                                 keysBySecondPart[secondPart][key] = value;
                             }
                         });
-                        console.log(keysBySecondPart)
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let itms = {}
                             Object.keys(keysBySecondPart[secondPart]).forEach(function(key2){
@@ -189,7 +188,8 @@
                         });
 
                         let kes = itims.sort((a, b) => b['001'] - a['001'])
-
+                        console.log(kes)
+                        
                         kes.forEach((itms) => {
                             let keysDiv = document.createElement('div');
                             keysDiv.classList.add('item');
