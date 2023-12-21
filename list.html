@@ -153,7 +153,6 @@
 
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let itms = {}
-                            let ae = ''
                             Object.keys(keysBySecondPart[secondPart]).forEach(function(key2){
                                 let valu2 = keysBySecondPart[secondPart][key2];
                                 let keyParts = key2.split('-');
@@ -166,7 +165,7 @@
                                     case 'cat': keyy = '4'; break;
                                     case 'tag': keyy = '5'; break;
                                     case 'owner': keyy = '6'; break;
-                                    case 'img': keyy = '11'; ae = keyParts[1]; break;
+                                    case 'img': keyy = '11'; break;
                                     default: keyy = '0'; break;
                                 }
                                 itms[keyy] = valu2;

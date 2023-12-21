@@ -62,7 +62,6 @@
                                     keysListDiv.appendChild(keysDiv);
                                 } else {
                                     let itms = {}
-                                    let ae = ''
                                     Object.keys(itemss).forEach(function(key2) {
                                         let valu2 = itemss[key2];
                                         let keyParts = key2.split('-');
@@ -76,7 +75,7 @@
                                         case 'type': tex = ''; keyy = '2'; break;
                                         case 'cat': tex = "Categories: "; itms['666'] = key2; itms['66'] = valu2; keyy = '4'; break;
                                         case 'tag': tex = "Tags: "; itms['555'] = key2; itms['55'] = valu2;  keyy = '5'; break;
-                                        case 'img': tex = ""; keyy = '11'; ae = valu2; break;
+                                        case 'img': tex = ""; keyy = '11'; break;
                                         default: tex = expr; keyy = '0'; break;
                                         }
                                         
@@ -219,7 +218,7 @@
                                     
                                     var imgElement = document.createElement('img');
                                     imgElement.classList.add('img');
-                                    imgElement.src = "https://pinkgoose.pythonanywhere.com/static/empty.png"
+                                    imgElement.src = itms['11']
                                     imgElement.alt = 'Image';
 
 
