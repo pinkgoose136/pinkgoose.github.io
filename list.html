@@ -130,7 +130,7 @@
             let keysListDiv = document.getElementById('keysList');
             keysListDiv.innerHTML = "";
             let ha = document.getElementById('keys_no');
-            ha.display = 'none';
+            ha.style.display = 'none';
             tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
                 console.log('Ошибка получения ключей: ' + err);
@@ -257,7 +257,7 @@
                         });
                         }else{
                             let ha = document.getElementById('keys_no');
-                            ha.display = 'block';
+                            ha.style.display = 'block';
                         }
 
                     }
