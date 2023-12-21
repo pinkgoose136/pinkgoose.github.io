@@ -50,13 +50,10 @@
                                 keysBySecondPart[secondPart].push(key);
                             }
                         });
-                        console.log(keysBySecondPart)
                         let keysListDiv = document.getElementById('keysList2');
                         Object.keys(keysBySecondPart).forEach(function(secondPart) {
                             let keysDiv = document.createElement('div');
                             keysDiv.classList.add('item');
-                            console.log(secondPart)
-
                             tg.CloudStorage.getItems(keysBySecondPart[secondPart], function(err, itemss) {
                                 if (err) {
                                     keysDiv.textContent = 'Error: ' + err;;
@@ -78,7 +75,7 @@
                                         case 'cat': tex = "Categories: "; itms['666'] = key2; itms['66'] = valu2; keyy = '4'; break;
                                         case 'tag': tex = "Tags: "; itms['555'] = key2; itms['55'] = valu2;  keyy = '5'; break;
                                         case 'img': tex = ""; keyy = '11'; break;
-                                        default: tex = expr; keyy = '0'; break;
+                                        default: tex = ""; keyy = '0'; break;
                                         }
                                         
                                         itms[keyy] = tex + valu2;
