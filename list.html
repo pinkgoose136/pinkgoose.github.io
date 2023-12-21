@@ -28,7 +28,6 @@
         </div>
     </div>
     <div id="keysList">
-        <h2 id="keys_no" style="display: none;"></h2>
     </div>
 
     <div class="radio-group">
@@ -123,14 +122,12 @@
         let idd = tg.initDataUnsafe.user.language_code;
         console.log(idd)
 
-        let ui = ['op1', 'op2', 'op3', 'op4', 'op5', 'ctgs_list', 'search', 'keys_no']
+        let ui = ['op1', 'op2', 'op3', 'op4', 'op5', 'ctgs_list', 'search']
         translate(tg, ui, idd)
 
         function generate(sear, type, ctgss){
             let keysListDiv = document.getElementById('keysList');
             keysListDiv.innerHTML = "";
-            let ha = document.getElementById('keys_no');
-            ha.style.display = 'none';
             tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
                 console.log('Ошибка получения ключей: ' + err);
@@ -256,8 +253,11 @@
                             keysListDiv.appendChild(keysDiv)
                         });
                         }else{
-                            let ha = document.getElementById('keys_no');
-                            ha.style.display = 'block';
+                            let ha = document.createElement('h2');
+                            ha.id = 'keys_no';
+                            let ui = ['keys_no']
+                            keysListDiv.appendChild(ha)
+                            translate(tg, ui, idd)
                         }
 
                     }
