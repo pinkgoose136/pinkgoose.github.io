@@ -51,16 +51,17 @@
                                 console.log(yd)
                             })
 
-                            inp.style.height = "auto";
-                            var newHeight = inp.scrollHeight;
-                            inp.style.height = newHeight + "px";
-
                             inp.addEventListener('input', function(event){
                                 var textarea = event.target;
                                 textarea.style.height = "auto";
                                 var newHeight = textarea.scrollHeight;
                                 textarea.style.height = newHeight + "px";
                             })
+
+                            inp.style.height = "auto";
+                            var newHeight = inp.scrollHeight;
+                            inp.style.height = newHeight + "px";
+
 
                             name.innerHTML = String(key);
                             head.id = String(key) + '-head';     
