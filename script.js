@@ -140,11 +140,13 @@ function create_drop(tg, exclude, idde){
                             let tutu = {};
                             let yy = item.split('\n');
                             yy.sort()
-                            console.log(yy)
                             yy.forEach(ee => {
                                 let yd = ee.split(': ');
                                 tutu[yd[0]] = yd[1];
                             });
+                            console.log(tutu)
+                            tutu.sort()
+                            console.log(tutu)
                             
                             for (let i = 0; i < tut.length; i++) {
                                 var option = document.createElement('option');
