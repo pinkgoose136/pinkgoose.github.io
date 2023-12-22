@@ -24,6 +24,7 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
+        adjustTextAreaHeight();
         let idd = tg.initDataUnsafe.user.id;
         tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
@@ -263,7 +264,7 @@
     <label id="zag" class="error"></label>
 
     <label for="description">Описание:</label>
-    <textarea name="description" id="description" required minlength="10" maxlength="1000" oninput="adjustTextAreaHeight()"></textarea><br>
+    <textarea name="description" id="description" required minlength="10" maxlength="400" oninput="adjustTextAreaHeight()"></textarea><br>
     <label id="desc_error" class="error"></label>
     <br>
 
