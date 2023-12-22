@@ -10,7 +10,7 @@
     <div id="keysList3"></div>
     <button id="accept">Добавить</button>
     <button id="delete">Удалить</button>
-    <h2 id="pa"></h2>
+    <h2 id="pa" style="display: none;">Заявка отправлена на рассмотрение</h2>
     <script>
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
@@ -33,7 +33,7 @@
         tg.expand();
         let idd = tg.initDataUnsafe.user.id;
 
-        let ui = ['accept', 'delete']
+        let ui = ['accept', 'delete', 'zayavka']
         translate(tg, ui, idd)
 
 
@@ -43,7 +43,7 @@
         } else {
             let ke = keys.filter(word => word.includes(idi))
             console.log(ke)
-            
+
             tg.CloudStorage.getItems(ke, function(err, values) {
                 if (err) {
                     console.log('Ошибка получения значений: ' + err);
@@ -78,6 +78,8 @@
                         acceptb.remove();
                         let deleteb = document.getElementById('delete');
                         deleteb.remove();
+                        let pa = document.getElementById('pa');
+                        pa.style.display = 'block'
                     }
                     else{
                     var head = document.createElement('div'); head.classList.add('head');
