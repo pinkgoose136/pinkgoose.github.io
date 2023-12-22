@@ -51,6 +51,10 @@
                                 console.log(yd)
                             })
 
+                            inp.style.height = "auto";
+                            var newHeight = inp.scrollHeight;
+                            inp.style.height = newHeight + "px";
+
                             inp.addEventListener('input', function(event){
                                 var textarea = event.target;
                                 textarea.style.height = "auto";
