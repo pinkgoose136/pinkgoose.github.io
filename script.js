@@ -80,7 +80,6 @@ function cts_addc(tg, idd){
     var dropdown = document.getElementById('categorySelect');
     dropdown.innerHTML = '';
 
-
     tg.CloudStorage.getItem('cts-channels', function(err, itemm) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
@@ -97,7 +96,8 @@ function cts_addc(tg, idd){
                     });
                     console.log(tutu)
                     
-                    let tu = itemm.split(', ')
+                    let te = itemm.split(', ')
+                    let tu = te.sort()
                     tu.shift()
                     for (let i = 0; i < tu.length; i++) {
                         var option = document.createElement('option');
@@ -121,7 +121,8 @@ function create_drop(tg, exclude, idde){
         } else {
             let tu = item.split(', ')
             tu.shift()
-            let tut = tu.filter(item => !exclude.includes(item));
+            let tuu = tu.filter(item => !exclude.includes(item));
+            let tut = tuu.sort()
 
             tg.CloudStorage.getKeys(function(err, keys) {
                 if (err) {
