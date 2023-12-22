@@ -144,13 +144,14 @@ function create_drop(tg, exclude, idde){
                                 let yd = ee.split(': ');
                                 tutu[yd[0]] = yd[1];
                             });
+                            console.log(tu)
                             console.log(tutu)
                             tutu.sort()
                             console.log(tutu)
                             
                             for (let i = 0; i < tut.length; i++) {
                                 var option = document.createElement('option');
-                                option.text = tutu[tu[i]];
+                                option.text = tutu[tut[i]];
                                 dropdown.add(option);
                             }
                             dropdown.value = '';
