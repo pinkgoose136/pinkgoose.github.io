@@ -76,15 +76,12 @@ function adjustTextAreaHeight() {
     textarea.style.height = newHeight + "px";
 }
 
-function cts_addc(tg, aValue, idd){
+function cts_addc(tg, idd){
     var dropdown = document.getElementById('categorySelect');
     dropdown.innerHTML = '';
 
-    if (aValue === 'emoji'){
-        aValue = 'stickers'
-    }
 
-    tg.CloudStorage.getItem('cts-'+aValue, function(err, itemm) {
+    tg.CloudStorage.getItem('cts-channels', function(err, itemm) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
         } else {
@@ -114,15 +111,11 @@ function cts_addc(tg, aValue, idd){
     })
 }
 
-function create_drop(tg, aaValue, exclude, idde){
+function create_drop(tg, exclude, idde){
     var dropdown = document.getElementById('categorySelect');
     dropdown.innerHTML = '';
 
-    if (aaValue === 'emoji'){
-        aaValue = 'stickers'
-    }
-
-    tg.CloudStorage.getItem('cts-'+aaValue, function(err, item) {
+    tg.CloudStorage.getItem('cts-channels', function(err, item) {
         if (err) {
             document.getElementById('opa').innerHTML = 'Ошибка получения значений: ' + err;
         } else {

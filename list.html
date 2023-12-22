@@ -55,6 +55,10 @@
         </div>
     </div>
     <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        let idd = tg.initDataUnsafe.user.language_code;
+
         let circle = document.getElementById('ccircle');
         circle.setAttribute('color', 'var(--tg-theme-link-color, #0078d4)');
 
@@ -109,7 +113,7 @@
         const radioButtons = document.querySelectorAll('input[type="radio"]');
         radioButtons.forEach((radio) => {
             radio.addEventListener('change', (event) => {
-                create_drop(tg, event.target.value, [])
+                create_drop(tg, [], idd)
                 generate(0, event.target.value, [])
             });
         });
@@ -117,11 +121,6 @@
     </script>
 
     <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        let idd = tg.initDataUnsafe.user.language_code;
-        console.log(idd)
-
         let ui = ['op1', 'op2', 'op3', 'op4', 'op5', 'ctgs_list', 'search']
         translate(tg, ui, idd)
 
@@ -269,7 +268,7 @@
             }
         });
         }
-        create_drop(tg, 'channels', [], idd)
+        create_drop(tg, [], idd)
         generate(0, 'channels', [])
         
         function addCategory2(vali) {
