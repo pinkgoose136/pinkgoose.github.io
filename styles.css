@@ -214,7 +214,7 @@ select {
 }
 
 .menu_button {
-    width: 45%;
+    width: 39%;
     background-color: var(--tg-theme-button-color, #0078d4);
     color: var(--tg-theme-button-text-color, #fff);
     border: none;
@@ -276,8 +276,12 @@ select {
     padding: 5%;
     background: var(--tg-theme-bg-color, #fff);
     overflow-x: scroll;
-    position: fixed;
+   /* position: fixed; */
     height: 100%;
+}
+#keysList3 {
+    padding: 5%;
+    background: var(--tg-theme-bg-color, #fff);
 }
 
 #close {
