@@ -24,7 +24,6 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        adjustTextAreaHeight();
         let idd = tg.initDataUnsafe.user.id;
         tg.CloudStorage.getKeys(function(err, keys) {
             if (err) {
@@ -119,6 +118,7 @@
                                         create_drop(tg, itms['66'].split(', '), idd);
                                         createTag(itms['55'].split(', '));
                                         createCat(itms['66'].split(', '));
+                                        adjustTextAreaHeight();
                                         
                                         document.getElementById('deleteButton').addEventListener('click', function() {
                                             document.getElementById('popup').style.display = 'none';
