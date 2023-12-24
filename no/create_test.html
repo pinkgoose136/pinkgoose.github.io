@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Создание теста</title>
+        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                height: 100vh;
+                background-color: #f4f4f4;
+            }
+    
+            #formContainer {
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+                max-width: 600px;
+                width: 100%;
+                overflow-y: scroll;
+            }
+    
+            label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .questionBlock {
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                margin-bottom: 15px;
+                background-color: #f4f4f4;
+            }
+
+        .questionTitle {
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #dbdbdb;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .questionContent {
+            display: none;
+            margin-top: 10px;
+        }
+    
+        textarea, input[type="text"] {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+            button {
+                padding: 10px 15px;
+                cursor: pointer;
+                background-color: #4caf50;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                margin: 20px 0;
+            }
+    
+            button:hover {
+                background-color: #45a049;
+            }
+    
+            table {
+                margin-top: 20px;
+                border-collapse: collapse;
+                width: 100%;
+            }
+    
+            th, td {
+                border: 1px solid #ccc;
+                padding: 8px;
+                text-align: left;
+            }
+    
+            th {
+                background-color: #f2f2f2;
+            }
+    
+            #questionPart, #resultsPart {
+                display: none;
+            }
+    
+            #testInfoPart, #questionPart, #resultsPart {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+    
+            .question {
+                width: calc(80% - 20px);
+                padding: 8px;
+                margin-bottom: 20px;
+            }
+    
+            .answer {
+                width: calc(50% - 20px);
+                margin-bottom: 8px;
+                padding: 8px;
+            }
+
+            #answers_div{
+                margin-top: 10px;
+            }
+
+            .radio_ans{
+                width: 20px;
+                height: 20px;
+            }
+
+            .tbli{
+                width: calc(100% - 20px);
+                height: calc(100% - 20px);
+                border: none;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+    
+    <div id="formContainer">
+        <div id="testInfoPart">
+            <h2>Создание теста</h2>
+            <label for="testName">Название теста:</label>
+            <input type="text" id="testName"><br><br>
+    
+            <label for="testDescription">Описание:</label>
+            <textarea id="testDescription" rows="4" cols="50"></textarea><br><br>
+    
+            <input type="radio" id="quizType" name="testType" value="quiz">
+            <label for="quizType">Квиз</label>
+            <input type="radio" id="multiDimensionalType" name="testType" value="multiDimensional">
+            <label for="multiDimensionalType">Многомерный</label><br><br>
+    
+            <button onclick="nextStep()">Далее</button>
+        </div>
+    
+        <div id="questionPart">
+            <h2>Добавление вопросов</h2>
+            <button onclick="addQuestion()">Добавить вопрос</button><br><br>
+    
+            <div id="questionsSection">
+            </div>
+            
+            <button onclick="start()">Назад</button>
+            <button onclick="showResults()">Далее</button>
+        </div>
+    
+        <div id="resultsPart">
+            <h2>Результаты</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Начальное значение %</th>
+                        <th>Конечное значение %</th>
+                        <th>Результат</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsTable">
+                </tbody>
+            </table>
+    
+            <button onclick="addResultRow('x', 'd')">Добавить результат</button><br><br>
+            <button onclick="nextStep()">Назад</button>
+            <button onclick="finishTest()">Завершить</button>
+        </div>
+    </div>
+
+<script>
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+    tg.MainButton.setText("Confirm");
+
+    let currentStep = 1;
+
+    addResultRow(0, 25)
+    addResultRow(26, 50)
+    addResultRow(51, 75)
+    addResultRow(76, 100)
+    let questionCount = 0;
+    let ansvers_counts = {
+    }
+    addQuestion()
+
+    function start(){
+        document.getElementById('testInfoPart').style.display = 'block';
+            document.getElementById('resultsPart').style.display = 'none';
+            document.getElementById('questionPart').style.display = 'none';
+            currentStep --;
+    }
+
+    function nextStep() {
+        document.getElementById('testInfoPart').style.display = 'none';
+            document.getElementById('resultsPart').style.display = 'none';
+            document.getElementById('questionPart').style.display = 'block';
+        switch (currentStep){
+            case 1: currentStep ++; break;
+            case 3: currentStep --; break;
+        }
+    }
+
+    function addQuestion() {
+        let questionsSection = document.getElementById('questionsSection');
+
+        questionCount++;
+        ansvers_counts[questionCount] = 2
+
+        let questionBlock = document.createElement('div');
+        questionBlock.classList.add('questionBlock');
+
+        let questionTitle = document.createElement('div');
+        questionTitle.classList.add('questionTitle');
+        questionTitle.id = 'question_title_'+questionCount;
+        questionTitle.textContent = `Вопрос ${questionCount}`;
+        questionBlock.appendChild(questionTitle);
+
+        let questionContent = document.createElement('div');
+        questionContent.classList.add('questionContent');
+
+        questionContent.id = "question_form_"+questionCount
+        questionContent.innerHTML = `
+            <input type="text" id="question${questionCount}" class="question" oninput="oninp(${questionCount})">
+            <label>Ответы</label>
+            <div id='answers_div_${questionCount}'>
+                <div><input type="text" id="answer1_${questionCount}" class="answer"><input type="radio" class="radio_ans" checked name="correctAnswer_${questionCount}"></div>
+                <div><input type="text" id="answer2_${questionCount}" class="answer"><input type="radio" class="radio_ans" name="correctAnswer_${questionCount}"></div>
+            </div>
+            <button onclick="addAnswer(${questionCount})">Добавить ещё ответ</button>
+        `;
+
+        questionContent.style.display = 'block';
+        questionBlock.appendChild(questionContent);
+
+        questionTitle.addEventListener('click', function () {
+            questionContent.style.display = questionContent.style.display === 'block' ? 'none' : 'block';
+        });
+
+        questionsSection.appendChild(questionBlock);
+    }
+
+    function oninp(questionNum){
+        let quett = document.getElementById("question_title_"+questionNum);
+        let quefr = document.getElementById("question"+questionNum);
+        quett.innerHTML = quefr.value;
+    }
+
+    function addAnswer(questionNum) {
+        let questionContent = document.getElementById("answers_div_"+questionNum);
+        ansvers_counts[questionNum] ++;
+
+        let inpdiv = document.createElement('div');
+
+        let newAnswerInput = document.createElement('input');
+        newAnswerInput.type = 'text';
+        newAnswerInput.classList.add('answer');
+        newAnswerInput.id = "answer"+ ansvers_counts[questionNum] + "_" + questionNum;
+
+        let newRadioInput = document.createElement('input');
+        newRadioInput.type = 'radio';
+        newRadioInput.name = `correctAnswer_${questionNum}`;
+        newRadioInput.classList.add('radio_ans');
+
+        inpdiv.appendChild(newAnswerInput);
+        inpdiv.appendChild(newRadioInput);
+        questionContent.appendChild(inpdiv);
+    }
+
+    function showResults() {
+        if (currentStep === 2) {
+            document.getElementById('questionPart').style.display = 'none';
+            document.getElementById('resultsPart').style.display = 'block';
+            currentStep++;
+        }
+    }
+
+    function addResultRow(x, y) {
+        let resultsTable = document.getElementById('resultsTable');
+        let newRow = resultsTable.insertRow();
+
+        let cell1 = newRow.insertCell(0);
+        let cell2 = newRow.insertCell(1);
+        let cell3 = newRow.insertCell(2);
+
+        cell1.innerHTML = '<input class="tbli" type="number" min="0" max="100">';
+        cell2.innerHTML = '<input class="tbli" type="number" min="0" max="100">';
+        cell3.innerHTML = '<input class="tbli" type="text">';
+
+        if (x != 'x'){
+            cell1.getElementsByTagName('input')[0].value = x
+            cell2.getElementsByTagName('input')[0].value = y 
+        }
+    }
+
+    let testInfo = {}
+    function finishTest() {
+        let testName = document.getElementById('testName').value;
+        let testDescription = document.getElementById('testDescription').value;
+
+        let questions = [];
+        let questionDivs = document.querySelectorAll('.question');
+        questionDivs.forEach(questionDiv => {
+            let question = {
+                questionText: questionDiv.value,
+                answers: []
+            };
+
+            let answerInputs = questionDiv.parentElement.querySelectorAll('.answer');
+            let radioInputs = questionDiv.parentElement.querySelectorAll('input[type="radio"]');
+
+            answerInputs.forEach((answerInput, index) => {
+                let answer = {
+                    answerText: answerInput.value,
+                    isCorrect: radioInputs[index].checked
+                };
+                question.answers.push(answer);
+            });
+
+            questions.push(question);
+        });
+
+        let results = [];
+        let resultsTable = document.getElementById('resultsTable');
+        let resultRows = resultsTable.querySelectorAll('tr');
+        resultRows.forEach(row => {
+            let cells = row.querySelectorAll('input');
+            let percentage = cells[0].value;
+            let resultText = cells[1].value;
+
+            results.push({
+                percentage: percentage,
+                resultText: resultText
+            });
+        });
+
+        testInfo = {
+            testName: testName,
+            testDescription: testDescription,
+            questions: questions,
+            results: results
+        };
+
+        console.log(testInfo);
+        tg.MainButton.show()
+    }
+
+    Telegram.WebApp.onEvent('mainButtonClicked', function(){
+        tg.sendData(JSON.stringify(testInfo));
+        tg.close();
+    })
+
+</script>
+
+</body>
+</html>
