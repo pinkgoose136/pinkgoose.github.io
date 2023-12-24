@@ -165,6 +165,7 @@ function translate(tg, wordlist, idd){
         if (err) {
             console.log('Ошибка получения ключей: ' + err);
         } else {
+            console.log(keys);
             let ker = keys.filter(word => word.includes('lng-'+idd))
             if (ker.length == 0){
                 idd = 'en'
