@@ -146,7 +146,7 @@
                 if (event.target.className == 'clickable'){
                     var selectedColor = getSelectedColor();
                     event.target.style.backgroundColor = selectedColor; 
-                  //  mouseDown = true;
+                    mouseDown = true;
                 }
             });
 
@@ -154,11 +154,18 @@
                 mouseDown = false;
             });
 
-         //   table.addEventListener('touchend', function(event) {
-        //        mouseDown = false;
-        //    });
+            table.addEventListener('touchend', function(event) {
+                mouseDown = false;
+            });
 
             table.addEventListener('mouseover', function(event) {
+                if (event.target.tagName === 'TD' && mouseDown == true && event.target.className == 'clickable') {
+                    var selectedColor = getSelectedColor();
+                    event.target.style.backgroundColor = selectedColor; 
+                }
+            });
+
+            table.addEventListener('touchmove', function(event) {
                 if (event.target.tagName === 'TD' && mouseDown == true && event.target.className == 'clickable') {
                     var selectedColor = getSelectedColor();
                     event.target.style.backgroundColor = selectedColor; 
