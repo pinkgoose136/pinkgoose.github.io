@@ -108,22 +108,22 @@
                 }
             });
 
-            element.addEventListener('touchstart', function(event) {
+            table.addEventListener('touchstart', function(event) {
                 if (event.target.className == 'clickable'){
                     var selectedColor = getSelectedColor();
                     event.target.style.backgroundColor = selectedColor; 
                     mouseDown = true;
                 }
-            //    event.preventDefault();
+                event.preventDefault();
             });
 
             table.addEventListener('mouseup', function() {
                 mouseDown = false;
             });
 
-            element.addEventListener('touchend', function(event) {
+            table.addEventListener('touchend', function(event) {
                 mouseDown = false;
-         //       event.preventDefault();
+                event.preventDefault();
             });
 
             table.addEventListener('mouseover', function(event) {
