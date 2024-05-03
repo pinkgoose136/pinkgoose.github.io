@@ -86,7 +86,7 @@
                 colorList[color]['colors'] = [];
                 colorList[color]['name'] = document.getElementById(color+'-name').innerHTML
             });
-
+            var allCells = document.querySelectorAll('td');
             allCells.forEach(function(cell) {
                 var color1 = cell.style.backgroundColor;
                 if (color1) {
