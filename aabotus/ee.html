@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Планнер недели</title>
     <link rel="stylesheet" href="stl.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="script.js"></script>
 </head>
 <body>
@@ -42,7 +43,7 @@
         </tr>
     </table>
 
-    <div>
+    <div style="display: none;">
         <button onclick="save()">Сохранить</button>
     </div>
 
@@ -68,6 +69,28 @@
         </div>
 
     </div>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.MainButton.setText("Confirm");
+        tg.MainButton.show()
+
+        Telegram.WebApp.onEvent('mainButtonClicked', function(){
+            var colorCheckboxes = document.querySelectorAll('.color-checkbox input[type="radio"]')
+            var colorList = {};
+
+            colorCheckboxes.forEach(function(checkbox) {
+                var color = checkbox.value;
+                colorList[color] = {'name': '', 'colors': {}}
+                colorList[color]['colors'] = [];
+                colorList[color]['name'] = document.getElementById(color+'-name').innerHTML
+            });
+
+            tg.sendData(JSON.stringify(colorList));
+            tg.close();
+        })
+    </script>
 
 
     <script>
@@ -99,6 +122,7 @@
             }
             var mouseDown = false;
 
+
             table.addEventListener('mousedown', function() {
                 if (event.target.className == 'clickable'){
                     var selectedColor = getSelectedColor();
@@ -107,8 +131,22 @@
                 }
             });
 
+            table.addEventListener('touchstart', function(event) {
+                if (event.target.className == 'clickable'){
+                    var selectedColor = getSelectedColor();
+                    event.target.style.backgroundColor = selectedColor; 
+                    mouseDown = true;
+                }
+                event.preventDefault();
+            });
+
             table.addEventListener('mouseup', function() {
                 mouseDown = false;
+            });
+
+            table.addEventListener('touchend', function(event) {
+                mouseDown = false;
+                event.preventDefault();
             });
 
             table.addEventListener('mouseover', function(event) {
