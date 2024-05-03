@@ -87,6 +87,17 @@
                 colorList[color]['name'] = document.getElementById(color+'-name').innerHTML
             });
 
+            allCells.forEach(function(cell) {
+                var color1 = cell.style.backgroundColor;
+                if (color1) {
+                    var color = rgbToHex(color1);
+                    if (color && colorList[color]) {
+                        colorList[color]['colors'].push(cell.id);
+                        cell.style.backgroundColor = '';
+                    }
+                }
+            });
+
             tg.sendData(JSON.stringify(colorList));
             tg.close();
         })
@@ -137,7 +148,7 @@
                     event.target.style.backgroundColor = selectedColor; 
                     mouseDown = true;
                 }
-                event.preventDefault();
+                //event.preventDefault();
             });
 
             table.addEventListener('mouseup', function() {
@@ -146,7 +157,7 @@
 
             table.addEventListener('touchend', function(event) {
                 mouseDown = false;
-                event.preventDefault();
+               // event.preventDefault();
             });
 
             table.addEventListener('mouseover', function(event) {
