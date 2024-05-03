@@ -166,17 +166,22 @@
             });
 
             table.addEventListener('touchmove', function(event) {
-                if (event.target.tagName === 'TD' && mouseDown == true && event.target.className == 'clickable') {
-                    var selectedColor = getSelectedColor();
-                    event.target.style.backgroundColor = selectedColor; 
+                for (var i = 0; i < event.touches.length; i++) {
+                    var touch = event.touches[i];
+                    var targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+                    if (targetElement.tagName === 'TD' && mouseDown == true && targetElement.className == 'clickable') {
+                        var selectedColor = getSelectedColor();
+                        targetElement.style.backgroundColor = selectedColor; 
+                        event.preventDefault();
+                    }
                 }
             });
+
 
             var allCells = document.querySelectorAll('td');
             allCells.forEach(function(cell) {
                 cell.addEventListener('click', function() {
                     if (event.target.className == 'clickable'){
-                        console.log(event.target.className)
                         var selectedColor = getSelectedColor();
                         event.target.style.backgroundColor = selectedColor;
                     }
