@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Планнер недели</title>
+    <link rel="stylesheet" href="stl.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="tasks">
+        <h1>Планнер недели</h1>
+
+        <div class="color-checkbox" id="colorcheck">
+        </div>
+
+        <button type="button" id="taskAdd" onclick="openModal('new')">Добавить задание</button>
+
+    </div>
+
+    <table>
+        <tr>
+            <th></th>
+            <th>Понедельник</th>
+            <th>Вторник</th>
+            <th>Среда</th>
+            <th>Четверг</th>
+            <th>Пятница</th>
+            <th>Суббота</th>
+            <th>Воскресенье</th>
+        </tr>
+    </table>
+
+    <div>
+        <button onclick="save()">Сохранить</button>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div>
+                <label for="textInput">Название задания:</label>
+                <input type="text" id="textInput" name="textInput">    
+            </div>
+
+            <div>
+                <label for="colorInput">Цвет:</label>
+                <input id="colorInput" name="colorInput" type="color">    
+            </div>
+
+            <div>
+                <button id="btnch" onclick="saveChanges()">Сохранить изменения</button>
+
+                <button id="btnDel" onclick="handleDeleteClick(event)" class="edt">Удалить задание</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var table = document.querySelector('table');
+
+            for (var i = 0; i < 24; i++) {
+                var row = document.createElement('tr');
+
+                for (var j = 0; j < 8; j++) {
+                    var cell = document.createElement('td');
+                    var div = document.createElement('div');
+                    div.className = 'task';
+                    div.setAttribute('data-hour', i);
+                    
+                    if (j == 0){
+                        var time = document.createElement('p');
+                        time.innerHTML = i + ':00'
+                        div.appendChild(time)
+                        cell.className = 'time'
+                    }
+                    else{cell.className = 'clickable'}
+                    cell.id = 'c-'+i+'-'+j
+                    cell.appendChild(div);
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+            var mouseDown = false;
+
+            table.addEventListener('mousedown', function() {
+                if (event.target.className == 'clickable'){
+                    var selectedColor = getSelectedColor();
+                    event.target.style.backgroundColor = selectedColor; 
+                    mouseDown = true;
+                }
+            });
+
+            table.addEventListener('mouseup', function() {
+                mouseDown = false;
+            });
+
+            table.addEventListener('mouseover', function(event) {
+                if (event.target.tagName === 'TD' && mouseDown == true && event.target.className == 'clickable') {
+                    var selectedColor = getSelectedColor();
+                    event.target.style.backgroundColor = selectedColor; 
+                }
+            });
+
+            var allCells = document.querySelectorAll('td');
+            allCells.forEach(function(cell) {
+                cell.addEventListener('click', function() {
+                    if (event.target.className == 'clickable'){
+                        console.log(event.target.className)
+                        var selectedColor = getSelectedColor();
+                        event.target.style.backgroundColor = selectedColor;
+                    }
+                });
+            });
+
+            function getSelectedColor() {
+                var checkedRadio = document.querySelector('input[type="radio"]:checked');
+                return checkedRadio ? checkedRadio.value : null;
+            }
+            fill()
+
+        });
+    </script>
+</body>
+</html>

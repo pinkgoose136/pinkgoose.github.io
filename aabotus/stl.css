@@ -1,0 +1,163 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+#tasks {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.color-checkbox label {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.color-square {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+
+#myModal {
+    margin-bottom: 20px;
+}
+
+#myModal label {
+    font-weight: bold;
+}
+
+#myModal input[type="text"],
+#myModal input[type="color"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#tasks button{
+    padding: 4px 8px;
+    margin-left: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+#taskAdd, #myModal button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    margin-top: 14px;
+}
+
+#taskAdd:hover, #myModal button {
+    background-color: #0056b3;
+}
+
+table {
+    width: calc(100% - 40px);
+    border-collapse: collapse;
+    margin: 20px;
+}
+
+td{
+    width: 10%;
+}
+td:first-child{
+    width: 6%;
+}
+
+th, td {
+    border: 1px solid #747474;
+    padding: 12px;
+    text-align: center;
+}
+
+th, .time {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.time div p{
+    color: white;
+    font-weight: bold;
+}
+
+.task {
+    user-select: none;
+    position: relative;
+}
+
+.task p {
+    margin: 0;
+    font-size: 12px;
+    color: #777;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+tr:hover td:first-child {
+    background-color: #837f7f;
+}
+
+td:hover{
+    border: 2px solid black;
+}
+
+
+
+
+
+
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
