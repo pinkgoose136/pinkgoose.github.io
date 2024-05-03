@@ -114,6 +114,7 @@
                     event.target.style.backgroundColor = selectedColor; 
                     mouseDown = true;
                 }
+            //    event.preventDefault();
             });
 
             table.addEventListener('mouseup', function() {
@@ -122,6 +123,7 @@
 
             element.addEventListener('touchend', function(event) {
                 mouseDown = false;
+         //       event.preventDefault();
             });
 
             table.addEventListener('mouseover', function(event) {
