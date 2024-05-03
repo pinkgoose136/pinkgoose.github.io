@@ -146,19 +146,17 @@
                 if (event.target.className == 'clickable'){
                     var selectedColor = getSelectedColor();
                     event.target.style.backgroundColor = selectedColor; 
-                    mouseDown = true;
+                  //  mouseDown = true;
                 }
-                //event.preventDefault();
             });
 
             table.addEventListener('mouseup', function() {
                 mouseDown = false;
             });
 
-            table.addEventListener('touchend', function(event) {
-                mouseDown = false;
-               // event.preventDefault();
-            });
+         //   table.addEventListener('touchend', function(event) {
+        //        mouseDown = false;
+        //    });
 
             table.addEventListener('mouseover', function(event) {
                 if (event.target.tagName === 'TD' && mouseDown == true && event.target.className == 'clickable') {
