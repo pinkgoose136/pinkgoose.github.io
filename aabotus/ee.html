@@ -98,6 +98,11 @@
                 }
             });
 
+            tg.CloudStorage.setItem('colorList', colorList, function(err) {
+                console.log('Элемент с ключом ' + key + ' успешно добавлен в хранилище');
+            });
+
+
             tg.sendData(JSON.stringify(colorList));
             tg.close();
         })
@@ -192,7 +197,7 @@
                 var checkedRadio = document.querySelector('input[type="radio"]:checked');
                 return checkedRadio ? checkedRadio.value : null;
             }
-            fill()
+            fill2()
 
         });
     </script>

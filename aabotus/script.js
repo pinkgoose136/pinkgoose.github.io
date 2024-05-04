@@ -26,7 +26,7 @@ function save() {
         console.log("Цвет:", color);
         console.log("Ячейки:", colorList[color]['colors']);
     }
-    fill()
+    fill2()
 }
 
 function fill() {
@@ -45,6 +45,26 @@ function fill() {
         }
     }
 }
+
+function fill2() {
+    let tg = window.Telegram.WebApp;
+    tg.CloudStorage.getItem('colorList', function(err, colorList) {
+        var allCells = document.querySelectorAll('td');
+        document.getElementById('colorcheck').innerHTML = '';
+    
+        if (colorList) {
+            for (var color in colorList) {
+                var nm = colorList[color]['name']
+                createTask(nm, color)
+                var cells = colorList[color]['colors'];
+                cells.forEach(function(idd) {
+                    document.getElementById(idd).style.backgroundColor = color;
+                });
+            }
+        }
+    })
+}
+
 
 
 function createTask(name, colo){
