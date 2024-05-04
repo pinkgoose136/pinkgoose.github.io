@@ -97,9 +97,10 @@
                     }
                 }
             });
-
+            console.log(colorList)
 
             for (var color in colorList) {
+                console.log(color)
                 tg.CloudStorage.setItem('colors_'+color+'_name', JSON.stringify(colorList[color]['name']), function(err) {
                     console.log('Элемент с ключом ' + key + ' успешно добавлен в хранилище');
                 });
