@@ -98,13 +98,21 @@
                 }
             });
 
-            tg.CloudStorage.setItem('colorList', colorList, function(err) {
-                console.log('Элемент с ключом ' + key + ' успешно добавлен в хранилище');
-            });
 
+            for (var color in colorList) {
+                tg.CloudStorage.setItem('colors_'+color+'_name', JSON.stringify(colorList[color]['name']), function(err) {
+                    console.log('Элемент с ключом ' + key + ' успешно добавлен в хранилище');
+                });
+
+                let ids = colorList[color]['colors'].join('/')
+
+                tg.CloudStorage.setItem('colors_'+color+'_colors', ids, function(err) {
+                    console.log('Элемент с ключом ' + key + ' успешно добавлен в хранилище');
+                });
+            }
 
             tg.sendData(JSON.stringify(colorList));
-            tg.close();
+         //   tg.close();
         })
     </script>
 
