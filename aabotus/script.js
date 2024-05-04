@@ -22,11 +22,6 @@ function save() {
         }
     });
 
-    for (var color in colorList) {
-        localStorage.setItem('colors_'+color+'_name', JSON.stringify(colorList[color]['name']));
-        let ids = colorList[color]['colors'].join('/')
-        localStorage.setItem('colors_'+color+'_colors', ids);
-    }
     fill2()
 }
 
