@@ -21,10 +21,11 @@ function save() {
             }
         }
     });
-    localStorage.setItem('colorList', JSON.stringify(colorList));
+
     for (var color in colorList) {
-        console.log("Цвет:", color);
-        console.log("Ячейки:", colorList[color]['colors']);
+        localStorage.setItem('colors_'+color+'_name', JSON.stringify(colorList[color]['name']));
+        let ids = colorList[color]['colors'].join('/')
+        localStorage.setItem('colors_'+color+'_colors', ids);
     }
     fill2()
 }
@@ -48,6 +49,15 @@ function fill() {
 
 function fill2() {
     let tg = window.Telegram.WebApp;
+
+    tg.CloudStorage.getKeys(function(err, keys) {
+            console.log(keys)
+            //tg.CloudStorage.getItems(keys, function(err, items) {
+
+            //})
+    })
+
+
     tg.CloudStorage.getItem('colorList', function(err, colorList) {
         var allCells = document.querySelectorAll('td');
         document.getElementById('colorcheck').innerHTML = '';
