@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Betting Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .balance {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .controls button, .controls input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+        .controls input {
+            width: 100px;
+            text-align: center;
+        }
+        .controls button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .controls button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .spinner {
+            display: none;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #007bff;
+            animation: spin 1s linear infinite;
+            margin-top: 10px;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @media (max-width: 600px) {
+            .controls {
+                flex-direction: column;
+            }
+            .controls button, .controls input {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="balance">Stan konta: <span id="balance">1000</span>zł</div>
+    <div class="controls">
+        <button onclick="adjustBet(0.5)">x0.5</button>
+        <input type="number" id="betAmount" value="100" step="1" min="1">
+        <button onclick="adjustBet(2)">x2</button>
+    </div>
+    <div class="error" id="error"></div>
+    <button onclick="playGame()">Zagraj</button>
+    <div class="spinner" id="spinner"></div>
+    <div class="result" id="result"></div>
+    <script src="https://telegram.org/js/games.js"></script>
+
+    <script>
+  
+        let balance = 1000;
+
+        function adjustBet(factor) {
+            const betInput = document.getElementById('betAmount');
+            let betAmount = parseInt(betInput.value);
+            betAmount = Math.max(1, Math.floor(betAmount * factor));
+            betInput.value = betAmount;
+        }
+
+        function playGame() {
+            const betInput = document.getElementById('betAmount');
+            const errorDiv = document.getElementById('error');
+            const spinner = document.getElementById('spinner');
+            const resultDiv = document.getElementById('result');
+
+            let betAmount = parseInt(betInput.value);
+
+            if (betAmount > balance) {
+                errorDiv.innerText = 'Nie stać cię';
+                return;
+            } else {
+                errorDiv.innerText = '';
+            }
+
+            spinner.style.display = 'block';
+            resultDiv.innerText = '';
+
+            setTimeout(() => {
+                const multipliers = [0, 0.2, 0.25, 0.5, 0.8, 0.75, 1, 1.25, 1.5, 2, 3, 5];
+                const randomMultiplier = multipliers[Math.floor(Math.random() * multipliers.length)];
+
+                balance -= betAmount;
+                const winnings = betAmount * randomMultiplier;
+                balance += winnings;
+
+                document.getElementById('balance').innerText = balance;
+                resultDiv.innerText = `Wygrałeś ${winnings.toFixed(2)}zł`;
+
+                spinner.style.display = 'none';
+            }, 2000);
+        }
+
+        document.getElementById('betAmount').addEventListener('input', function(e) {
+            const betAmount = e.target.value;
+            e.target.value = betAmount.replace(/[^0-9]/g, '');
+            if (e.target.value === '' || e.target.value === '0') {
+                e.target.value = 1;
+            }
+        });
+
+        let t = TelegramGameProxy.getGameHighScores()
+        console.log(t)
+        
+    </script>
+</body>
+</html>
