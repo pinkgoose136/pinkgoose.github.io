@@ -73,6 +73,8 @@ body {
         <button onclick="adjustBet(0.5)">x0.5</button>
         <input type="number" id="betAmount" value="100" step="1" min="1">
         <button onclick="adjustBet(2)">x2</button>
+        <button onclick="adjustBet('all')">All-in</button>
+        
     </div>
     <div class="error" id="error"></div>
     <button onclick="playGame()">Zagraj</button>
@@ -82,13 +84,18 @@ body {
 
     <script>
   
-        let balance = 1000;
+        let balance = 5000;
 
         function adjustBet(factor) {
-            const betInput = document.getElementById('betAmount');
-            let betAmount = parseInt(betInput.value);
-            betAmount = Math.max(1, Math.floor(betAmount * factor));
-            betInput.value = betAmount;
+            if (factor != 'all'){
+                const betInput = document.getElementById('betAmount');
+                let betAmount = parseInt(betInput.value);
+                betAmount = Math.max(1, Math.floor(betAmount * factor));
+                betInput.value = betAmount;
+            }else{
+                let betAmount = balance;
+                document.getElementById('betAmount').value = betAmount
+            }
         }
 
         function playGame() {
@@ -121,7 +128,7 @@ body {
                 resultDiv.innerText = `Wygrałeś ${winnings.toFixed(2)}zł`;
 
                 spinner.style.display = 'none';
-            }, 2000);
+            }, 1000);
         }
 
         document.getElementById('betAmount').addEventListener('input', function(e) {
