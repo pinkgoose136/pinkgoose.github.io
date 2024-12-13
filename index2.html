@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Tagging Page</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Image uploading</h1>
+        <div class="image-list" id="image-list"></div>
+        <div class="image-uploader">
+            <label for="image-input" class="custom-file-label">Upload Image</label>
+            <input type="file" id="image-input" accept="image/*" onchange="addImage()">
+        </div>
+        <button class="submit-button" id="submit-button" onclick="submitData()">Submit</button>
+    </div>
+
+    <script>
+        const imageList = document.getElementById('image-list');
+        let images = [];
+
+        function addImage() {
+            const fileInput = document.getElementById('image-input');
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = () => {
+                    const imageId = Date.now();
+                    const imageBlock = document.createElement('div');
+                    imageBlock.className = 'image-item';
+                    imageBlock.dataset.id = imageId;
+
+                    imageBlock.innerHTML = `
+                        <button class="delete-button" onclick="deleteImage(${imageId})">&times;</button>
+                        <img src="${reader.result}" alt="Uploaded Image">
+                        <input type="text" placeholder="Enter tag" onkeypress="handleTagInput(event, ${imageId})">
+                        <div class="tag-list" id="tag-list-${imageId}"></div>
+                    `;
+
+                    imageList.appendChild(imageBlock);
+                    images.push({ id: imageId, tags: [] });
+                };
+
+                reader.readAsDataURL(file);
+                fileInput.value = '';
+            }
+        }
+
+        function handleTagInput(event, imageId) {
+            if (event.key === 'Enter') {
+                const input = event.target;
+                const tag = input.value.trim();
+                const image = images.find(img => img.id === imageId);
+
+                if (tag && !image.tags.includes(tag)) {
+                    image.tags.push(tag);
+                    const tagList = document.getElementById(`tag-list-${imageId}`);
+                    const tagBlock = document.createElement('div');
+                    tagBlock.className = 'tag';
+                    tagBlock.textContent = tag;
+                    tagBlock.onclick = () => removeTag(imageId, tag);
+                    tagList.appendChild(tagBlock);
+                    input.value = '';
+                } else {
+                    input.value = '';
+                }
+            }
+        }
+
+        function removeTag(imageId, tag) {
+            const image = images.find(img => img.id === imageId);
+            image.tags = image.tags.filter(t => t !== tag);
+
+            const tagList = document.getElementById(`tag-list-${imageId}`);
+            tagList.innerHTML = '';
+            image.tags.forEach(t => {
+                const tagBlock = document.createElement('div');
+                tagBlock.className = 'tag';
+                tagBlock.textContent = t;
+                tagBlock.onclick = () => removeTag(imageId, t);
+                tagList.appendChild(tagBlock);
+            });
+        }
+
+        function deleteImage(imageId) {
+            images = images.filter(img => img.id !== imageId);
+            const imageBlock = document.querySelector(`.image-item[data-id="${imageId}"]`);
+            if (imageBlock) imageBlock.remove();
+        }
+
+        function submitData() {
+            let valid = true;
+
+            images.forEach(image => {
+                const input = document.querySelector(`.image-item[data-id="${image.id}"] input[type="text"]`);
+                if (image.tags.length === 0) {
+                    valid = false;
+                    input.classList.add('error');
+                    if (!input.nextElementSibling || !input.nextElementSibling.classList.contains('error-message')) {
+                        const errorMessage = document.createElement('div');
+                        errorMessage.className = 'error-message';
+                        errorMessage.textContent = 'Please add at least one tag.';
+                        input.after(errorMessage);
+                    }
+                } else {
+                    input.classList.remove('error');
+                    if (input.nextElementSibling && input.nextElementSibling.classList.contains('error-message')) {
+                        input.nextElementSibling.remove();
+                    }
+                }
+            });
+
+            if (valid) {
+                console.log(images);
+            }
+        }
+
+
+        let tg = window.Telegram.WebApp;
+        if(tg){
+            tg.expand();
+            tg.MainButton.setText("Submit");
+            tg.MainButton.show()
+
+            Telegram.WebApp.onEvent('mainButtonClicked', function(){
+                submitData()
+                tg.sendData(JSON.stringify(images));
+                //tg.close();
+            })
+        }
+
+    </script>
+</body>
+</html>
