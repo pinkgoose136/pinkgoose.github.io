@@ -119,19 +119,24 @@
             }
         }
 
+
         let tg = window.Telegram.WebApp;
-        if (tg) {
+        if(tg){
             tg.expand();
             tg.MainButton.setText("Submit");
-            tg.MainButton.show();
+            tg.MainButton.show()
 
-            Telegram.WebApp.onEvent('main_button_pressed', function () { // Исправлено имя события
-                submitData(); // Ваш метод для обработки данных
-                tg.sendData(JSON.stringify(images)); // Отправляем данные
-                tg.close(); // Закрываем WebApp
-            });
+            Telegram.WebApp.onEvent('mainButtonClicked', function(){
+                submitData()
+                console.log(images)
+                if(images){
+                    tg.sendData(JSON.stringify(images));
+                }else{
+                    tg.sendData({'aaa': 'xdd'})
+                }
+                    //tg.close();
+            })
         }
-
 
     </script>
 </body>
