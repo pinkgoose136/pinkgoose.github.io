@@ -124,6 +124,7 @@
         tg.MainButton.setText("Подтвердить");
         tg.MainButton.textColor = "#F55353";
         tg.MainButton.color = "#E0FFFF";
+        tg.MainButton.show()
 
         Telegram.WebApp.onEvent('mainButtonClicked', function(){
             let data = {
@@ -132,6 +133,7 @@
             tg.sendData(JSON.stringify(data));   
             tg.close();
         });
+
 
 
     </script>
