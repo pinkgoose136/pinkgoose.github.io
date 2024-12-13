@@ -120,21 +120,17 @@
         }
 
         let tg = window.Telegram.WebApp;
-        tg.expand();
-        tg.MainButton.setText("Подтвердить");
-        tg.MainButton.textColor = "#F55353";
-        tg.MainButton.color = "#E0FFFF";
-        tg.MainButton.show()
+        if(tg){
+            tg.expand();
+            tg.MainButton.setText("Submit");
+            tg.MainButton.show()
 
-        Telegram.WebApp.onEvent('mainButtonClicked', function(){
-            let data = {
-                name: 'SUS'
-            }
-            tg.sendData(JSON.stringify(data));   
-            tg.close();
-        });
-
-
+            Telegram.WebApp.onEvent('mainButtonClicked', function(){
+                submitData()
+                tg.sendData(JSON.stringify(images));
+                tg.close();
+            })
+        }
 
     </script>
 </body>
