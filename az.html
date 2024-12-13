@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script> <!--Подключаем скрипт от телеграм-->
+    <title>Добавить памятную дату</title>
+</head>
+<body>
+    <form id="eventForm">
+        <label for="eventName">Название даты:</label>
+        <input type="text" id="eventName" name="eventName" required><br><br>
+
+        <label for="eventDate">Дата:</label>
+        <input type="date" id="eventDate" name="eventDate" required><br><br>
+
+        <label for="eventTimezone">Часовой пояс:</label>
+        <select id="eventTimezone" name="eventTimezone">
+            <option value="-12">(GMT-12:00) Эниветок, Киритимати (Кирибати)</option>
+            <option value="-11">(GMT-11:00) Мидуэй, Самоа</option>
+            <option value="-10">(GMT-10:00) Гавайи</option>
+            <option value="-9">(GMT-09:00) Аляска</option>
+            <option value="-8">(GMT-08:00) Тихоокеанское время (США и Канада)</option>
+            <option value="-7">(GMT-07:00) Горное время (США и Канада)</option>
+            <option value="-6">(GMT-06:00) Центральное время (США и Канада), Мехико</option>
+            <option value="-5">(GMT-05:00) Восточное время (США и Канада), Богота, Лима</option>
+            <option value="-4">(GMT-04:00) Атлантическое время (Канада), Каракас, Ла-Пас</option>
+            <option value="-3">(GMT-03:00) Буэнос-Айрес, Джорджтаун</option>
+            <option value="-2">(GMT-02:00) Среднеатлантическое время</option>
+            <option value="-1">(GMT-01:00) Азорские острова, о. Мыконос</option>
+            <option value="0">(GMT) Лиссабон, Лондон, Эдинбург, Дублин, Касабланка</option>
+            <option value="1">(GMT+01:00) Амстердам, Брюссель, Копенгаген, Мадрид, Париж</option>
+            <option value="2">(GMT+02:00) Афины, Иерусалим, Бухарест, Киев, Калининград</option>
+            <option value="3">(GMT+03:00) Багдад, Кувейт, Москва, Санкт-Петербург, Найроби</option>
+            <option value="3.5">(GMT+03:30) Тегеран</option>
+            <option value="4">(GMT+04:00) Баку, Ереван, Тбилиси, Дубай, Мускат</option>
+            <option value="4.5">(GMT+04:30) Кабул</option>
+            <option value="5">(GMT+05:00) Екатеринбург, Исламабад, Карачи, Ташкент</option>
+            <option value="5.5">(GMT+05:30) Дели, Калькутта, Мумбаи, Ченнай</option>
+            <option value="5.75">(GMT+05:45) Катманду</option>
+            <option value="6">(GMT+06:00) Алматы, Астана, Новосибирск</option>
+            <option value="6.5">(GMT+06:30) Янгон</option>
+            <option value="7">(GMT+07:00) Бангкок, Ханой, Джакарта</option>
+            <option value="8">(GMT+08:00) Пекин, Гонконг, Куала-Лумпур, Сингапур</option>
+            <option value="8.75">(GMT+08:45) Европейский западноавстралийский стандартный времени</option>
+            <option value="9">(GMT+09:00) Осака, Саппоро, Токио, Сеул</option>
+            <option value="9.5">(GMT+09:30) Аделаида, Дарвин</option>
+            <option value="10">(GMT+10:00) Брисбен, Канберра, Мельбурн, Сидней</option>
+            <option value="10.5">(GMT+10:30) Лорд-Хау</option>
+            <option value="11">(GMT+11:00) Соломоновы острова, Владивосток</option>
+            <option value="11.5">(GMT+11:30) Остров Норфолк</option>
+            <option value="12">(GMT+12:00) Фиджи, Камчатка, Окленд</option>
+            <option value="12.75">(GMT+12:45) Чатем</option>
+            <option value="13">(GMT+13:00) Тонга</option>
+            <option value="14">(GMT+14:00) Острова Лайн</option>
+        </select><br><br>
+
+        <label for="eventTime">Время (опционально):</label>
+        <input type="time" id="eventTime" name="eventTime" value="00:00" step="1"><br><br>
+        
+        <input type="submit" value="Сохранить">
+    </form>
+    <style>
+        body {
+            color: var(--tg-theme-text-color);
+            background: var(--tg-theme-bg-color);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Выравнивание по верхнему краю */
+        }
+        form {
+            width: 90%;
+            max-width: 400px;
+            background-color: var(--tg-theme-secondary-bg-color);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px; /* Отступ сверху */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <script>
+   let tg = window.Telegram.WebApp;
+   tg.expand();
+   tg.MainButton.setText("Подтвердить");
+   tg.MainButton.textColor = "#F55353";
+   tg.MainButton.color = "#E0FFFF";
+   tg.MainButton.hide()
+   document.getElementById("eventForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            tg.MainButton.show()
+    });   
+    Telegram.WebApp.onEvent('mainButtonClicked', function(){
+    let data = {
+        name: document.getElementById("eventName").value,
+        date: document.getElementById("eventDate").value,
+        timezone: document.getElementById("eventTimezone").value,
+        time: document.getElementById("eventTime").value
+    }
+    tg.sendData(JSON.stringify(data));   
+    tg.close();
+        
+     });
+</script>
+    
+</body>
+</html>
