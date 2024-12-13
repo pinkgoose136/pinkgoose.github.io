@@ -119,25 +119,20 @@
             }
         }
 
-
         let tg = window.Telegram.WebApp;
-        if(tg){
-            tg.expand();
-            tg.MainButton.setText("Submit");
-            tg.MainButton.show()
+        tg.expand();
+        tg.MainButton.setText("Подтвердить");
+        tg.MainButton.textColor = "#F55353";
+        tg.MainButton.color = "#E0FFFF";
 
-            Telegram.WebApp.onEvent('mainButtonClicked', function(){
-                submitData()
-                console.log(images)
-                tg.sendData(JSON.stringify({ key: "value" }));
-                if(images){
-                    tg.sendData(JSON.stringify(images));
-                }else{
-                    tg.sendData({'aaa': 'xdd'})
-                }
-                    //tg.close();
-            })
-        }
+        Telegram.WebApp.onEvent('mainButtonClicked', function(){
+            let data = {
+                name: 'SUS'
+            }
+            tg.sendData(JSON.stringify(data));   
+            tg.close();
+        });
+
 
     </script>
 </body>
