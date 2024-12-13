@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Tagging Page</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Image Tagging Page</h1>
+        <h1>Image uploading</h1>
+        <div class="image-list" id="image-list"></div>
         <div class="image-uploader">
             <label for="image-input" class="custom-file-label">Upload Image</label>
             <input type="file" id="image-input" accept="image/*" onchange="addImage()">
-            
         </div>
-        <div class="image-list" id="image-list"></div>
-        <button class="submit-button" onclick="submitData()">Submit</button>
+        <button class="submit-button" id="submit-button" onclick="submitData()">Submit</button>
     </div>
 
     <script>
@@ -116,9 +116,23 @@
 
             if (valid) {
                 console.log(images);
-                alert('Data submitted successfully! Check the console for details.');
             }
         }
+
+
+        let tg = window.Telegram.WebApp;
+        if(tg){
+            tg.expand();
+            tg.MainButton.setText("Submit");
+            tg.MainButton.show()
+
+            Telegram.WebApp.onEvent('mainButtonClicked', function(){
+                submitData()
+                tg.sendData(JSON.stringify(images));
+                tg.close();
+            })
+        }
+
     </script>
 </body>
 </html>
