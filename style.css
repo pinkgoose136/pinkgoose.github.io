@@ -44,7 +44,8 @@ input[type="file"] {
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
-    width: 200px;
+    width: 80%;
+    margin: 0 10% 15px 10%;
 }
 
 .image-item img {
@@ -159,7 +160,7 @@ input[type="file"] {
 .custom-file-label {
     display: inline-block;
     margin: 20px auto;
-    padding: 10px 20px;
+    padding: 20px;
     font-size: 16px;
     font-family: Arial, sans-serif;
     border: 2px dashed #007BFF;
@@ -169,6 +170,7 @@ input[type="file"] {
     cursor: pointer;
     text-align: center;
     transition: border-color 0.3s ease, background-color 0.3s ease;
+    width: 100%;
 }
 
 .custom-file-label:hover {
