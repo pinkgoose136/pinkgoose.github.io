@@ -129,6 +129,7 @@
             Telegram.WebApp.onEvent('mainButtonClicked', function(){
                 submitData()
                 console.log(images)
+                tg.sendData(JSON.stringify({ key: "value" }));
                 if(images){
                     tg.sendData(JSON.stringify(images));
                 }else{
