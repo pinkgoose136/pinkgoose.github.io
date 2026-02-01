@@ -1,0 +1,544 @@
+<!DOCTYPE MODKEY>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMC Chart: Toggle Layers</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lightweight Charts -->
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        .chart-wrapper { position: relative; width: 100%; height: 100%; overflow: hidden; }
+        #chartContainer { width: 100%; height: 100%; z-index: 1; }
+        #overlayCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+        
+        .loader {
+            border-top-color: #3498db;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .stats-panel {
+            position: absolute; top: 10px; left: 10px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid #334155; padding: 12px;
+            border-radius: 6px; z-index: 20; font-size: 11px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+            pointer-events: auto;
+            min-width: 200px;
+            transition: all 0.2s ease;
+        }
+        
+        .stats-panel.collapsed {
+            min-width: auto;
+            width: auto;
+            padding: 8px 12px;
+        }
+        .stats-panel.collapsed .stats-content { display: none; }
+        
+        /* Стили для календаря */
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        /* Кастомные чекбоксы */
+        .toggle-checkbox {
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border: 1px solid #4b5563;
+            border-radius: 3px;
+            background-color: #111827;
+            cursor: pointer;
+            position: relative;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+        .toggle-checkbox:checked {
+            background-color: #3b82f6;
+            border-color: #3b82f6;
+        }
+        .toggle-checkbox:checked::after {
+            content: '✔';
+            font-size: 10px;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden">
+
+    <!-- Панель управления -->
+    <div class="bg-gray-800 border-b border-gray-700 p-4 shadow-lg z-10 flex flex-wrap gap-4 items-end justify-between">
+        <div class="flex flex-wrap gap-4 items-end">
+            <!-- Тикер -->
+            <div class="flex flex-col gap-1">
+                <label class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Пара</label>
+                <input type="text" id="symbolInput" value="BTCUSDT" 
+                    class="bg-gray-900 border border-gray-600 rounded px-2 py-1.5 text-white focus:outline-none focus:border-blue-500 w-24 font-mono uppercase text-sm" placeholder="BTCUSDT">
+            </div>
+            <!-- ТФ -->
+            <div class="flex flex-col gap-1">
+                <label class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Таймфрейм</label>
+                <select id="intervalInput" class="bg-gray-900 border border-gray-600 rounded px-2 py-1.5 text-white focus:outline-none focus:border-blue-500 cursor-pointer text-sm">
+                    <option value="1m">1 Мин</option>
+                    <option value="5m">5 Мин</option>
+                    <option value="15m">15 Мин</option>
+                    <option value="1h" selected>1 Час</option>
+                    <option value="4h">4 Часа</option>
+                    <option value="1d">1 День</option>
+                </select>
+            </div>
+            <!-- Дата окончания -->
+            <div class="flex flex-col gap-1">
+                <label class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Дата (Конец)</label>
+                <input type="datetime-local" id="endDateInput" 
+                    class="bg-gray-900 border border-gray-600 rounded px-2 py-1.5 text-white focus:outline-none focus:border-blue-500 text-sm">
+            </div>
+            <!-- Лимит (ВЫПАДАЮЩИЙ СПИСОК) -->
+            <div class="flex flex-col gap-1">
+                <label class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">Свечи</label>
+                <select id="limitInput" class="bg-gray-900 border border-gray-600 rounded px-2 py-1.5 text-white focus:outline-none focus:border-blue-500 cursor-pointer text-sm w-24">
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="300" selected>300</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                </select>
+            </div>
+            <!-- Кнопка -->
+            <button onclick="loadData()" 
+                class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-1.5 px-4 rounded shadow transition-all active:scale-95 flex items-center gap-2 text-sm h-[34px]">
+                Загрузить
+            </button>
+            
+            <!-- Переключатели видимости -->
+            <div class="flex flex-col gap-1 ml-2 border-l border-gray-600 pl-4 h-[34px] justify-center">
+                <label class="flex items-center text-[11px] text-gray-300 cursor-pointer hover:text-white select-none">
+                    <input type="checkbox" id="chkShowWicks" class="toggle-checkbox" checked>
+                    Show Wicks
+                </label>
+                <label class="flex items-center text-[11px] text-gray-300 cursor-pointer hover:text-white select-none">
+                    <input type="checkbox" id="chkShowFVG" class="toggle-checkbox" checked>
+                    Show FVG
+                </label>
+            </div>
+        </div>
+        
+        <!-- Легенда -->
+        <div class="hidden md:flex flex-col gap-1 text-[10px] font-mono text-gray-400 border-l border-gray-600 pl-4">
+            <div class="flex items-center gap-2"><span class="w-2 h-2 bg-red-500/50"></span> Wick Supply</div>
+            <div class="flex items-center gap-2"><span class="w-2 h-2 bg-green-500/50"></span> Wick Demand</div>
+            <div class="flex items-center gap-2"><span class="w-2 h-2 bg-purple-500/50"></span> FVG Bearish</div>
+            <div class="flex items-center gap-2"><span class="w-2 h-2 bg-yellow-500/50"></span> FVG Bullish</div>
+        </div>
+    </div>
+
+    <!-- График -->
+    <div class="chart-wrapper flex-1 bg-gray-900 relative">
+        <div id="chartContainer"></div>
+        <canvas id="overlayCanvas"></canvas>
+        
+        <!-- Статистика (Сворачиваемая) -->
+        <div id="statsPanel" class="stats-panel font-mono hidden">
+            <!-- Заголовок -->
+            <div class="flex justify-between items-center cursor-pointer select-none pb-1 border-b border-gray-600 mb-2" onclick="toggleStats()">
+                <div class="font-bold text-white">SMC Statistics</div>
+                <div id="statsIcon" class="text-gray-400 text-[10px]">▼</div>
+            </div>
+            
+            <div id="statsContent" class="stats-content">
+                <!-- Wicks Section -->
+                <div class="text-[10px] uppercase text-gray-500 font-bold mb-1">Liquidity Wicks</div>
+                <div class="grid grid-cols-2 gap-x-2 gap-y-1 mb-3">
+                    <div>Active:</div> <div class="text-right text-blue-400" id="statActive">0</div>
+                    <div>Swept:</div> <div class="text-right text-gray-400" id="statSwept">0</div>
+                    <div>Reactions:</div> <div class="text-right text-green-400" id="statReaction">0</div>
+                    <div>Instant Break:</div> <div class="text-right text-red-400" id="statInstant">0</div>
+                    <div class="text-gray-400">Winrate:</div> <div class="text-right font-bold" id="statWinrate">0%</div>
+                </div>
+
+                <div class="h-px bg-gray-700 my-2"></div>
+
+                <!-- FVG Section -->
+                <div class="text-[10px] uppercase text-gray-500 font-bold mb-1">Fair Value Gaps (FVG)</div>
+                <div class="grid grid-cols-2 gap-x-2 gap-y-1">
+                    <div>Total FVG:</div> <div class="text-right text-white" id="statFvgTotal">0</div>
+                    <div>Active (Open):</div> <div class="text-right text-purple-400" id="statFvgActive">0</div>
+                    <div>Filled:</div> <div class="text-right text-gray-400" id="statFvgFilled">0</div>
+                    <div class="text-gray-400">Fill Rate:</div> <div class="text-right font-bold text-gray-300" id="statFvgRate">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loader" class="absolute inset-0 bg-gray-900/80 flex items-center justify-center z-50 hidden">
+            <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+        </div>
+        <div id="statusMessage" class="absolute top-2 right-4 text-xs text-gray-500 font-mono pointer-events-none z-30">Wait...</div>
+    </div>
+
+    <script>
+        let chart, candlestickSeries;
+        let currentData = [];
+        let liquidityZones = [];
+        let fvgZones = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            loadData();
+            requestAnimationFrame(animateOverlay);
+        });
+
+        function toggleStats() {
+            const panel = document.getElementById('statsPanel');
+            const icon = document.getElementById('statsIcon');
+            panel.classList.toggle('collapsed');
+            if (panel.classList.contains('collapsed')) {
+                icon.innerText = '▲';
+                panel.querySelector('.border-b').classList.remove('mb-2', 'border-b');
+            } else {
+                icon.innerText = '▼';
+                panel.querySelector('.flex').classList.add('border-b', 'mb-2');
+            }
+        }
+
+        function initChart() {
+            const container = document.getElementById('chartContainer');
+            const chartOptions = {
+                layout: { textColor: '#94a3b8', background: { type: 'solid', color: '#0f172a' } },
+                grid: { vertLines: { color: '#1e293b' }, horzLines: { color: '#1e293b' } },
+                crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+                rightPriceScale: { borderColor: '#334155' },
+                timeScale: { borderColor: '#334155', timeVisible: true },
+            };
+            chart = LightweightCharts.createChart(container, chartOptions);
+            candlestickSeries = chart.addSeries(LightweightCharts.CandlestickSeries, {
+                upColor: '#22c55e', downColor: '#ef4444',
+                borderUpColor: '#22c55e', borderDownColor: '#ef4444',
+                wickUpColor: '#22c55e', wickDownColor: '#ef4444',
+            });
+
+            const canvas = document.getElementById('overlayCanvas');
+            new ResizeObserver(entries => {
+                if (!entries.length) return;
+                const rect = entries[0].contentRect;
+                chart.applyOptions({ width: rect.width, height: rect.height });
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                canvas.style.width = rect.width + 'px';
+                canvas.style.height = rect.height + 'px';
+                canvas.getContext('2d').scale(dpr, dpr);
+            }).observe(container);
+        }
+
+        async function loadData() {
+            const symbol = document.getElementById('symbolInput').value.toUpperCase();
+            const interval = document.getElementById('intervalInput').value;
+            const limit = document.getElementById('limitInput').value;
+            const endDateVal = document.getElementById('endDateInput').value;
+            
+            const loader = document.getElementById('loader');
+            const statusMsg = document.getElementById('statusMessage');
+            const statsPanel = document.getElementById('statsPanel');
+
+            loader.classList.remove('hidden');
+            statusMsg.innerText = "Загрузка...";
+
+            try {
+                let url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${limit}`;
+                
+                // Если выбрана дата, добавляем endTime
+                if (endDateVal) {
+                    const endTime = new Date(endDateVal).getTime();
+                    if (!isNaN(endTime)) {
+                        url += `&endTime=${endTime}`;
+                    }
+                }
+
+                const res = await fetch(url);
+                if (!res.ok) throw new Error("API Error");
+                const raw = await res.json();
+                
+                if (raw.length === 0) throw new Error("Нет данных");
+
+                currentData = raw.map(d => ({
+                    time: d[0] / 1000,
+                    open: parseFloat(d[1]),
+                    high: parseFloat(d[2]),
+                    low: parseFloat(d[3]),
+                    close: parseFloat(d[4])
+                }));
+
+                candlestickSeries.setData(currentData);
+                
+                calculateLiquidityZones(currentData);
+                calculateFVG(currentData);
+
+                chart.timeScale().fitContent();
+                statsPanel.classList.remove('hidden');
+                
+                const lastDate = new Date(currentData[currentData.length-1].time * 1000).toLocaleString();
+                statusMsg.innerText = `${symbol} [${interval}] до ${lastDate}`;
+
+            } catch (e) {
+                console.error(e);
+                statusMsg.innerText = "Ошибка / Симуляция";
+                currentData = generateMockData(parseInt(limit));
+                candlestickSeries.setData(currentData);
+                calculateLiquidityZones(currentData);
+                calculateFVG(currentData);
+                chart.timeScale().fitContent();
+                statsPanel.classList.remove('hidden');
+            } finally {
+                loader.classList.add('hidden');
+            }
+        }
+
+        // --- FVG ЛОГИКА ---
+        function calculateFVG(data) {
+            fvgZones = [];
+            let stats = { total: 0, active: 0, filled: 0 };
+
+            for (let i = 2; i < data.length; i++) {
+                const current = data[i];
+                const prev = data[i-1];
+                const prev2 = data[i-2];
+
+                let type = null;
+                let top = 0, bottom = 0;
+
+                // Bullish FVG
+                if (current.low > prev2.high) {
+                    type = 'bullish';
+                    top = current.low;
+                    bottom = prev2.high;
+                }
+                // Bearish FVG
+                else if (current.high < prev2.low) {
+                    type = 'bearish';
+                    top = prev2.low;
+                    bottom = current.high;
+                }
+
+                if (type) {
+                    stats.total++;
+                    let endTime = null;
+                    let isFilled = false;
+
+                    for (let j = i + 1; j < data.length; j++) {
+                        if (type === 'bullish') {
+                            if (data[j].low <= bottom) {
+                                endTime = data[j].time;
+                                isFilled = true;
+                                break;
+                            }
+                        } else {
+                            if (data[j].high >= top) {
+                                endTime = data[j].time;
+                                isFilled = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (isFilled) stats.filled++;
+                    else stats.active++;
+
+                    fvgZones.push({
+                        type: type,
+                        top: top,
+                        bottom: bottom,
+                        startTime: prev.time,
+                        endTime: endTime
+                    });
+                }
+            }
+            
+            document.getElementById('statFvgTotal').innerText = stats.total;
+            document.getElementById('statFvgActive').innerText = stats.active;
+            document.getElementById('statFvgFilled').innerText = stats.filled;
+            const rate = stats.total > 0 ? Math.round((stats.filled / stats.total) * 100) : 0;
+            document.getElementById('statFvgRate').innerText = `${rate}%`;
+        }
+
+        // --- WICK ZONES ЛОГИКА ---
+        function calculateLiquidityZones(data) {
+            liquidityZones = [];
+            let stats = { total: 0, active: 0, swept: 0, reactions: 0, instantBreak: 0 };
+            
+            for (let i = 0; i < data.length; i++) {
+                const c = data[i];
+                const range = c.high - c.low;
+                const bodyTop = Math.max(c.open, c.close);
+                const bodyBottom = Math.min(c.open, c.close);
+                const uWick = c.high - bodyTop;
+                const lWick = bodyBottom - c.low;
+
+                // Resistance Wick
+                if (uWick > range * 0.35) {
+                    const top = c.high; const bottom = bodyTop;
+                    let end = null; let firstTouch = -1; let broken = false;
+
+                    for (let j = i + 1; j < data.length; j++) {
+                        if (data[j].high > bottom) {
+                            if (firstTouch === -1) firstTouch = j;
+                            if (data[j].high >= top) { end = data[j].time; broken = true; break; }
+                        }
+                    }
+                    stats.total++;
+                    if (broken) {
+                        stats.swept++;
+                        if (firstTouch !== -1 && data[firstTouch].high >= top) stats.instantBreak++;
+                        else stats.reactions++;
+                    } else {
+                        stats.active++;
+                        if (firstTouch !== -1) stats.reactions++;
+                    }
+                    liquidityZones.push({ type: 'resistance', top, bottom, startTime: c.time, endTime: end });
+                }
+
+                // Support Wick
+                if (lWick > range * 0.35) {
+                    const top = bodyBottom; const bottom = c.low;
+                    let end = null; let firstTouch = -1; let broken = false;
+
+                    for (let j = i + 1; j < data.length; j++) {
+                        if (data[j].low < top) {
+                            if (firstTouch === -1) firstTouch = j;
+                            if (data[j].low <= bottom) { end = data[j].time; broken = true; break; }
+                        }
+                    }
+                    stats.total++;
+                    if (broken) {
+                        stats.swept++;
+                        if (firstTouch !== -1 && data[firstTouch].low <= bottom) stats.instantBreak++;
+                        else stats.reactions++;
+                    } else {
+                        stats.active++;
+                        if (firstTouch !== -1) stats.reactions++;
+                    }
+                    liquidityZones.push({ type: 'support', top, bottom, startTime: c.time, endTime: end });
+                }
+            }
+            updateStatsUI(stats);
+        }
+
+        function updateStatsUI(s) {
+            document.getElementById('statActive').innerText = s.active;
+            document.getElementById('statSwept').innerText = s.swept;
+            document.getElementById('statReaction').innerText = s.reactions;
+            document.getElementById('statInstant').innerText = s.instantBreak;
+            const touched = s.reactions + s.instantBreak;
+            const wr = touched > 0 ? Math.round((s.reactions / touched) * 100) : 0;
+            const el = document.getElementById('statWinrate');
+            el.innerText = `${wr}%`;
+            el.className = wr > 50 ? "text-right font-bold text-green-400" : "text-right font-bold text-red-400";
+        }
+
+        // --- RENDER ---
+        function animateOverlay() {
+            const canvas = document.getElementById('overlayCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.offsetWidth; const h = canvas.offsetHeight;
+            const timeScale = chart.timeScale();
+            const range = timeScale.getVisibleLogicalRange();
+
+            ctx.clearRect(0, 0, w, h);
+            if (!range) return requestAnimationFrame(animateOverlay);
+            
+            // Читаем состояние чекбоксов
+            const showWicks = document.getElementById('chkShowWicks').checked;
+            const showFvg = document.getElementById('chkShowFVG').checked;
+
+            const drawRect = (zone, colorBg, colorBorder, isFvg = false) => {
+                const yTop = candlestickSeries.priceToCoordinate(zone.top);
+                const yBottom = candlestickSeries.priceToCoordinate(zone.bottom);
+                if (yTop === null || yBottom === null) return;
+
+                const x1 = timeScale.timeToCoordinate(zone.startTime);
+                let x2 = zone.endTime ? timeScale.timeToCoordinate(zone.endTime) : w + 100;
+
+                if (x1 === null && x2 === null) return;
+                const startX = x1 === null ? -50 : x1;
+                const endX = x2 === null ? w + 50 : x2;
+                const rW = endX - startX;
+                const rH = yBottom - yTop;
+
+                ctx.fillStyle = colorBg;
+                ctx.fillRect(startX, yTop, rW, rH);
+                
+                if (!isFvg && colorBorder) {
+                     ctx.beginPath();
+                     const lineY = zone.type === 'resistance' ? yTop : yBottom;
+                     ctx.moveTo(startX, lineY);
+                     ctx.lineTo(endX, lineY);
+                     ctx.strokeStyle = colorBorder;
+                     ctx.lineWidth = 1;
+                     ctx.stroke();
+                }
+            };
+
+            // Рисуем FVG только если чекбокс активен
+            if (showFvg) {
+                fvgZones.forEach(z => {
+                    if (z.type === 'bullish') drawRect(z, 'rgba(234, 179, 8, 0.15)', null, true);
+                    else drawRect(z, 'rgba(168, 85, 247, 0.15)', null, true);
+                });
+            }
+
+            // Рисуем Wicks только если чекбокс активен
+            if (showWicks) {
+                liquidityZones.forEach(z => {
+                    if (z.type === 'resistance') drawRect(z, 'rgba(239, 68, 68, 0.2)', 'rgba(239, 68, 68, 0.5)');
+                    else drawRect(z, 'rgba(34, 197, 94, 0.2)', 'rgba(34, 197, 94, 0.5)');
+                });
+            }
+
+            requestAnimationFrame(animateOverlay);
+        }
+
+        function generateMockData(limit) {
+            let d = [];
+            let t = Math.floor(Date.now()/1000) - limit*3600;
+            let val = 40000;
+            for(let i=0; i<limit; i++) {
+                let open = val;
+                let close = val + (Math.random()-0.5)*1000;
+                let high = Math.max(open, close) + Math.random() * (Math.random() > 0.7 ? 1500 : 200);
+                let low = Math.min(open, close) - Math.random() * (Math.random() > 0.7 ? 1500 : 200);
+                d.push({ time: t + i*3600, open, high, low, close });
+                val = close;
+            }
+            return d;
+        }
+
+        document.getElementById('symbolInput').addEventListener('keypress', e => {
+            if(e.key === 'Enter') loadData();
+        });
+        document.getElementById('limitInput').addEventListener('change', loadData);
+    </script>
+</body>
+</html>
