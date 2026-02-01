@@ -1,0 +1,589 @@
+<!DOCTYPE MODKEY>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SMC Chart: Collapsible UI</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lightweight Charts -->
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 2px; }
+        
+        .chart-wrapper { position: relative; width: 100%; height: 100%; overflow: hidden; }
+        #chartContainer { width: 100%; height: 100%; z-index: 1; }
+        #overlayCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+        
+        .stats-panel {
+            position: absolute; top: 10px; left: 10px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(4px);
+            border: 1px solid #334155; padding: 8px;
+            border-radius: 6px; z-index: 20; font-size: 11px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+            pointer-events: auto;
+            min-width: 180px;
+            transition: all 0.2s ease;
+        }
+        .stats-panel.collapsed { min-width: auto; width: auto; padding: 6px 10px; }
+        .stats-panel.collapsed .stats-content { display: none; }
+        
+        input[type="datetime-local"] { color-scheme: dark; }
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1); opacity: 0.6; cursor: pointer;
+        }
+
+        .toggle-checkbox {
+            appearance: none; width: 16px; height: 16px;
+            border: 1px solid #4b5563; border-radius: 4px;
+            background-color: #1e293b; cursor: pointer;
+            position: relative; vertical-align: middle;
+            margin-right: 6px; transition: all 0.2s;
+        }
+        .toggle-checkbox:checked { background-color: #3b82f6; border-color: #3b82f6; }
+        .toggle-checkbox:checked::after {
+            content: '✔'; font-size: 10px; color: white;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        }
+        
+        input, select { -webkit-appearance: none; appearance: none; }
+        
+        /* Анимация сворачивания */
+        .settings-collapsed { display: none; }
+        .chevron-rotated { transform: rotate(180deg); }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden text-sm">
+
+    <!-- Верхняя панель (Контейнер) -->
+    <div class="flex flex-col z-10 shadow-lg bg-gray-800">
+        
+        <!-- Секция настроек (Сворачиваемая) -->
+        <div id="inputsArea" class="border-b border-gray-700 p-3 sm:p-4 transition-all duration-300">
+            <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-4 items-end">
+                <!-- Пара -->
+                <div class="flex flex-col gap-1 min-w-0">
+                    <label class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider pl-1">Пара</label>
+                    <input type="text" id="symbolInput" value="BTCUSDT" 
+                        class="bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500 w-full sm:w-24 font-mono uppercase text-sm placeholder-gray-600" placeholder="BTCUSDT">
+                </div>
+                
+                <!-- Таймфрейм -->
+                <div class="flex flex-col gap-1 min-w-0">
+                    <label class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider pl-1">Таймфрейм</label>
+                    <div class="relative">
+                        <select id="intervalInput" class="bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500 w-full sm:w-auto cursor-pointer text-sm appearance-none pr-8">
+                            <option value="1m">1 Мин</option>
+                            <option value="5m">5 Мин</option>
+                            <option value="15m">15 Мин</option>
+                            <option value="1h" selected>1 Час</option>
+                            <option value="4h">4 Часа</option>
+                            <option value="1d">1 День</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Дата (Конец) -->
+                <div class="flex flex-col gap-1 min-w-0 col-span-2 sm:col-span-1 relative">
+                    <label class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider pl-1">Дата (Конец)</label>
+                    <div class="flex items-center">
+                        <input type="datetime-local" id="endDateInput" 
+                            class="bg-gray-900 border border-gray-600 rounded-l px-3 py-2 text-white focus:outline-none focus:border-blue-500 text-sm w-full sm:w-auto">
+                        <button onclick="clearDate()" class="bg-gray-700 border border-l-0 border-gray-600 rounded-r px-2 py-2 text-gray-300 hover:text-white h-[38px]" title="Сбросить на Сейчас">
+                            ✕
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Свечи -->
+                <div class="flex flex-col gap-1 min-w-0 col-span-1 sm:col-span-1">
+                    <label class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider pl-1">Свечи</label>
+                    <div class="relative">
+                        <select id="limitInput" class="bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-blue-500 w-full sm:w-24 cursor-pointer text-sm appearance-none pr-8">
+                            <option value="500">500</option>
+                            <option value="1000" selected>1000</option>
+                            <option value="5000">5000</option>
+                            <option value="10000">10000</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Кнопка Загрузить -->
+                <button onclick="loadData()" 
+                    class="bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold py-2 px-6 rounded shadow transition-colors flex items-center justify-center gap-2 text-sm h-[38px] w-full sm:w-auto mt-2 sm:mt-0 col-span-1 sm:col-span-1">
+                    <span>Загрузить</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Нижняя панель (Всегда видна: Чекбоксы + Кнопка сворачивания) -->
+        <div class="flex items-center justify-between p-2 bg-gray-800 border-b border-gray-700 select-none">
+            <!-- Чекбоксы -->
+            <div class="flex flex-wrap gap-x-4 gap-y-2 items-center">
+                <label class="flex items-center text-xs text-gray-300 cursor-pointer hover:text-white py-1">
+                    <input type="checkbox" id="chkShowWicks" class="toggle-checkbox" checked> <span>Wicks</span>
+                </label>
+                <label class="flex items-center text-xs text-gray-300 cursor-pointer hover:text-white py-1">
+                    <input type="checkbox" id="chkShowFVG" class="toggle-checkbox" checked> <span>FVG</span>
+                </label>
+                <label class="flex items-center text-xs text-gray-300 cursor-pointer hover:text-white py-1">
+                    <input type="checkbox" id="chkShowOB" class="toggle-checkbox" checked> <span>OB</span>
+                </label>
+                <label class="flex items-center text-xs text-gray-300 cursor-pointer hover:text-white py-1">
+                    <input type="checkbox" id="chkShowStruct" class="toggle-checkbox" checked> <span>BOS</span>
+                </label>
+            </div>
+
+            <!-- Кнопка сворачивания -->
+            <button onclick="toggleInputs()" class="ml-2 p-1.5 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors" title="Свернуть/Развернуть настройки">
+                <svg id="chevronIcon" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- График -->
+    <div class="chart-wrapper flex-1 bg-gray-900 relative w-full">
+        <div id="chartContainer"></div>
+        <canvas id="overlayCanvas"></canvas>
+        
+        <!-- Статистика -->
+        <div id="statsPanel" class="stats-panel font-mono hidden">
+            <div class="flex justify-between items-center cursor-pointer select-none pb-1 border-b border-gray-600 mb-2" onclick="toggleStats()">
+                <div class="font-bold text-white text-xs">Analytics</div>
+                <div id="statsIcon" class="text-gray-400 text-[10px]">▼</div>
+            </div>
+            <div id="statsContent" class="stats-content">
+                <div class="text-[9px] uppercase text-gray-500 font-bold mb-1">Liquidity Wicks</div>
+                <div class="grid grid-cols-2 gap-x-2 gap-y-1 mb-2">
+                    <div>Active:</div> <div class="text-right text-blue-400" id="statActive">0</div>
+                    <div>Swept:</div> <div class="text-right text-gray-400" id="statSwept">0</div>
+                    <div>Reactions:</div> <div class="text-right text-green-400" id="statReaction">0</div>
+                    <div>Winrate:</div> <div class="text-right font-bold" id="statWinrate">0%</div>
+                </div>
+                <div class="h-px bg-gray-600 my-1 opacity-50"></div>
+                <div class="text-[9px] uppercase text-gray-500 font-bold mb-1">FVG</div>
+                <div class="grid grid-cols-2 gap-x-2 gap-y-1 mb-2">
+                    <div>Total:</div> <div class="text-right text-white" id="statFvgTotal">0</div>
+                    <div>Active:</div> <div class="text-right text-purple-400" id="statFvgActive">0</div>
+                    <div>Fill Rate:</div> <div class="text-right font-bold text-gray-300" id="statFvgRate">0%</div>
+                </div>
+                <div class="h-px bg-gray-600 my-1 opacity-50"></div>
+                <div class="text-[9px] uppercase text-gray-500 font-bold mb-1">Order Blocks</div>
+                <div class="grid grid-cols-2 gap-x-2 gap-y-1">
+                    <div class="text-blue-400">Bullish:</div> <div class="text-right text-blue-500 font-bold" id="statObBull">0</div>
+                    <div class="text-orange-400">Bearish:</div> <div class="text-right text-orange-500 font-bold" id="statObBear">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loader" class="absolute inset-0 bg-gray-900/80 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+            <div class="flex flex-col items-center">
+                <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-10 w-10 mb-3"></div>
+                <div id="statusMessage" class="text-xs text-gray-300 font-mono bg-gray-800 px-3 py-1 rounded shadow">Инициализация...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let chart, candlestickSeries;
+        let currentData = [];
+        let liquidityZones = [], fvgZones = [], orderBlocks = [], structureLines = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            loadData();
+            requestAnimationFrame(animateOverlay);
+        });
+
+        // Сворачивание верхней панели
+        function toggleInputs() {
+            const inputs = document.getElementById('inputsArea');
+            const icon = document.getElementById('chevronIcon');
+            
+            // Используем hidden класс для мгновенного освобождения места
+            if (inputs.classList.contains('hidden')) {
+                inputs.classList.remove('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                inputs.classList.add('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            }
+            
+            // Ресайз графика, так как место изменилось
+            if(chart) {
+                // Небольшая задержка, чтобы DOM обновился
+                setTimeout(() => {
+                    const container = document.getElementById('chartContainer');
+                    const rect = container.getBoundingClientRect();
+                    chart.applyOptions({ height: rect.height, width: rect.width });
+                }, 50);
+            }
+        }
+
+        function clearDate() {
+            document.getElementById('endDateInput').value = '';
+            loadData();
+        }
+
+        function toggleStats() {
+            const panel = document.getElementById('statsPanel');
+            panel.classList.toggle('collapsed');
+            const icon = document.getElementById('statsIcon');
+            if (panel.classList.contains('collapsed')) {
+                icon.innerText = '▲';
+                panel.querySelector('.border-b').classList.remove('mb-2', 'border-b');
+            } else {
+                icon.innerText = '▼';
+                panel.querySelector('.flex').classList.add('border-b', 'mb-2');
+            }
+        }
+
+        function initChart() {
+            const container = document.getElementById('chartContainer');
+            const chartOptions = {
+                layout: { textColor: '#94a3b8', background: { type: 'solid', color: '#0f172a' } },
+                grid: { vertLines: { color: '#1e293b' }, horzLines: { color: '#1e293b' } },
+                crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+                rightPriceScale: { borderColor: '#334155', scaleMargins: { top: 0.1, bottom: 0.1 } },
+                timeScale: { borderColor: '#334155', timeVisible: true },
+            };
+            chart = LightweightCharts.createChart(container, chartOptions);
+            candlestickSeries = chart.addSeries(LightweightCharts.CandlestickSeries, {
+                upColor: '#22c55e', downColor: '#ef4444',
+                borderUpColor: '#22c55e', borderDownColor: '#ef4444',
+                wickUpColor: '#22c55e', wickDownColor: '#ef4444',
+            });
+
+            const canvas = document.getElementById('overlayCanvas');
+            new ResizeObserver(entries => {
+                if (!entries.length) return;
+                const rect = entries[0].contentRect;
+                chart.applyOptions({ width: rect.width, height: rect.height });
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                canvas.style.width = rect.width + 'px';
+                canvas.style.height = rect.height + 'px';
+                canvas.getContext('2d').scale(dpr, dpr);
+            }).observe(container);
+        }
+
+        async function loadData() {
+            const symbol = document.getElementById('symbolInput').value.toUpperCase();
+            const interval = document.getElementById('intervalInput').value;
+            const totalLimit = parseInt(document.getElementById('limitInput').value) || 1000;
+            const endDateVal = document.getElementById('endDateInput').value;
+            
+            const loader = document.getElementById('loader');
+            const statusMsg = document.getElementById('statusMessage');
+            const statsPanel = document.getElementById('statsPanel');
+
+            loader.classList.remove('hidden');
+            
+            currentData = [];
+            candlestickSeries.setData([]);
+            
+            let accumulatedData = [];
+            let remaining = totalLimit;
+            let currentEndTime = null;
+            let userSelectedTime = null;
+
+            if (endDateVal) {
+                const ts = new Date(endDateVal).getTime();
+                if (!isNaN(ts)) {
+                    currentEndTime = ts;
+                    userSelectedTime = ts / 1000;
+                    statusMsg.innerText = `Загрузка истории до ${endDateVal.replace('T', ' ')}...`;
+                } else {
+                    statusMsg.innerText = `Загрузка свежих данных...`;
+                }
+            } else {
+                statusMsg.innerText = `Загрузка свежих данных...`;
+            }
+
+            try {
+                while (remaining > 0) {
+                    const batchSize = Math.min(remaining, 1000); 
+                    let url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${batchSize}`;
+                    if (currentEndTime) {
+                        url += `&endTime=${currentEndTime}`;
+                    }
+
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error("API Error");
+                    const raw = await res.json();
+                    
+                    if (!Array.isArray(raw) || raw.length === 0) break;
+
+                    const batchData = raw.map(d => ({
+                        time: d[0] / 1000,
+                        open: parseFloat(d[1]),
+                        high: parseFloat(d[2]),
+                        low: parseFloat(d[3]),
+                        close: parseFloat(d[4])
+                    }));
+
+                    accumulatedData = [...batchData, ...accumulatedData];
+                    currentEndTime = batchData[0].time * 1000 - 1;
+                    remaining -= batchSize;
+                    
+                    if (raw.length < batchSize) break;
+                }
+
+                if (accumulatedData.length === 0) throw new Error("Нет данных");
+
+                currentData = accumulatedData;
+                candlestickSeries.setData(currentData);
+                
+                calculateLiquidityZones(currentData);
+                calculateFVG(currentData);
+                calculateOrderBlocks(currentData);
+                calculateStructure(currentData);
+
+                chart.timeScale().fitContent();
+                statsPanel.classList.remove('hidden');
+                
+                const lastCandleTime = new Date(currentData[currentData.length-1].time * 1000);
+                const fmtDate = lastCandleTime.toLocaleDateString() + ' ' + lastCandleTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                statusMsg.innerText = `Готово. Последняя свеча: ${fmtDate}`;
+
+            } catch (e) {
+                console.error(e);
+                statusMsg.innerText = "Режим симуляции (Сеть/API недоступны)";
+                currentData = generateMockData(parseInt(totalLimit), userSelectedTime);
+                candlestickSeries.setData(currentData);
+                calculateLiquidityZones(currentData);
+                calculateFVG(currentData);
+                calculateOrderBlocks(currentData);
+                calculateStructure(currentData);
+                chart.timeScale().fitContent();
+                statsPanel.classList.remove('hidden');
+            } finally {
+                setTimeout(() => loader.classList.add('hidden'), 500);
+            }
+        }
+
+        function calculateStructure(data) {
+            structureLines = [];
+            let lastHigh = null, lastLow = null;
+            for (let i = 2; i < data.length - 2; i++) {
+                const c = data[i];
+                const isHigh = c.high > data[i-1].high && c.high > data[i-2].high && c.high > data[i+1].high && c.high > data[i+2].high;
+                const isLow = c.low < data[i-1].low && c.low < data[i-2].low && c.low < data[i+1].low && c.low < data[i+2].low;
+                if (lastHigh && c.close > lastHigh.price) {
+                     structureLines.push({ type: 'bos_up', price: lastHigh.price, time: lastHigh.time, breakTime: c.time });
+                     lastHigh = null; 
+                }
+                if (lastLow && c.close < lastLow.price) {
+                    structureLines.push({ type: 'bos_down', price: lastLow.price, time: lastLow.time, breakTime: c.time });
+                    lastLow = null;
+                }
+                if (isHigh) lastHigh = { price: c.high, time: c.time };
+                if (isLow) lastLow = { price: c.low, time: c.time };
+            }
+        }
+
+        function calculateOrderBlocks(data) {
+            orderBlocks = [];
+            let bullCount = 0, bearCount = 0;
+            for (let i = 3; i < data.length; i++) {
+                if (data[i].low > data[i-2].high) {
+                    const origin = data[i-2]; 
+                    if (origin.close < origin.open) {
+                        let broken = false; let endTime = null;
+                        for(let k = i + 1; k < data.length; k++) {
+                            if (data[k].close < origin.low) { broken = true; endTime = data[k].time; break; }
+                        }
+                        bullCount++;
+                        orderBlocks.push({ type: 'bullish', top: origin.high, bottom: origin.low, startTime: origin.time, endTime: endTime });
+                    }
+                }
+                if (data[i].high < data[i-2].low) {
+                    const origin = data[i-2];
+                    if (origin.close > origin.open) {
+                        let broken = false; let endTime = null;
+                        for(let k = i + 1; k < data.length; k++) {
+                            if (data[k].close > origin.high) { broken = true; endTime = data[k].time; break; }
+                        }
+                        bearCount++;
+                        orderBlocks.push({ type: 'bearish', top: origin.high, bottom: origin.low, startTime: origin.time, endTime: endTime });
+                    }
+                }
+            }
+            if(document.getElementById('statObBull')) document.getElementById('statObBull').innerText = bullCount;
+            if(document.getElementById('statObBear')) document.getElementById('statObBear').innerText = bearCount;
+        }
+
+        function calculateFVG(data) {
+            fvgZones = [];
+            let stats = { total: 0, active: 0, filled: 0 };
+            for (let i = 2; i < data.length; i++) {
+                const current = data[i]; const prev2 = data[i-2];
+                let type = null; let top = 0, bottom = 0;
+                if (current.low > prev2.high) { type = 'bullish'; top = current.low; bottom = prev2.high; }
+                else if (current.high < prev2.low) { type = 'bearish'; top = prev2.low; bottom = current.high; }
+                if (type) {
+                    stats.total++; let endTime = null; let isFilled = false;
+                    for (let j = i + 1; j < data.length; j++) {
+                        if (type === 'bullish' && data[j].low <= bottom) { endTime = data[j].time; isFilled = true; break; }
+                        if (type === 'bearish' && data[j].high >= top) { endTime = data[j].time; isFilled = true; break; }
+                    }
+                    if (isFilled) stats.filled++; else stats.active++;
+                    fvgZones.push({ type, top, bottom, startTime: data[i-1].time, endTime });
+                }
+            }
+            if(document.getElementById('statFvgTotal')) document.getElementById('statFvgTotal').innerText = stats.total;
+            if(document.getElementById('statFvgActive')) document.getElementById('statFvgActive').innerText = stats.active;
+            if(document.getElementById('statFvgFilled')) document.getElementById('statFvgFilled').innerText = stats.filled;
+            const rate = stats.total > 0 ? Math.round((stats.filled / stats.total) * 100) : 0;
+            if(document.getElementById('statFvgRate')) document.getElementById('statFvgRate').innerText = `${rate}%`;
+        }
+
+        function calculateLiquidityZones(data) {
+            liquidityZones = [];
+            let stats = { total: 0, active: 0, swept: 0, reactions: 0, instantBreak: 0 };
+            for (let i = 0; i < data.length; i++) {
+                const c = data[i]; const range = c.high - c.low;
+                const bodyTop = Math.max(c.open, c.close); const bodyBottom = Math.min(c.open, c.close);
+                if ((c.high - bodyTop) > range * 0.35) {
+                    let end = null, broken = false, firstTouch = -1;
+                    for (let j = i + 1; j < data.length; j++) {
+                        if (data[j].high > bodyTop) {
+                            if (firstTouch === -1) firstTouch = j;
+                            if (data[j].high >= c.high) { end = data[j].time; broken = true; break; }
+                        }
+                    }
+                    stats.total++; if(broken) stats.swept++; else stats.active++;
+                    if(broken && firstTouch !== -1 && data[firstTouch].high >= c.high) stats.instantBreak++;
+                    else if (firstTouch !== -1) stats.reactions++;
+                    liquidityZones.push({ type: 'resistance', top: c.high, bottom: bodyTop, startTime: c.time, endTime: end });
+                }
+                if ((bodyBottom - c.low) > range * 0.35) {
+                    let end = null, broken = false, firstTouch = -1;
+                    for (let j = i + 1; j < data.length; j++) {
+                        if (data[j].low < bodyBottom) {
+                            if (firstTouch === -1) firstTouch = j;
+                            if (data[j].low <= c.low) { end = data[j].time; broken = true; break; }
+                        }
+                    }
+                    stats.total++; if(broken) stats.swept++; else stats.active++;
+                    if(broken && firstTouch !== -1 && data[firstTouch].low <= c.low) stats.instantBreak++;
+                    else if (firstTouch !== -1) stats.reactions++;
+                    liquidityZones.push({ type: 'support', top: bodyBottom, bottom: c.low, startTime: c.time, endTime: end });
+                }
+            }
+            if(document.getElementById('statActive')) document.getElementById('statActive').innerText = stats.active;
+            if(document.getElementById('statSwept')) document.getElementById('statSwept').innerText = stats.swept;
+            if(document.getElementById('statReaction')) document.getElementById('statReaction').innerText = stats.reactions;
+            const touched = stats.reactions + stats.instantBreak;
+            const wr = touched > 0 ? Math.round((stats.reactions / touched) * 100) : 0;
+            if(document.getElementById('statWinrate')) document.getElementById('statWinrate').innerText = `${wr}%`;
+        }
+
+        function animateOverlay() {
+            const canvas = document.getElementById('overlayCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.offsetWidth; const h = canvas.offsetHeight;
+            const timeScale = chart.timeScale();
+            const range = timeScale.getVisibleLogicalRange();
+
+            ctx.clearRect(0, 0, w, h);
+            if (!range) return requestAnimationFrame(animateOverlay);
+            
+            const showWicks = document.getElementById('chkShowWicks').checked;
+            const showFvg = document.getElementById('chkShowFVG').checked;
+            const showOB = document.getElementById('chkShowOB').checked;
+            const showStruct = document.getElementById('chkShowStruct').checked;
+
+            const drawRect = (zone, colorBg, colorBorder) => {
+                const yTop = candlestickSeries.priceToCoordinate(zone.top);
+                const yBottom = candlestickSeries.priceToCoordinate(zone.bottom);
+                if (yTop === null || yBottom === null) return;
+                const x1 = timeScale.timeToCoordinate(zone.startTime);
+                let x2 = zone.endTime ? timeScale.timeToCoordinate(zone.endTime) : w + 100;
+                if (x1 === null && x2 === null) return;
+                const startX = x1 === null ? -50 : x1;
+                const endX = x2 === null ? w + 50 : x2;
+
+                ctx.fillStyle = colorBg;
+                ctx.fillRect(startX, yTop, endX - startX, yBottom - yTop);
+                if (colorBorder) {
+                    ctx.beginPath();
+                    const lineY = zone.type.includes('resistance') || zone.type.includes('bearish') ? yTop : yBottom;
+                    ctx.moveTo(startX, lineY); ctx.lineTo(endX, lineY);
+                    ctx.strokeStyle = colorBorder; ctx.lineWidth = 1; ctx.stroke();
+                }
+            };
+
+            if (showOB) orderBlocks.forEach(ob => {
+                if (ob.type === 'bullish') drawRect(ob, 'rgba(59, 130, 246, 0.3)', 'rgba(59, 130, 246, 1)'); 
+                else drawRect(ob, 'rgba(249, 115, 22, 0.3)', 'rgba(249, 115, 22, 1)');
+            });
+            if (showFvg) fvgZones.forEach(z => {
+                if (z.type === 'bullish') drawRect(z, 'rgba(234, 179, 8, 0.15)', null);
+                else drawRect(z, 'rgba(168, 85, 247, 0.15)', null);
+            });
+            if (showWicks) liquidityZones.forEach(z => {
+                if (z.type === 'resistance') drawRect(z, 'rgba(239, 68, 68, 0.1)', 'rgba(239, 68, 68, 0.4)');
+                else drawRect(z, 'rgba(34, 197, 94, 0.1)', 'rgba(34, 197, 94, 0.4)');
+            });
+            if (showStruct) {
+                ctx.lineWidth = 1; ctx.font = '10px sans-serif';
+                structureLines.forEach(line => {
+                    const y = candlestickSeries.priceToCoordinate(line.price);
+                    if (y === null) return;
+                    const x1 = timeScale.timeToCoordinate(line.time);
+                    const x2 = timeScale.timeToCoordinate(line.breakTime);
+                    if (x1 === null && x2 === null) return;
+                    const sx = x1 === null ? -50 : x1;
+                    const ex = x2 === null ? w + 50 : x2;
+                    ctx.beginPath(); ctx.setLineDash([2, 2]); ctx.strokeStyle = '#ffffff';
+                    ctx.moveTo(sx, y); ctx.lineTo(ex, y); ctx.stroke(); ctx.setLineDash([]);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillText(line.type === 'bos_up' ? 'BOS ▲' : 'BOS ▼', (sx + ex) / 2, y - 4);
+                });
+            }
+            requestAnimationFrame(animateOverlay);
+        }
+
+        function generateMockData(limit, endTime) {
+            let d = []; 
+            let now = endTime || Math.floor(Date.now()/1000);
+            let t = now - limit*3600; 
+            let val = 40000;
+            for(let i=0; i<limit; i++) {
+                let open = val; let close = val + (Math.random()-0.5)*1000;
+                let high = Math.max(open, close) + Math.random() * 200;
+                let low = Math.min(open, close) - Math.random() * 200;
+                d.push({ time: t + i*3600, open, high, low, close }); val = close;
+            }
+            return d;
+        }
+
+        document.getElementById('symbolInput').addEventListener('keypress', e => { if(e.key === 'Enter') loadData(); });
+        document.getElementById('limitInput').addEventListener('change', loadData);
+        document.getElementById('intervalInput').addEventListener('change', loadData);
+        document.getElementById('endDateInput').addEventListener('change', loadData);
+    </script>
+</body>
+</html>
