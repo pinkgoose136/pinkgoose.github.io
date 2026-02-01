@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SMC Chart: Mobile Optimized</title>
+    <title>SMC Chart: All History</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,7 +16,7 @@
             background-color: #0f172a;
             color: #e2e8f0;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent; /* Убирает подсветку при тапе на мобильных */
+            -webkit-tap-highlight-color: transparent;
         }
         /* Тонкий скроллбар */
         ::-webkit-scrollbar { width: 4px; height: 4px; }
@@ -26,16 +26,6 @@
         .chart-wrapper { position: relative; width: 100%; height: 100%; overflow: hidden; }
         #chartContainer { width: 100%; height: 100%; z-index: 1; }
         #overlayCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
-        
-        .loader {
-            border-top-color: #3b82f6;
-            -webkit-animation: spinner 1.0s linear infinite;
-            animation: spinner 1.0s linear infinite;
-        }
-        @keyframes spinner {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
         
         /* Панель статистики */
         .stats-panel {
@@ -52,7 +42,6 @@
         .stats-panel.collapsed { min-width: auto; width: auto; padding: 6px 10px; }
         .stats-panel.collapsed .stats-content { display: none; }
         
-        /* Инверсия иконки календаря для темной темы */
         input[type="datetime-local"]::-webkit-calendar-picker-indicator {
             filter: invert(1);
             opacity: 0.6;
@@ -62,7 +51,7 @@
         /* Кастомные чекбоксы */
         .toggle-checkbox {
             appearance: none;
-            width: 16px; height: 16px; /* Чуть больше для пальца */
+            width: 16px; height: 16px;
             border: 1px solid #4b5563;
             border-radius: 4px;
             background-color: #1e293b;
@@ -81,7 +70,6 @@
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
         }
         
-        /* Убираем дефолтные стили iOS для инпутов */
         input, select { -webkit-appearance: none; appearance: none; }
     </style>
 </head>
@@ -110,7 +98,6 @@
                         <option value="4h">4 Часа</option>
                         <option value="1d">1 День</option>
                     </select>
-                    <!-- Стрелочка для селекта -->
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                     </div>
@@ -196,7 +183,7 @@
                 </div>
                 
                 <div class="h-px bg-gray-600 my-1 opacity-50"></div>
-                <div class="text-[9px] uppercase text-gray-500 font-bold mb-1">Order Blocks</div>
+                <div class="text-[9px] uppercase text-gray-500 font-bold mb-1">Order Blocks (Total)</div>
                 <div class="grid grid-cols-2 gap-x-2 gap-y-1">
                     <div class="text-blue-400">Bullish:</div> <div class="text-right text-blue-500 font-bold" id="statObBull">0</div>
                     <div class="text-orange-400">Bearish:</div> <div class="text-right text-orange-500 font-bold" id="statObBear">0</div>
@@ -272,7 +259,6 @@
         async function loadData() {
             const symbol = document.getElementById('symbolInput').value.toUpperCase();
             const interval = document.getElementById('intervalInput').value;
-            // Теперь берем значение из select
             const totalLimit = parseInt(document.getElementById('limitInput').value) || 1000;
             const endDateVal = document.getElementById('endDateInput').value;
             
@@ -290,7 +276,7 @@
             try {
                 // Умная пагинация для больших объемов
                 while (remaining > 0) {
-                    const batchSize = Math.min(remaining, 1000); // Binance лимит 1000
+                    const batchSize = Math.min(remaining, 1000); 
                     let url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${batchSize}`;
                     if (currentEndTime) {
                         url += `&endTime=${currentEndTime}`;
@@ -310,15 +296,11 @@
                         close: parseFloat(d[4])
                     }));
 
-                    // Добавляем в начало массива
                     accumulatedData = [...batchData, ...accumulatedData];
-                    
-                    // Обновляем время для следующего шага назад
                     currentEndTime = batchData[0].time * 1000 - 1;
                     remaining -= batchSize;
                     
                     if (raw.length < batchSize) break;
-                    // Пауза не нужна, браузер справится, но для стабильности можно оставить 0
                 }
 
                 if (accumulatedData.length === 0) throw new Error("Нет данных");
@@ -335,8 +317,6 @@
                 chart.timeScale().fitContent();
                 
                 statsPanel.classList.remove('hidden');
-                
-                const lastDate = new Date(currentData[currentData.length-1].time * 1000).toLocaleString();
                 statusMsg.innerText = `Готово`;
 
             } catch (e) {
@@ -351,7 +331,6 @@
                 chart.timeScale().fitContent();
                 statsPanel.classList.remove('hidden');
             } finally {
-                // Скрываем лоадер через небольшую задержку
                 setTimeout(() => loader.classList.add('hidden'), 500);
             }
         }
@@ -364,7 +343,6 @@
 
             for (let i = 2; i < data.length - 2; i++) {
                 const c = data[i];
-                // Fractal High/Low (упрощенно: выше 2 слева и 2 справа)
                 const isHigh = c.high > data[i-1].high && c.high > data[i-2].high && c.high > data[i+1].high && c.high > data[i+2].high;
                 const isLow = c.low < data[i-1].low && c.low < data[i-2].low && c.low < data[i+1].low && c.low < data[i+2].low;
 
@@ -394,10 +372,10 @@
                         for(let k = i + 1; k < data.length; k++) {
                             if (data[k].close < origin.low) { broken = true; endTime = data[k].time; break; }
                         }
-                        if (!broken) {
-                            bullCount++;
-                            orderBlocks.push({ type: 'bullish', top: origin.high, bottom: origin.low, startTime: origin.time, endTime: endTime });
-                        }
+                        
+                        // ИЗМЕНЕНИЕ: Добавляем блок ВСЕГДА, даже если он пробит (endTime != null)
+                        bullCount++;
+                        orderBlocks.push({ type: 'bullish', top: origin.high, bottom: origin.low, startTime: origin.time, endTime: endTime });
                     }
                 }
                 if (data[i].high < data[i-2].low) { // Bearish FVG
@@ -407,10 +385,10 @@
                         for(let k = i + 1; k < data.length; k++) {
                             if (data[k].close > origin.high) { broken = true; endTime = data[k].time; break; }
                         }
-                        if (!broken) {
-                            bearCount++;
-                            orderBlocks.push({ type: 'bearish', top: origin.high, bottom: origin.low, startTime: origin.time, endTime: endTime });
-                        }
+                        
+                        // ИЗМЕНЕНИЕ: Добавляем блок ВСЕГДА
+                        bearCount++;
+                        orderBlocks.push({ type: 'bearish', top: origin.high, bottom: origin.low, startTime: origin.time, endTime: endTime });
                     }
                 }
             }
@@ -486,7 +464,6 @@
             if(document.getElementById('statActive')) document.getElementById('statActive').innerText = stats.active;
             if(document.getElementById('statSwept')) document.getElementById('statSwept').innerText = stats.swept;
             if(document.getElementById('statReaction')) document.getElementById('statReaction').innerText = stats.reactions;
-            // if(document.getElementById('statInstant')) document.getElementById('statInstant').innerText = stats.instantBreak;
             const touched = stats.reactions + stats.instantBreak;
             const wr = touched > 0 ? Math.round((stats.reactions / touched) * 100) : 0;
             if(document.getElementById('statWinrate')) document.getElementById('statWinrate').innerText = `${wr}%`;
